@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { latinOf } from './latin'
+import { genderOf, latinOf, latinWithSide } from './latin'
 import { landmarks } from './landmarks'
 import { pieces } from './skeleton'
 
@@ -30,12 +30,30 @@ describe('Latin names', () => {
     ['Vertebra C7', 'Vertebra prominens [C VII]'],
     ['Vertebra T12', 'Vertebra thoracica [T XII]'],
     ['Vertebra L5', 'Vertebra lumbalis [L V]'],
-    ['Upper canine', 'Dens caninus (arcus maxillaris)'],
-    ['Lower first molar tooth', 'Dens molaris primus (arcus mandibularis)'],
+    ['Upper canine', 'Dens caninus maxillaris'],
+    ['Lower first molar tooth', 'Dens molaris primus mandibularis'],
     ['Opening of frontal sinus', 'Apertura sinus frontalis'],
     ['Greater trochanter', 'Trochanter major'],
   ])('%s → %s', (en, latin) => {
     expect(latinOf(en)).toBe(latin)
+  })
+
+  it('knows the gender of every paired piece, so its side agrees', () => {
+    const unknown = [...new Set(pieces.filter((p) => p.side).map((p) => latinOf(p.en)!))].filter((l) => !genderOf(l))
+    expect(unknown).toEqual([])
+  })
+
+  it.each([
+    ['Hip bone', 'right', 'Os coxae dextrum'],
+    ['Scapula', 'left', 'Scapula sinistra'],
+    ['Humerus', 'right', 'Humerus dexter'],
+    ['Femur', 'left', 'Femur sinistrum'],
+    ['Third rib', 'right', 'Costa tertia dextra [III]'],
+    ['Sesamoid bones of foot', 'left', 'Ossa sesamoidea pedis sinistra'],
+    ['Upper canine', 'right', 'Dens caninus maxillaris dexter'],
+    ['Frontal bone', undefined, 'Os frontale'],
+  ] as const)('%s (%s) → %s', (en, side, latin) => {
+    expect(latinWithSide(en, side)).toBe(latin)
   })
 
   it('returns nothing for names it does not know', () => {

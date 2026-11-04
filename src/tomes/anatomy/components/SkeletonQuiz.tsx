@@ -31,12 +31,12 @@ const MODES: Record<Subject, { id: QuizMode; name: string; description: string }
   bones: [
     { id: 'identify', name: 'Identifica', description: 'Se resalta una pieza: elige su nombre entre cuatro.' },
     { id: 'locate', name: 'Señala', description: 'Te doy un nombre: haz clic en la pieza.' },
-    { id: 'type', name: 'Escribe', description: 'Se resalta una pieza: escribe su nombre.' },
+    { id: 'type', name: 'Escribe', description: 'Se resalta una pieza: escribe su nombre, en español, latín o inglés.' },
   ],
   landmarks: [
     { id: 'identify', name: 'Identifica', description: 'Un pin marca un accidente: elige su nombre entre cuatro.' },
     { id: 'locate', name: 'Señala', description: 'Te doy un accidente: haz clic en su lugar sobre el hueso.' },
-    { id: 'type', name: 'Escribe', description: 'Un pin marca un accidente: escribe su nombre.' },
+    { id: 'type', name: 'Escribe', description: 'Un pin marca un accidente: escribe su nombre, en español, latín o inglés.' },
   ],
 }
 

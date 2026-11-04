@@ -128,7 +128,7 @@ export function SearchTrigger({ onClick, className = '' }: { onClick: () => void
     >
       <SearchIcon className="size-4 shrink-0" />
       <span className="flex-1 truncate">Busca un área, un tomo, un sistema…</span>
-      <kbd className="rounded-sm border border-line-strong px-1.5 py-0.5 font-sans text-xs">Ctrl K</kbd>
+      <kbd className="rounded-sm border border-line-strong px-1.5 py-0.5 font-sans text-xs">Ctrl + K</kbd>
     </button>
   )
 }

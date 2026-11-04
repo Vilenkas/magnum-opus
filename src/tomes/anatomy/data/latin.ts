@@ -126,7 +126,8 @@ const patterns: [RegExp, (m: RegExpMatchArray) => string | undefined][] = [
   ],
   [
     /^(Upper|Lower) (.+)$/,
-    (m) => (TOOTH[m[2]] ? `${TOOTH[m[2]]} (arcus ${m[1] === 'Upper' ? 'maxillaris' : 'mandibularis'})` : undefined),
+    // TA has no upper/lower teeth: the dental arch's adjective tells them apart.
+    (m) => (TOOTH[m[2]] ? `${TOOTH[m[2]]} ${m[1] === 'Upper' ? 'maxillaris' : 'mandibularis'}` : undefined),
   ],
 ]
 
@@ -141,4 +142,41 @@ export function latinOf(en: string): string | undefined {
       if (latin) return latin
     }
   }
+}
+
+type Gender = 'm' | 'f' | 'n' | 'n-pl'
+
+/** Grammatical gender of the head noun (first word) of every Latin piece name. */
+const HEAD_GENDER: Record<string, Gender> = {
+  Os: 'n', Femur: 'n', Manubrium: 'n', Corpus: 'n',
+  Ossa: 'n-pl',
+  Humerus: 'm', Radius: 'm', Talus: 'm', Calcaneus: 'm', Malleus: 'm', Stapes: 'm', Dens: 'm',
+  Processus: 'm', Atlas: 'm', Axis: 'm', Vomer: 'm',
+  Clavicula: 'f', Scapula: 'f', Ulna: 'f', Tibia: 'f', Fibula: 'f', Patella: 'f', Costa: 'f',
+  Maxilla: 'f', Mandibula: 'f', Concha: 'f', Phalanx: 'f', Cartilago: 'f', Incus: 'f', Vertebra: 'f',
+}
+
+const SIDE_FORMS: Record<Gender, { left: string; right: string }> = {
+  m: { right: 'dexter', left: 'sinister' },
+  f: { right: 'dextra', left: 'sinistra' },
+  n: { right: 'dextrum', left: 'sinistrum' },
+  'n-pl': { right: 'dextra', left: 'sinistra' },
+}
+
+/** Gender of a Latin name's head noun, if known. */
+export const genderOf = (latin: string): Gender | undefined => HEAD_GENDER[latin.split(' ')[0]]
+
+/**
+ * Latin name with its side, agreeing with the head noun: "Os coxae dextrum",
+ * "Scapula sinistra", "Costa tertia dextra [III]" (before any bracketed numeral).
+ * TA itself has no side terms; this follows the usual Latin anatomical style.
+ */
+export function latinWithSide(en: string, side?: 'left' | 'right'): string | undefined {
+  const latin = latinOf(en)
+  if (!latin || !side) return latin
+  const gender = genderOf(latin)
+  if (!gender) return latin
+  const word = SIDE_FORMS[gender][side]
+  const bracket = latin.indexOf(' [')
+  return bracket === -1 ? `${latin} ${word}` : `${latin.slice(0, bracket)} ${word}${latin.slice(bracket)}`
 }

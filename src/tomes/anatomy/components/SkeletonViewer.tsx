@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
-import { latinOf } from '../data/latin'
+import { latinOf, latinWithSide } from '../data/latin'
 import { landmarkById, landmarksByPiece, type Landmark } from '../data/landmarks'
 import { groupById, pieceById, regionOf, type BonePiece, type GroupId, type RegionId } from '../data/skeleton'
 import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
@@ -266,7 +266,7 @@ function PieceCard({
         </p>
         <h3 className={plate.title}>{piece.name}</h3>
         <p className={plate.meta}>
-          <TaNames en={piece.en} />
+          <TaNames en={piece.en} side={piece.side} />
           {piece.aliases && piece.aliases.length > 0 && <> · También: {piece.aliases.join(', ')}</>}
         </p>
       </div>
@@ -342,8 +342,8 @@ function LandmarkPanel({
 }
 
 /** Terminologia Anatomica names: Latin (the standard) first, English as a quieter reference. */
-function TaNames({ en }: { en: string }) {
-  const latin = latinOf(en)
+function TaNames({ en, side }: { en: string; side?: 'left' | 'right' }) {
+  const latin = side ? latinWithSide(en, side) : latinOf(en)
   return (
     <>
       {latin && (

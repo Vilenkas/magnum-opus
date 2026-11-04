@@ -1,5 +1,6 @@
 import { levenshtein, normalize } from '@/forge/text'
 import { landmarks } from '../data/landmarks'
+import { latinOf } from '../data/latin'
 import { pieces, type Side } from '../data/skeleton'
 
 /** Anything with a name to type: a piece or a landmark. */
@@ -35,6 +36,19 @@ const ORDINALS: Record<string, number> = {
   // English (Terminologia Anatomica names)
   first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6,
   seventh: 7, eighth: 8, ninth: 9, tenth: 10, eleventh: 11, twelfth: 12,
+  // Latin (Terminologia Anatomica): masculine, feminine, neuter and their genitives
+  primus: 1, prima: 1, primum: 1, primae: 1, primi: 1,
+  secundus: 2, secunda: 2, secundum: 2, secundae: 2, secundi: 2,
+  tertius: 3, tertia: 3, tertium: 3, tertiae: 3, tertii: 3,
+  quartus: 4, quarta: 4, quartum: 4, quartae: 4, quarti: 4,
+  quintus: 5, quintum: 5, quintae: 5, quinti: 5,
+  sextus: 6, sextum: 6, sextae: 6, sexti: 6,
+  septimus: 7, septimum: 7, septimae: 7, septimi: 7,
+  octavus: 8, octavum: 8, octavae: 8, octavi: 8,
+  nonus: 9, nona: 9, nonum: 9, nonae: 9, noni: 9,
+  decimus: 10, decimum: 10, decimae: 10, decimi: 10,
+  undecimus: 11, undecimae: 11,
+  duodecimus: 12, duodecimae: 12,
   // Roman numerals, common in clinical Spanish ("V metatarsiano")
   i: 1, ii: 2, iii: 3, iv: 4, v: 5, vi: 6, vii: 7, viii: 8, ix: 9, x: 10, xi: 11, xii: 12,
 }
@@ -42,8 +56,18 @@ const ORDINALS: Record<string, number> = {
 /** Multi-word rewrites applied before tokenizing (longest phrases first). */
 const PHRASES: [RegExp, string][] = [
   [/\bdedo gordo\b/g, '1 dedo pie'],
-  [/\bhallux\b/g, '1 dedo pie'],
+  [/\bhall?ux\b/g, '1 dedo pie'],
   [/\bpulgar\b/g, '1 dedo mano'],
+  // Latin digits (TA): pollex, index, digitus medius… in nominative or genitive.
+  [/\bhall?ucis\b/g, '1 dedo pie'],
+  [/\bpoll(ex|icis)\b/g, '1 dedo mano'],
+  [/\bindicis\b/g, '2 dedo mano'],
+  [/\bdigit[iu]s? medi(i|us)\b/g, '3 dedo mano'],
+  [/\bdigit[iu]s? anularis\b/g, '4 dedo mano'],
+  [/\bdigit[iu]s? minim[iu]s? manus\b/g, '5 dedo mano'],
+  [/\bdigit[iu]s? minim[iu]s? pedis\b/g, '5 dedo pie'],
+  [/\bmanus\b/g, 'mano'],
+  [/\bpedis\b/g, 'pie'],
   [/\bindice\b/g, '2 dedo'],
   [/\bdedo medio\b/g, '3 dedo'],
   [/\bdedo corazon\b/g, '3 dedo'],
@@ -52,6 +76,9 @@ const PHRASES: [RegExp, string][] = [
   [/\bdorsal(es)?\b/g, 'toracica'],
   [/\btoracic[oa]s?\b/g, 'toracica'],
   [/\bcervicales\b/g, 'cervical'],
+  [/\bcervicalis\b/g, 'cervical'],
+  [/\bthoracica\b/g, 'toracica'],
+  [/\blumbalis\b/g, 'lumbar'],
   [/\blumbares\b/g, 'lumbar'],
 ]
 
@@ -69,13 +96,16 @@ function canonicalVertebrae(s: string): string {
 /** Words that never change the meaning. */
 const STOP = new Set(['de', 'del', 'la', 'el', 'los', 'las', 'y', 'of', 'the', 'bone', 'bones'])
 /** Words that may be present or not ("dedo", "vertebra", "hueso" are implied by the rest). */
-const OPTIONAL = new Set(['hueso', 'huesos', 'vertebra', 'dedo', 'finger'])
+const OPTIONAL = new Set(['hueso', 'huesos', 'vertebra', 'dedo', 'finger', 'os', 'ossis', 'ossa', 'digiti', 'digitus'])
 
 const SIDE_WORDS: Record<string, Side> = {
   derecho: 'right', derecha: 'right', derechos: 'right', derechas: 'right',
   der: 'right', dcho: 'right', dcha: 'right', dr: 'right', right: 'right',
   izquierdo: 'left', izquierda: 'left', izquierdos: 'left', izquierdas: 'left',
   izq: 'left', izdo: 'left', izda: 'left', iz: 'left', left: 'left',
+  // Latin, any gender or number
+  dexter: 'right', dextra: 'right', dextrum: 'right', dextri: 'right', dextrae: 'right',
+  sinister: 'left', sinistra: 'left', sinistrum: 'left', sinistri: 'left', sinistrae: 'left',
 }
 
 interface Parsed {
@@ -121,8 +151,8 @@ function getVocabulary(): Set<string> {
   if (!vocabulary) {
     vocabulary = new Set()
     const names = [
-      ...pieces.flatMap((p) => [p.base, ...(p.aliases ?? []), p.en]),
-      ...landmarks.flatMap((l) => [l.name, ...l.aliases, l.en]),
+      ...pieces.flatMap((p) => [p.base, ...(p.aliases ?? []), p.en, latinOf(p.en) ?? '']),
+      ...landmarks.flatMap((l) => [l.name, ...l.aliases, l.en, latinOf(l.en) ?? '']),
     ]
     for (const name of names) {
       for (const t of parseAnswer(name).tokens) vocabulary.add(t)
@@ -144,6 +174,22 @@ function isTypoOf(typed: string, expected: string, ownWords: Set<string>): boole
     if (w !== expected && !ownWords.has(w) && levenshtein(typed, w) <= d) return false
   }
   return true
+}
+
+const withoutBracket = (latin: string) => latin.replace(/\s*\[[^\]]*\]/g, '')
+
+/** How many distinct TA terms share each bracket-less Latin name. */
+let bareLatinCounts: Map<string, number> | null = null
+function getBareLatinCounts(): Map<string, number> {
+  if (!bareLatinCounts) {
+    bareLatinCounts = new Map()
+    const terms = new Set([...pieces.map((p) => p.en), ...landmarks.map((l) => l.en)])
+    for (const en of terms) {
+      const latin = latinOf(en)
+      if (latin) bareLatinCounts.set(withoutBracket(latin), (bareLatinCounts.get(withoutBracket(latin)) ?? 0) + 1)
+    }
+  }
+  return bareLatinCounts
 }
 
 type Match = 'exact' | 'typo' | 'incomplete' | 'none'
@@ -177,7 +223,7 @@ export type TypedVerdict =
   | { correct: false; reason: 'empty' | 'incomplete' | 'wrong-bone' | 'wrong-side' }
 
 /**
- * Checks a typed answer against the Spanish name, its aliases and the TA English name.
+ * Checks a typed answer against the Spanish name, its aliases and the TA names (English and Latin).
  * The side is optional, but if given it must be right. `incomplete` means everything
  * written is right but something essential is missing ("falange distal") — the UI lets
  * the user add detail instead of failing them.
@@ -189,6 +235,14 @@ export function checkTyped(input: string, piece: Nameable): TypedVerdict {
   let best: Match = 'none'
   // Parenthesised qualifiers are optional: "Atlas (C1)" accepts "atlas" and "atlas c1".
   const names = [piece.base, ...(piece.aliases ?? []), piece.en].flatMap((n) => [n, n.replace(/\s*\([^)]*\)/g, '')])
+  // Latin keeps its qualifiers: "[C III]" and "(arcus maxillaris)" are what tell series apart.
+  // Without the bracket it is accepted only while still unique ("Vertebra prominens", not "Vertebra cervicalis").
+  const latin = latinOf(piece.en)
+  if (latin) {
+    names.push(latin)
+    const bare = withoutBracket(latin)
+    if (bare !== latin && getBareLatinCounts().get(bare) === 1) names.push(bare)
+  }
   // Ties with words of this same piece (Spanish vs English name) must not block a typo fix.
   const ownWords = new Set(names.flatMap((n) => parseAnswer(n).tokens))
   for (const name of names) {

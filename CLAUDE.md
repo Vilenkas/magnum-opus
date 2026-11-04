@@ -84,7 +84,8 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).
 - `data/latin.ts` + `data/landmark-latin.ts` — Latin TA names keyed by TA English (`latinOf(en)`);
-  numbered series (ribs, phalanges, vertebrae, teeth) come from patterns. Shown in the viewer
+  numbered series (ribs, phalanges, vertebrae, teeth) come from patterns; the quiz accepts them
+  as typed answers (Latin ordinals and digits are parsed). Shown in the viewer
   next to the English (Latin first, English quieter); tests require every piece and landmark to have one.
 - `assets/landmarks.json` (generated: 895 landmark points + normals on 79 pieces) and
   `data/landmark-names.ts` (hand-edited Spanish names keyed by TA English). `data/landmarks.ts`
