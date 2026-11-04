@@ -5,7 +5,8 @@ import {
   createRouter,
   Outlet,
 } from '@tanstack/react-router'
-import { AtlasPage } from './shell/AtlasPage'
+import { AtlasPage } from './shell/atlas/AtlasPage'
+import { parseAtlasSearch } from './shell/atlas/route'
 import { TomePage } from './shell/TomePage'
 import { NotFound } from './shell/NotFound'
 
@@ -17,6 +18,7 @@ const rootRoute = createRootRoute({
 const atlasRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
+  validateSearch: parseAtlasSearch,
   component: AtlasPage,
 })
 

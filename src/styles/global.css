@@ -7,10 +7,17 @@
 
   --color-ink: #0d0c0a;
   --color-ink-raised: #17150f;
+  --color-ink-sunken: #110f0c;
+  --color-line: #2a251c;
+  --color-line-strong: #3a3226;
   --color-gold: #c9a45c;
   --color-gold-dim: #8a7140;
+  /* Selected rows and chips. */
+  --color-gold-faint: #2a2418;
   --color-parchment: #e9e1cf;
   --color-muted: #9a917f;
+  /* Outlines of unwritten things; decoration only, too dark for text. */
+  --color-faint: #5a5040;
 }
 
 html,

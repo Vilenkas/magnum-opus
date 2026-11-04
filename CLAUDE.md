@@ -13,8 +13,11 @@ experience with its own design, effects and organisation — not a generic artic
 
 Three layers:
 
-- `src/shell/` — the app shell (Atlas home, tome loading, routing chrome). Knows only that
-  tomes exist and how to open them; never styles a tome's interior.
+- `src/shell/` — the app shell (Atlas home, tome loading, routing chrome). Knows tomes'
+  manifests and the map of knowledge, and how to open tomes; never styles a tome's interior.
+  `shell/atlas/` is the home: three switchable views of the same `buildAtlas()` model
+  (Estantes, Índice, Mapa; `?view=` in the URL, last one remembered) plus a Ctrl+K search
+  over tomes, areas and facets. Pure logic (`model.ts`, `search.ts`, `layout.ts`) is tested.
 - `src/forge/` — building blocks shared by tomes, extracted only once two tomes needed them:
   `practice.ts` (persisted per-item stats, weighted pick of what you miss, `seededRng` for
   tests) and `text.ts` (normalize, diacritics, levenshtein). Tome-specific logic (anatomy's
