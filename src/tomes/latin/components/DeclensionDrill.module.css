@@ -1,0 +1,239 @@
+.setup {
+  display: grid;
+  gap: 1rem;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.5rem;
+}
+
+.mode {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  border: 1px solid rgb(231 217 181 / 0.25);
+  background: transparent;
+  color: var(--wax-text);
+  font-family: var(--lat-body);
+  cursor: pointer;
+}
+.mode:hover {
+  border-color: rgb(231 217 181 / 0.6);
+}
+.mode[data-active='true'] {
+  border-color: var(--wax-text);
+  background: rgb(231 217 181 / 0.08);
+}
+
+.modeName {
+  font-family: var(--lat-carved);
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+}
+
+.modeDescription {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--wax-dim);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  justify-content: space-between;
+}
+.row:first-of-type {
+  justify-content: flex-start;
+}
+
+.label {
+  color: var(--wax-dim);
+}
+
+.dim {
+  color: var(--wax-dim);
+  font-size: 0.95rem;
+  margin: 0 !important;
+}
+
+/* ---------- Progress ---------- */
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--wax-dim);
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 2px;
+  background: rgb(231 217 181 / 0.15);
+}
+.progressBar > span {
+  display: block;
+  height: 100%;
+  background: var(--wax-text);
+  transition: width 400ms ease;
+}
+
+/* ---------- Questions ---------- */
+
+.question {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.entry {
+  margin: 0 !important;
+  font-size: 1.15rem;
+  font-style: italic;
+}
+
+.ask {
+  margin: 0.25rem 0 !important;
+  font-family: var(--lat-carved);
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.askNumber {
+  color: var(--wax-dim);
+}
+
+.answerRow {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.feedback {
+  margin: 0.4rem 0 0 !important;
+  font-size: 1.1rem;
+}
+.feedback[data-correct='true'] {
+  color: var(--wax-good);
+}
+.feedback[data-correct='false'] {
+  color: var(--wax-bad);
+}
+
+.answer {
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--wax-text);
+}
+
+.answerEnding {
+  color: #ffb08a;
+  font-weight: 700;
+}
+
+.written {
+  margin: 0 !important;
+  font-style: italic;
+  font-size: 2.4rem;
+  line-height: 1.1;
+}
+
+/* Case × number grid for "Analiza". */
+.grid {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 0.3rem 0.5rem;
+  max-width: 26rem;
+  margin: 0.5rem 0;
+}
+
+.gridHead {
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wax-dim);
+}
+
+.gridLabel {
+  align-self: center;
+  padding-right: 0.5rem;
+}
+
+.cell {
+  height: 2.1rem;
+  border: 1px solid rgb(231 217 181 / 0.3);
+  background: transparent;
+  color: var(--wax-text);
+  font-family: var(--lat-body);
+  cursor: pointer;
+}
+.cell:hover:not(:disabled) {
+  border-color: var(--wax-text);
+}
+.cell:disabled {
+  cursor: default;
+}
+.cell[data-state='chosen'] {
+  background: rgb(231 217 181 / 0.18);
+  border-color: var(--wax-text);
+}
+.cell[data-state='right'] {
+  background: rgb(169 201 138 / 0.25);
+  border-color: var(--wax-good);
+  color: var(--wax-good);
+}
+.cell[data-state='wrong'] {
+  background: rgb(240 138 112 / 0.2);
+  border-color: var(--wax-bad);
+  color: var(--wax-bad);
+}
+.cell[data-state='missed'] {
+  border: 1px dashed var(--wax-good);
+  color: var(--wax-good);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.nextRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* ---------- Results ---------- */
+
+.results {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.score {
+  margin: 0 !important;
+  font-family: var(--lat-carved);
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.scoreWord {
+  font-family: var(--lat-body);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--wax-dim);
+}
+
+.missed {
+  margin: 0 !important;
+  padding-left: 1.2rem !important;
+  list-style: '· ' !important;
+}
+.missed strong {
+  font-style: italic;
+}

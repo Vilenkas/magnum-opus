@@ -1,0 +1,171 @@
+/* Shared surfaces for the Latin tome's interactive pieces. */
+
+/* ---------- Marble slab (reference material) ---------- */
+
+.slab {
+  position: relative;
+  width: min(100vw - 2rem, 52rem);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background:
+    linear-gradient(125deg, transparent 40%, rgb(120 110 95 / 0.06) 41%, transparent 43%),
+    linear-gradient(180deg, #f5f2ec, #e6e0d4);
+  border: 1px solid #cbc3b4;
+  box-shadow:
+    inset 0 0 0 5px #efebe3,
+    inset 0 0 0 6px #d5cdbf,
+    0 20px 40px -28px rgb(60 50 40 / 0.6);
+}
+
+.caption {
+  margin: 0 0 1rem !important;
+  text-align: center;
+  font-family: var(--lat-carved);
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
+  color: var(--lat-minium);
+}
+
+.chip {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid #c4bbab;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.5);
+  color: var(--lat-ink);
+  font-family: var(--lat-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+.chip:hover {
+  border-color: var(--lat-minium);
+}
+.chip[data-active='true'] {
+  background: var(--lat-ink);
+  border-color: var(--lat-ink);
+  color: var(--lat-marble);
+}
+
+.ending {
+  color: var(--lat-minium);
+  font-weight: 700;
+}
+
+/* ---------- Wax tablet (exercises) ---------- */
+
+.tablet {
+  position: relative;
+  width: min(100vw - 2rem, 46rem);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 2.5rem 0;
+  padding: 1.1rem;
+  border-radius: 6px;
+  /* wooden frame */
+  background:
+    repeating-linear-gradient(92deg, rgb(255 255 255 / 0.04) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, #7a5532, #5a3d22);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 22px 40px -24px rgb(40 25 10 / 0.8);
+}
+
+.wax {
+  --wax-text: #e7d9b5;
+  --wax-dim: #b9a77f;
+  --wax-good: #a9c98a;
+  --wax-bad: #f08a70;
+  min-height: 16rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 3px;
+  color: var(--wax-text);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgb(255 230 170 / 0.08), transparent 60%),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.05) 0 1px, transparent 1px 4px),
+    #2f281f;
+  box-shadow: inset 0 3px 10px rgb(0 0 0 / 0.6);
+}
+
+.wax ::selection {
+  background: var(--wax-text);
+  color: #2f281f;
+}
+
+.waxCaption {
+  margin: 0 0 1rem !important;
+  font-family: var(--lat-carved);
+  letter-spacing: 0.25em;
+  font-size: 0.8rem;
+  color: var(--wax-dim);
+  text-align: center;
+}
+
+.waxChip {
+  padding: 0.15rem 0.7rem;
+  border: 1px solid rgb(231 217 181 / 0.35);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--wax-text);
+  font-family: var(--lat-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.waxChip:hover {
+  border-color: var(--wax-text);
+}
+.waxChip[data-active='true'] {
+  background: var(--wax-text);
+  color: #2f281f;
+}
+
+.waxButton {
+  padding: 0.4rem 1.1rem;
+  border: 1px solid var(--wax-text);
+  border-radius: 2px;
+  background: var(--wax-text);
+  color: #2f281f;
+  font-family: var(--lat-carved);
+  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.waxButton:hover:not(:disabled) {
+  background: #fff1cc;
+}
+.waxButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.waxGhost {
+  composes: waxButton;
+  background: transparent;
+  color: var(--wax-text);
+}
+.waxGhost:hover:not(:disabled) {
+  background: rgb(231 217 181 / 0.12);
+}
+
+/* Text scratched into the wax with a stylus. */
+.waxInput {
+  width: 100%;
+  padding: 0.4rem 0.2rem;
+  border: 0;
+  border-bottom: 2px solid rgb(231 217 181 / 0.4);
+  background: transparent;
+  color: var(--wax-text);
+  font-family: var(--lat-body);
+  font-style: italic;
+  font-size: 1.6rem;
+  outline: none;
+}
+.waxInput:focus {
+  border-bottom-color: var(--wax-text);
+}
+.waxInput::placeholder {
+  color: rgb(231 217 181 / 0.3);
+}

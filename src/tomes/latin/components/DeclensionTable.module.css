@@ -1,0 +1,122 @@
+.picker {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.pickerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pickerLabel {
+  width: 2rem;
+  font-family: var(--lat-carved);
+  color: var(--lat-minium);
+}
+
+.header {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
+
+.entry {
+  margin: 0 !important;
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.meaning {
+  margin: 0 !important;
+  color: var(--lat-ink-soft);
+}
+
+.hint {
+  font-style: italic;
+}
+
+.derivatives {
+  margin: 0.25rem 0 0 !important;
+  font-size: 0.95rem;
+  color: var(--lat-bronze);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 !important;
+}
+
+.table th,
+.table td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid #d3ccbe;
+  text-align: left;
+}
+
+.table thead th {
+  font-family: var(--lat-carved);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid var(--lat-ink);
+}
+
+.table tbody th {
+  font-weight: 400;
+  white-space: nowrap;
+  /* Beat the chapter's generic `.prose th` header rule. */
+  border-bottom: 1px solid #d3ccbe;
+  font-family: var(--lat-body);
+  letter-spacing: 0;
+}
+
+.table tbody tr {
+  outline: none;
+  transition: background 150ms ease;
+}
+.table tbody tr[data-active='true'] {
+  background: rgb(168 50 42 / 0.07);
+}
+
+.caseAbbr {
+  display: inline-block;
+  min-width: 1.8rem;
+  font-family: var(--lat-carved);
+  color: var(--lat-minium);
+}
+
+.form {
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.9rem;
+}
+
+.caseInfo {
+  flex: 1 1 20rem;
+  margin: 0 !important;
+  min-height: 1.7em;
+  font-size: 0.98rem;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--lat-ink-soft);
+  cursor: pointer;
+}
+.toggle input {
+  accent-color: var(--lat-minium);
+}

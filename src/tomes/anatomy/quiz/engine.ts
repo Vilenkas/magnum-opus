@@ -1,6 +1,7 @@
 import { landmarks } from '../data/landmarks'
 import { pieceById, pieces, regionById, groupById, type GroupId, type RegionId, type Side, type Tissue } from '../data/skeleton'
-import { weightOf, type QuizStats } from './stats'
+import { pickWeighted, shuffle, type Rng } from '@/forge/practice'
+import type { QuizStats } from './stats'
 
 export type QuizMode = 'identify' | 'locate' | 'type'
 
@@ -77,7 +78,7 @@ export function describeItem(item: QuizItem): string {
 
 export const regionName = (id: RegionId) => regionById.get(id)!.name
 
-export type Rng = () => number
+export type { Rng }
 
 export function buildPool(
   settings: Pick<QuizSettings, 'subject' | 'region' | 'includeNonBone'>,
@@ -89,22 +90,9 @@ export function buildPool(
   )
 }
 
-function shuffle<T>(items: T[], rng: Rng): T[] {
-  const a = [...items]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
 /** Weighted sampling without replacement (Efraimidis–Spirakis). */
 export function pickTargets(pool: QuizItem[], stats: QuizStats, count: number, rng: Rng): string[] {
-  return pool
-    .map((p) => ({ id: p.id, key: Math.pow(rng(), 1 / weightOf(stats[p.id])) }))
-    .sort((a, b) => b.key - a.key)
-    .slice(0, Math.min(count, pool.length))
-    .map((x) => x.id)
+  return pickWeighted(pool, stats, count, rng)
 }
 
 /**

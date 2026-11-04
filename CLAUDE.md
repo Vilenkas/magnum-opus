@@ -15,8 +15,11 @@ Three layers:
 
 - `src/shell/` — the app shell (Atlas home, tome loading, routing chrome). Knows only that
   tomes exist and how to open them; never styles a tome's interior.
-- `src/forge/` — reusable building blocks (quiz engine, flashcards, 3D scene wrapper…).
-  *Not created yet on purpose*: extract pieces here only once two different tomes need them.
+- `src/forge/` — building blocks shared by tomes, extracted only once two tomes needed them:
+  `practice.ts` (persisted per-item stats, weighted pick of what you miss, `seededRng` for
+  tests) and `text.ts` (normalize, diacritics, levenshtein). Tome-specific logic (anatomy's
+  name parsing, Latin morphology) stays in its tome. Visual components are not shared:
+  each tome draws its own.
 - `src/tomes/<id>/` — one self-contained folder per tome:
   - `manifest.ts` — eager, lightweight metadata (`TomeManifest` in `src/tomes/types.ts`).
     `id` must equal the folder name.
@@ -64,6 +67,17 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and
   only one open tab; `--virtual-time-budget` screenshots render an empty canvas, and
   SwiftShader renders at a few fps, so camera flights need several seconds.
+
+## Latin tome
+
+- The user is a **beginner** here (unlike anatomy): grammar content accuracy is on us, and
+  every paradigm must be backed by tests. Pronunciation: classical restored.
+- `grammar/nouns.ts` — declension engine: nominative + genitive + gender + declension →
+  12 forms with macrons, split into stem/ending. `analyze()` lists every case a form written
+  without macrons can be. Reference paradigms in `nouns.test.ts`.
+- `data/nouns.ts` — beginner vocabulary (hand-editable) with Spanish derivatives.
+- Inscription style: `toInscription()` (U→V, interpuncts), Marcellus + Alegreya fonts,
+  marble = SVG turbulence noise inline; exercises sit on a wax tablet (`plates.module.css`).
 
 ## Commands
 

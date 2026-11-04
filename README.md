@@ -23,6 +23,8 @@ See [CLAUDE.md](CLAUDE.md) for architecture and conventions.
 
 3D anatomy derived from [Z-Anatomy](https://github.com/Z-Anatomy/Models-of-human-anatomy)
 (CC BY-SA 4.0), itself based on BodyParts3D, The Database Center for Life Science (CC BY-SA 2.1 Japan).
-- [ ] Phase 3 — Extract `src/forge/` from the second tome
+- [x] Phase 3 — Second tome (Latin) and `src/forge/` extracted from both
+  - [x] Declensions: engine, interactive tables, decline/analyze drills
+  - [ ] Alphabet & pronunciation, history, verbs, vocabulary SRS
 - [x] Phase 4 — Tauri desktop packaging (`pnpm desktop:build` → Windows installer)
 - [ ] Phase 5 — Knowledge map, daily spaced-repetition review, notes

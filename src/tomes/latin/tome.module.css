@@ -1,0 +1,337 @@
+/*
+ * Latin tome: Roman inscriptions.
+ * Veined marble, carved square capitals, minium red (the pigment painted into the letters),
+ * and wax tablets for the exercises.
+ */
+.root {
+  --lat-marble: #ece8df;
+  --lat-stone: #d9d3c6;
+  --lat-ink: #2a2622;
+  --lat-ink-soft: #5d554c;
+  --lat-minium: #a8322a;
+  --lat-bronze: #8b6b3d;
+  --lat-carved: 'Marcellus', 'Times New Roman', serif;
+  --lat-body: 'Alegreya Variable', Georgia, serif;
+
+  min-height: 100dvh;
+  color: var(--lat-ink);
+  font-family: var(--lat-body);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  background:
+    /* Marble veining: ridges of turbulence noise, one large tile (no visible seams). */
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271600%27%20height%3D%271600%27%3E%3Cfilter%20id%3D%27v%27%3E%3CfeTurbulence%20type%3D%27turbulence%27%20baseFrequency%3D%270.0018%200.0065%27%20numOctaves%3D%274%27%20seed%3D%2711%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200.42%200%200%200%200%200.38%200%200%200%200%200.33%20-1.1%200%200%200%200.22%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23v)%27%2F%3E%3C%2Fsvg%3E") center / cover no-repeat,
+    radial-gradient(ellipse at 30% 20%, rgb(255 255 255 / 0.7), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgb(160 150 130 / 0.18), transparent 60%),
+    var(--lat-marble);
+  background-attachment: fixed;
+}
+
+.root ::selection {
+  background: var(--lat-minium);
+  color: var(--lat-marble);
+}
+
+/* Carved letters: dark in the groove, light catching the lower lip. */
+.carved {
+  font-family: var(--lat-carved);
+  color: #3b3631;
+  text-shadow:
+    0 1px 0 rgb(255 255 255 / 0.75),
+    0 -1px 0 rgb(0 0 0 / 0.18);
+  letter-spacing: 0.12em;
+}
+
+/* ---------- Frontispiece ---------- */
+
+.frontispiece {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 6rem 1.25rem 5rem;
+}
+
+/* Tabula ansata: an inscription plaque with dovetail handles. */
+.tabulaAnsata {
+  position: relative;
+  margin: 0 2.5rem 4rem;
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  background: linear-gradient(180deg, #f3f0e9, #e2ddd2);
+  border: 1px solid #c9c1b2;
+  box-shadow:
+    inset 0 0 0 6px #ece7dd,
+    inset 0 0 0 7px #c9c1b2,
+    0 18px 40px -24px rgb(60 50 40 / 0.6);
+}
+.tabulaAnsata::before,
+.tabulaAnsata::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 2.5rem;
+  height: 5rem;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, #f3f0e9, #e2ddd2);
+  border: 1px solid #c9c1b2;
+}
+.tabulaAnsata::before {
+  left: -2.5rem;
+  clip-path: polygon(100% 0, 0 30%, 0 70%, 100% 100%);
+}
+.tabulaAnsata::after {
+  right: -2.5rem;
+  clip-path: polygon(0 0, 100% 30%, 100% 70%, 0 100%);
+}
+
+.kicker {
+  composes: carved;
+  font-size: 0.95rem;
+  letter-spacing: 0.35em;
+  color: var(--lat-minium);
+  text-shadow: none;
+}
+
+.title {
+  composes: carved;
+  margin: 0.5rem 0;
+  font-size: clamp(1.9rem, 6.5vw, 3.6rem);
+  line-height: 1.05;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-style: italic;
+  color: var(--lat-ink-soft);
+}
+
+.books {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.book {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  column-gap: 1rem;
+  align-items: baseline;
+  padding: 1.1rem 1.25rem;
+  color: inherit;
+  text-decoration: none;
+  background: rgb(255 255 255 / 0.35);
+  border: 1px solid #d3ccbe;
+  transition:
+    background 250ms ease,
+    transform 250ms ease;
+}
+a.book:hover {
+  background: rgb(255 255 255 / 0.7);
+  transform: translateX(4px);
+}
+
+.numeral {
+  composes: carved;
+  grid-row: 1 / span 3;
+  align-self: center;
+  font-size: 1.6rem;
+  color: var(--lat-minium);
+  text-shadow: none;
+  text-align: center;
+}
+
+.bookLatin {
+  composes: carved;
+  font-size: 1.35rem;
+}
+
+.bookTitle {
+  grid-column: 2;
+  font-weight: 600;
+}
+
+.bookSummary {
+  grid-column: 2;
+  font-style: italic;
+  color: var(--lat-ink-soft);
+}
+
+.bookPending {
+  opacity: 0.5;
+}
+
+.pending {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ---------- Chapter ---------- */
+
+.chapter {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 5rem 1.25rem 6rem;
+}
+
+.chapterHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.crumb {
+  composes: carved;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--lat-ink-soft);
+  text-decoration: none;
+}
+.crumb:hover {
+  color: var(--lat-minium);
+}
+
+.chapterNumeral {
+  font-family: var(--lat-carved);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--lat-minium);
+  font-size: 0.85rem;
+}
+
+.chapterLatin {
+  composes: carved;
+  margin: 0.25rem 0;
+  font-size: clamp(2.2rem, 8vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.chapterTitle {
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--lat-ink-soft);
+}
+
+.loading {
+  text-align: center;
+  font-style: italic;
+}
+
+/* ---------- Prose ---------- */
+
+.prose h2 {
+  font-family: var(--lat-carved);
+  font-weight: 400;
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  margin: 3rem 0 1rem;
+}
+
+.prose h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 2rem 0 0.5rem;
+  color: var(--lat-minium);
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose table,
+.prose blockquote {
+  margin: 1rem 0;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose ul {
+  list-style: '· ';
+}
+.prose li::marker {
+  color: var(--lat-minium);
+  font-weight: 700;
+}
+
+/* Latin words in running text: italic, the classic convention. */
+.prose em {
+  color: var(--lat-ink);
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.prose th {
+  font-family: var(--lat-carved);
+  font-weight: 400;
+  text-align: left;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--lat-ink);
+  padding: 0.4rem 0.6rem;
+}
+.prose td {
+  border-bottom: 1px solid #d3ccbe;
+  padding: 0.4rem 0.6rem;
+  vertical-align: top;
+}
+
+.prose blockquote {
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid var(--lat-minium);
+  background: rgb(255 255 255 / 0.4);
+  font-size: 1.2rem;
+}
+.prose blockquote p {
+  margin: 0.25rem 0;
+}
+
+.prose hr {
+  border: 0;
+  text-align: center;
+  margin: 3rem 0;
+}
+.prose hr::after {
+  content: '·  ·  ·';
+  font-family: var(--lat-carved);
+  color: var(--lat-minium);
+  letter-spacing: 0.3em;
+}
+
+@media (max-width: 560px) {
+  .root {
+    font-size: 1.05rem;
+  }
+  .tabulaAnsata {
+    margin: 0 1.75rem 3rem;
+  }
+  .tabulaAnsata::before,
+  .tabulaAnsata::after {
+    width: 1.75rem;
+  }
+  .tabulaAnsata::before {
+    left: -1.75rem;
+  }
+  .tabulaAnsata::after {
+    right: -1.75rem;
+  }
+  .prose table {
+    display: block;
+    overflow-x: auto;
+  }
+}

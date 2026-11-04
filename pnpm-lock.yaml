@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/alegreya':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource-variable/eb-garamond':
         specifier: ^5.3.0
         version: 5.3.0
@@ -18,6 +21,9 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       '@fontsource/cormorant-garamond':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource/marcellus':
         specifier: ^5.3.0
         version: 5.3.0
       '@react-three/drei':
@@ -94,6 +100,9 @@ packages:
   '@dimforge/rapier3d-compat@0.12.0':
     resolution: {integrity: sha512-uekIGetywIgopfD97oDL5PfeezkFpNhwlzlaEYNOA0N6ghdsOvh/HYjSMek5Q2O1PYvRSDFcqFVJl4r4ZBwOow==}
 
+  '@fontsource-variable/alegreya@5.3.0':
+    resolution: {integrity: sha512-K+DFrm7tnqsG6di2w3eW/o4Ic6XNFLtZCKcPldeHEnE9f8uWy4llIp1CqQAu+ByI9MFfs1C7eLv4Rv84yEIerw==}
+
   '@fontsource-variable/eb-garamond@5.3.0':
     resolution: {integrity: sha512-656OJsA9Vv24yhqRZFEzXnzS2AYgKdEILLgHJYLzzXndgcWFKfSXFqzbRI5/6Yk1Yt7UfWrUeppE5nRQPQMwlQ==}
 
@@ -105,6 +114,9 @@ packages:
 
   '@fontsource/cormorant-garamond@5.3.0':
     resolution: {integrity: sha512-weuGsCirGVWBWqpt6YUp0yLThTe4G8YO45noq8wxeJCRvEpq5lFrxNMFSTxcyOyV5k5otzJ8guDzYegdYlcLMQ==}
+
+  '@fontsource/marcellus@5.3.0':
+    resolution: {integrity: sha512-cMnanjpiPIC7Rq4GXIA/Zal5WLSoDV5Mc681tMkWsWfKHXnRnLGlhuGeBnLF6HrqtFkiSdiuy4NCSPfOrz266w==}
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -1722,6 +1734,8 @@ snapshots:
 
   '@dimforge/rapier3d-compat@0.12.0': {}
 
+  '@fontsource-variable/alegreya@5.3.0': {}
+
   '@fontsource-variable/eb-garamond@5.3.0': {}
 
   '@fontsource-variable/inter@5.3.0': {}
@@ -1729,6 +1743,8 @@ snapshots:
   '@fontsource/cinzel@5.3.0': {}
 
   '@fontsource/cormorant-garamond@5.3.0': {}
+
+  '@fontsource/marcellus@5.3.0': {}
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:

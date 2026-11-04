@@ -1,3 +1,4 @@
+import { levenshtein, normalize } from '@/forge/text'
 import { landmarks } from '../data/landmarks'
 import { pieces, type Side } from '../data/skeleton'
 
@@ -15,16 +16,7 @@ export interface Nameable {
  * and small typos are all tolerated.
  */
 
-/** Lowercase, strip accents and punctuation, collapse whitespace. */
-export function normalize(text: string): string {
-  return text
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
+export { normalize, levenshtein }
 
 const ORDINALS: Record<string, number> = {
   // Spanish (both genders, and the apocopated forms)
@@ -116,18 +108,6 @@ export function parseAnswer(text: string): Parsed {
   return { tokens: [...tokens], side }
 }
 
-export function levenshtein(a: string, b: string): number {
-  if (a === b) return 0
-  let prev = Array.from({ length: b.length + 1 }, (_, i) => i)
-  for (let i = 1; i <= a.length; i++) {
-    const curr = [i]
-    for (let j = 1; j <= b.length; j++) {
-      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1))
-    }
-    prev = curr
-  }
-  return prev[b.length]
-}
 
 /** Typos tolerated in a word: none below 5 letters, 1 from 5, 2 from 9. Numbers/codes: none. */
 function typoBudget(word: string): number {
