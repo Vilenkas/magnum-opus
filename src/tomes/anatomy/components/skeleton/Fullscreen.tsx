@@ -1,13 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { setWindowFullscreen } from '@/shell/desktop'
 import plate from './plate.module.css'
 
-/** Fullscreen for one element (a plate). Works in browsers and in Tauri's webview. */
+/** Fullscreen for one element (a plate). In the desktop app the window follows along. */
 export function useFullscreen<T extends HTMLElement>() {
   const ref = useRef<T>(null)
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    const sync = () => setActive(document.fullscreenElement === ref.current)
+    const sync = () => {
+      const on = document.fullscreenElement === ref.current
+      setActive(on)
+      // Leaving with Esc only exits the element: bring the window back too.
+      if (!document.fullscreenElement) void setWindowFullscreen(false)
+      else if (on) void setWindowFullscreen(true)
+    }
     document.addEventListener('fullscreenchange', sync)
     return () => document.removeEventListener('fullscreenchange', sync)
   }, [])

@@ -34,7 +34,7 @@ Tiers (`manifest.tier`): `scroll` (MDX + palette) → `codex` (custom layout, 3D
 
 Vite 8 · React 19 · TypeScript 7 · TanStack Router (hash history, code-based routes) ·
 MDX (`@mdx-js/rollup` + remark-gfm) · Tailwind v4 (shell only) · self-hosted fonts via
-`@fontsource`. Desktop packaging with Tauri 2 is planned (not set up yet).
+`@fontsource`. Desktop app with Tauri 2 (see below).
 Everything must work offline: no CDNs, no runtime network requests.
 
 3D: three.js + React Three Fiber + drei, imported only from inside tomes and lazy-loaded.
@@ -72,6 +72,21 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `pnpm typecheck`
 - `pnpm test` — Vitest (pure logic only; 3D is verified visually)
 - `pnpm new-tome <id> "<Título>"` — scaffold a tome from `scripts/templates/tome/`
+- `pnpm desktop` — Tauri dev window (runs `pnpm dev` itself)
+- `pnpm desktop:build` — release exe + NSIS installer in `src-tauri/target/release/bundle/nsis/`
+
+## Desktop (Tauri 2)
+
+- `src-tauri/` — minimal Rust shell; no custom commands. Identifier `com.magnumopus.desktop`.
+- CSP lives in `tauri.conf.json`; `'wasm-unsafe-eval'` is required by the meshopt decoder.
+  Any new runtime feature (workers, wasm, blobs) must be allowed there or it fails only in
+  the desktop build.
+- `src/shell/desktop.ts` — `isDesktop` and wrappers around `@tauri-apps/api`, all no-ops in
+  the browser. Each API used needs its permission in `src-tauri/capabilities/default.json`.
+- Debugging the built app: set `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9334`
+  before launching the exe, then attach via DevTools protocol (page URL `http://tauri.localhost/`).
+- Rust is the standalone MSVC install (no rustup) with Visual Studio C++ tools.
+- App icon: `src-tauri/icons/source.svg` → `magick … source.png` → `pnpm tauri icon src-tauri/icons/source.png`.
 
 ## Notes
 

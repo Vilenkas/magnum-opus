@@ -17,6 +17,9 @@ export default defineConfig({
   },
   // Relative base so the build works from Tauri's custom protocol / file system.
   base: './',
+  // Tauri: it waits on this exact port in dev, and keeps its own Rust output on screen.
+  clearScreen: false,
+  server: { port: 5173, strictPort: true },
   build: {
     // three.js lives in lazily-loaded tome chunks (~1 MB raw); that's expected for an offline app.
     chunkSizeWarningLimit: 1500,
