@@ -29,6 +29,22 @@ export type Focus =
   | { kind: 'group'; group: GroupId }
   /** `context` > 1 widens the frame so neighbouring bones stay visible. */
   | { kind: 'piece'; id: string; context?: number }
+  /** A point on a piece (a landmark), looked at along its surface normal. */
+  | { kind: 'point'; pieceId: string; position: Vec3; normal: Vec3 }
+
+type Vec3 = [number, number, number]
+
+/** A pin on the model (a bony landmark). */
+export interface Marker {
+  id: string
+  /** Piece it sits on: sizes the pin relative to the bone. */
+  pieceId: string
+  position: Vec3
+  normal: Vec3
+  look: 'normal' | 'active' | 'correct' | 'wrong'
+  /** Openings (foramina…) are drawn as rings around the void instead of dots. */
+  opening?: boolean
+}
 
 export interface SkeletonStageProps {
   lookOf: (piece: BonePiece, hoveredId: string | null) => PieceLook
@@ -36,6 +52,14 @@ export interface SkeletonStageProps {
   focus: Focus
   onPick?: (id: string | null) => void
   onHoverChange?: (id: string | null) => void
+  markers?: Marker[]
+  onMarkerHover?: (id: string | null) => void
+  onMarkerPick?: (id: string) => void
+  /**
+   * Called with the clicked point on a pickable piece, in model space.
+   * Lets a parent test "click near this landmark" without pins.
+   */
+  onSurfacePick?: (pieceId: string, point: Vec3) => void
   /** Overlays drawn on top of the canvas (tags, prompts…). */
   children?: ReactNode
   className?: string
@@ -159,6 +183,83 @@ function useCameraFlight() {
   )
 }
 
+const MARKER_COLORS: Record<Marker['look'], string> = {
+  normal: '#e0a526',
+  active: '#fff6dc',
+  correct: '#8fbf5a',
+  wrong: '#d4452c',
+}
+
+const Z_AXIS = new THREE.Vector3(0, 0, 1)
+
+/** Pin radius on screen, in CSS pixels, whatever the zoom. */
+const MARKER_PX = 5
+
+/**
+ * Landmark pins. Unit-sized geometry scaled every frame to a constant size on screen, so
+ * they read as well on the whole skeleton as in a close-up of an ossicle.
+ */
+function Markers({
+  markers,
+  onHover,
+  onPick,
+}: {
+  markers: Marker[]
+  onHover?: (id: string | null) => void
+  onPick?: (id: string) => void
+}) {
+  const invalidate = useThree((s) => s.invalidate)
+  const group = useRef<THREE.Group>(null)
+  useEffect(() => invalidate(), [markers, invalidate])
+
+  useFrame(({ camera, size }) => {
+    const cam = camera as THREE.PerspectiveCamera
+    const perPixel = (2 * Math.tan(THREE.MathUtils.degToRad(cam.fov) / 2)) / size.height
+    for (const child of group.current?.children ?? []) {
+      const factor = (child.userData.scale as number) ?? 1
+      child.scale.setScalar(cam.position.distanceTo(child.position) * perPixel * MARKER_PX * factor)
+    }
+  })
+
+  return (
+    <group ref={group}>
+      {markers.map((m) => {
+        const color = MARKER_COLORS[m.look]
+        const common = {
+          position: m.position,
+          renderOrder: 2,
+          userData: { scale: m.look === 'active' ? 1.6 : 1 },
+          onPointerOver: (e: ThreeEvent<PointerEvent>) => {
+            e.stopPropagation()
+            onHover?.(m.id)
+          },
+          onPointerOut: () => onHover?.(null),
+          onClick: (e: ThreeEvent<MouseEvent>) => {
+            e.stopPropagation()
+            if (e.delta <= 4) onPick?.(m.id)
+          },
+        }
+        if (m.opening) {
+          // A ring facing outwards along the normal, around the hole.
+          const q = new THREE.Quaternion().setFromUnitVectors(Z_AXIS, new THREE.Vector3(...m.normal).normalize())
+          return (
+            <mesh key={m.id} quaternion={q} {...common}>
+              <torusGeometry args={[1.8, 0.45, 8, 24]} />
+              <meshBasicMaterial color={color} />
+            </mesh>
+          )
+        }
+        return (
+          <mesh key={m.id} {...common}>
+            <sphereGeometry args={[1, 16, 12]} />
+            <meshBasicMaterial color={color} />
+          </mesh>
+        )
+      })}
+    </group>
+  )
+}
+
 function SkeletonModel({
   lookOf,
   isPickable = defaultPickable,
@@ -166,6 +267,10 @@ function SkeletonModel({
   onPick,
   hoveredId,
   setHoveredId,
+  markers,
+  onMarkerHover,
+  onMarkerPick,
+  onSurfacePick,
 }: Omit<SkeletonStageProps, 'children' | 'className' | 'onHoverChange'> & {
   hoveredId: string | null
   setHoveredId: (id: string | null) => void
@@ -224,6 +329,20 @@ function SkeletonModel({
         box.setFromCenterAndSize(center, new THREE.Vector3(side, side, side))
       }
       direction = viewDirectionFor(center, bodyAxis)
+    } else if (focus.kind === 'point') {
+      const center = new THREE.Vector3(...focus.position)
+      // Frame a neighbourhood proportional to the bone: a hand's width around a femoral
+      // landmark, a few millimetres around an ossicle's.
+      const mesh = meshes.get(focus.pieceId)
+      const boneSize = mesh ? new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()).length() : 0.2
+      const side = THREE.MathUtils.clamp(boneSize * 0.35, 0.015, 0.12)
+      box.setFromCenterAndSize(center, new THREE.Vector3(side, side, side))
+      // Look along the surface normal, nudged outwards from the body and slightly from above:
+      // normals on borders and edges can point sideways, the nudge keeps the view readable.
+      const outward = viewDirectionFor(center, bodyAxis)
+      direction = new THREE.Vector3(...focus.normal).normalize().addScaledVector(outward, 0.35)
+      direction.y += 0.15
+      direction.normalize()
     } else if (focus.kind === 'region' || focus.kind === 'group') {
       for (const [id, mesh] of meshes) {
         const piece = pieceById.get(id)!
@@ -253,16 +372,28 @@ function SkeletonModel({
   }
 
   return (
-    <primitive
-      object={scene}
-      onPointerMove={(e: ThreeEvent<PointerEvent>) => setHoveredId(pick(e))}
-      onPointerLeave={() => setHoveredId(null)}
-      onClick={(e: ThreeEvent<MouseEvent>) => {
-        const id = pick(e)
-        // Ignore clicks that were really the end of an orbit drag.
-        if (e.delta <= 4) onPick?.(id)
-      }}
-    />
+    <>
+      <primitive
+        object={scene}
+        onPointerMove={(e: ThreeEvent<PointerEvent>) => setHoveredId(pick(e))}
+        onPointerLeave={() => setHoveredId(null)}
+        onClick={(e: ThreeEvent<MouseEvent>) => {
+          // Ignore clicks that were really the end of an orbit drag.
+          if (e.delta > 4) return
+          e.stopPropagation()
+          const hit = e.intersections.find(({ object }) => {
+            const piece = pieceById.get(object.name)
+            return piece && object.visible && isPickable(piece)
+          })
+          const id = hit?.object.name ?? null
+          onPick?.(id)
+          if (hit && id) onSurfacePick?.(id, hit.point.toArray() as Vec3)
+        }}
+      />
+      {markers && markers.length > 0 && (
+        <Markers markers={markers} onHover={onMarkerHover} onPick={onMarkerPick} />
+      )}
+    </>
   )
 }
 

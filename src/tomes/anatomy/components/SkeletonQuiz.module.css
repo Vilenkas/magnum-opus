@@ -288,3 +288,22 @@
 .typeRow .input {
   min-width: 12rem;
 }
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.onBone {
+  font-family: var(--anatomy-body);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--anatomy-ink-soft);
+}
+
+.locateOn {
+  font-style: italic;
+  opacity: 0.85;
+}

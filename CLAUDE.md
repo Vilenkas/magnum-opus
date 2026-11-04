@@ -46,7 +46,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `assets/skeleton.glb` — 269 pieces (210 bones, 31 cartilages, 28 teeth) from Z-Anatomy,
   CC BY-SA: keep attribution visible. Rebuild via `tools/anatomy/README.md`.
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
-  expert). `data/skeleton.ts` — types, groups, regions, axial/appendicular division.
+  expert).
+- `assets/landmarks.json` (generated: 895 landmark points + normals on 79 pieces) and
+  `data/landmark-names.ts` (hand-edited Spanish names keyed by TA English). `data/landmarks.ts`
+  joins them. Openings (foramina) are marked at the void, not on the surface.
+- The quiz works on `QuizItem`s (`quiz/engine.ts`): pieces or landmarks, same engine. `data/skeleton.ts` — types, groups, regions, axial/appendicular division.
 - `components/skeleton/SkeletonStage.tsx` — shared canvas + model + camera flight used by
   every 3D plate. Parents drive it declaratively: `lookOf(piece)`, `isPickable`, `focus`.
   It **clones** the cached GLTF scene: an Object3D has one parent, so two plates sharing

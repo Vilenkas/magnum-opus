@@ -1,4 +1,13 @@
-import { pieces, type BonePiece, type Side } from '../data/skeleton'
+import { landmarks } from '../data/landmarks'
+import { pieces, type Side } from '../data/skeleton'
+
+/** Anything with a name to type: a piece or a landmark. */
+export interface Nameable {
+  base: string
+  aliases?: string[]
+  en: string
+  side?: Side
+}
 
 /**
  * Typed-answer checking that compares meaning, not spelling: word order, filler words,
@@ -131,10 +140,12 @@ let vocabulary: Set<string> | null = null
 function getVocabulary(): Set<string> {
   if (!vocabulary) {
     vocabulary = new Set()
-    for (const p of pieces) {
-      for (const name of [p.base, ...(p.aliases ?? []), p.en]) {
-        for (const t of parseAnswer(name).tokens) vocabulary.add(t)
-      }
+    const names = [
+      ...pieces.flatMap((p) => [p.base, ...(p.aliases ?? []), p.en]),
+      ...landmarks.flatMap((l) => [l.name, ...l.aliases, l.en]),
+    ]
+    for (const name of names) {
+      for (const t of parseAnswer(name).tokens) vocabulary.add(t)
     }
   }
   return vocabulary
@@ -191,7 +202,7 @@ export type TypedVerdict =
  * written is right but something essential is missing ("falange distal") — the UI lets
  * the user add detail instead of failing them.
  */
-export function checkTyped(input: string, piece: BonePiece): TypedVerdict {
+export function checkTyped(input: string, piece: Nameable): TypedVerdict {
   const answer = parseAnswer(input)
   if (answer.tokens.length === 0) return { correct: false, reason: 'empty' }
 

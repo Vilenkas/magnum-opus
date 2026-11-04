@@ -1,7 +1,8 @@
-import { useCallback, useRef, useState, type KeyboardEvent } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
+import { landmarkById, landmarksByPiece, type Landmark } from '../data/landmarks'
 import { groupById, pieceById, regionOf, type BonePiece, type GroupId, type RegionId } from '../data/skeleton'
 import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
-import { SkeletonStage, StageTag, type Focus, type PieceLook } from './skeleton/SkeletonStage'
+import { SkeletonStage, StageTag, type Focus, type Marker, type PieceLook } from './skeleton/SkeletonStage'
 import plate from './skeleton/plate.module.css'
 import styles from './SkeletonViewer.module.css'
 
@@ -25,6 +26,8 @@ const sameScope = (a: Scope | null, b: Scope | null) => a?.kind === b?.kind && a
 const focusFor = (scope: Scope | null): Focus =>
   !scope ? { kind: 'all' } : scope.kind === 'region' ? { kind: 'region', region: scope.id } : { kind: 'group', group: scope.id }
 
+const focusOnLandmark = (l: Landmark): Focus => ({ kind: 'point', pieceId: l.pieceId, position: l.position, normal: l.normal })
+
 /** Pieces the user has taken out of the way, to see what's behind them. */
 type Removal = 'hidden' | 'dimmed'
 
@@ -37,15 +40,27 @@ export function SkeletonViewer() {
   const [removed, setRemoved] = useState<Map<string, Removal>>(new Map())
   // Undo stack: each entry is the piece removed by that step.
   const [history, setHistory] = useState<string[]>([])
+  const [showLandmarks, setShowLandmarks] = useState(true)
+  const [landmarkId, setLandmarkId] = useState<string | null>(null)
+  const [hoveredLandmarkId, setHoveredLandmarkId] = useState<string | null>(null)
   const lastClick = useRef<{ id: string | null; t: number }>({ id: null, t: 0 })
   const fullscreen = useFullscreen<HTMLElement>()
 
   const selected = selectedId ? pieceById.get(selectedId) : undefined
   const hovered = hoveredId ? pieceById.get(hoveredId) : undefined
+  const pieceLandmarks = useMemo(() => (selectedId ? (landmarksByPiece.get(selectedId) ?? []) : []), [selectedId])
+  const pinsVisible = showLandmarks && pieceLandmarks.length > 0
+  const activeLandmark = landmarkId ? landmarkById.get(landmarkId) : undefined
+  const hoveredLandmark = hoveredLandmarkId ? landmarkById.get(hoveredLandmarkId) : undefined
+
+  // A new bone means a new set of landmarks.
+  useEffect(() => {
+    setLandmarkId(null)
+    setHoveredLandmarkId(null)
+  }, [selectedId])
 
   const inScope = useCallback(
-    (p: BonePiece) =>
-      !scope || (scope.kind === 'region' ? regionOf(p).id === scope.id : p.group === scope.id),
+    (p: BonePiece) => !scope || (scope.kind === 'region' ? regionOf(p).id === scope.id : p.group === scope.id),
     [scope],
   )
 
@@ -53,13 +68,32 @@ export function SkeletonViewer() {
     (p: BonePiece, hovered: string | null): PieceLook => {
       const removal = removed.get(p.id)
       if (removal === 'hidden') return 'hidden'
-      if (p.id === selectedId) return 'selected'
+      // With pins on it, a lighter tint keeps the landmarks readable.
+      if (p.id === selectedId) return pinsVisible ? 'hover' : 'selected'
       if (removal === 'dimmed') return 'ghost'
+      // Looking at a landmark: everything else turns translucent so nothing hides it
+      // (e.g. the hanging forearm in front of the greater trochanter).
+      if (landmarkId) return 'ghost'
       if (!inScope(p)) return 'faded'
       if (p.id === hovered) return 'hover'
       return 'base'
     },
-    [selectedId, inScope, removed],
+    [selectedId, inScope, removed, pinsVisible, landmarkId],
+  )
+
+  const markers = useMemo<Marker[]>(
+    () =>
+      pinsVisible
+        ? pieceLandmarks.map((l) => ({
+            id: l.id,
+            pieceId: l.pieceId,
+            position: l.position,
+            normal: l.normal,
+            opening: l.opening,
+            look: l.id === landmarkId || l.id === hoveredLandmarkId ? 'active' : 'normal',
+          }))
+        : [],
+    [pinsVisible, pieceLandmarks, landmarkId, hoveredLandmarkId],
   )
 
   // Dimmed and hidden pieces let clicks through, so what's behind them can be picked.
@@ -71,6 +105,14 @@ export function SkeletonViewer() {
     if (id && id === lastClick.current.id && now - lastClick.current.t < 400) setFocus({ kind: 'piece', id })
     lastClick.current = { id, t: now }
     setSelectedId(id)
+  }
+
+  const selectLandmark = (id: string) => {
+    const l = landmarkById.get(id)
+    if (!l) return
+    setShowLandmarks(true)
+    setLandmarkId(id)
+    setFocus(focusOnLandmark(l))
   }
 
   const isolate = (next: Scope | null) => {
@@ -107,11 +149,13 @@ export function SkeletonViewer() {
   }
 
   const onKeyDown = (e: KeyboardEvent) => {
+    if (e.target instanceof HTMLInputElement) return
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
       e.preventDefault()
       undo()
-    } else if (e.key === 'Escape' && selectedId) {
-      setSelectedId(null)
+    } else if (e.key === 'Escape') {
+      if (landmarkId) setLandmarkId(null)
+      else if (selectedId) setSelectedId(null)
     } else if (selectedId && !e.ctrlKey && !e.metaKey && !e.altKey) {
       if (e.key.toLowerCase() === 'o') remove(selectedId, 'hidden')
       if (e.key.toLowerCase() === 'a') remove(selectedId, 'dimmed')
@@ -120,6 +164,7 @@ export function SkeletonViewer() {
 
   const hiddenCount = [...removed.values()].filter((r) => r === 'hidden').length
   const dimmedCount = removed.size - hiddenCount
+  const tag = hoveredLandmark?.name ?? (hovered && hovered.id !== selectedId ? hovered.name : null)
 
   return (
     // tabIndex lets the plate take focus when the canvas is clicked, for keyboard shortcuts.
@@ -145,8 +190,11 @@ export function SkeletonViewer() {
         focus={focus}
         onPick={handlePick}
         onHoverChange={setHoveredId}
+        markers={markers}
+        onMarkerHover={setHoveredLandmarkId}
+        onMarkerPick={selectLandmark}
       >
-        {hovered && hovered.id !== selectedId && <StageTag>{hovered.name}</StageTag>}
+        {tag && <StageTag>{tag}</StageTag>}
         {removed.size > 0 && (
           <div className={styles.removedBar}>
             <span>
@@ -166,12 +214,25 @@ export function SkeletonViewer() {
 
       <div className={plate.legend} aria-live="polite">
         {selected ? (
-          <PieceCard
-            piece={selected}
-            onFocus={() => setFocus({ kind: 'piece', id: selected.id })}
-            onDim={() => remove(selected.id, 'dimmed')}
-            onHide={() => remove(selected.id, 'hidden')}
-          />
+          <>
+            <PieceCard
+              piece={selected}
+              onFocus={() => setFocus({ kind: 'piece', id: selected.id })}
+              onDim={() => remove(selected.id, 'dimmed')}
+              onHide={() => remove(selected.id, 'hidden')}
+            />
+            {pieceLandmarks.length > 0 && (
+              <LandmarkPanel
+                landmarks={pieceLandmarks}
+                active={activeLandmark}
+                hoveredId={hoveredLandmarkId}
+                showPins={showLandmarks}
+                onTogglePins={() => setShowLandmarks((v) => !v)}
+                onHover={setHoveredLandmarkId}
+                onSelect={selectLandmark}
+              />
+            )}
+          </>
         ) : (
           <p className={plate.hint}>
             Arrastra para girar · rueda para acercar · clic para identificar · doble clic para enfocar ·
@@ -220,5 +281,60 @@ function PieceCard({
         </button>
       </div>
     </div>
+  )
+}
+
+function LandmarkPanel({
+  landmarks,
+  active,
+  hoveredId,
+  showPins,
+  onTogglePins,
+  onHover,
+  onSelect,
+}: {
+  landmarks: Landmark[]
+  active?: Landmark
+  hoveredId: string | null
+  showPins: boolean
+  onTogglePins: () => void
+  onHover: (id: string | null) => void
+  onSelect: (id: string) => void
+}) {
+  return (
+    <section className={styles.landmarks} aria-label="Accidentes óseos">
+      <div className={styles.landmarksHead}>
+        <span className={plate.kicker}>Accidentes óseos · {landmarks.length}</span>
+        <button className={styles.linkButton} onClick={onTogglePins}>
+          {showPins ? 'Ocultar pines' : 'Mostrar pines'}
+        </button>
+      </div>
+
+      {active && (
+        <p className={styles.landmarkDetail}>
+          <strong>{active.name}</strong>
+          <span className={plate.latin}> · {active.en}</span>
+          {active.aliases.length > 0 && <> · También: {active.aliases.join(', ')}</>}
+          {active.inconstant && <span className={styles.badge}>inconstante</span>}
+          {active.opening && <span className={styles.badge}>abertura</span>}
+        </p>
+      )}
+
+      <ul className={styles.landmarkList}>
+        {landmarks.map((l) => (
+          <li key={l.id}>
+            <button
+              className={styles.landmarkChip}
+              data-active={l.id === active?.id || l.id === hoveredId}
+              onMouseEnter={() => onHover(l.id)}
+              onMouseLeave={() => onHover(null)}
+              onClick={() => onSelect(l.id)}
+            >
+              {l.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }

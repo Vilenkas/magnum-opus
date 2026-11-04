@@ -49,3 +49,79 @@
     justify-content: flex-start;
   }
 }
+
+/* ---------- Bony landmarks ---------- */
+
+.landmarks {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dotted color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.landmarksHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.linkButton {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--anatomy-accent);
+  font-family: var(--anatomy-body);
+  font-style: italic;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.landmarkDetail {
+  margin: 0.5rem 0 0 !important;
+  font-size: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0 0.45rem;
+  border: 1px solid var(--anatomy-accent);
+  border-radius: 999px;
+  color: var(--anatomy-accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  vertical-align: 0.1em;
+}
+
+.landmarkList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  max-height: 7.5rem;
+  overflow-y: auto;
+  margin: 0.6rem 0 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.landmarkList li {
+  margin: 0 !important;
+}
+
+.landmarkChip {
+  padding: 0.1rem 0.55rem;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.landmarkChip:hover,
+.landmarkChip[data-active='true'] {
+  background: #e0a526;
+  border-color: #e0a526;
+  color: var(--anatomy-ink);
+}

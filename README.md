@@ -17,7 +17,7 @@ See [CLAUDE.md](CLAUDE.md) for architecture and conventions.
 - [ ] Phase 2 — Anatomy pilot: osteology with a 3D skeleton and quizzes
   - [x] Z-Anatomy skeleton → GLB pipeline, Spanish names, interactive viewer
   - [x] Skeleton quiz on the 3D model: identify / locate / type, weighted by past mistakes
-  - [ ] Landmark pins (acromion, trochanters…) from Z-Anatomy label lines
+  - [x] Bony landmarks: 895 pins with Spanish names in the viewer, and in the quiz
 
 ## Credits
 

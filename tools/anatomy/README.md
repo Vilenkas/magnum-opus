@@ -31,6 +31,22 @@ pnpm dlx @gltf-transform/cli optimize <out-dir>/skeleton-raw.glb src/tomes/anato
 node tools/anatomy/gen-bones.mjs <out-dir>/skeleton-meta.json src/tomes/anatomy/data/bones.ts
 ```
 
+## Bony landmarks
+
+```sh
+# 4. Export landmark points + smoothed surface normals (right side, mirrored to the left).
+blender -b --factory-startup --disable-autoexec path/to/Startup.blend \
+  --python tools/anatomy/export_landmarks.py -- <out-dir>
+# → <out-dir>/landmarks.json (rejects whole-group labels; keeps openings off-surface)
+
+# 5. Clean names, drop whole-bone labels, check translations → assets/landmarks.json.
+#    Fails if a landmark lacks a Spanish name in data/landmark-names.ts or sits on an unknown piece.
+node tools/anatomy/gen-landmarks.mjs <out-dir>/landmarks.json
+```
+
+Spanish names live in `src/tomes/anatomy/data/landmark-names.ts` (hand-edited, never
+generated), so re-exporting positions never loses corrections.
+
 ## Notes on the source model
 
 - Names are Terminologia Anatomica (English); paired pieces end in `.l` / `.r`.

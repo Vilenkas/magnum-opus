@@ -9,6 +9,7 @@
     "types": ["vite/client", "mdx"],
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
     "moduleDetection": "force",
     "noEmit": true,
     "strict": true,
