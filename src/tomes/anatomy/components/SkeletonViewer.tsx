@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
+import { latinOf } from '../data/latin'
 import { landmarkById, landmarksByPiece, type Landmark } from '../data/landmarks'
 import { groupById, pieceById, regionOf, type BonePiece, type GroupId, type RegionId } from '../data/skeleton'
 import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
@@ -265,7 +266,7 @@ function PieceCard({
         </p>
         <h3 className={plate.title}>{piece.name}</h3>
         <p className={plate.meta}>
-          <span className={plate.latin}>{piece.en}</span>
+          <TaNames en={piece.en} />
           {piece.aliases && piece.aliases.length > 0 && <> · También: {piece.aliases.join(', ')}</>}
         </p>
       </div>
@@ -313,7 +314,8 @@ function LandmarkPanel({
       {active && (
         <p className={styles.landmarkDetail}>
           <strong>{active.name}</strong>
-          <span className={plate.latin}> · {active.en}</span>
+          {' · '}
+          <TaNames en={active.en} />
           {active.aliases.length > 0 && <> · También: {active.aliases.join(', ')}</>}
           {active.inconstant && <span className={styles.badge}>inconstante</span>}
           {active.opening && <span className={styles.badge}>abertura</span>}
@@ -336,5 +338,23 @@ function LandmarkPanel({
         ))}
       </ul>
     </section>
+  )
+}
+
+/** Terminologia Anatomica names: Latin (the standard) first, English as a quieter reference. */
+function TaNames({ en }: { en: string }) {
+  const latin = latinOf(en)
+  return (
+    <>
+      {latin && (
+        <span className={plate.latin} lang="la">
+          {latin}
+        </span>
+      )}
+      {latin && ' · '}
+      <span className={plate.english} lang="en">
+        {en}
+      </span>
+    </>
   )
 }

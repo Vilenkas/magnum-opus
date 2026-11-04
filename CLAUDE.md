@@ -83,6 +83,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   in `library/anatomy/` (scanned: render pages with Ghostscript, see `testut-notes.md` there).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).
+- `data/latin.ts` + `data/landmark-latin.ts` — Latin TA names keyed by TA English (`latinOf(en)`);
+  numbered series (ribs, phalanges, vertebrae, teeth) come from patterns. Shown in the viewer
+  next to the English (Latin first, English quieter); tests require every piece and landmark to have one.
 - `assets/landmarks.json` (generated: 895 landmark points + normals on 79 pieces) and
   `data/landmark-names.ts` (hand-edited Spanish names keyed by TA English). `data/landmarks.ts`
   joins them. Openings (foramina) are marked at the void, not on the surface.
