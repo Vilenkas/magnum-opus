@@ -17,7 +17,8 @@ class Registry {
       this.order.push(id)
       this.pages.set(id, new Set())
     }
-    if (page) this.pages.get(id)!.add(page)
+    // "475, 483" cites two places.
+    for (const p of page?.split(',') ?? []) if (p.trim()) this.pages.get(id)!.add(p.trim())
     return this.order.indexOf(id) + 1
   }
 }

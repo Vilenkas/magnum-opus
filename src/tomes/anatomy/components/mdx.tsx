@@ -26,4 +26,5 @@ export const mdxComponents: MDXComponents = {
   SkeletonBreakdown,
   SkeletonViewer: lazyPlate(() => import('./SkeletonViewer').then((m) => m.SkeletonViewer)),
   SkeletonQuiz: lazyPlate(() => import('./SkeletonQuiz').then((m) => m.SkeletonQuiz)),
+  JointTypes: lazyPlate(() => import('./JointTypes').then((m) => m.JointTypes)),
 }

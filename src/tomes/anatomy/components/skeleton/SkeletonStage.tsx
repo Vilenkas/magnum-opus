@@ -31,8 +31,15 @@ export type Focus =
   | { kind: 'piece'; id: string; context?: number }
   /** A point on a piece (a landmark), looked at along its surface normal. */
   | { kind: 'point'; pieceId: string; position: Vec3; normal: Vec3 }
+  /**
+   * A joint: a frame around `position` sized from the smallest of its pieces (or `frame`,
+   * in model units), seen from an anatomical view (default: the joint's own side).
+   */
+  | { kind: 'joint'; position: Vec3; pieceIds: string[]; view?: JointView; frame?: number }
 
 type Vec3 = [number, number, number]
+
+export type JointView = 'front' | 'back' | 'side' | 'top' | 'below'
 
 /** A pin on the model (a bony landmark). */
 export interface Marker {
@@ -109,6 +116,26 @@ function viewDirectionFor(center: THREE.Vector3, bodyAxis: THREE.Vector3): THREE
     .addScaledVector(facesBack ? new THREE.Vector3(0, 0, -1) : FRONT, 0.8)
     .setY(0.15)
     .normalize()
+}
+
+/** Anatomical views for joints; 'side' looks from the joint's own side of the body. */
+function jointViewDirection(view: JointView | undefined, center: THREE.Vector3, bodyAxis: THREE.Vector3): THREE.Vector3 {
+  const lateral = Math.sign(center.x - bodyAxis.x) || 1
+  switch (view) {
+    case 'front':
+      return FRONT.clone()
+    case 'back':
+      return new THREE.Vector3(0, 0.1, -1).normalize()
+    case 'side':
+      return new THREE.Vector3(lateral, 0.1, 0.25).normalize()
+    // Never straight up or down: the camera's up vector is +Y.
+    case 'top':
+      return new THREE.Vector3(0, 1, 0.3).normalize()
+    case 'below':
+      return new THREE.Vector3(0, -1, 0.3).normalize()
+    default:
+      return viewDirectionFor(center, bodyAxis)
+  }
 }
 
 const FLIGHT_SECONDS = 0.7
@@ -343,6 +370,18 @@ function SkeletonModel({
       direction = new THREE.Vector3(...focus.normal).normalize().addScaledVector(outward, 0.35)
       direction.y += 0.15
       direction.normalize()
+    } else if (focus.kind === 'joint') {
+      const center = new THREE.Vector3(...focus.position)
+      const largest = (id: string) => {
+        const mesh = meshes.get(id)
+        const size = mesh ? new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()) : undefined
+        return size ? Math.max(size.x, size.y, size.z) : Infinity
+      }
+      // The smallest bone sets the scale: a hip shows the whole acetabulum, a finger joint two phalanges.
+      const smallest = Math.min(...focus.pieceIds.map(largest))
+      const side = focus.frame ?? THREE.MathUtils.clamp(Number.isFinite(smallest) ? smallest * 1.1 : 0.15, 0.06, 0.3)
+      box.setFromCenterAndSize(center, new THREE.Vector3(side, side, side))
+      direction = jointViewDirection(focus.view, center, bodyAxis)
     } else if (focus.kind === 'region' || focus.kind === 'group') {
       for (const [id, mesh] of meshes) {
         const piece = pieceById.get(id)!
