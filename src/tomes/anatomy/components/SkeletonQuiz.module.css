@@ -275,3 +275,16 @@
     font-size: 0.85rem;
   }
 }
+
+.hintLine {
+  margin: 0.6rem 0 0 !important;
+  font-style: italic;
+  color: var(--anatomy-accent);
+}
+
+.typeRow {
+  flex-wrap: wrap;
+}
+.typeRow .input {
+  min-width: 12rem;
+}

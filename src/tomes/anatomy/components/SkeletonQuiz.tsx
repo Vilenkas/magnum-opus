@@ -213,9 +213,14 @@ export function SkeletonQuiz() {
                 answer={answer}
                 onSubmit={(text) => {
                   const verdict = checkTyped(text, target)
-                  if (!verdict.correct && verdict.reason === 'empty') return
+                  // Empty or incomplete answers aren't graded: the user can add detail.
+                  if (!verdict.correct && (verdict.reason === 'empty' || verdict.reason === 'incomplete')) {
+                    return verdict.reason
+                  }
                   submit(verdict.correct, text, verdict)
+                  return null
                 }}
+                onGiveUp={() => submit(false, null, { correct: false, reason: 'wrong-bone' })}
               />
             )}
             {answer && (
@@ -373,15 +378,19 @@ function TypePanel({
   target,
   answer,
   onSubmit,
+  onGiveUp,
 }: {
   target: BonePiece
   answer?: Answer
-  onSubmit: (text: string) => void
+  /** Returns why the answer wasn't graded, or null once it was. */
+  onSubmit: (text: string) => 'empty' | 'incomplete' | null
+  onGiveUp: () => void
 }) {
   const [text, setText] = useState('')
+  const [hint, setHint] = useState<'empty' | 'incomplete' | null>(null)
   const handle = (e: FormEvent) => {
     e.preventDefault()
-    onSubmit(text)
+    setHint(onSubmit(text))
   }
   return (
     <div>
@@ -394,26 +403,50 @@ function TypePanel({
             id="quiz-typed"
             className={styles.input}
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {
+              setText(e.target.value)
+              setHint(null)
+            }}
             disabled={!!answer}
             autoFocus
             autoComplete="off"
             spellCheck={false}
-            placeholder="p. ej. Clavícula derecha"
+            placeholder="p. ej. Clavícula derecha, 5.º metatarsiano, T12…"
           />
           {!answer && (
-            <button type="submit" className={plate.buttonSolid}>
-              Comprobar
-            </button>
+            <>
+              <button type="submit" className={plate.buttonSolid}>
+                Comprobar
+              </button>
+              <button type="button" className={plate.button} onClick={onGiveUp}>
+                No lo sé
+              </button>
+            </>
           )}
         </div>
       </form>
-      {answer?.verdict && <TypedFeedback verdict={answer.verdict} target={target} />}
+      {!answer && hint === 'incomplete' && (
+        <p className={styles.hintLine} role="status">
+          Vas bien, pero es incompleto: precisa más (qué número, mano o pie…).
+        </p>
+      )}
+      {answer?.verdict && <TypedFeedback verdict={answer.verdict} target={target} given={answer.given} />}
     </div>
   )
 }
 
-function TypedFeedback({ verdict, target }: { verdict: TypedVerdict; target: BonePiece }) {
+function TypedFeedback({
+  verdict,
+  target,
+  given,
+}: {
+  verdict: TypedVerdict
+  target: BonePiece
+  given: string | null
+}) {
+  if (!verdict.correct && given === null) {
+    return <Feedback correct={false}>Era {target.name}.</Feedback>
+  }
   if (verdict.correct) {
     return (
       <Feedback correct>

@@ -5,8 +5,8 @@ import type { BonePiece } from './skeleton'
 export const bonePieces: BonePiece[] = [
   { id: 'arytenoid-cartilage-l', name: 'Cartílago aritenoides izquierdo', base: 'Cartílago aritenoides', side: 'left', group: 'laryngeal-cartilages', tissue: 'cartilage', en: 'Arytenoid cartilage' },
   { id: 'arytenoid-cartilage-r', name: 'Cartílago aritenoides derecho', base: 'Cartílago aritenoides', side: 'right', group: 'laryngeal-cartilages', tissue: 'cartilage', en: 'Arytenoid cartilage' },
-  { id: 'atlas-c1', name: 'Atlas (C1)', base: 'Atlas (C1)', group: 'cervical-vertebrae', en: 'Atlas (C1)' },
-  { id: 'axis-c2', name: 'Axis (C2)', base: 'Axis (C2)', group: 'cervical-vertebrae', en: 'Axis (C2)' },
+  { id: 'atlas-c1', name: 'Atlas (C1)', base: 'Atlas (C1)', aliases: ['Vértebra C1'], group: 'cervical-vertebrae', en: 'Atlas (C1)' },
+  { id: 'axis-c2', name: 'Axis (C2)', base: 'Axis (C2)', aliases: ['Vértebra C2'], group: 'cervical-vertebrae', en: 'Axis (C2)' },
   { id: 'body-of-sternum', name: 'Cuerpo del esternón', base: 'Cuerpo del esternón', group: 'sternum', en: 'Body of sternum' },
   { id: 'calcaneus-l', name: 'Calcáneo izquierdo', base: 'Calcáneo', side: 'left', group: 'tarsals', en: 'Calcaneus' },
   { id: 'calcaneus-r', name: 'Calcáneo derecho', base: 'Calcáneo', side: 'right', group: 'tarsals', en: 'Calcaneus' },

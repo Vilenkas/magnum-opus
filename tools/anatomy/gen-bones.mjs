@@ -13,8 +13,8 @@ const cap = (s) => s[0].toUpperCase() + s.slice(1)
 // base English name -> [Spanish name, gender of the noun the side adjective agrees with, aliases]
 const DICT = {
   'Arytenoid cartilage': ['Cartílago aritenoides', 'm'],
-  'Atlas (C1)': ['Atlas (C1)', 'm'],
-  'Axis (C2)': ['Axis (C2)', 'm'],
+  'Atlas (C1)': ['Atlas (C1)', 'm', ['Vértebra C1']],
+  'Axis (C2)': ['Axis (C2)', 'm', ['Vértebra C2']],
   'Body of sternum': ['Cuerpo del esternón', 'm'],
   Calcaneus: ['Calcáneo', 'm'],
   'Capitate bone': ['Hueso grande', 'm', ['Capitado']],

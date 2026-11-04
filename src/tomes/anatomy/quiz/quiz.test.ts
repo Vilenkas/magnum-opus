@@ -29,39 +29,99 @@ describe('normalize', () => {
 })
 
 describe('checkTyped', () => {
+  const ok = (input: string, id: string) => expect(checkTyped(input, piece(id)).correct, input).toBe(true)
+  const verdict = (input: string, id: string) => checkTyped(input, piece(id))
+
   it('accepts the Spanish name without accents or side', () => {
-    expect(checkTyped('femur', piece('femur-r'))).toEqual({ correct: true, exact: true })
+    expect(verdict('femur', 'femur-r')).toEqual({ correct: true, exact: true })
   })
 
   it('accepts aliases and the TA English name', () => {
-    expect(checkTyped('fíbula', piece('fibula-l')).correct).toBe(true)
-    expect(checkTyped('Fibula', piece('fibula-l')).correct).toBe(true)
-    expect(checkTyped('omóplato', piece('scapula-r')).correct).toBe(true)
+    ok('fíbula', 'fibula-l')
+    ok('Fibula', 'fibula-l')
+    ok('omóplato', 'scapula-r')
+    ok('fifth metacarpal', 'fifth-metacarpal-bone-r')
   })
 
-  it('accepts a correct side and rejects a wrong one', () => {
-    expect(checkTyped('clavícula derecha', piece('clavicle-r')).correct).toBe(true)
-    expect(checkTyped('clavícula izquierda', piece('clavicle-r'))).toEqual({ correct: false, reason: 'wrong-side' })
+  it('accepts a correct side, in any position and abbreviated', () => {
+    ok('clavícula derecha', 'clavicle-r')
+    ok('derecha clavícula', 'clavicle-r')
+    ok('clavicula dcha', 'clavicle-r')
+    expect(verdict('clavícula izq', 'clavicle-r')).toEqual({ correct: false, reason: 'wrong-side' })
   })
 
-  it('ignores leading articles and "hueso"', () => {
-    expect(checkTyped('el hueso escafoides', piece('scaphoid-bone-l')).correct).toBe(true)
+  it('ignores word order and filler words', () => {
+    ok('el hueso escafoides', 'scaphoid-bone-l')
+    ok('costilla octava', 'eighth-rib-r')
+    ok('la octava costilla', 'eighth-rib-r')
   })
 
-  it('makes parenthesised qualifiers optional', () => {
-    expect(checkTyped('atlas', piece('atlas-c1')).correct).toBe(true)
-    expect(checkTyped('axis c2', piece('axis-c2')).correct).toBe(true)
+  it('accepts ordinals written any way', () => {
+    for (const s of ['quinto metacarpiano', '5 metacarpiano', '5º metacarpiano', '5o metacarpiano', 'V metacarpiano', 'metacarpiano 5'])
+      ok(s, 'fifth-metacarpal-bone-r')
+    ok('1ª costilla', 'first-rib-l')
+    ok('primer costilla', 'first-rib-l')
   })
 
-  it('forgives one typo on long names but flags it as inexact', () => {
-    expect(checkTyped('astragalos', piece('talus-l'))).toEqual({ correct: true, exact: false })
-    // Short names must be exact: "radio" vs "ratio" is not a typo worth forgiving.
-    expect(checkTyped('ratio', piece('radius-r')).correct).toBe(false)
+  it('understands vertebral shorthand', () => {
+    for (const s of ['T12', 'vértebra T12', 'D12', 'dorsal 12', 'duodécima vértebra torácica', 't 12', '12 dorsal'])
+      ok(s, 'vertebra-t12')
+    ok('L3', 'vertebra-l3')
+    ok('c1', 'atlas-c1')
+    ok('atlas', 'atlas-c1')
+    expect(verdict('T11', 'vertebra-t12').correct).toBe(false)
   })
 
-  it('rejects other bones and empty answers', () => {
-    expect(checkTyped('tibia', piece('fibula-r'))).toEqual({ correct: false, reason: 'wrong-bone' })
-    expect(checkTyped('   ', piece('fibula-r'))).toEqual({ correct: false, reason: 'empty' })
+  it('understands finger names', () => {
+    ok('falange distal del pulgar', 'distal-phalanx-of-first-finger-of-hand-r')
+    ok('falange proximal del meñique de la mano', 'proximal-phalanx-of-fifth-finger-of-hand-l')
+    ok('falange proximal del dedo gordo', 'proximal-phalanx-of-first-finger-of-foot-l')
+    ok('falange media 3 dedo pie', 'middle-phalanx-of-third-finger-of-foot-r')
+  })
+
+  it('flags incomplete answers instead of failing them', () => {
+    expect(verdict('falange distal', 'distal-phalanx-of-fifth-finger-of-hand-r')).toEqual({ correct: false, reason: 'incomplete' })
+    expect(verdict('falange distal del meñique', 'distal-phalanx-of-fifth-finger-of-hand-r')).toEqual({ correct: false, reason: 'incomplete' })
+    expect(verdict('costilla', 'eighth-rib-r')).toEqual({ correct: false, reason: 'incomplete' })
+  })
+
+  it('forgives small typos but flags them as inexact', () => {
+    expect(verdict('astralago', 'talus-l')).toEqual({ correct: true, exact: false })
+    expect(verdict('clavicla', 'clavicle-r')).toEqual({ correct: true, exact: false })
+    expect(verdict('metacarpiamo 5', 'fifth-metacarpal-bone-r')).toEqual({ correct: true, exact: false })
+  })
+
+  it('never forgives a wrong number', () => {
+    expect(verdict('séptima costilla', 'eighth-rib-r').correct).toBe(false)
+    expect(verdict('4 metacarpiano', 'fifth-metacarpal-bone-r').correct).toBe(false)
+  })
+
+  it('rejects other bones, extra words and empty answers', () => {
+    expect(verdict('tibia', 'fibula-r')).toEqual({ correct: false, reason: 'wrong-bone' })
+    expect(verdict('falange distal del quinto dedo del pie', 'distal-phalanx-of-fifth-finger-of-hand-r').correct).toBe(false)
+    expect(verdict('cuneiforme lateral', 'medial-cuneiform-bone-r').correct).toBe(false)
+    expect(verdict('   ', 'fibula-r')).toEqual({ correct: false, reason: 'empty' })
+  })
+})
+
+describe('checkTyped across the whole catalogue', () => {
+  it("never accepts one piece's name as the answer for a different piece", () => {
+    const confusions: string[] = []
+    for (const a of pieces) {
+      for (const b of pieces) {
+        if (a.base === b.base) continue
+        if (checkTyped(a.base, b).correct) confusions.push(`"${a.base}" accepted for ${b.id}`)
+      }
+    }
+    expect(confusions).toEqual([])
+  }, 30_000)
+
+  it("accepts every piece's own name and aliases", () => {
+    for (const p of pieces) {
+      for (const name of [p.base, p.name, ...(p.aliases ?? []), p.en]) {
+        expect(checkTyped(name, p).correct, `${name} → ${p.id}`).toBe(true)
+      }
+    }
   })
 })
 
