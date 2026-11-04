@@ -66,22 +66,144 @@
   margin-top: 1.25rem;
 }
 
-.description {
-  font-style: italic;
-  margin: 0 0 1rem !important;
+.lead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
 }
 
-.regions {
-  list-style: none;
+.description {
+  flex: 1 1 20rem;
+  font-style: italic;
+  margin: 0 !important;
+}
+
+.toggleAll {
+  border: 0;
+  padding: 0.25rem 0;
+  background: none;
+  color: var(--anatomy-accent);
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.toggleAll:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.rows {
+  /* Beats the chapter prose's em-dash bullets. */
+  list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-.regions li {
+.rows li {
+  margin: 0 !important;
+}
+
+/* Nested levels hang from a thin rule, a step smaller each time. */
+.rows[data-depth='1'],
+.rows[data-depth='2'],
+.rows[data-depth='3'] {
+  margin-left: 0.55rem !important;
+  padding-left: 0.9rem !important;
+  border-left: 1px solid color-mix(in oklab, var(--anatomy-ink) 18%, transparent);
+}
+
+.rows[data-depth='1'] {
+  font-size: 0.95em;
+}
+
+.rows[data-depth='2'],
+.rows[data-depth='3'] {
+  font-size: 0.92em;
+}
+
+.row {
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
-  margin: 0.35rem 0 !important;
+  width: 100%;
+  padding: 0.3rem 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+button.row {
+  cursor: pointer;
+}
+
+button.row:hover .name {
+  color: var(--anatomy-accent);
+}
+
+button.row:focus-visible {
+  outline: 2px solid var(--anatomy-accent);
+  outline-offset: 2px;
+}
+
+.chevron,
+.chevronSpace {
+  flex: none;
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.chevron {
+  align-self: center;
+  fill: none;
+  stroke: var(--anatomy-accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 200ms ease;
+}
+
+.chevron[data-open='true'] {
+  transform: rotate(90deg);
+}
+
+.note {
+  margin: -0.15rem 0 0.3rem 1.25rem !important;
+  font-size: 0.85em;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+.fold {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms ease;
+}
+
+.fold[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+
+.fold > div {
+  overflow: hidden;
+}
+
+.rows[data-depth='0'] > li > .fold[data-open='true'] {
+  margin-bottom: 0.4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fold,
+  .chevron {
+    transition: none;
+  }
 }
 
 .dots {
@@ -93,4 +215,10 @@
   font-family: var(--anatomy-display);
   font-weight: 700;
   font-variant-numeric: oldstyle-nums;
+}
+
+.rows[data-depth='1'] .count,
+.rows[data-depth='2'] .count,
+.rows[data-depth='3'] .count {
+  font-weight: 600;
 }
