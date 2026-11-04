@@ -1,0 +1,25 @@
+.note {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 2px solid var(--anatomy-accent);
+  background: color-mix(in oklab, var(--anatomy-accent) 6%, transparent);
+  font-style: italic;
+}
+
+.title {
+  font-family: var(--anatomy-display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+  margin: 0 0 0.4rem !important;
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+.body > :last-child {
+  margin-bottom: 0;
+}

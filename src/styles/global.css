@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+/* Shell design tokens. Tomes do NOT inherit these; they bring their own. */
+@theme {
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-display: 'Cinzel', serif;
+
+  --color-ink: #0d0c0a;
+  --color-ink-raised: #17150f;
+  --color-gold: #c9a45c;
+  --color-gold-dim: #8a7140;
+  --color-parchment: #e9e1cf;
+  --color-muted: #9a917f;
+}
+
+html,
+body {
+  background: var(--color-ink);
+  color: var(--color-parchment);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
