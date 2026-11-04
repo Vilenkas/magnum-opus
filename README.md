@@ -16,7 +16,7 @@ See [CLAUDE.md](CLAUDE.md) for architecture and conventions.
 - [ ] Phase 1 — Shell: search (Ctrl+K), tome transitions
 - [ ] Phase 2 — Anatomy pilot: osteology with a 3D skeleton and quizzes
   - [x] Z-Anatomy skeleton → GLB pipeline, Spanish names, interactive viewer
-  - [ ] "Identify the bone" quiz on the 3D model
+  - [x] Skeleton quiz on the 3D model: identify / locate / type, weighted by past mistakes
   - [ ] Landmark pins (acromion, trochanters…) from Z-Anatomy label lines
 
 ## Credits

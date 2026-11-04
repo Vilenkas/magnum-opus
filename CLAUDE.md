@@ -47,14 +47,24 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   CC BY-SA: keep attribution visible. Rebuild via `tools/anatomy/README.md`.
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert). `data/skeleton.ts` — types, groups, regions, axial/appendicular division.
-- Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol);
-  `--virtual-time-budget` screenshots render an empty canvas.
+- `components/skeleton/SkeletonStage.tsx` — shared canvas + model + camera flight used by
+  every 3D plate. Parents drive it declaratively: `lookOf(piece)`, `isPickable`, `focus`.
+  It **clones** the cached GLTF scene: an Object3D has one parent, so two plates sharing
+  `useGLTF`'s scene would steal it from each other.
+- Camera moves use the stage's own `useCameraFlight` (drei `Bounds` doesn't request frames
+  with `frameloop="demand"`, so its animations stall).
+- `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
+  Progress persists via `src/shell/storage.ts` (namespaced localStorage).
+- Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and
+  only one open tab; `--virtual-time-budget` screenshots render an empty canvas, and
+  SwiftShader renders at a few fps, so camera flights need several seconds.
 
 ## Commands
 
 - `pnpm dev` — dev server
 - `pnpm build` — typecheck + production build
 - `pnpm typecheck`
+- `pnpm test` — Vitest (pure logic only; 3D is verified visually)
 - `pnpm new-tome <id> "<Título>"` — scaffold a tome from `scripts/templates/tome/`
 
 ## Notes

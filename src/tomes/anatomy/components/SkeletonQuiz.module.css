@@ -1,0 +1,277 @@
+/* ---------- Progress ---------- */
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem 0;
+  font-size: 0.95rem;
+  font-variant-numeric: lining-nums;
+}
+
+.progressBar {
+  flex: 1;
+  height: 2px;
+  background: color-mix(in oklab, var(--anatomy-ink) 15%, transparent);
+}
+.progressBar > span {
+  display: block;
+  height: 100%;
+  background: var(--anatomy-accent);
+  transition: width 400ms ease;
+}
+
+.locatePrompt {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 2rem);
+  padding: 0.3rem 1rem;
+  background: rgb(43 33 24 / 0.88);
+  color: var(--anatomy-paper);
+  font-size: 1.05rem;
+  pointer-events: none;
+  text-align: center;
+}
+
+/* ---------- Setup ---------- */
+
+.setup {
+  display: grid;
+  gap: 1rem;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.5rem;
+}
+
+.mode {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+}
+.mode:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 6%, transparent);
+}
+.mode[data-active='true'] {
+  border-color: var(--anatomy-accent);
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+  box-shadow: inset 3px 0 0 var(--anatomy-accent);
+}
+
+.modeName {
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.modeDescription {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+.checkbox input {
+  accent-color: var(--anatomy-accent);
+}
+
+.lengths {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.poolSize {
+  margin-left: auto;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+
+.hardest {
+  margin: 0 !important;
+  font-size: 0.95rem;
+}
+
+/* ---------- Questions ---------- */
+
+.prompt {
+  display: block;
+  margin: 0 0 0.75rem !important;
+  font-family: var(--anatomy-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0.5rem;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+  background: color-mix(in oklab, var(--anatomy-paper) 60%, white);
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+}
+.choice:hover:not(:disabled) {
+  border-color: var(--anatomy-accent);
+}
+.choice:disabled {
+  cursor: default;
+}
+.choice[data-state='correct'] {
+  background: #6f8f4e;
+  border-color: #6f8f4e;
+  color: white;
+}
+.choice[data-state='wrong'] {
+  background: #5e1a10;
+  border-color: #5e1a10;
+  color: white;
+}
+
+.choiceKey {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.typeForm {
+  display: grid;
+}
+
+.typeRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+  background: color-mix(in oklab, var(--anatomy-paper) 50%, white);
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 1.1rem;
+}
+.input:focus {
+  outline: 2px solid var(--anatomy-accent);
+  outline-offset: -1px;
+}
+
+.feedback {
+  margin: 0.75rem 0 0 !important;
+  font-size: 1.05rem;
+}
+.feedback[data-correct='true'] .feedbackMark {
+  color: #4f6b33;
+}
+.feedback[data-correct='false'] .feedbackMark {
+  color: var(--anatomy-accent);
+}
+.feedbackMark {
+  font-weight: 700;
+}
+
+.nextRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+/* ---------- Results ---------- */
+
+.results {
+  display: grid;
+  gap: 1rem;
+}
+
+.score {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.scoreNumber {
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--anatomy-accent);
+  font-variant-numeric: lining-nums;
+}
+
+.scoreVerdict {
+  font-family: var(--anatomy-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.missed {
+  margin: 0.4rem 0 0 !important;
+  padding-left: 1.25rem !important;
+}
+
+.missedGiven {
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+
+.resultActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+@media (max-width: 560px) {
+  .poolSize {
+    margin-left: 0;
+  }
+  .progress {
+    font-size: 0.85rem;
+  }
+}

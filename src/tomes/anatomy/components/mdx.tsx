@@ -1,24 +1,24 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, type ComponentType } from 'react'
 import type { MDXComponents } from 'mdx/types'
 import { MarginNote } from './MarginNote'
 import { SkeletonBreakdown } from './SkeletonBreakdown'
 
-// three.js is heavy: only fetched when a chapter actually renders the viewer.
-const LazySkeletonViewer = lazy(() =>
-  import('./SkeletonViewer').then((m) => ({ default: m.SkeletonViewer })),
-)
-
-function SkeletonViewer() {
-  return (
-    <Suspense fallback={<p style={{ textAlign: 'center', fontStyle: 'italic' }}>Preparando la lámina…</p>}>
-      <LazySkeletonViewer />
-    </Suspense>
-  )
+/** three.js is heavy: 3D plates are only fetched when a chapter actually renders them. */
+function lazyPlate(load: () => Promise<ComponentType>) {
+  const Lazy = lazy(async () => ({ default: await load() }))
+  return function Plate() {
+    return (
+      <Suspense fallback={<p style={{ textAlign: 'center', fontStyle: 'italic' }}>Preparando la lámina…</p>}>
+        <Lazy />
+      </Suspense>
+    )
+  }
 }
 
 /** Components available inside every anatomy MDX chapter without importing. */
 export const mdxComponents: MDXComponents = {
   MarginNote,
   SkeletonBreakdown,
-  SkeletonViewer,
+  SkeletonViewer: lazyPlate(() => import('./SkeletonViewer').then((m) => m.SkeletonViewer)),
+  SkeletonQuiz: lazyPlate(() => import('./SkeletonQuiz').then((m) => m.SkeletonQuiz)),
 }

@@ -1,0 +1,36 @@
+.stage {
+  position: relative;
+  height: min(78vh, 46rem);
+  min-height: 24rem;
+  cursor: grab;
+  touch-action: none;
+}
+.stage:active {
+  cursor: grabbing;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+  pointer-events: none;
+}
+
+.tag {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 2rem);
+  padding: 0.15rem 0.7rem;
+  background: rgb(43 33 24 / 0.85);
+  color: var(--anatomy-paper);
+  font-size: 0.9rem;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

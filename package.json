@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "new-tome": "node scripts/new-tome.ts"
+    "new-tome": "node scripts/new-tome.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -39,6 +41,7 @@
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.3.4",
     "typescript": "^7.0.2",
-    "vite": "^8.3.5"
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
   }
 }

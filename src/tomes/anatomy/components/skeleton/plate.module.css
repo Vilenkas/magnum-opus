@@ -1,0 +1,129 @@
+/* Shared chrome for 3D plates (viewer, quiz). Breaks out of the narrow text column. */
+.plate {
+  position: relative;
+  width: min(100vw - 2rem, 64rem);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 3rem 0;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  background:
+    radial-gradient(ellipse at 50% 40%, rgb(255 252 242 / 0.85), transparent 70%),
+    color-mix(in oklab, var(--anatomy-paper) 85%, #d9c9a8);
+}
+
+.caption {
+  padding: 1rem 1rem 0;
+  font-family: var(--anatomy-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.chipBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem 0;
+}
+
+.chip {
+  padding: 0.2rem 0.75rem;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+.chip:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.chip[data-active='true'] {
+  background: var(--anatomy-ink);
+  border-color: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.legend {
+  min-height: 6rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.hint {
+  margin: 0.75rem 0 0 !important;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--anatomy-ink-soft);
+}
+
+.kicker {
+  margin: 0 !important;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+}
+
+.title {
+  margin: 0.15rem 0 0.1rem !important;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 1.7rem !important;
+  line-height: 1.15;
+  color: var(--anatomy-ink) !important;
+}
+
+.meta {
+  margin: 0 !important;
+  font-size: 0.95rem;
+  color: var(--anatomy-ink-soft);
+}
+
+.latin {
+  font-style: italic;
+}
+
+.button {
+  flex-shrink: 0;
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--anatomy-accent);
+  background: transparent;
+  color: var(--anatomy-accent);
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+.button:hover:not(:disabled) {
+  background: var(--anatomy-accent);
+  color: var(--anatomy-paper);
+}
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.buttonSolid {
+  composes: button;
+  background: var(--anatomy-accent);
+  color: var(--anatomy-paper);
+}
+.buttonSolid:hover:not(:disabled) {
+  background: var(--anatomy-ink);
+  border-color: var(--anatomy-ink);
+}
