@@ -1,40 +1,25 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useSearch } from '@tanstack/react-router'
-import { listTomes } from '@/tomes/registry'
-import { buildAtlas } from './model'
+import { useGlobalSearch } from '@/shell/GlobalSearch'
+import { Icon, SHELVES_PATH } from '@/shell/icons'
 import { SearchTrigger } from './parts'
 import { rememberView, resolveView, type AtlasSearch, type AtlasView } from './route'
 import { IndexView } from './IndexView'
 import { MapView } from './MapView'
-import { SearchPalette } from './SearchPalette'
 import { ShelvesView } from './ShelvesView'
 
 /**
  * Home of the app: the map of knowledge seen three ways (shelves, index, map),
- * all reading the same atlas, plus a universal search on Ctrl+K.
+ * all reading the same atlas. The universal search (Ctrl+K) lives in GlobalSearch, above every route.
  */
 export function AtlasPage() {
   const search = useSearch({ strict: false }) as AtlasSearch
   const view = resolveView(search.view)
-  const atlas = useMemo(() => buildAtlas(listTomes()), [])
-  const [searching, setSearching] = useState(false)
+  const { atlas, open: openSearch } = useGlobalSearch()
 
   useEffect(() => {
     if (search.view) rememberView(search.view)
   }, [search.view])
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault()
-        setSearching(true)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
-  const openSearch = () => setSearching(true)
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -54,15 +39,13 @@ export function AtlasPage() {
       {view === 'shelves' && <ShelvesView atlas={atlas} onSearch={openSearch} />}
       {view === 'index' && <IndexView atlas={atlas} area={search.area} system={search.system} />}
       {view === 'map' && <MapView atlas={atlas} />}
-
-      {searching && <SearchPalette atlas={atlas} onClose={() => setSearching(false)} />}
     </div>
   )
 }
 
 const views: { id: AtlasView; label: string; icon: string }[] = [
   // Book spines on a shelf.
-  { id: 'shelves', label: 'Estantes', icon: 'M5 4v16M9 4v16M13 6l4 14M3 20h18' },
+  { id: 'shelves', label: 'Estantes', icon: SHELVES_PATH },
   // A tree outline.
   { id: 'index', label: 'Índice', icon: 'M4 5h6M8 12h6M8 19h6M6 5v14M6 12h2M6 19h2M14 5h6' },
   // Nodes and links.
@@ -82,9 +65,7 @@ function ViewSwitcher({ current, search }: { current: AtlasView; search: AtlasSe
             id === current ? 'bg-gold text-ink' : 'text-muted hover:text-parchment'
           }`}
         >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="size-4">
-            <path d={icon} />
-          </svg>
+          <Icon path={icon} className="size-4" />
           <span>{label}</span>
         </Link>
       ))}

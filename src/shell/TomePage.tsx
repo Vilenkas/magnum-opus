@@ -1,6 +1,9 @@
 import { Suspense, useEffect } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
 import { getTome } from '@/tomes/registry'
+import { SearchIcon } from './atlas/parts'
+import { useGlobalSearch } from './GlobalSearch'
+import { Icon, SHELVES_PATH } from './icons'
 import { NotFound } from './NotFound'
 
 export function TomePage() {
@@ -20,7 +23,7 @@ export function TomePage() {
   return (
     // data-tome lets a tome scope global styles to itself if it needs to.
     <div data-tome={manifest.id} style={{ background: manifest.palette.background, minHeight: '100dvh' }}>
-      <BackToAtlas />
+      <TomeChrome />
       <Suspense fallback={<TomeLoading color={manifest.palette.accent} />}>
         <Component manifest={manifest} path={_splat ?? ''} />
       </Suspense>
@@ -28,16 +31,24 @@ export function TomePage() {
   )
 }
 
-/** The only piece of shell chrome drawn on top of a tome. */
-function BackToAtlas() {
+/** The only shell chrome drawn on top of a tome: back to the Atlas, and the universal search. */
+function TomeChrome() {
+  const { open } = useGlobalSearch()
+  const pill = 'flex h-8 items-center gap-1.5 px-3 text-white/80 transition hover:bg-black/30 hover:text-white'
   return (
-    <Link
-      to="/"
-      title="Volver al Atlas"
-      className="fixed top-4 left-4 z-50 rounded-full border border-white/15 bg-black/50 px-3 py-1.5 font-sans text-xs tracking-widest text-white/80 uppercase backdrop-blur transition hover:bg-black/70 hover:text-white"
+    <nav
+      aria-label="Magnum Opus"
+      className="fixed top-4 left-4 z-50 flex items-stretch overflow-hidden rounded-full border border-white/15 bg-black/50 font-sans text-xs tracking-widest uppercase backdrop-blur"
     >
-      ← Atlas
-    </Link>
+      <Link to="/" title="Volver al Atlas" className={pill}>
+        <Icon path={SHELVES_PATH} className="size-4" />
+        <span>Atlas</span>
+      </Link>
+      <span aria-hidden="true" className="w-px bg-white/15" />
+      <button type="button" onClick={open} title="Buscar (Ctrl + K)" aria-label="Buscar" className={pill}>
+        <SearchIcon className="size-4" />
+      </button>
+    </nav>
   )
 }
 
