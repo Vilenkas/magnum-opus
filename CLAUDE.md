@@ -52,6 +52,17 @@ Full rule in `docs/taxonomy.md`. In short:
 Tiers (`manifest.tier`): `scroll` (MDX + palette) → `codex` (custom layout, 3D, quizzes) →
 `grimoire` (fully bespoke). Displayed in Spanish as Pergamino / Códice / Grimorio.
 
+## Reference material and illustrations
+
+Full rules in `docs/assets.md`. In short:
+
+- `library/<tome>/` — the user's reference PDFs, git-ignored. Read them to write content;
+  paraphrase and cite, never copy. Nothing there is bundled.
+- `src/tomes/<id>/figures/public/` (committed, open licences only) and `figures/private/`
+  (git-ignored, personal use). Each folder's `index.ts` declares its own figures, so deleting
+  `private/` leaves nothing dangling. MDX: `<Figura id="…" />`; a list of ids falls back.
+  Missing figures render nothing in production: the app must always work without `private/`.
+
 ## Stack
 
 Vite 8 · React 19 · TypeScript 7 · TanStack Router (hash history, code-based routes) ·

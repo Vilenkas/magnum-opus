@@ -3,3 +3,9 @@ dist
 *.local
 .vite
 src-tauri/target
+
+# Local-only material, never committed (docs/assets.md):
+# reference PDFs, and illustrations not licensed for redistribution.
+/library/*
+!/library/README.md
+src/tomes/*/figures/private/

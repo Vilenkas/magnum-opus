@@ -1,5 +1,6 @@
 import { lazy, Suspense, type ComponentType } from 'react'
 import type { MDXComponents } from 'mdx/types'
+import { Figure } from './Figure'
 import { MarginNote } from './MarginNote'
 import { SkeletonBreakdown } from './SkeletonBreakdown'
 
@@ -17,6 +18,8 @@ function lazyPlate(load: () => Promise<ComponentType>) {
 
 /** Components available inside every anatomy MDX chapter without importing. */
 export const mdxComponents: MDXComponents = {
+  // Spanish name in MDX, like the rest of the chapter's content.
+  Figura: Figure,
   MarginNote,
   SkeletonBreakdown,
   SkeletonViewer: lazyPlate(() => import('./SkeletonViewer').then((m) => m.SkeletonViewer)),

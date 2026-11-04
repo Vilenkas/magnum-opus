@@ -1,0 +1,51 @@
+.figure {
+  margin: 2.5rem auto;
+  max-width: 34rem;
+}
+
+.figure[data-wide='true'] {
+  max-width: none;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Scans have white paper: multiply lets them sit on the tome's own paper. */
+  mix-blend-mode: multiply;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--anatomy-display);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.credit {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+.missing {
+  margin: 2rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px dashed color-mix(in oklab, var(--anatomy-accent) 60%, transparent);
+  color: var(--anatomy-accent);
+  font-size: 0.85rem;
+  text-align: center;
+}
