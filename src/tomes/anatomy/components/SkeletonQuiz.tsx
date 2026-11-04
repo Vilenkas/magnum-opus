@@ -4,6 +4,7 @@ import { checkTyped, type TypedVerdict } from '../quiz/answer'
 import { buildPool, createRound, type Question, type QuizMode, type QuizSettings } from '../quiz/engine'
 import { hardestPieces, loadStats, recordAnswer, type QuizStats } from '../quiz/stats'
 import { SkeletonStage, type Focus, type PieceLook } from './skeleton/SkeletonStage'
+import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
 import plate from './skeleton/plate.module.css'
 import styles from './SkeletonQuiz.module.css'
 
@@ -39,6 +40,7 @@ export function SkeletonQuiz() {
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [focus, setFocus] = useState<Focus>({ kind: 'all' })
+  const fullscreen = useFullscreen<HTMLElement>()
 
   const question = questions[index]
   const target = question ? pieceById.get(question.targetId)! : undefined
@@ -155,8 +157,13 @@ export function SkeletonQuiz() {
   const score = answers.filter((a) => a.correct).length
 
   return (
-    <figure className={plate.plate}>
+    <figure className={plate.plate} ref={fullscreen.ref}>
       <figcaption className={plate.caption}>Lámina III · Examen de osteología</figcaption>
+      {fullscreen.supported && (
+        <div className={plate.tools}>
+          <FullscreenButton active={fullscreen.active} onClick={fullscreen.toggle} />
+        </div>
+      )}
 
       {phase === 'playing' ? (
         <div className={styles.progress}>

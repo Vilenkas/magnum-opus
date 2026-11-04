@@ -51,6 +51,8 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   every 3D plate. Parents drive it declaratively: `lookOf(piece)`, `isPickable`, `focus`.
   It **clones** the cached GLTF scene: an Object3D has one parent, so two plates sharing
   `useGLTF`'s scene would steal it from each other.
+- Raycasting goes through drei `<Bvh firstHitOnly={false}>`: without it every pointer move
+  tests ~650k triangles. Not first-hit-only, because picking skips ghosted/hidden pieces.
 - Camera moves use the stage's own `useCameraFlight` (drei `Bounds` doesn't request frames
   with `frameloop="demand"`, so its animations stall).
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.

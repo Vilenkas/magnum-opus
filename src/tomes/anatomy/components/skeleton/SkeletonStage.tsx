@@ -1,11 +1,11 @@
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
-import { OrbitControls, useGLTF, useProgress } from '@react-three/drei'
+import { Bvh, OrbitControls, useGLTF, useProgress } from '@react-three/drei'
 import * as THREE from 'three'
 /** The parts of OrbitControls the camera flight needs (drei's impl lives in three-stdlib). */
 type OrbitControlsImpl = THREE.EventDispatcher<{ start: object }> & { target: THREE.Vector3; update: () => void }
 import skeletonUrl from '../../assets/skeleton.glb?url'
-import { pieceById, regionOf, type BonePiece, type RegionId, type Tissue } from '../../data/skeleton'
+import { pieceById, regionOf, type BonePiece, type GroupId, type RegionId, type Tissue } from '../../data/skeleton'
 import styles from './SkeletonStage.module.css'
 
 /** How a piece is painted. The parent decides; the stage just applies it. */
@@ -19,11 +19,14 @@ export type PieceLook =
   | 'faded'
   /** Translucent context, so a highlighted piece stays visible even deep inside the skull. */
   | 'ghost'
+  /** Not drawn and not pickable. */
+  | 'hidden'
 
 /** What the camera frames. Pass a new object to re-frame, even on the same target. */
 export type Focus =
   | { kind: 'all' }
   | { kind: 'region'; region: RegionId }
+  | { kind: 'group'; group: GroupId }
   /** `context` > 1 widens the frame so neighbouring bones stay visible. */
   | { kind: 'piece'; id: string; context?: number }
 
@@ -85,7 +88,8 @@ function viewDirectionFor(center: THREE.Vector3, bodyAxis: THREE.Vector3): THREE
 }
 
 const FLIGHT_SECONDS = 0.7
-const FRAME_MARGIN = 1.05
+/** Breathing room around whatever is framed (1 = touching the edges). */
+const FRAME_MARGIN = 1.12
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
 /**
@@ -132,15 +136,21 @@ function useCameraFlight() {
 
   return useCallback(
     (box: THREE.Box3, direction: THREE.Vector3) => {
-      const sphere = box.getBoundingSphere(new THREE.Sphere())
-      const vFov = THREE.MathUtils.degToRad(camera.fov)
-      const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect)
-      const distance = (sphere.radius * FRAME_MARGIN) / Math.sin(Math.min(vFov, hFov) / 2)
+      const center = box.getCenter(new THREE.Vector3())
+      const size = box.getSize(new THREE.Vector3())
+      // Fit the box's height to the vertical FOV and its widest horizontal side to the
+      // horizontal FOV (a tall skeleton in a wide canvas is height-bound), then step back
+      // half the depth so the near face isn't clipped.
+      const vHalf = THREE.MathUtils.degToRad(camera.fov) / 2
+      const hHalf = Math.atan(Math.tan(vHalf) * camera.aspect)
+      const horizontal = Math.max(size.x, size.z)
+      const fit = Math.max(size.y / 2 / Math.tan(vHalf), horizontal / 2 / Math.tan(hHalf))
+      const distance = fit * FRAME_MARGIN + horizontal / 2
       flight.current = {
         fromPos: camera.position.clone(),
-        fromTarget: controls?.target.clone() ?? sphere.center.clone(),
-        toPos: sphere.center.clone().addScaledVector(direction, distance),
-        toTarget: sphere.center.clone(),
+        fromTarget: controls?.target.clone() ?? center.clone(),
+        toPos: center.clone().addScaledVector(direction, distance),
+        toTarget: center,
         t: 0,
       }
       invalidate()
@@ -168,6 +178,8 @@ function SkeletonModel({
   const scene = useMemo(() => gltf.scene.clone(true), [gltf.scene])
   const materials = useMaterials()
   const invalidate = useThree((s) => s.invalidate)
+  const canvasWidth = useThree((s) => s.size.width)
+  const canvasHeight = useThree((s) => s.size.height)
   const flyTo = useCameraFlight()
 
   const meshes = useMemo(() => {
@@ -186,6 +198,8 @@ function SkeletonModel({
     for (const [id, mesh] of meshes) {
       const piece = pieceById.get(id)!
       const look = lookOf(piece, hoveredId)
+      mesh.visible = look !== 'hidden'
+      if (look === 'hidden') continue
       mesh.material = look === 'base' ? materials.base[piece.tissue ?? 'bone'] : materials[look]
       // Ghosts draw after solids so they never hide them.
       mesh.renderOrder = look === 'faded' || look === 'ghost' ? 1 : 0
@@ -210,22 +224,30 @@ function SkeletonModel({
         box.setFromCenterAndSize(center, new THREE.Vector3(side, side, side))
       }
       direction = viewDirectionFor(center, bodyAxis)
-    } else if (focus.kind === 'region') {
+    } else if (focus.kind === 'region' || focus.kind === 'group') {
       for (const [id, mesh] of meshes) {
-        if (regionOf(pieceById.get(id)!).id === focus.region) box.expandByObject(mesh)
+        const piece = pieceById.get(id)!
+        const inFocus = focus.kind === 'region' ? regionOf(piece).id === focus.region : piece.group === focus.group
+        if (inFocus) box.expandByObject(mesh)
       }
+      // Tiny groups (ossicles) still get a frame wide enough to show where they sit.
+      const minSide = 0.12
+      const size = box.getSize(new THREE.Vector3()).max(new THREE.Vector3(minSide, minSide, minSide))
+      box.setFromCenterAndSize(box.getCenter(new THREE.Vector3()), size)
     } else {
       box.setFromObject(scene)
     }
     flyTo(box, direction)
-  }, [focus, meshes, scene, bodyAxis, flyTo])
+    // Re-frame when the canvas is resized (e.g. entering fullscreen).
+  }, [focus, meshes, scene, bodyAxis, flyTo, canvasWidth, canvasHeight])
 
-  // Nearest pickable piece under the pointer; faded "ghosts" let the ray through.
+  // Nearest pickable piece under the pointer. Faded, ghosted or hidden pieces let the
+  // ray through (raycasting ignores `visible`, so hidden ones must be skipped here).
   const pick = (e: ThreeEvent<PointerEvent | MouseEvent>) => {
     e.stopPropagation()
     const hit = e.intersections.find(({ object }) => {
       const piece = pieceById.get(object.name)
-      return piece && isPickable(piece)
+      return piece && object.visible && isPickable(piece)
     })
     return hit?.object.name ?? null
   }
@@ -251,7 +273,7 @@ export function SkeletonStage({ children, className, onHoverChange, onPick, ...m
   useEffect(() => onHoverChange?.(hoveredId), [hoveredId, onHoverChange])
 
   return (
-    <div className={`${styles.stage} ${className ?? ''}`}>
+    <div className={`${styles.stage} ${className ?? ''}`} data-stage>
       <Canvas
         frameloop="demand"
         dpr={[1, 2]}
@@ -262,7 +284,11 @@ export function SkeletonStage({ children, className, onHoverChange, onPick, ...m
         <directionalLight position={[2, 3, 2]} intensity={1.6} />
         <directionalLight position={[-2, 1, -2]} intensity={0.5} />
         <Suspense fallback={null}>
-          <SkeletonModel {...modelProps} onPick={onPick} hoveredId={hoveredId} setHoveredId={setHoveredId} />
+          {/* BVH-accelerated raycasting: hover/click test a few hundred triangles instead of
+              all ~650k. Not first-hit-only: picking needs to see through ghosted pieces. */}
+          <Bvh firstHitOnly={false}>
+            <SkeletonModel {...modelProps} onPick={onPick} hoveredId={hoveredId} setHoveredId={setHoveredId} />
+          </Bvh>
         </Suspense>
         <OrbitControls makeDefault enablePan enableDamping={false} />
       </Canvas>

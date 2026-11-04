@@ -25,7 +25,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.4rem;
-  padding: 0.75rem 1rem 0;
+  padding: 0.75rem 1rem 0.5rem;
 }
 
 .chip {
@@ -126,4 +126,58 @@
 .buttonSolid:hover:not(:disabled) {
   background: var(--anatomy-ink);
   border-color: var(--anatomy-ink);
+}
+
+/* ---------- Plate chrome: top-right tools ---------- */
+
+.tools {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.iconButton {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--anatomy-paper) 80%, white);
+  color: var(--anatomy-ink);
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+.iconButton:hover {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+/* ---------- Fullscreen: the plate becomes the whole screen ---------- */
+
+.plate:fullscreen {
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.plate:fullscreen > [data-stage] {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+
+.plate:focus {
+  outline: none;
 }

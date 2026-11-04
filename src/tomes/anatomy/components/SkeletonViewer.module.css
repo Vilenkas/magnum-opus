@@ -5,9 +5,47 @@
   gap: 1rem;
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+/* Floating bar on the stage while pieces are hidden or dimmed. */
+.removedBar {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.4rem 0.3rem 0.8rem;
+  background: rgb(43 33 24 / 0.88);
+  color: var(--anatomy-paper);
+  font-size: 0.9rem;
+}
+
+.barButton {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid rgb(239 230 210 / 0.4);
+  background: transparent;
+  color: var(--anatomy-paper);
+  font-family: var(--anatomy-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.barButton:hover {
+  background: var(--anatomy-paper);
+  color: var(--anatomy-ink);
+}
+
 @media (max-width: 560px) {
   .card {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .actions {
+    justify-content: flex-start;
   }
 }
