@@ -7,7 +7,8 @@ const manifest: TomeManifest = {
   description: 'La lengua de Roma: su alfabeto, su historia y su gramática, para leerla y practicarla.',
   tier: 'codex',
   status: 'draft',
-  tags: ['lengua', 'gramática', 'historia'],
+  home: 'languages/classical/latin',
+  tags: ['gramática', 'declinaciones', 'Roma'],
   // Anatomical terminology is Latin: the two tomes speak to each other.
   related: ['anatomy'],
   palette: {

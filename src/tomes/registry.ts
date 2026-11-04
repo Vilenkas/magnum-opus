@@ -1,4 +1,5 @@
 import { lazy, type LazyExoticComponent } from 'react'
+import { placementProblems } from './taxonomy'
 import type { TomeComponent, TomeManifest } from './types'
 
 /**
@@ -32,6 +33,13 @@ for (const [path, mod] of Object.entries(manifestModules)) {
     throw new Error(`Tome "${folder}" has a manifest.ts but no Tome.tsx`)
   }
   tomes.set(manifest.id, { manifest, Component: lazy(loader) })
+}
+
+// Fail fast on a misplaced tome: a typo in `home` would silently hide it from the map.
+const ids = new Set(tomes.keys())
+for (const { manifest } of tomes.values()) {
+  const problems = placementProblems(manifest, ids)
+  if (problems.length) throw new Error(`Tome "${manifest.id}": ${problems.join('; ')}`)
 }
 
 export const getTome = (id: string) => tomes.get(id)

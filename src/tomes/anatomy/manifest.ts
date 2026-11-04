@@ -7,7 +7,9 @@ const manifest: TomeManifest = {
   description: 'La arquitectura del cuerpo humano, comenzando por su armazón: los huesos.',
   tier: 'codex',
   status: 'draft',
-  tags: ['medicina', 'osteología', 'biología'],
+  home: 'health/basic-sciences/anatomy',
+  facets: { system: ['skeletal'] },
+  tags: ['esqueleto', 'huesos', 'accidentes óseos'],
   palette: {
     background: '#efe6d2',
     foreground: '#2b2118',

@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react'
+import type { TomeFacets } from './taxonomy'
 
 /**
  * How much bespoke work a tome has. A tome can be promoted over time.
@@ -24,7 +25,18 @@ export interface TomeManifest {
   description: string
   tier: TomeTier
   status: TomeStatus
+  /**
+   * Where the tome lives in the map of knowledge (src/tomes/taxonomy.ts): one
+   * path, chosen by discipline. A tome covers its node's subtree until a more
+   * specific tome claims a child. See docs/taxonomy.md.
+   */
+  home: string
+  /** What the tome is about across branches (e.g. body system). */
+  facets?: TomeFacets
+  /** Free search keywords (Spanish). Not structure: don't repeat home or facets. */
   tags: string[]
+  /** Ids of tomes worth reading before this one; they form suggested routes. */
+  prereqs?: string[]
   /** Ids of related tomes, used for the knowledge map. */
   related?: string[]
   /** Colors the shell uses to preview the tome (Atlas card, transitions). */

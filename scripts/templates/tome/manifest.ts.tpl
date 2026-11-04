@@ -6,6 +6,8 @@ const manifest: TomeManifest = {
   description: 'Describe este tomo en una frase.',
   tier: 'scroll',
   status: 'draft',
+  // Path in src/tomes/taxonomy.ts, chosen by discipline (docs/taxonomy.md).
+  home: '__HOME__',
   tags: [],
   palette: {
     background: '#1a1a1a',

@@ -30,6 +30,22 @@ Three layers:
 
 Tomes register automatically via `import.meta.glob` in `src/tomes/registry.ts`.
 
+## Organising knowledge
+
+Full rule in `docs/taxonomy.md`. In short:
+
+- `src/tomes/taxonomy.ts` is the map of knowledge: a tree of disciplines (any depth, pure
+  data, English path ids, Spanish titles). Each tome sets one `home` path in its manifest.
+- Classify by **discipline** (method), not object: anatomy, physiology, pharmacology and
+  imaging are nodes; "cardiovascular" is a facet (`facets.system`). Clinical specialties are
+  nodes under `health/clinical`.
+- A tome covers its node's subtree until a more specific tome claims a child. Split a topic
+  into its own tome only when it needs its own design or outgrows its parent tome.
+- Order is not in the tree: `prereqs` form suggested routes; `related` is see-also; `tags`
+  are search keywords only.
+- The registry throws on an invalid `home`/facet/reference; `taxonomy.test.ts` checks all
+  manifests.
+
 Tiers (`manifest.tier`): `scroll` (MDX + palette) → `codex` (custom layout, 3D, quizzes) →
 `grimoire` (fully bespoke). Displayed in Spanish as Pergamino / Códice / Grimorio.
 
@@ -85,7 +101,7 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `pnpm build` — typecheck + production build
 - `pnpm typecheck`
 - `pnpm test` — Vitest (pure logic only; 3D is verified visually)
-- `pnpm new-tome <id> "<Título>"` — scaffold a tome from `scripts/templates/tome/`
+- `pnpm new-tome <id> "<Título>" <home>` — scaffold a tome from `scripts/templates/tome/`
 - `pnpm desktop` — Tauri dev window (runs `pnpm dev` itself)
 - `pnpm desktop:build` — release exe + NSIS installer in `src-tauri/target/release/bundle/nsis/`
 
