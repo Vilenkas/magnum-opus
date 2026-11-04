@@ -9,8 +9,12 @@
 
 .image {
   display: block;
-  width: 100%;
+  /* Tall plates (a tibia) would otherwise run for screens. */
+  max-width: 100%;
+  max-height: min(34rem, 75vh);
+  width: auto;
   height: auto;
+  margin: 0 auto;
   /* Scans have white paper: multiply lets them sit on the tome's own paper. */
   mix-blend-mode: multiply;
 }
@@ -27,6 +31,11 @@
   font-family: var(--anatomy-display);
   font-style: italic;
   font-weight: 600;
+}
+
+.legend {
+  font-size: 0.85rem;
+  line-height: 1.45;
 }
 
 .credit {

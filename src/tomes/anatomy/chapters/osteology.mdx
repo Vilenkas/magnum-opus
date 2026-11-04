@@ -1,11 +1,15 @@
 {/*
-  Sample content to show the format. Rewrite it with your own voice.
-  Components available without importing: <Figura id="…" />, <MarginNote>, <SkeletonBreakdown>, <SkeletonViewer>, <SkeletonQuiz>.
+  General anatomy of bone, written from Testut–Latarjet t. I pp. 1–24 (paraphrased, cited).
+  Components available without importing: <Cita fuente="…" p="…" />, <Figura id="…" />,
+  <MarginNote>, <SkeletonBreakdown>, <SkeletonViewer>, <SkeletonQuiz>.
+  testut-fig-* figures live in figures/private (local only): without them they simply don't render.
 */}
 
-La **osteología** es la parte de la anatomía que estudia los huesos: su forma, su estructura interna, su desarrollo y la manera en que se organizan para dar al cuerpo un armazón capaz de sostenerlo, protegerlo y moverlo.
+La **osteología** (del griego *ostéon*, hueso, y *lógos*, tratado) es la parte de la anatomía que estudia los huesos: su forma, su arquitectura interior, su estructura, sus vasos y su desarrollo.
 
-Lejos de ser una estructura inerte, el hueso es un tejido vivo: se remodela durante toda la vida, almacena calcio y fósforo y alberga en su interior la médula ósea, donde se forman las células de la sangre.
+Los huesos son órganos blanquecinos, duros y resistentes. Situados casi siempre en medio de las partes blandas, les sirven de sostén; a veces se disponen formando cavidades que las alojan y las protegen; se unen entre sí formando las articulaciones, y ofrecen a los músculos la superficie en que se insertan, de modo que funcionan como palancas. Constituyen así la parte pasiva del aparato locomotor.<Cita fuente="testut-1" p="1" />
+
+Su estudio es la base de toda la anatomía, descriptiva y topográfica: casi todas las partes blandas se describen por su relación con el esqueleto. Y el hueso guarda la huella de su función con tal fidelidad que, a partir de un esqueleto, puede deducirse buena parte de la vida del animal al que perteneció: así reconstruyó Cuvier faunas enteras a partir de restos fósiles.<Cita fuente="testut-1" p="1" />
 
 ## Funciones del esqueleto
 
@@ -17,50 +21,184 @@ Lejos de ser una estructura inerte, el hueso es un tejido vivo: se remodela dura
 
 ## El esqueleto en cifras
 
-El esqueleto adulto suele contar **206 huesos**, que se dividen en dos grandes grupos según su posición respecto al eje del cuerpo.
+El esqueleto adulto suele contar **206 huesos**, que se dividen en dos grandes grupos según su posición respecto al eje del cuerpo. Cada fila de la lámina se despliega hasta el hueso aislado.<Cita fuente="testut-1" p="3" />
 
 <SkeletonBreakdown />
 
-<MarginNote title="Nota">
-  El número exacto varía entre individuos: huesos sesamoideos accesorios, huesos wormianos
-  en las suturas del cráneo o vértebras supernumerarias pueden alterar el recuento.
+<MarginNote title="Un número que cambia con la edad">
+  El recuento excluye los huesos supernumerarios del cráneo (huesos wormianos) y los pequeños
+  sesamoideos de la mano y del pie, cuyo número es muy variable. Además, la cifra no es la misma
+  a lo largo de la vida: en el joven hay más piezas, porque algunos huesos nacen de varias (el
+  frontal, de dos mitades; el coxal, de tres huesos: ilion, isquion y pubis), y en el anciano hay
+  menos, porque huesos vecinos llegan a soldarse.<Cita fuente="testut-1" p="3" />
 </MarginNote>
+
+### El hueso y la talla
+
+La longitud de cada hueso guarda una proporción constante con la estatura, y eso permite resolver un problema clásico de la antropología y de la medicina legal: **estimar la talla de una persona a partir de un solo hueso**. Manouvrier, a partir de las mediciones de Rollet, elaboró tablas que relacionan la longitud de los huesos largos de los miembros con la talla, por separado para hombres y mujeres. Según ellas, un fémur masculino de 519 mm corresponde a una talla de unos 1,83 m.<Cita fuente="testut-1" p="4–5" />
+
+Los huesos deben medirse en su longitud máxima sobre la tablilla osteométrica de Broca. La talla que se obtiene es la del cadáver: para la del vivo se restan unos 2 cm.<Cita fuente="testut-1" p="6" />
 
 ## El esqueleto completo
 
-Cada pieza del modelo puede identificarse por separado. Gíralo, aísla una región y haz clic en cualquier hueso.
+El modelo, derivado de *Z-Anatomy*<Cita fuente="z-anatomy" /> y este a su vez de *BodyParts3D*,<Cita fuente="bodyparts3d" /> permite identificar cada pieza por separado. Gíralo, aísla una región y haz clic en cualquier hueso.
 
 <SkeletonViewer />
 
-<MarginNote title="Fuente del modelo">
-  Modelo 3D derivado de *Z-Anatomy* (CC BY-SA 4.0), basado a su vez en *BodyParts3D*,
-  The Database Center for Life Science (CC BY-SA 2.1 Japón).
-</MarginNote>
+## Dirección de los huesos
+
+La **dirección absoluta** es la que tiene el hueso considerado aisladamente. Hay huesos rectilíneos, como el peroné; curvos en arco, como las costillas; en forma de S itálica, como la clavícula, y torcidos sobre su propio eje, como el húmero.<Cita fuente="testut-1" p="6" />
+
+La **dirección relativa** es la que tiene cada hueso en su sitio, en un sujeto de pie: horizontal, vertical u oblicua. Para describir una dirección oblicua se recurre a los seis planos de referencia: el plano medio o sagital, el lateral, el anterior, el posterior, el superior y el inferior. Así, el radio, cuyo extremo inferior está más lejos del plano medio que el superior, es oblicuo *de arriba abajo y de dentro afuera*; las costillas son oblicuas *de dentro afuera, de atrás adelante y de arriba abajo*.<Cita fuente="testut-1" p="6" />
+
+Da igual por qué extremo se empiece la descripción, pero una vez elegido hay que mantenerlo: el fémur es oblicuo *de arriba abajo y de fuera adentro* o, lo que es lo mismo, *de abajo arriba y de dentro afuera*.
 
 ## Clasificación por su forma
 
-| Tipo | Rasgo | Ejemplos |
+Los nombres de muchos huesos nacieron de comparaciones: los antiguos anatomistas vieron en ellos un cubo (*cuboides*), una pirámide (*piramidal*), una barca (*escafoides*), un guisante (*pisiforme*) o una cuña (*esfenoides*, *cuneiforme*). Por su forma general se agrupan en tres grandes clases.<Cita fuente="testut-1" p="6–7" />
+
+| Tipo | Rasgo | Dónde se encuentran |
 | --- | --- | --- |
-| Largos | La longitud predomina sobre la anchura y el grosor | Fémur, húmero, falanges |
-| Cortos | Dimensiones similares en los tres ejes | Huesos del carpo y del tarso |
-| Planos | Delgados y extensos, a menudo protectores | Parietal, esternón, escápula |
-| Irregulares | Formas complejas que no encajan en otro grupo | Vértebras, esfenoides |
-| Sesamoideos | Se desarrollan dentro de un tendón | Rótula |
+| Largos | Una dimensión, la longitud, predomina sobre las otras dos. Tienen un cuerpo o **diáfisis**, casi siempre prismático triangular, y dos extremos o **epífisis**, más voluminosos y con superficies articulares | Miembros: húmero, fémur, falanges |
+| Anchos o planos | Predominan la longitud y la anchura, y ambas son parecidas; suelen tener una cara cóncava y otra convexa | Rodeando cavidades: cráneo, pelvis; escápula |
+| Cortos | Las tres dimensiones son casi iguales; forma más o menos cúbica, con muchas facetas | Columna, carpo, tarso: regiones muy resistentes, de movimientos variados pero poco extensos |
 
-## Anatomía de un hueso largo
+<Figura id="testut-fig-2" />
 
-### Diáfisis
-El cuerpo o caña del hueso: un tubo de hueso compacto que rodea la **cavidad medular**.
+<MarginNote title="Otras categorías">
+  La anatomía moderna suele añadir los huesos **irregulares** (vértebras, esfenoides), cuya forma
+  compleja no encaja en ningún grupo, y los **sesamoideos**, que se desarrollan dentro de un
+  tendón, como la rótula.
+</MarginNote>
 
-### Epífisis
-Los extremos ensanchados, formados por hueso esponjoso y recubiertos de **cartílago articular**.
+## Caras, bordes y extremos
 
-### Metáfisis
-La zona de transición entre ambas, donde en el hueso en crecimiento se encuentra la **placa epifisaria**.
+Sea cual sea su forma, en todo hueso se distinguen **caras, bordes y extremos**, que son sus regiones descriptivas. Cada una recibe un adjetivo según hacia dónde mira en el sujeto de pie: interna, externa, anterior, posterior, superior o inferior. El húmero, por ejemplo, tiene dos extremos (superior e inferior) y tres caras (posterior, interna y externa).<Cita fuente="testut-1" p="7–8" />
 
----
+Para dos regiones opuestas de un mismo hueso se usan también **proximal** y **distal**: proximal es la más cercana al plano medio y distal la más alejada. En los miembros, proximal es la parte más cercana a la raíz del miembro y distal la más cercana a su extremo libre: el extremo superior del fémur es el proximal; en un metatarsiano, el proximal es el que se articula con el tarso.<Cita fuente="testut-1" p="8" />
 
-Recubriendo el exterior se encuentra el **periostio**, una membrana fibrosa rica en vasos y nervios; el interior de la cavidad medular lo tapiza el **endostio**.
+## Accidentes de la superficie
+
+La superficie de los huesos está llena de **eminencias, cavidades y agujeros**. Sus nombres son tan numerosos como caprichosos (*coracoides*, *coronoides*, *unciforme*…), pero los consagra el uso de siglos y ningún intento de sustituirlos por términos más científicos ha prosperado.<Cita fuente="testut-1" p="8" />
+
+### Eminencias o apófisis
+
+Son las partes del hueso que sobresalen de su superficie.
+
+| Clase | Qué son | Ejemplos de nombre |
+| --- | --- | --- |
+| Articulares | Corresponden a las articulaciones; su forma depende de si la articulación es móvil o fija | Cabeza, cóndilo |
+| No articulares | Rugosas; casi todas dan inserción a ligamentos o músculos | Eminencia, protuberancia o tuberosidad, eminencia mamilar, espina, línea, cresta |
+
+Toda prominencia de inserción se desarrolla en proporción al órgano que se inserta en ella. Por eso las eminencias no articulares están más marcadas en los sujetos vigorosos que en los de musculatura débil, y en quien trabaja con sus músculos que en quien lleva una vida sedentaria.<Cita fuente="testut-1" p="8" />
+
+### Cavidades
+
+Las **articulares** se oponen a las eminencias del hueso vecino y están hechas para corresponderse exactamente con ellas. Las **no articulares** se agrupan, según su uso, en tres clases:<Cita fuente="testut-1" p="8–9" />
+
+| Clase | Función | Ejemplos |
+| --- | --- | --- |
+| De inserción | Dan asidero a ligamentos o músculos | Fosa digital del trocánter mayor |
+| De recepción | Alojan tendones, vasos o nervios (**canales**, **surcos**) u órganos más voluminosos (**fosas**); el hueso se amolda al órgano, como si este hubiera dejado impresa su forma: son las **impresiones** | Fosa occipital, fosa orbitaria |
+| De ampliación | Oquedades anfractuosas que agrandan cavidades vecinas y comunican con ellas | Senos frontales y maxilares, celdillas etmoidales, celdas mastoideas |
+
+### Agujeros y conductos
+
+Los de **transmisión** dejan pasar vasos y nervios que atraviesan el hueso sin detenerse en él: unos son grandes, como el agujero occipital, por el que pasa el bulbo raquídeo, o el conducto carotídeo; otros muy pequeños, como el agujero redondo menor, que da paso a la arteria meníngea media. Según su forma pueden llamarse *hiato*, *hendidura*, *cisura* o *agujero rasgado*.<Cita fuente="testut-1" p="9" />
+
+Los **nutricios** dan paso a los vasos que alimentan al propio hueso, y se ordenan en cuatro órdenes según su tamaño:<Cita fuente="testut-1" p="9" />
+
+1. **Primer orden**: los más grandes, en la diáfisis de los huesos largos y en algunos anchos. Son oblicuos y dan paso a la **arteria nutricia**.
+2. **Segundo orden**: en las epífisis de los huesos largos, en los bordes de los anchos y en las caras no articulares de los cortos. Son muy numerosos (Bichat contó unos 140 en el extremo inferior del fémur) y sirven sobre todo para las venas.
+3. **Tercer orden**: diminutos, repartidos por toda la superficie bajo el periostio, de 40 a 50 por milímetro cuadrado. Son el origen de los conductos de Havers.
+4. **Cuarto orden**: los orificios de los conductillos óseos, aún más pequeños.
+
+## La regla de los agujeros nutricios
+
+Los agujeros nutricios de los huesos largos tienen una situación y una dirección constantes para cada hueso:<Cita fuente="testut-1" p="10" />
+
+| Hueso | Situación | Dirección |
+| --- | --- | --- |
+| Clavícula | Cara inferior, cerca del borde posterior (a veces doble, a veces ausente) | Hacia fuera |
+| Escápula | Tres: fosa supraespinosa, fosa infraespinosa y fosa subescapular | Hacia abajo, hacia arriba y hacia atrás, respectivamente |
+| Húmero | Cara interna, algo por debajo de la mitad | De arriba abajo |
+| Cúbito | Cara anterior, en la unión del tercio superior con el medio | De abajo arriba |
+| Radio | Igual que el cúbito, un poco más abajo | De abajo arriba |
+| Coxal | Tres: fosa ilíaca interna, fosa ilíaca externa y por delante de la escotadura ciática | Hacia abajo y atrás (los dos primeros); hacia arriba y atrás (el tercero) |
+| Fémur | Línea áspera, algo por encima de la mitad | De abajo arriba |
+| Tibia | Cara posterior, en la unión del tercio superior con el medio | De arriba abajo |
+| Peroné | Cara posterior, en el tercio medio | De arriba abajo |
+
+La tabla esconde una regla fácil de recordar: **los agujeros nutricios se dirigen hacia el codo y se alejan de la rodilla**. En el miembro superior apuntan al codo (el del húmero baja, los del radio y el cúbito suben); en el inferior huyen de la rodilla (el del fémur sube, los de la tibia y el peroné bajan).<Cita fuente="testut-1" p="10–12" />
+
+<Figura id="testut-fig-3" />
+
+La explicación está en el crecimiento. Los dos extremos de un hueso largo no crecen por igual, y el que más crece se aleja más del agujero, que no cambia de sitio: sólo lo parece. Es el experimento del clavo de Hunter: un clavo implantado en el centro de un hueso de un animal joven ya no está en el centro cuando el hueso termina de crecer. Los extremos que más crecen son los alejados del codo (el superior del húmero y los inferiores del radio y el cúbito) y los cercanos a la rodilla (el inferior del fémur y los superiores de la tibia y el peroné). En el feto todas las arterias nutricias se dirigen hacia el extremo libre del miembro; el crecimiento desigual las arrastra y, en el fémur, el radio y el cúbito, acaban siendo recurrentes.<Cita fuente="testut-1" p="10–12" />
+
+<MarginNote title="¿Epífisis fértil?">
+  Los cirujanos llaman *epífisis fértil* a la del extremo que más crece, pero la expresión es
+  engañosa: el crecimiento en longitud no lo produce la epífisis, sino el cartílago de conjunción
+  que la separa de la diáfisis, y que prolifera hacia la diáfisis. La epífisis es sólo un testigo
+  de ese trabajo.<Cita fuente="testut-1" p="15" />
+</MarginNote>
+
+## El periostio
+
+El hueso fresco tiene dos elementos que el esqueleto preparado pierde: los cartílagos articulares y el **periostio** (del griego *perí*, alrededor, y *ostéon*). Es una membrana fibrosa blanquecina que envuelve el hueso y que, durante la osificación, participa en su formación; después le lleva sus vasos y con ellos los materiales para su nutrición: es la **membrana nutricia** del hueso.<Cita fuente="testut-1" p="12" />
+
+- **Grosor**: proporcional al tamaño del hueso. En las diáfisis de los huesos largos mide alrededor de un milímetro; en las epífisis, de uno a tres. El más grueso es el de la cara exocraneal de la apófisis basilar del occipital; el más delgado, el que tapiza las cavidades de los huesos de la cara.
+- **Extensión**: envuelve casi todo el hueso. Falta donde se insertan tendones y ligamentos, cuyas fibras penetran en el hueso (fibras de Sharpey), y sobre los cartílagos articulares, donde se continúa con la cápsula de la articulación y, a través de ella, con el periostio del hueso vecino.
+- **Adherencia**: mayor cuanto más irregular es la superficie y cuanta más edad tiene el sujeto. Se despega con más facilidad en los huesos planos que en los cortos, y en la diáfisis que en las epífisis.
+- **Vasos y nervios**: muy rico en arterias, venas y linfáticos, y con una abundante red nerviosa.<Cita fuente="testut-1" p="12–13" />
+
+## Arquitectura interior
+
+Vistos en corte, los huesos están formados por **substancia ósea**, que encierra cavidades ocupadas por una substancia blanda, la **médula**. La substancia ósea se presenta con tres aspectos: el **tejido compacto**, de laminillas apretadas sin cavidades; el **tejido esponjoso**, cuyas laminillas sólo se tocan en ciertos puntos y dejan pequeñas cavidades llenas de médula, y el **tejido reticular o areolar**, un esponjoso de cavidades mayores. Al microscopio los tres son el mismo tejido: sólo cambia su arquitectura.<Cita fuente="testut-1" p="14" />
+
+### Huesos largos
+
+<Figura id="testut-fig-5" />
+
+- Las **epífisis** son casi enteramente de tejido esponjoso, cubierto por una delgada cáscara de tejido compacto o, en las superficies articulares, por cartílago. Se forman a partir de puntos de osificación propios, que aparecen después del nacimiento. Durante el crecimiento quedan separadas de la diáfisis por el **cartílago de conjunción**, y su soldadura marca el fin del crecimiento del hueso.<Cita fuente="testut-1" p="14–15" />
+- La **diáfisis** es de tejido compacto, más grueso en su parte media, y encierra el **conducto medular**, que se prolonga hasta las epífisis. Hacia los extremos, el conducto se llena de un tejido areolar que se continúa insensiblemente con el esponjoso de la epífisis.<Cita fuente="testut-1" p="15–16" />
+
+La **médula ósea**, además de aligerar el esqueleto, contribuye a formar las células de la sangre. Se distinguen varias clases: la **roja**, que ocupa todas las cavidades del feto y, en el adulto, las de los huesos esponjosos (cuerpos vertebrales, base del cráneo, costillas, esternón); la **amarilla** o adiposa, que llena casi todas las cavidades del adulto, en especial los conductos medulares; la **gelatinosa**, semitransparente y excepcional en el hombre, que ocupa a veces las aréolas de los huesos anchos del cráneo y de la cara, y la **gris**, rarísima en el hombre.<Cita fuente="testut-1" p="16" />
+
+Las **trabéculas** del tejido esponjoso no se disponen al azar: siguen la dirección de las fuerzas que el hueso soporta. De ahí la fórmula de Julius Wolff: *el hueso normal tiene una estructura determinada por su función*.<Cita fuente="testut-1" p="17" />
+
+<Figura id="testut-fig-10" />
+
+### Huesos planos
+
+Dos láminas de tejido compacto encierran una capa de tejido esponjoso; en los bordes se unen y el esponjoso queda completamente envuelto. En la bóveda del cráneo esas láminas son la **tabla externa** y la **tabla interna**, y el esponjoso que las separa se llama **diploe**. Donde el esponjoso desaparece, las dos tablas se funden en una lámina delgada y a veces translúcida, como en el centro de la escápula o en la fosa ilíaca. El diploe está recorrido por anchos **conductos venosos**, que alcanzan su mayor desarrollo en el cráneo.<Cita fuente="testut-1" p="17–18" />
+
+### Huesos cortos
+
+Se parecen a las epífisis de los huesos largos: una masa de tejido esponjoso dentro de una delgada cáscara de tejido compacto. También aquí las trabéculas, que a primera vista parecen desordenadas, siguen un orden constante en cada hueso: en el astrágalo y el calcáneo se cruzan siguiendo las líneas de presión del pie. Como dice el viejo adagio, *la función hace el órgano*.<Cita fuente="testut-1" p="18" />
+
+## El tejido óseo
+
+El tejido óseo se compone de **células óseas**, alojadas en pequeñas lagunas de las que parten finos conductillos, y de una **substancia fundamental**. Ésta está recorrida por conductos: los **conductos de Havers**, regulares y cilíndricos, propios del tejido compacto, y los espacios medulares, más anchos e irregulares, del esponjoso. Alrededor de cada conducto de Havers las laminillas óseas se disponen en capas concéntricas: es un **sistema de Havers**. Por fuera de la diáfisis y alrededor del conducto medular, las laminillas forman los sistemas fundamentales externo e interno.<Cita fuente="testut-1" p="19–20" />
+
+<Figura id="testut-fig-12" />
+
+Pese a su dureza, es uno de los tejidos más maleables del organismo: se destruye y se reconstruye sin cesar, y cualquier cambio en las fuerzas que soporta se traduce, con el tiempo, en un cambio de su forma. John Hunter llamó a esta propiedad, ya en 1786, *variación modelante*.<Cita fuente="testut-1" p="20" />
+
+En números redondos, el hueso es un **30 %** de substancia orgánica y un **70 %** de substancia mineral. Si se sumerge en un ácido diluido, el mineral se disuelve y queda la **oseína**: el hueso conserva su forma, pero se vuelve blando y flexible, como un cartílago. Si se calcina, arde la oseína y queda un residuo ligero y friable, la *harina de huesos*, compuesto sobre todo por fosfato de calcio (en torno al 84–86 %), con carbonato de calcio (9–11 %) y pequeñas cantidades de fosfato de magnesio y fluoruro de calcio.<Cita fuente="testut-1" p="20–21" />
+
+## Vasos y nervios de los huesos
+
+En los **huesos largos** hay tres sistemas arteriales:<Cita fuente="testut-1" p="21–23" />
+
+1. La **arteria nutricia**, con mucho la más voluminosa. Entra por el agujero nutricio, lo recorre oblicuamente y en la médula se divide en una rama ascendente y otra descendente, de calibre desigual: la principal es la que continúa la dirección del agujero. También ella *se dirige hacia el codo y se aleja de la rodilla*.
+2. Las **arterias periósticas de la diáfisis**, finísimas y muy numerosas, que nacen del periostio y penetran por los agujeros de tercer orden.
+3. Las **arterias de las epífisis**, que entran por los agujeros de segundo orden.
+
+Las tres redes se anastomosan entre sí, de modo que la nutrición del hueso queda asegurada aunque una de ellas se obstruya. Mientras persiste el cartílago de conjunción, sin embargo, la red de la epífisis no comunica con la de la médula.<Cita fuente="testut-1" p="23" /> Los **huesos anchos** tienen arterias periósticas superficiales y arterias nutricias profundas; los **cortos**, sólo ramas finas que llegan desde el periostio.
+
+Las **venas** son independientes de las arterias y de mayor calibre. En los huesos largos salen sobre todo por los orificios de las epífisis; en los anchos recorren el diploe por los conductos venosos, cuyas paredes, interrumpidas por estrechamientos y tabiques, recuerdan válvulas; en los cortos forman a veces conductos muy desarrollados, como en los cuerpos vertebrales.<Cita fuente="testut-1" p="23–24" />
+
+La existencia de **linfáticos** verdaderos en el hueso no está demostrada: la linfa parece circular por vainas que rodean los vasos de los conductos de Havers. Los **nervios** entran sobre todo con la arteria nutricia; otros, más finos, llegan desde el periostio a las epífisis y a la diáfisis. Los describió por primera vez Gros, en 1846, en el fémur del buey y del caballo.<Cita fuente="testut-1" p="24" />
 
 ## Examen
 

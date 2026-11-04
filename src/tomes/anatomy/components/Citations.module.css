@@ -1,0 +1,49 @@
+.mark {
+  font-size: 0.7em;
+  line-height: 0;
+  margin-left: 0.1em;
+}
+
+.mark a {
+  color: var(--anatomy-accent);
+  text-decoration: none;
+  font-variant-numeric: lining-nums;
+}
+
+.mark a:hover {
+  text-decoration: underline;
+}
+
+.unknown {
+  color: var(--anatomy-accent);
+  font-size: 0.8em;
+}
+
+.sources {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  font-size: 0.9rem;
+}
+
+.sources ol {
+  list-style: decimal !important;
+}
+
+.sources li::marker {
+  color: var(--anatomy-accent);
+}
+
+.sources li:target {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+
+.sources a {
+  color: inherit;
+  text-decoration-color: color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+.pages {
+  opacity: 0.75;
+}

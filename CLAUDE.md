@@ -78,6 +78,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 
 - `assets/skeleton.glb` — 269 pieces (210 bones, 31 cartilages, 28 teeth) from Z-Anatomy,
   CC BY-SA: keep attribution visible. Rebuild via `tools/anatomy/README.md`.
+- `data/sources.ts` — bibliography. Chapters cite with `<Cita fuente="testut-1" p="12" />`; each book
+  lists its sources at the end automatically (`components/Citations.tsx`). Testut–Latarjet t. I is
+  in `library/anatomy/` (scanned: render pages with Ghostscript, see `testut-notes.md` there).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).
 - `assets/landmarks.json` (generated: 895 landmark points + normals on 79 pieces) and

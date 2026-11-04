@@ -22,6 +22,7 @@ export function Figure({ id, caption, wide = false }: { id: string | string[]; c
       <img src={figure.src} alt={figure.alt ?? figure.title} loading="lazy" decoding="async" className={styles.image} />
       <figcaption className={styles.caption}>
         <span className={styles.title}>{caption ?? figure.title}</span>
+        {figure.legend && <span className={styles.legend}>{figure.legend}</span>}
         <span className={styles.credit}>
           {figure.url ? (
             <a href={figure.url} target="_blank" rel="noreferrer">

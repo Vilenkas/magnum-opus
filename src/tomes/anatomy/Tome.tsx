@@ -7,6 +7,7 @@ import '@fontsource-variable/eb-garamond'
 import '@fontsource-variable/eb-garamond/wght-italic.css'
 import type { TomeProps } from '../types'
 import { books, type Book } from './books'
+import { CitationProvider, Sources } from './components/Citations'
 import { mdxComponents } from './components/mdx'
 import styles from './tome.module.css'
 
@@ -78,9 +79,13 @@ function BookView({ book }: { book: Book }) {
         </div>
       </header>
       <div className={styles.prose}>
-        <Suspense fallback={<p className={styles.loading}>Abriendo el libro…</p>}>
-          <Content components={mdxComponents} />
-        </Suspense>
+        <CitationProvider>
+          <Suspense fallback={<p className={styles.loading}>Abriendo el libro…</p>}>
+            <Content components={mdxComponents} />
+            {/* After the chapter, so every <Cita> has registered. */}
+            <Sources />
+          </Suspense>
+        </CitationProvider>
       </div>
     </article>
   )

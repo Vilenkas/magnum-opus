@@ -26,6 +26,8 @@ export interface FigureEntry {
   title: string
   /** Spanish alt text when the caption isn't enough to picture it. */
   alt?: string
+  /** Key to the numbers or letters drawn on the figure: "1, diáfisis. — 2, epífisis…". */
+  legend?: string
   /** Credit as it should read: "Henry Gray, Anatomy of the Human Body (1918), fig. 188". */
   credit: string
   license: License
