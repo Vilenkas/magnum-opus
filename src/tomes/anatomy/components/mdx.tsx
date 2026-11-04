@@ -3,7 +3,7 @@ import type { MDXComponents } from 'mdx/types'
 import { Cite } from './Citations'
 import { Figure } from './Figure'
 import { MarginNote } from './MarginNote'
-import { SkeletonBreakdown } from './SkeletonBreakdown'
+import { JointBreakdown, SkeletonBreakdown } from './SkeletonBreakdown'
 
 /** three.js is heavy: 3D plates are only fetched when a chapter actually renders them. */
 function lazyPlate(load: () => Promise<ComponentType>) {
@@ -24,6 +24,7 @@ export const mdxComponents: MDXComponents = {
   Cita: Cite,
   MarginNote,
   SkeletonBreakdown,
+  JointBreakdown,
   SkeletonViewer: lazyPlate(() => import('./SkeletonViewer').then((m) => m.SkeletonViewer)),
   SkeletonQuiz: lazyPlate(() => import('./SkeletonQuiz').then((m) => m.SkeletonQuiz)),
   JointTypes: lazyPlate(() => import('./JointTypes').then((m) => m.JointTypes)),

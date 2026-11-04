@@ -222,3 +222,28 @@ button.row:focus-visible {
 .rows[data-depth='3'] .count {
   font-weight: 600;
 }
+
+/* Joint genus beside its name: a quiet tag, not a second title. */
+.kind {
+  margin-left: 0.5em;
+  font-family: var(--anatomy-display);
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+  white-space: nowrap;
+}
+
+.latin {
+  font-style: italic;
+}
+
+.footnote {
+  margin: 1rem 0 0 !important;
+  padding-top: 0.6rem;
+  border-top: 1px dotted color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+  font-size: 0.82rem;
+  font-style: italic;
+  opacity: 0.8;
+}

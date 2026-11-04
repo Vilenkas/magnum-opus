@@ -10,11 +10,15 @@ export interface CountNode {
   count?: number
   /** A short clarification shown under the name. */
   note?: string
+  /** Latin (TA) name, shown under the name. */
+  latin?: string
+  /** A short tag after the name: the joint's genus ("Enartrosis"). */
+  kind?: string
   children?: CountNode[]
 }
 
 export interface CountDivision {
-  id: 'axial' | 'appendicular'
+  id: string
   name: string
   description: string
   regions: CountNode[]
