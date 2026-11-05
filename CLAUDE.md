@@ -82,6 +82,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/sources.ts` — bibliography. Chapters cite with `<Cita fuente="testut-1" p="12" />`; each book
   lists its sources at the end automatically (`components/Citations.tsx`). Testut–Latarjet t. I is
   in `library/anatomy/` (scanned: render pages with Ghostscript, see `testut-notes.md` there).
+- `assets/muscles.glb` (5.6 MB), `joints.glb`, `insertions.glb` + generated `soft-tissues.json`
+  (Latin/Spanish from TA2, insertion → bone and → muscle pieces). Not wired into a plate yet.
+  Source blend and TA2.csv live in `library/anatomy/z-anatomy/` (see `tools/anatomy/README.md`).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).
 - `data/latin.ts` + `data/landmark-latin.ts` — Latin TA names keyed by TA English (`latinOf(en)`);
