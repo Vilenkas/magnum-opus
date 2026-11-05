@@ -5,10 +5,12 @@ import { trailOf, type Atlas, type AtlasNode } from './model'
 import { statusText, TomeBanner, Trail } from './parts'
 
 // Wide enough that the centre's title never reaches the first ring.
-const RING = 155
-/** Room around the second ring for its radial labels. */
-const MARGIN = 175
-const HALF = RING * 2 + MARGIN
+const RING = 150
+/** The outer ring: far enough that first-ring labels fit between the two. */
+const OUTER = 345
+/** Room around the outer ring for its radial labels. */
+const MARGIN = 215
+const HALF = OUTER + MARGIN
 const TWEEN_MS = 650
 
 const GOLD = 'var(--color-gold)'
@@ -79,7 +81,7 @@ export function MapView({ atlas, area }: { atlas: Atlas; area?: string }) {
   const navigate = useNavigate()
   const focus = area ? atlas.byPath.get(area) : undefined
   const children = focus ? focus.children : atlas.roots
-  const points = useMemo(() => focusLayout(children, RING), [children])
+  const points = useMemo(() => focusLayout(children, RING, OUTER), [children])
   const firstTome = atlas.tomes[0] && atlas.homeOf.get(atlas.tomes[0].id)
   const [selected, setSelected] = useState<AtlasNode | undefined>(focus ?? firstTome)
 
@@ -132,7 +134,7 @@ export function MapView({ atlas, area }: { atlas: Atlas; area?: string }) {
       <div className="overflow-x-auto rounded-sm border border-line bg-ink-sunken">
         <svg
           viewBox={`${-HALF} ${-HALF} ${HALF * 2} ${HALF * 2}`}
-          className="mx-auto block w-full max-w-[52rem] min-w-[36rem] select-none"
+          className="mx-auto block w-full max-w-[60rem] min-w-[40rem] select-none"
           role="group"
           aria-label="Mapa del saber"
         >
@@ -272,10 +274,11 @@ function Node({
   const { node, angle, ring, hidden } = point
   const { x, y } = pos
 
-  const dotRadius = node.status === 'tome' ? 9 : ring === 1 ? 7 : lit(node) ? 5.5 : 4
+  const branch = ring === 1 && node.children.length > 0
+  const dotRadius = node.status === 'tome' ? 9 : ring === 1 && node.children.length ? 7 : lit(node) ? 5.5 : 4
   const labelColor = node.status === 'tome' ? GOLD : lit(node) || node.status === 'covered' ? 'var(--color-parchment)' : 'var(--color-muted)'
-  const labelFont = node.status === 'tome' || ring === 1 ? 'var(--font-display)' : 'var(--font-sans)'
-  const labelSize = node.status === 'tome' ? 21 : ring === 1 ? 19 : 15
+  const labelFont = node.status === 'tome' || branch ? 'var(--font-display)' : 'var(--font-sans)'
+  const labelSize = node.status === 'tome' ? 19 : branch ? 16 : 14
   const title = node.status === 'tome' ? node.tomes.map((t) => t.title).join(' · ') : node.title
   const more = hidden > 0 ? `+${hidden}` : ''
   // Branches of the first ring keep a centred label; leaves (and the outer ring) read along

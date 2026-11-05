@@ -18,12 +18,13 @@ export const descendantCount = (node: AtlasNode): number =>
   node.children.reduce((sum, c) => sum + 1 + descendantCount(c), 0)
 
 /**
- * Progressive constellation: only two levels around the focus. Children sit on the first
- * ring, grandchildren on the second; each child gets an arc proportional to its own
- * children, so a busy branch has room and a lone leaf still has a slot. The first child is
- * centred at the top. Whatever lies deeper is counted, not drawn.
+ * Progressive constellation: only two levels around the focus. Children with children of
+ * their own sit on the inner ring, grandchildren on the outer one; a child that is a leaf
+ * goes straight to the outer ring, where its label has room. Each child gets an arc
+ * proportional to its own children, so a busy branch has room and a lone leaf still has a
+ * slot. The first child is centred at the top. Whatever lies deeper is counted, not drawn.
  */
-export function focusLayout(children: AtlasNode[], ring: number): MapPoint[] {
+export function focusLayout(children: AtlasNode[], ring: number, outer = ring * 2): MapPoint[] {
   const weight = (n: AtlasNode) => Math.max(1, n.children.length)
   const total = children.reduce((sum, c) => sum + weight(c), 0)
   if (!total) return []
@@ -35,10 +36,11 @@ export function focusLayout(children: AtlasNode[], ring: number): MapPoint[] {
     const start = cursor
     const span = weight(child) * step
     const angle = start + span / 2
+    const r = child.children.length ? ring : outer
     const point: MapPoint = {
       node: child,
-      x: Math.cos(angle) * ring,
-      y: Math.sin(angle) * ring,
+      x: Math.cos(angle) * r,
+      y: Math.sin(angle) * r,
       angle,
       ring: 1,
       hidden: 0,
@@ -48,8 +50,8 @@ export function focusLayout(children: AtlasNode[], ring: number): MapPoint[] {
       const a = start + (i + 0.5) * step
       points.push({
         node: grandchild,
-        x: Math.cos(a) * ring * 2,
-        y: Math.sin(a) * ring * 2,
+        x: Math.cos(a) * outer,
+        y: Math.sin(a) * outer,
         angle: a,
         ring: 2,
         parent: point,

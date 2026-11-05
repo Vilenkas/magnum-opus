@@ -31,7 +31,7 @@ describe('taxonomy', () => {
     ])
     expect(trail('health/nowhere')).toEqual([])
     // Same id under different parents is fine: paths are the identity.
-    expect(nodeAt('health/clinical/neurology')).not.toBe(nodeAt('health/basic-sciences/anatomy/neurology'))
+    expect(nodeAt('health/clinical/internal-medicine/neurology')).not.toBe(nodeAt('health/basic-sciences/anatomy/neurology'))
     expect(taxonomyPaths()).toContain('languages/classical/latin')
   })
 

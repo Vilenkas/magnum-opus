@@ -27,6 +27,7 @@ export const taxonomy: TaxonomyNode[] = [
     title: 'Ciencias de la salud',
     children: [
       {
+        // How the body is built and works, before disease.
         id: 'basic-sciences',
         title: 'Ciencias básicas',
         children: [
@@ -40,37 +41,180 @@ export const taxonomy: TaxonomyNode[] = [
               ['angiology', 'Angiología'],
               ['neurology', 'Neurología'],
               ['splanchnology', 'Esplacnología'],
+              ['esthesiology', 'Estesiología'],
             ]),
           },
           ...leaves([
+            ['embryology', 'Embriología'],
             ['histology', 'Histología'],
-            ['physiology', 'Fisiología'],
+            ['cell-biology', 'Biología celular'],
             ['biochemistry', 'Bioquímica'],
-            ['microbiology', 'Microbiología'],
-            ['pathology', 'Patología'],
-            ['pharmacology', 'Farmacología'],
+            ['genetics', 'Genética'],
+            ['physiology', 'Fisiología'],
+            ['immunology', 'Inmunología'],
           ]),
+          {
+            id: 'microbiology',
+            title: 'Microbiología',
+            children: leaves([
+              ['bacteriology', 'Bacteriología'],
+              ['virology', 'Virología'],
+              ['mycology', 'Micología'],
+              ['parasitology', 'Parasitología'],
+            ]),
+          },
+          {
+            id: 'pathology',
+            title: 'Patología',
+            children: leaves([
+              ['physiopathology', 'Fisiopatología'],
+              ['pathological-anatomy', 'Anatomía patológica'],
+            ]),
+          },
+          {
+            id: 'pharmacology',
+            title: 'Farmacología',
+            children: leaves([
+              ['general-pharmacology', 'Farmacología general'],
+              ['posology', 'Posología'],
+              ['clinical-pharmacology', 'Farmacología clínica'],
+              ['toxicology', 'Toxicología'],
+            ]),
+          },
         ],
       },
       {
+        // The methods for finding out what the patient has.
         id: 'diagnostics',
         title: 'Ciencias diagnósticas',
+        children: [
+          {
+            id: 'imaging',
+            title: 'Imagenología',
+            children: leaves([
+              ['radiology', 'Radiología'],
+              ['ultrasound', 'Ecografía'],
+              ['computed-tomography', 'Tomografía computarizada'],
+              ['magnetic-resonance', 'Resonancia magnética'],
+              ['nuclear-medicine', 'Medicina nuclear'],
+            ]),
+          },
+          {
+            id: 'laboratory',
+            title: 'Laboratorio clínico',
+            children: leaves([
+              ['clinical-biochemistry', 'Bioquímica clínica'],
+              ['clinical-hematology', 'Hematología de laboratorio'],
+              ['clinical-microbiology', 'Microbiología clínica'],
+            ]),
+          },
+          { id: 'electrodiagnosis', title: 'Electrodiagnóstico' },
+        ],
+      },
+      {
+        // Medical practice: specialties grouped by how they treat (medically, surgically…).
+        id: 'clinical',
+        title: 'Medicina clínica',
+        children: [
+          // The clinical method itself: history and examination, before any specialty.
+          { id: 'semiology', title: 'Semiología' },
+          {
+            id: 'internal-medicine',
+            title: 'Medicina interna',
+            children: leaves([
+              ['cardiology', 'Cardiología'],
+              ['pulmonology', 'Neumonología'],
+              ['nephrology', 'Nefrología'],
+              ['gastroenterology', 'Gastroenterología'],
+              ['hepatology', 'Hepatología'],
+              ['endocrinology', 'Endocrinología'],
+              ['hematology', 'Hematología'],
+              ['infectious-diseases', 'Infectología'],
+              ['rheumatology', 'Reumatología'],
+              ['neurology', 'Neurología clínica'],
+              ['oncology', 'Oncología'],
+              ['clinical-immunology', 'Inmunología clínica'],
+              ['allergology', 'Alergología'],
+              ['geriatrics', 'Geriatría'],
+            ]),
+          },
+          {
+            id: 'surgery',
+            title: 'Cirugía',
+            children: leaves([
+              ['general-surgery', 'Cirugía general'],
+              ['traumatology', 'Traumatología y ortopedia'],
+              ['neurosurgery', 'Neurocirugía'],
+              ['cardiothoracic-surgery', 'Cirugía cardiotorácica'],
+              ['vascular-surgery', 'Cirugía vascular'],
+              ['plastic-surgery', 'Cirugía plástica'],
+              ['urology', 'Urología'],
+            ]),
+          },
+          {
+            id: 'medical-surgical',
+            title: 'Especialidades medicoquirúrgicas',
+            children: leaves([
+              ['ophthalmology', 'Oftalmología'],
+              ['otorhinolaryngology', 'Otorrinolaringología'],
+              ['dermatology', 'Dermatología'],
+            ]),
+          },
+          {
+            id: 'maternal-child',
+            title: 'Salud maternoinfantil',
+            children: leaves([
+              ['obstetrics-gynecology', 'Ginecología y obstetricia'],
+              ['pediatrics', 'Pediatría'],
+              ['neonatology', 'Neonatología'],
+            ]),
+          },
+          { id: 'psychiatry', title: 'Psiquiatría' },
+          {
+            id: 'critical-care',
+            title: 'Urgencias y cuidados críticos',
+            children: leaves([
+              ['emergency-medicine', 'Medicina de urgencias'],
+              ['intensive-care', 'Medicina intensiva'],
+              ['anesthesiology', 'Anestesiología'],
+            ]),
+          },
+          { id: 'rehabilitation', title: 'Medicina física y rehabilitación' },
+        ],
+      },
+      {
+        // Health of populations rather than of the patient.
+        id: 'public-health',
+        title: 'Salud pública',
         children: leaves([
-          ['imaging', 'Imagenología'],
-          ['laboratory', 'Laboratorio clínico'],
+          ['epidemiology', 'Epidemiología'],
+          ['biostatistics', 'Bioestadística'],
+          ['preventive-medicine', 'Medicina preventiva'],
+          ['occupational-health', 'Salud ocupacional'],
         ]),
       },
       {
-        id: 'clinical',
-        title: 'Medicina clínica',
+        // Health disciplines with their own method and practice beside medicine.
+        id: 'health-professions',
+        title: 'Otras ciencias de la salud',
         children: leaves([
-          ['cardiology', 'Cardiología'],
-          ['pulmonology', 'Neumonología'],
-          ['nephrology', 'Nefrología'],
-          ['gastroenterology', 'Gastroenterología'],
-          ['neurology', 'Neurología clínica'],
-          ['endocrinology', 'Endocrinología'],
-          ['traumatology', 'Traumatología'],
+          ['dentistry', 'Odontología'],
+          ['nursing', 'Enfermería'],
+          ['nutrition', 'Nutrición y dietética'],
+          ['physiotherapy', 'Fisioterapia'],
+          ['pharmacy', 'Farmacia'],
+          ['psychology', 'Psicología de la salud'],
+        ]),
+      },
+      {
+        // Medicine seen from history, ethics and law.
+        id: 'medical-humanities',
+        title: 'Humanidades médicas',
+        children: leaves([
+          ['history-of-medicine', 'Historia de la medicina'],
+          ['bioethics', 'Bioética'],
+          ['forensic-medicine', 'Medicina legal y forense'],
+          ['medical-terminology', 'Terminología médica'],
         ]),
       },
     ],

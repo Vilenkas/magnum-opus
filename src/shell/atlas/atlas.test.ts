@@ -166,6 +166,13 @@ describe('focusLayout', () => {
     expect(basic.filter((p) => p.ring === 2).map((p) => p.node.id)).toEqual(['osteology', 'neurology'])
   })
 
+  it('sends leaf children to the outer ring, where their labels have room', () => {
+    const basic = focusLayout(at('health/basic').children, 100, 230)
+    expect(Math.hypot(point(basic, 'health/basic/anatomy').x, point(basic, 'health/basic/anatomy').y)).toBeCloseTo(100)
+    expect(Math.hypot(point(basic, 'health/basic/physiology').x, point(basic, 'health/basic/physiology').y)).toBeCloseTo(230)
+    expect(Math.hypot(point(basic, 'health/basic/anatomy/osteology').x, point(basic, 'health/basic/anatomy/osteology').y)).toBeCloseTo(230)
+  })
+
   it('returns nothing around a leaf', () => {
     expect(focusLayout(at('health/basic/physiology').children, 100)).toEqual([])
   })
