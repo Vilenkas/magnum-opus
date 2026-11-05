@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { facets } from '@/tomes/taxonomy'
 import {
@@ -16,12 +16,18 @@ import { statusText, TomeBanner, Trail } from './parts'
 export function IndexView({ atlas, area, system }: { atlas: Atlas; area?: string; system?: string }) {
   const node = area ? atlas.byPath.get(area) : undefined
   const activeSystem = !node && isFacetValue('system', system) ? system : undefined
+  const content = useRef<HTMLElement>(null)
+
+  // The content scrolls on its own (wide screens): a new area starts at its top.
+  useEffect(() => {
+    content.current?.scrollTo({ top: 0 })
+  }, [area, system])
 
   return (
-    <div className="flex flex-1 flex-wrap">
+    <div className="flex flex-1 flex-wrap lg:min-h-0 lg:flex-nowrap">
       <nav
         aria-label="Mapa del saber"
-        className="max-w-full flex-[1_1_18rem] border-line bg-ink-sunken px-3 py-6 text-sm sm:border-r"
+        className="max-w-full flex-[1_1_18rem] border-line bg-ink-sunken px-3 py-6 text-sm sm:border-r lg:w-72 lg:flex-none lg:overflow-y-auto"
       >
         <Link
           to="/"
@@ -56,7 +62,7 @@ export function IndexView({ atlas, area, system }: { atlas: Atlas; area?: string
         </ul>
       </nav>
 
-      <main className="min-w-0 flex-[999_1_35rem] px-5 py-8 sm:px-10">
+      <main ref={content} className="min-w-0 flex-[999_1_35rem] px-5 py-8 sm:px-10 lg:overflow-y-auto">
         {activeSystem ? (
           <SystemPanel atlas={atlas} value={activeSystem} />
         ) : area && !node ? (

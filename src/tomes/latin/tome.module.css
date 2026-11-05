@@ -27,6 +27,13 @@
   background-attachment: fixed;
 }
 
+/* Ink-tinted scrollbars on the page and inside the tome. The page's own scrollbar belongs to
+   <html>, outside the tome: :has() scopes it to while this tome is open (data-tome). */
+:global(html:has([data-tome='latin'])),
+.root {
+  scrollbar-color: color-mix(in oklab, #2a2622 32%, transparent) transparent;
+}
+
 .root ::selection {
   background: var(--lat-minium);
   color: var(--lat-marble);
