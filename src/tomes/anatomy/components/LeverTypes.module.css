@@ -1,0 +1,169 @@
+/* Same palette as the stage markers: gold fulcrum, green effort, red load. */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 1rem 1rem 0;
+}
+
+.tab {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--anatomy-ink);
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 250ms ease,
+    color 250ms ease;
+}
+
+.tab:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+
+.tab[data-active='true'] {
+  background: var(--anatomy-accent);
+  border-color: var(--anatomy-accent);
+  color: var(--anatomy-paper);
+}
+
+.tabName {
+  font-family: var(--anatomy-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.tabAka {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.schema {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  padding: 0.75rem 1.25rem 0.5rem;
+}
+
+.svg {
+  width: 13rem;
+  flex: none;
+}
+
+.bar {
+  stroke: var(--anatomy-ink);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.fulcrum {
+  fill: #e0a526;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.2;
+}
+
+.effort,
+.load {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.effort {
+  stroke: #5f8a36;
+}
+
+.load {
+  stroke: #b8381f;
+}
+
+.schemaLetter {
+  font-family: var(--anatomy-display);
+  font-style: italic;
+  font-size: 15px;
+  fill: var(--anatomy-ink);
+}
+
+.description {
+  flex: 1 1 18rem;
+  max-width: 34rem;
+  margin: 0 !important;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.example {
+  margin: 0 0 0.75rem !important;
+}
+
+.points {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.points li {
+  display: grid;
+  grid-template-columns: auto 11rem 1fr;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 !important;
+}
+
+.dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  align-self: center;
+}
+
+.dot[data-role='fulcrum'] {
+  background: #e0a526;
+}
+
+.dot[data-role='effort'] {
+  background: #8fbf5a;
+}
+
+.dot[data-role='load'] {
+  background: #d4452c;
+}
+
+.pointRole {
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+}
+
+.letter {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@media (max-width: 40rem) {
+  .tabs {
+    flex-direction: column;
+  }
+  .points li {
+    grid-template-columns: auto 1fr;
+  }
+  .points li > :last-child {
+    grid-column: 2;
+  }
+}

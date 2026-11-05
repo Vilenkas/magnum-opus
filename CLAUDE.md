@@ -103,6 +103,8 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/joints.ts` + `components/JointTypes.tsx` — Libro II's classification plate (Testut's classes
   and genera, each shown on real joints). The stage's `{ kind: 'joint' }` focus frames a landmark
   with an anatomical view (`front`/`side`/`top`…); size from the smallest bone or `frame`.
+- `data/levers.ts` + `components/LeverTypes.tsx` — Libro III's plate: Testut's three levers, each
+  with fulcrum/effort/load on landmarks (markers with `size` and `onTop`, drawn over the bones).
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
   Progress persists via `src/shell/storage.ts` (namespaced localStorage).
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and

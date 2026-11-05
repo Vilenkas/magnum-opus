@@ -51,6 +51,10 @@ export interface Marker {
   look: 'normal' | 'active' | 'correct' | 'wrong'
   /** Openings (foramina…) are drawn as rings around the void instead of dots. */
   opening?: boolean
+  /** Size multiplier on screen (1 = landmark pin). */
+  size?: number
+  /** Drawn over the bones, never hidden behind them (points of a lever). */
+  onTop?: boolean
 }
 
 export interface SkeletonStageProps {
@@ -254,8 +258,8 @@ function Markers({
         const color = MARKER_COLORS[m.look]
         const common = {
           position: m.position,
-          renderOrder: 2,
-          userData: { scale: m.look === 'active' ? 1.6 : 1 },
+          renderOrder: m.onTop ? 3 : 2,
+          userData: { scale: (m.look === 'active' ? 1.6 : 1) * (m.size ?? 1) },
           onPointerOver: (e: ThreeEvent<PointerEvent>) => {
             e.stopPropagation()
             onHover?.(m.id)
@@ -272,14 +276,14 @@ function Markers({
           return (
             <mesh key={m.id} quaternion={q} {...common}>
               <torusGeometry args={[1.8, 0.45, 8, 24]} />
-              <meshBasicMaterial color={color} />
+              <meshBasicMaterial color={color} depthTest={!m.onTop} />
             </mesh>
           )
         }
         return (
           <mesh key={m.id} {...common}>
             <sphereGeometry args={[1, 16, 12]} />
-            <meshBasicMaterial color={color} />
+            <meshBasicMaterial color={color} depthTest={!m.onTop} />
           </mesh>
         )
       })}
