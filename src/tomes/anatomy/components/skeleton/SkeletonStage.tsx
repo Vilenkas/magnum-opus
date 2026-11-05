@@ -32,6 +32,12 @@ export type TissueLook =
   | 'cartilage'
   | 'origin'
   | 'insertion'
+  | 'artery'
+  | 'vein'
+  | 'heart'
+  | 'valve'
+  | 'node'
+  | 'organ'
   | 'hover'
   | 'selected'
   | 'ghost'
@@ -147,6 +153,13 @@ function useTissueMaterials() {
       cartilage: make('#c9d3cf', { roughness: 0.5 }),
       origin: make('#c0392b', { roughness: 0.5, ...onBone }),
       insertion: make('#2f6ea5', { roughness: 0.5, ...onBone }),
+      // Angiology: red arteries, blue veins and green lymph nodes, as in the atlases.
+      artery: make('#b8322a', { roughness: 0.45 }),
+      vein: make('#3b5a92', { roughness: 0.45 }),
+      heart: make('#a8473c', { roughness: 0.55 }),
+      valve: make('#efe3c8', { roughness: 0.45 }),
+      node: make('#5fae3a', { roughness: 0.5, emissive: '#2f6a14', emissiveIntensity: 0.35 }),
+      organ: make('#8c4a5a', { roughness: 0.6 }),
       hover: make('#e9b9a0', { emissive: '#9c3b26', emissiveIntensity: 0.2 }),
       selected: make('#e0a526', { roughness: 0.5, emissive: '#6b4a08', emissiveIntensity: 0.25 }),
       ghost: make('#d9b8a8', { transparent: true, opacity: 0.18, depthWrite: false }),

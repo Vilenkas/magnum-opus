@@ -2,26 +2,12 @@
 // Usage: node tools/anatomy/gen-soft-tissues.mjs <soft-meta.json> <TA2.csv> <out.json>
 // Generated file: hand corrections go in data/soft-names.ts, never here.
 import { readFileSync, writeFileSync } from 'node:fs'
+import { loadTa2 } from './ta2.mjs'
 
 const [metaPath, taPath, outPath] = process.argv.slice(2)
 const meta = JSON.parse(readFileSync(metaPath, 'utf8'))
 
-// TA2.csv: one quoted line per term, ';'-separated: TA2ID;English;Latin;Français;Español;…
-const ta = new Map()
-for (const line of readFileSync(taPath, 'utf8').replace(/^﻿/, '').split(/\r?\n/).slice(1)) {
-  const cols = line.replace(/^"|"$/g, '').split(';')
-  if (cols.length < 5 || !cols[1]) continue
-  const key = cols[1].trim().toLowerCase()
-  if (!ta.has(key)) ta.set(key, { la: cols[2].trim(), es: cols[4].trim() })
-}
-
-/** The tome says "peroné" (classical Spanish); TA2 Spanish says "fíbula". */
-const spanish = (es) => es && es.replace(/\bfíbula\b/g, 'peroné').replace(/\bFíbula\b/g, 'Peroné')
-
-const lookup = (en) => {
-  const hit = ta.get(en.toLowerCase().replace(/^\(|\)$/g, ''))
-  return hit ? { la: hit.la, es: spanish(hit.es) } : { la: null, es: null }
-}
+const lookup = loadTa2(taPath)
 
 const bones = new Set(
   [...readFileSync('src/tomes/anatomy/data/bones.ts', 'utf8').matchAll(/id: '([^']+)'/g)].map((m) => m[1]),

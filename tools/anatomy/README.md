@@ -77,3 +77,29 @@ node tools/anatomy/gen-soft-tissues.mjs <out-dir>/soft-meta.json library/anatomy
 ```
 
 `data/soft-tissues.test.ts` checks the three .glb against `soft-tissues.json` node by node.
+
+## Heart, vessels and lymphoid organs
+
+```sh
+# 9. Export "5: Cardiovascular system" (heart chambers, valves, papillary muscles; ~630 arteries
+#    and veins, which are bevelled curves in the source and become 8-sided tubes) and
+#    "6: Lymphoid organs" (lymph node groups, thymus, spleen). ~2 min: the scene is evaluated once.
+blender -b --factory-startup --disable-autoexec $BLEND --python tools/anatomy/export_vessels.py -- <out-dir>
+# → vessels-raw.glb (~11 MB), lymph-raw.glb, vessels-meta.json
+
+# 10. Compress (no simplification: the tubes are already light) → ~2.5 MB + 0.45 MB.
+for n in vessels lymph; do
+  pnpm dlx @gltf-transform/cli optimize <out-dir>/$n-raw.glb src/tomes/anatomy/assets/$n.glb \
+    --compress meshopt --texture-compress false --simplify false --join false --instance false --flatten false
+done
+
+# 11. Names from TA2 → assets/vessels.json. What TA2 lacks or gets wrong goes in
+#     src/tomes/anatomy/data/vessel-names.ts (hand-edited, wins over TA2).
+node tools/anatomy/gen-vessels.mjs <out-dir>/vessels-meta.json library/anatomy/z-anatomy/TA2.csv \
+  src/tomes/anatomy/assets/vessels.json
+```
+
+`tools/anatomy/ta2.mjs` is the TA2 lookup shared by both generators. It also applies the
+tome's Spanish: "peroné", "ganglio" for TA2's "nodo", "aurícula" for "atrio". No lymphatic
+vessels are modelled in Z-Anatomy, only nodes and organs. `data/vessels.test.ts` checks the
+two .glb against `vessels.json` and that everything has a Spanish name.

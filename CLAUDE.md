@@ -118,6 +118,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   numbering restarts). Its plates are SVG, no 3D: `Circulation` (the double circulation as a closed
   loop of stages in `data/circulation.ts`, tested), `Anastomoses` (fig. 118's five kinds, with a
   ligature that reroutes the flow) and `VenousValves` (valves closing, Bardeleben's distance D).
+- `assets/vessels.glb` (heart + ~630 arteries and veins as tubes) and `lymph.glb` (node groups,
+  thymus, spleen), named in generated `vessels.json` + hand-edited `data/vessel-names.ts` (wins over
+  TA2). `components/VesselViewer.tsx` (Lámina IV of Angiología): layers over a ghosted skeleton and
+  a searchable index that joins both sides of a paired vessel (`data/vessels.ts`, tested).
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
   Progress persists via `src/shell/storage.ts` (namespaced localStorage).
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and
