@@ -6,43 +6,57 @@ export interface MapPoint {
   y: number
   /** Radians, 0 pointing right, clockwise (SVG y grows downward). */
   angle: number
+  /** 1: a child of the focus; 2: a grandchild. */
+  ring: 1 | 2
   parent?: MapPoint
+  /** Descendants not drawn (below the second ring), shown as "+N". */
+  hidden: number
 }
 
+/** Every node below `node`. */
+export const descendantCount = (node: AtlasNode): number =>
+  node.children.reduce((sum, c) => sum + 1 + descendantCount(c), 0)
+
 /**
- * Radial cluster layout ("dendrogram"): branches sit on rings by depth, every
- * leaf on the outer ring, each subtree getting an arc proportional to its
- * leaves. The first domain is centred at the top.
+ * Progressive constellation: only two levels around the focus. Children sit on the first
+ * ring, grandchildren on the second; each child gets an arc proportional to its own
+ * children, so a busy branch has room and a lone leaf still has a slot. The first child is
+ * centred at the top. Whatever lies deeper is counted, not drawn.
  */
-export function radialLayout(roots: AtlasNode[], ring: number): { points: MapPoint[]; radius: number } {
-  const maxDepth = Math.max(1, ...roots.map(function deepest(n: AtlasNode): number {
-    return n.children.length ? Math.max(...n.children.map(deepest)) : n.depth
-  }))
-  const radius = maxDepth * ring
-  const leaves = roots.reduce((sum, r) => sum + r.leafCount, 0)
-  const step = (2 * Math.PI) / Math.max(1, leaves)
-  let cursor = -Math.PI / 2 - ((roots[0]?.leafCount ?? 0) * step) / 2
+export function focusLayout(children: AtlasNode[], ring: number): MapPoint[] {
+  const weight = (n: AtlasNode) => Math.max(1, n.children.length)
+  const total = children.reduce((sum, c) => sum + weight(c), 0)
+  if (!total) return []
+  const step = (2 * Math.PI) / total
+  let cursor = -Math.PI / 2 - (weight(children[0]) * step) / 2
 
   const points: MapPoint[] = []
-  const place = (node: AtlasNode, parent: MapPoint | undefined): MapPoint => {
-    const point: MapPoint = { node, x: 0, y: 0, angle: 0, parent }
-    points.push(point)
-    let r: number
-    if (node.children.length) {
-      // Centre of the arc its leaves take, so a branch sits over its subtree.
-      const start = cursor
-      for (const child of node.children) place(child, point)
-      point.angle = (start + cursor) / 2
-      r = node.depth * ring
-    } else {
-      point.angle = cursor + step / 2
-      cursor += step
-      r = radius
+  for (const child of children) {
+    const start = cursor
+    const span = weight(child) * step
+    const angle = start + span / 2
+    const point: MapPoint = {
+      node: child,
+      x: Math.cos(angle) * ring,
+      y: Math.sin(angle) * ring,
+      angle,
+      ring: 1,
+      hidden: 0,
     }
-    point.x = Math.cos(point.angle) * r
-    point.y = Math.sin(point.angle) * r
-    return point
+    points.push(point)
+    child.children.forEach((grandchild, i) => {
+      const a = start + (i + 0.5) * step
+      points.push({
+        node: grandchild,
+        x: Math.cos(a) * ring * 2,
+        y: Math.sin(a) * ring * 2,
+        angle: a,
+        ring: 2,
+        parent: point,
+        hidden: descendantCount(grandchild),
+      })
+    })
+    cursor += span
   }
-  for (const root of roots) place(root, undefined)
-  return { points, radius }
+  return points
 }

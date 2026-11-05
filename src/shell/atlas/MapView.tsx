@@ -1,12 +1,15 @@
-import { useMemo, useState, type KeyboardEvent } from 'react'
-import { Link } from '@tanstack/react-router'
-import { radialLayout, type MapPoint } from './layout'
-import type { Atlas, AtlasNode } from './model'
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
+import { Link, useNavigate } from '@tanstack/react-router'
+import { focusLayout, type MapPoint } from './layout'
+import { trailOf, type Atlas, type AtlasNode } from './model'
 import { statusText, TomeBanner, Trail } from './parts'
 
-const RING = 115
-/** Room around the outer ring for the leaf labels. */
-const MARGIN = 160
+// Wide enough that the centre's title never reaches the first ring.
+const RING = 155
+/** Room around the second ring for its radial labels. */
+const MARGIN = 175
+const HALF = RING * 2 + MARGIN
+const TWEEN_MS = 650
 
 const GOLD = 'var(--color-gold)'
 const GOLD_DIM = 'var(--color-gold-dim)'
@@ -14,32 +17,146 @@ const LINE = 'var(--color-line-strong)'
 const FAINT = 'var(--color-faint)'
 const INK = 'var(--color-ink)'
 
-/** The whole map as a radial tree: written tomes glow, the way to them is gilded. */
-export function MapView({ atlas }: { atlas: Atlas }) {
-  const { points, radius } = useMemo(() => radialLayout(atlas.roots, RING), [atlas])
+const CENTER_KEY = '·center·'
+
+type Pos = { x: number; y: number }
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
+
+/**
+ * Moves every keyed point from where it was drawn to its new target. Points that were not
+ * on screen start from `seed` (their parent's old place) and fade in. Returns positions and
+ * opacities for the current frame.
+ */
+function useTween(targets: Map<string, Pos>, seed: (key: string) => Pos) {
+  const shown = useRef(new Map<string, Pos>())
+  const [frame, setFrame] = useState<{ pos: Map<string, Pos>; opacity: Map<string, number> }>(() => ({
+    pos: targets,
+    opacity: new Map([...targets.keys()].map((k) => [k, 1])),
+  }))
+
+  useEffect(() => {
+    const from = new Map<string, Pos>()
+    const entering = new Set<string>()
+    for (const key of targets.keys()) {
+      const old = shown.current.get(key)
+      if (old) from.set(key, old)
+      else {
+        from.set(key, seed(key))
+        entering.add(key)
+      }
+    }
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    const start = performance.now()
+    let raf = 0
+    const tick = (now: number) => {
+      const t = reduce ? 1 : Math.min(1, (now - start) / TWEEN_MS)
+      const k = easeInOut(t)
+      const pos = new Map<string, Pos>()
+      const opacity = new Map<string, number>()
+      for (const [key, to] of targets) {
+        const a = from.get(key)!
+        pos.set(key, { x: a.x + (to.x - a.x) * k, y: a.y + (to.y - a.y) * k })
+        opacity.set(key, entering.has(key) ? k : 1)
+      }
+      shown.current = pos
+      setFrame({ pos, opacity })
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+    // `seed` reads the frame on screen through a ref: only new targets restart the tween.
+  }, [targets])
+
+  return frame
+}
+
+/**
+ * The map as a progressive constellation: the focused area at the centre, its children and
+ * grandchildren around it. Clicking a branch re-centres on it; the centre goes back up.
+ * The focus lives in the URL (?area=), so the browser's back button walks back too.
+ */
+export function MapView({ atlas, area }: { atlas: Atlas; area?: string }) {
+  const navigate = useNavigate()
+  const focus = area ? atlas.byPath.get(area) : undefined
+  const children = focus ? focus.children : atlas.roots
+  const points = useMemo(() => focusLayout(children, RING), [children])
   const firstTome = atlas.tomes[0] && atlas.homeOf.get(atlas.tomes[0].id)
-  const [selected, setSelected] = useState<AtlasNode | undefined>(firstTome)
-  const half = radius + MARGIN
+  const [selected, setSelected] = useState<AtlasNode | undefined>(focus ?? firstTome)
+
+  useEffect(() => setSelected(focus ?? firstTome), [focus, firstTome])
+
+  const centerKey = focus?.path ?? CENTER_KEY
+  const targets = useMemo(() => {
+    const map = new Map<string, Pos>([[centerKey, { x: 0, y: 0 }]])
+    for (const p of points) map.set(p.node.path, { x: p.x, y: p.y })
+    return map
+  }, [points, centerKey])
+
+  const parentOf = useMemo(() => new Map(points.map((p) => [p.node.path, p.parent?.node.path ?? centerKey])), [points, centerKey])
+  const { pos, opacity } = useTween(targets, (key) => {
+    // New points grow out of their parent, wherever it was drawn; else from the centre.
+    const parent = parentOf.get(key)
+    return (parent ? frameRef.current.get(parent) : undefined) ?? { x: 0, y: 0 }
+  })
+  const frameRef = useRef(pos)
+  frameRef.current = pos
+
+  const goTo = (node?: AtlasNode) => navigate({ to: '/', search: node ? { view: 'map', area: node.path } : { view: 'map' } })
+
+  const activate = (node: AtlasNode) => {
+    setSelected(node)
+    if (node.children.length) goTo(node)
+  }
+
+  const at = (key: string) => pos.get(key) ?? targets.get(key)!
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-8">
+    <main className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 sm:px-8">
+      <nav aria-label="Ruta en el mapa" className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+        <button type="button" onClick={() => goTo()} className={focus ? 'text-muted hover:text-gold' : 'text-gold'}>
+          Biblioteca
+        </button>
+        {focus &&
+          trailOf(focus).map((n) => (
+            <span key={n.path} className="flex items-center gap-2">
+              <span className="text-faint" aria-hidden="true">
+                ›
+              </span>
+              <button type="button" onClick={() => goTo(n)} className={n === focus ? 'text-gold' : 'text-muted hover:text-gold'}>
+                {n.title}
+              </button>
+            </span>
+          ))}
+      </nav>
+
       <div className="overflow-x-auto rounded-sm border border-line bg-ink-sunken">
         <svg
-          viewBox={`${-half} ${-half} ${half * 2} ${half * 2}`}
-          className="mx-auto block w-full max-w-[56rem] min-w-[40rem] select-none"
+          viewBox={`${-HALF} ${-HALF} ${HALF * 2} ${HALF * 2}`}
+          className="mx-auto block w-full max-w-[52rem] min-w-[36rem] select-none"
           role="group"
           aria-label="Mapa del saber"
         >
-          {points.map((p) => p.parent && <Edge key={`e-${p.node.path}`} point={p} />)}
-          <circle r={18} fill={INK} stroke={GOLD} />
-          <circle r={7} fill={GOLD} />
+          {points.map((p) => {
+            const from = at(p.parent?.node.path ?? centerKey)
+            const to = at(p.node.path)
+            return <Edge key={`e-${p.node.path}`} node={p.node} from={from} to={to} opacity={opacity.get(p.node.path) ?? 1} />
+          })}
+
+          <Center
+            focus={focus}
+            pos={at(centerKey)}
+            onUp={() => (focus ? goTo(focus.parent) : undefined)}
+            selected={selected === focus && !!focus}
+          />
+
           {points.map((p) => (
             <Node
               key={p.node.path}
               point={p}
-              radius={radius}
+              pos={at(p.node.path)}
+              opacity={opacity.get(p.node.path) ?? 1}
               selected={p.node === selected}
-              onSelect={() => setSelected(p.node)}
+              onActivate={() => activate(p.node)}
             />
           ))}
         </svg>
@@ -64,6 +181,12 @@ export function MapView({ atlas }: { atlas: Atlas }) {
             <span aria-hidden="true" className="size-2 rounded-full border border-faint" />
             Por escribir
           </li>
+          <li className="flex items-center gap-3 text-xs">
+            <span aria-hidden="true" className="font-semibold text-gold">
+              +N
+            </span>
+            Áreas por debajo: pulsa para desplegarlas
+          </li>
         </ul>
       </div>
     </main>
@@ -72,70 +195,129 @@ export function MapView({ atlas }: { atlas: Atlas }) {
 
 const lit = (node: AtlasNode) => node.status === 'tome' || node.status === 'path'
 
-function Edge({ point }: { point: MapPoint }) {
-  const from = point.parent ?? { x: 0, y: 0 }
-  const { status } = point.node
+function Edge({ node, from, to, opacity }: { node: AtlasNode; from: Pos; to: Pos; opacity: number }) {
   return (
     <line
       x1={from.x}
       y1={from.y}
-      x2={point.x}
-      y2={point.y}
-      stroke={lit(point.node) ? GOLD_DIM : status === 'covered' ? GOLD_DIM : LINE}
-      strokeOpacity={status === 'covered' ? 0.5 : 1}
-      strokeWidth={lit(point.node) ? 1.6 : 1}
+      x2={to.x}
+      y2={to.y}
+      stroke={lit(node) || node.status === 'covered' ? GOLD_DIM : LINE}
+      strokeOpacity={(node.status === 'covered' ? 0.5 : 1) * opacity}
+      strokeWidth={lit(node) ? 1.6 : 1}
     />
+  )
+}
+
+const onEnter = (action: () => void) => (e: KeyboardEvent) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault()
+    action()
+  }
+}
+
+/** The focused area (or the whole library) at the centre; clicking it goes one level up. */
+function Center({ focus, pos, onUp, selected }: { focus?: AtlasNode; pos: Pos; onUp: () => void; selected: boolean }) {
+  const title = focus ? focus.tomes.map((t) => t.title).join(' · ') || focus.title : 'Biblioteca'
+  const isTome = focus?.status === 'tome'
+  return (
+    <g
+      role={focus ? 'button' : undefined}
+      tabIndex={focus ? 0 : undefined}
+      aria-label={focus ? `${focus.title}: subir un nivel` : 'Biblioteca'}
+      onClick={focus ? onUp : undefined}
+      onKeyDown={focus ? onEnter(onUp) : undefined}
+      className={focus ? 'cursor-pointer outline-none [&:focus-visible>circle:first-child]:stroke-parchment' : ''}
+    >
+      {focus && <title>{`${focus.title} · pulsa para subir un nivel`}</title>}
+      <circle cx={pos.x} cy={pos.y} r={30} fill={INK} stroke={selected ? 'var(--color-parchment)' : GOLD} strokeWidth={1.4} />
+      {isTome && <circle cx={pos.x} cy={pos.y} r={30} fill={GOLD} fillOpacity={0.15} />}
+      <circle cx={pos.x} cy={pos.y} r={isTome ? 11 : 8} fill={GOLD} />
+      <text
+        x={pos.x}
+        y={pos.y + 52}
+        textAnchor="middle"
+        fill={GOLD}
+        fontFamily="var(--font-display)"
+        fontSize={22}
+        fontWeight={700}
+        stroke={INK}
+        strokeWidth={6}
+        paintOrder="stroke"
+      >
+        {title}
+      </text>
+      {focus && (
+        <text x={pos.x} y={pos.y + 72} textAnchor="middle" fill="var(--color-muted)" fontSize={12} letterSpacing="0.15em">
+          ↑ SUBIR
+        </text>
+      )}
+    </g>
   )
 }
 
 function Node({
   point,
-  radius,
+  pos,
+  opacity,
   selected,
-  onSelect,
+  onActivate,
 }: {
   point: MapPoint
-  radius: number
+  pos: Pos
+  opacity: number
   selected: boolean
-  onSelect: () => void
+  onActivate: () => void
 }) {
-  const { node, x, y, angle } = point
-  const isLeaf = !node.children.length
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      onSelect()
-    }
-  }
+  const { node, angle, ring, hidden } = point
+  const { x, y } = pos
 
-  const dotRadius = node.status === 'tome' ? 9 : node.depth === 1 ? 7 : lit(node) ? 5.5 : 4
+  const dotRadius = node.status === 'tome' ? 9 : ring === 1 ? 7 : lit(node) ? 5.5 : 4
   const labelColor = node.status === 'tome' ? GOLD : lit(node) || node.status === 'covered' ? 'var(--color-parchment)' : 'var(--color-muted)'
-  const labelFont = node.status === 'tome' || node.depth === 1 ? 'var(--font-display)' : 'var(--font-sans)'
-  const labelSize = node.status === 'tome' ? 22 : node.depth === 1 ? 20 : 15
+  const labelFont = node.status === 'tome' || ring === 1 ? 'var(--font-display)' : 'var(--font-sans)'
+  const labelSize = node.status === 'tome' ? 21 : ring === 1 ? 19 : 15
+  const title = node.status === 'tome' ? node.tomes.map((t) => t.title).join(' · ') : node.title
+  const more = hidden > 0 ? `+${hidden}` : ''
+  // Branches of the first ring keep a centred label; leaves (and the outer ring) read along
+  // their ray, which stays clear because nothing grows beyond a leaf.
+  const radialLabel = ring === 2 || !node.children.length
 
-  // Leaves read outward along their ray; flipped on the left half so text is never upside down.
+  // The outer ring reads outward along its ray, flipped on the left half so text is never upside down.
   const degrees = (angle * 180) / Math.PI
   const flip = Math.cos(angle) < 0
-  const leafLabel = {
-    x: Math.cos(angle) * (radius + 16),
-    y: Math.sin(angle) * (radius + 16),
-    transform: `rotate(${flip ? degrees + 180 : degrees} ${Math.cos(angle) * (radius + 16)} ${Math.sin(angle) * (radius + 16)})`,
+  const r = Math.hypot(x, y) + 16
+  const lx = Math.cos(angle) * r
+  const ly = Math.sin(angle) * r
+  const radial = {
+    x: lx,
+    y: ly,
+    transform: `rotate(${flip ? degrees + 180 : degrees} ${lx} ${ly})`,
     textAnchor: flip ? ('end' as const) : ('start' as const),
     dominantBaseline: 'middle' as const,
   }
-  const branchLabel = { x, y: y + dotRadius + labelSize + 2, textAnchor: 'middle' as const }
+  // First-ring branches: a level label set off away from the centre, so it never reaches
+  // the centre's title (right of a node on the right, above one at the top…).
+  const ux = Math.cos(angle)
+  const uy = Math.sin(angle)
+  const off = dotRadius + 10
+  const below = {
+    x: x + ux * off,
+    y: y + uy * off + (uy > 0.35 ? labelSize * 0.8 : uy < -0.35 ? -4 : labelSize * 0.35),
+    textAnchor: Math.abs(ux) < 0.35 ? ('middle' as const) : ux > 0 ? ('start' as const) : ('end' as const),
+  }
 
   return (
     <g
       role="button"
       tabIndex={0}
-      aria-label={`${node.title}: ${statusText(node)}`}
+      aria-label={`${node.title}: ${statusText(node)}${node.children.length ? ', desplegar' : ''}`}
       aria-pressed={selected}
-      onClick={onSelect}
-      onKeyDown={onKey}
+      onClick={onActivate}
+      onKeyDown={onEnter(onActivate)}
+      opacity={opacity}
       className="cursor-pointer outline-none [&:focus-visible>circle:first-child]:stroke-parchment"
     >
-      <title>{`${node.title} · ${statusText(node)}`}</title>
+      <title>{`${node.title} · ${statusText(node)}${node.children.length ? ' · pulsa para desplegar' : ''}`}</title>
       <circle cx={x} cy={y} r={16} fill="transparent" stroke={selected ? 'var(--color-parchment)' : 'transparent'} strokeWidth={1.5} />
       {node.status === 'tome' && <circle cx={x} cy={y} r={16} fill={GOLD} fillOpacity={0.18} />}
       <circle
@@ -144,10 +326,10 @@ function Node({
         r={dotRadius}
         fill={node.status === 'tome' ? GOLD : node.status === 'covered' ? GOLD_DIM : INK}
         stroke={node.status === 'tome' || node.status === 'covered' ? 'none' : lit(node) ? GOLD : FAINT}
-        strokeWidth={node.depth === 1 ? 2 : 1.2}
+        strokeWidth={ring === 1 ? 2 : 1.2}
       />
       <text
-        {...(isLeaf ? leafLabel : branchLabel)}
+        {...(radialLabel ? radial : below)}
         fill={labelColor}
         fontFamily={labelFont}
         fontSize={labelSize}
@@ -156,7 +338,9 @@ function Node({
         strokeWidth={5}
         paintOrder="stroke"
       >
-        {node.status === 'tome' ? node.tomes.map((t) => t.title).join(' · ') : node.title}
+        {flip && more && <tspan fill={GOLD} fontSize={12} fontWeight={600}>{`${more}  `}</tspan>}
+        {title}
+        {!flip && more && <tspan fill={GOLD} fontSize={12} fontWeight={600}>{`  ${more}`}</tspan>}
       </text>
     </g>
   )

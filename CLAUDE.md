@@ -18,7 +18,10 @@ Three layers:
   `shell/atlas/` is the home: three switchable views of the same `buildAtlas()` model
   (Estantes, Índice, Mapa; `?view=` in the URL, last one remembered). The Ctrl+K search over
   tomes, areas and facets lives in `GlobalSearch.tsx`, wrapping every route (also inside tomes;
-  `useGlobalSearch()` gives the atlas and `open`). Tomes get one chrome pill: Atlas + search. Pure logic (`model.ts`, `search.ts`, `layout.ts`) is tested.
+  `useGlobalSearch()` gives the atlas and `open`). Tomes get one chrome pill: Atlas + search. The Mapa is a progressive constellation
+  (`focusLayout`: the focused area at the centre, two rings around it, deeper levels counted as
+  "+N"; `?area=` holds the focus, clicks re-centre with a tween). Pure logic (`model.ts`,
+  `search.ts`, `layout.ts`) is tested.
 - `src/forge/` — building blocks shared by tomes, extracted only once two tomes needed them:
   `practice.ts` (persisted per-item stats, weighted pick of what you miss, `seededRng` for
   tests) and `text.ts` (normalize, diacritics, levenshtein). Tome-specific logic (anatomy's

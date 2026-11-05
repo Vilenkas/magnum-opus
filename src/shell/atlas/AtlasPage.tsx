@@ -40,7 +40,7 @@ export function AtlasPage() {
 
       {view === 'shelves' && <ShelvesView atlas={atlas} onSearch={openSearch} />}
       {view === 'index' && <IndexView atlas={atlas} area={search.area} system={search.system} />}
-      {view === 'map' && <MapView atlas={atlas} />}
+      {view === 'map' && <MapView atlas={atlas} area={search.area} />}
     </div>
   )
 }

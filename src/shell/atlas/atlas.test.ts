@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { TaxonomyNode } from '@/tomes/taxonomy'
 import type { TomeManifest } from '@/tomes/types'
-import { radialLayout } from './layout'
+import { descendantCount, focusLayout } from './layout'
 import { buildAtlas, facetCounts, pendingLeaves, relatedTo, tomesWithFacet, tomesWithin, trailOf } from './model'
 import { matchScore, search } from './search'
 
@@ -133,21 +133,40 @@ describe('search', () => {
   })
 })
 
-describe('radialLayout', () => {
-  const { points, radius } = radialLayout(atlas.roots, 100)
-  const point = (path: string) => points.find((p) => p.node.path === path)!
+describe('focusLayout', () => {
+  const root = focusLayout(atlas.roots, 100)
+  const point = (points: ReturnType<typeof focusLayout>, path: string) => points.find((p) => p.node.path === path)!
 
-  it('puts every leaf on the outer ring and branches on their depth ring', () => {
-    expect(radius).toBe(400)
-    for (const p of points) {
-      const r = Math.hypot(p.x, p.y)
-      expect(r).toBeCloseTo(p.node.children.length ? p.node.depth * 100 : 400)
-    }
+  it('draws only two levels around the focus', () => {
+    expect(root.filter((p) => p.ring === 1).map((p) => p.node.path)).toEqual(['health', 'languages', 'mathematics'])
+    expect(root.filter((p) => p.ring === 2).map((p) => p.node.path)).toEqual([
+      'health/basic',
+      'health/clinical',
+      'languages/latin',
+      'mathematics/algebra',
+    ])
+    expect(root.some((p) => p.node.path === 'health/basic/anatomy')).toBe(false)
   })
 
-  it('centres the first domain at the top and links children to parents', () => {
-    expect(point('health').angle).toBeCloseTo(-Math.PI / 2)
-    expect(point('health/basic/anatomy/osteology').parent).toBe(point('health/basic/anatomy'))
-    expect(points).toHaveLength(atlas.byPath.size)
+  it('puts the rings at one and two ring widths, the first child at the top', () => {
+    for (const p of root) expect(Math.hypot(p.x, p.y)).toBeCloseTo(p.ring * 100)
+    expect(point(root, 'health').angle).toBeCloseTo(-Math.PI / 2)
+    expect(point(root, 'health/basic').parent).toBe(point(root, 'health'))
+  })
+
+  it('counts what lies deeper instead of drawing it', () => {
+    expect(point(root, 'health/basic').hidden).toBe(4)
+    expect(point(root, 'languages/latin').hidden).toBe(0)
+    expect(descendantCount(at('health'))).toBe(7)
+  })
+
+  it('re-centres on any node: its children, then grandchildren', () => {
+    const basic = focusLayout(at('health/basic').children, 100)
+    expect(basic.filter((p) => p.ring === 1).map((p) => p.node.id)).toEqual(['anatomy', 'physiology'])
+    expect(basic.filter((p) => p.ring === 2).map((p) => p.node.id)).toEqual(['osteology', 'neurology'])
+  })
+
+  it('returns nothing around a leaf', () => {
+    expect(focusLayout(at('health/basic/physiology').children, 100)).toEqual([])
   })
 })
