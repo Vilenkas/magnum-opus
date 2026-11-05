@@ -2,6 +2,7 @@ import { lazy, Suspense, type ComponentType } from 'react'
 import type { MDXComponents } from 'mdx/types'
 import { Cite } from './Citations'
 import { Figure } from './Figure'
+import { Loading } from './Loading'
 import { MarginNote } from './MarginNote'
 import { JointBreakdown, SkeletonBreakdown } from './SkeletonBreakdown'
 
@@ -10,7 +11,7 @@ function lazyPlate(load: () => Promise<ComponentType>) {
   const Lazy = lazy(async () => ({ default: await load() }))
   return function Plate() {
     return (
-      <Suspense fallback={<p style={{ textAlign: 'center', fontStyle: 'italic' }}>Preparando la lámina…</p>}>
+      <Suspense fallback={<Loading label="Preparando la lámina…" />}>
         <Lazy />
       </Suspense>
     )

@@ -189,11 +189,6 @@ a.bookEntry:hover {
   margin-top: 0.5rem;
 }
 
-.loading {
-  text-align: center;
-  font-style: italic;
-}
-
 /* ---------- MDX prose ---------- */
 
 .prose h2 {

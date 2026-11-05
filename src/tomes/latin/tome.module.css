@@ -221,6 +221,15 @@ a.book:hover {
 .loading {
   text-align: center;
   font-style: italic;
+  /* Invisible for the first quarter second: most loads finish before anyone sees it. */
+  opacity: 0;
+  animation: loading-appear 300ms ease 250ms forwards;
+}
+
+@keyframes loading-appear {
+  to {
+    opacity: 1;
+  }
 }
 
 /* ---------- Prose ---------- */

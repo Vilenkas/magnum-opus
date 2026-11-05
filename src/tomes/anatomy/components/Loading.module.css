@@ -1,0 +1,44 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 4rem 0;
+  /* Invisible for the first quarter second: most loads finish before anyone sees it. */
+  opacity: 0;
+  animation: appear 300ms ease 250ms forwards;
+}
+
+.ring {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 2px solid color-mix(in oklab, var(--anatomy-accent) 25%, transparent);
+  border-top-color: var(--anatomy-accent);
+  border-radius: 50%;
+  animation: spin 900ms linear infinite;
+}
+
+.label {
+  font-family: var(--anatomy-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--anatomy-ink-soft);
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation-duration: 2.4s;
+  }
+}
