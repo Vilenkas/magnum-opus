@@ -9,7 +9,7 @@ const RING = 150
 /** The outer ring: far enough that first-ring labels fit between the two. */
 const OUTER = 345
 /** Room around the outer ring for its radial labels. */
-const MARGIN = 215
+const MARGIN = 250
 const HALF = OUTER + MARGIN
 const TWEEN_MS = 650
 
