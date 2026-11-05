@@ -78,6 +78,11 @@ node tools/anatomy/gen-soft-tissues.mjs <out-dir>/soft-meta.json library/anatomy
 
 `data/soft-tissues.test.ts` checks the three .glb against `soft-tissues.json` node by node.
 
+Z-Anatomy names 27 insertion areas for one side while parenting them to the other side's bone
+(`Pronator quadratus.el` on `Radius.r`). The export trusts where the area actually lies (the
+model's right is −X; on the midline the bone's side wins) and logs each `SIDE FIX`; a test keeps
+every area on the side of its bone and its muscle.
+
 ## Heart, vessels and lymphoid organs
 
 ```sh

@@ -14,7 +14,11 @@ const spanish = (es) =>
     .replace(/(^|[^\p{L}])([Nn])odo(s?)(?![\p{L}])/gu, (_, pre, n, s) => `${pre}${n === 'N' ? 'G' : 'g'}anglio${s}`)
     .replace(/(^|[^\p{L}])([Ii])liac([ao]s?)(?![\p{L}])/gu, '$1$2líac$3')
     .replace(/\binferiore\b/g, 'inferior')
-    .replace(/\bMusculo\b/g, 'Músculo')
+    .replace(/\b([Mm])usculo(s?)\b/g, '$1úsculo$2')
+    .replace(/\bhumero\b/g, 'húmero')
+    .replace(/\bLinea\b/g, 'Línea')
+    // "Cabeza corta músculo del bíceps braquial" → "Cabeza corta del músculo bíceps braquial".
+    .replace(/^(Cabeza \p{L}+) músculo del /u, '$1 del músculo ')
     // Feminine "aurícula": the article and the adjective follow.
     .replace(/\bdel atrio (derech|izquierd)o\b/g, 'de la aurícula $1a')
     .replace(/\b([Aa])trio (derech|izquierd)o\b/g, (_, a, side) => `${a === 'A' ? 'A' : 'a'}urícula ${side}a`)

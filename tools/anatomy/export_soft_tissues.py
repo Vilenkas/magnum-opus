@@ -135,6 +135,15 @@ for o in meshes('3: Joints'):
 
 # ---------- Muscular insertions: "<muscle>.o2r" = second origin area, right side ----------
 INSERTION = re.compile(r'^\(?(.+?)\)?\.([oe])(\d*)([lr])?$')
+
+
+def center_x(o):
+    """World X of the bounding-box centre."""
+    from mathutils import Vector
+    return (sum((o.matrix_world @ Vector(c) for c in o.bound_box), Vector()) / 8).x
+
+
+
 for o in meshes('2: Muscular insertions'):
     m = INSERTION.match(o.name)
     if not m:
@@ -142,9 +151,20 @@ for o in meshes('2: Muscular insertions'):
         continue
     muscle, oe, n, s = m.groups()
     side = SIDE.get(s) if s else None
-    muscle_id = slug(muscle) + ({'left': '-l', 'right': '-r'}[side] if side else '')
     bone = o.parent.name if o.parent else None
     bone_side = side_of(bone) if bone else None
+    # Z-Anatomy sometimes names an area for one side and parents it to the other side's bone
+    # ("Pronator quadratus.el" on "Radius.r"). Where the area actually lies decides both; the
+    # model's right is -X. On the midline (procerus) the position can't tell: the bone's side wins.
+    if side and bone_side and side != bone_side:
+        x = center_x(o)
+        geo = bone_side if abs(x) < 0.01 else ('right' if x < 0 else 'left')
+        print('SIDE FIX', o.name, 'on', bone, '->', geo)
+        if geo != bone_side:
+            bone = strip_side(bone) + '.' + geo[0]
+            bone_side = geo
+        side = geo
+    muscle_id = slug(muscle) + ({'left': '-l', 'right': '-r'}[side] if side else '')
     bone_id = (slug(strip_side(bone)) + ({'left': '-l', 'right': '-r'}[bone_side] if bone_side else '')) if bone else None
     mats = [x.name for x in o.data.materials if x]
     # The material ("Origin-Flexion", "End-Adduction") is more reliable than the .o/.e suffix,

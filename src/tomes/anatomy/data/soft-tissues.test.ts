@@ -62,6 +62,25 @@ describe('soft tissues', () => {
     expect(unlinked.size).toBeLessThanOrEqual(6)
   })
 
+  it('puts each area on the same side as its bone and its muscle', () => {
+    const sideOf = (id: string) => id.match(/-([lr])$/)?.[1]
+    const crossed = entries
+      .filter((e) => e.set === 'insertions')
+      .filter((e) => {
+        const bone = sideOf(e.bone!)
+        const muscles = (e.musclePieces ?? []).map(sideOf)
+        return bone && muscles.some((m) => m && m !== bone)
+      })
+      .map((e) => e.id)
+    expect(crossed).toEqual([])
+  })
+
+  it('writes the Spanish names well: accents, and "of the muscle" in its place', () => {
+    const names = new Set(entries.map((e) => e.es).filter(Boolean) as string[])
+    const bad = [...names].filter((n) => /^Cabeza \p{L}+ músculo del |\b(musculo|humero|Linea)\b|^\(|\)$/u.test(n))
+    expect(bad).toEqual([])
+  })
+
   it('names almost everything in Spanish and Latin from TA2', () => {
     for (const set of ['muscles', 'joints'] as const) {
       const all = entries.filter((e) => e.set === set)
