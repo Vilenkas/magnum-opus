@@ -38,12 +38,12 @@ export const mdxComponents: MDXComponents = {
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.
   MuscleViewer: lazyPlate(() =>
     import('./TissueViewer').then(({ TissueViewer }) => () => (
-      <TissueViewer caption="Lámina II · Los músculos sobre el esqueleto" initial={{ muscles: true }} />
+      <TissueViewer caption="Lámina II · Los músculos sobre el esqueleto" initial={{ muscles: true }} storageKey="muscles" />
     )),
   ),
   LigamentViewer: lazyPlate(() =>
     import('./TissueViewer').then(({ TissueViewer }) => () => (
-      <TissueViewer caption="Lámina III · Los ligamentos" initial={{ joints: true }} />
+      <TissueViewer caption="Lámina III · Los ligamentos" initial={{ joints: true }} storageKey="ligaments" />
     )),
   ),
 }

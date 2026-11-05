@@ -2,7 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent }
 import { latinOf, latinWithSide } from '../data/latin'
 import { landmarkById, landmarksByPiece, type Landmark } from '../data/landmarks'
 import { groupById, pieceById, regionOf, type BonePiece, type GroupId, type RegionId } from '../data/skeleton'
+import { boneIndex } from '../data/viewer-indexes'
 import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
+import { IndexedStage } from './skeleton/IndexedStage'
 import { SkeletonStage, StageTag, type Focus, type Marker, type PieceLook } from './skeleton/SkeletonStage'
 import plate from './skeleton/plate.module.css'
 import styles from './SkeletonViewer.module.css'
@@ -44,6 +46,8 @@ export function SkeletonViewer() {
   const [showLandmarks, setShowLandmarks] = useState(true)
   const [landmarkId, setLandmarkId] = useState<string | null>(null)
   const [hoveredLandmarkId, setHoveredLandmarkId] = useState<string | null>(null)
+  // Only the selected piece stays solid; the rest of the skeleton turns translucent.
+  const [isolated, setIsolated] = useState(false)
   const lastClick = useRef<{ id: string | null; t: number }>({ id: null, t: 0 })
   const fullscreen = useFullscreen<HTMLElement>()
 
@@ -58,6 +62,7 @@ export function SkeletonViewer() {
   useEffect(() => {
     setLandmarkId(null)
     setHoveredLandmarkId(null)
+    setIsolated(false)
   }, [selectedId])
 
   const inScope = useCallback(
@@ -71,6 +76,7 @@ export function SkeletonViewer() {
       if (removal === 'hidden') return 'hidden'
       // With pins on it, a lighter tint keeps the landmarks readable.
       if (p.id === selectedId) return pinsVisible ? 'hover' : 'selected'
+      if (isolated && selectedId) return 'ghost'
       if (removal === 'dimmed') return 'ghost'
       // Looking at a landmark: everything else turns translucent so nothing hides it
       // (e.g. the hanging forearm in front of the greater trochanter).
@@ -79,7 +85,7 @@ export function SkeletonViewer() {
       if (p.id === hovered) return 'hover'
       return 'base'
     },
-    [selectedId, inScope, removed, pinsVisible, landmarkId],
+    [selectedId, inScope, removed, pinsVisible, landmarkId, isolated],
   )
 
   const markers = useMemo<Marker[]>(
@@ -106,6 +112,23 @@ export function SkeletonViewer() {
     if (id && id === lastClick.current.id && now - lastClick.current.t < 400) setFocus({ kind: 'piece', id })
     lastClick.current = { id, t: now }
     setSelectedId(id)
+  }
+
+  /** From the index: select the piece, bring it back if it was put away, and fly to it. */
+  const choosePiece = (id: string) => {
+    const piece = pieceById.get(id)
+    if (!piece) return
+    if (!inScope(piece)) setScope(null)
+    if (removed.has(id)) {
+      setRemoved((prev) => {
+        const next = new Map(prev)
+        next.delete(id)
+        return next
+      })
+      setHistory((prev) => prev.filter((h) => h !== id))
+    }
+    setSelectedId(id)
+    setFocus({ kind: 'piece', id })
   }
 
   const selectLandmark = (id: string) => {
@@ -185,33 +208,35 @@ export function SkeletonViewer() {
         ))}
       </div>
 
-      <SkeletonStage
-        lookOf={lookOf}
-        isPickable={isPickable}
-        focus={focus}
-        onPick={handlePick}
-        onHoverChange={setHoveredId}
-        markers={markers}
-        onMarkerHover={setHoveredLandmarkId}
-        onMarkerPick={selectLandmark}
-      >
-        {tag && <StageTag>{tag}</StageTag>}
-        {removed.size > 0 && (
-          <div className={styles.removedBar}>
-            <span>
-              {hiddenCount > 0 && `${hiddenCount} ${hiddenCount === 1 ? 'oculta' : 'ocultas'}`}
-              {hiddenCount > 0 && dimmedCount > 0 && ' · '}
-              {dimmedCount > 0 && `${dimmedCount} ${dimmedCount === 1 ? 'atenuada' : 'atenuadas'}`}
-            </span>
-            <button className={styles.barButton} onClick={undo} title="Deshacer (Ctrl+Z)">
-              Deshacer
-            </button>
-            <button className={styles.barButton} onClick={reset}>
-              Restablecer modelo
-            </button>
-          </div>
-        )}
-      </SkeletonStage>
+      <IndexedStage sections={boneIndex} selectedKey={selectedId} onChoose={(e) => choosePiece(e.key)} storageKey="skeleton" label="Buscar un hueso">
+        <SkeletonStage
+          lookOf={lookOf}
+          isPickable={isPickable}
+          focus={focus}
+          onPick={handlePick}
+          onHoverChange={setHoveredId}
+          markers={markers}
+          onMarkerHover={setHoveredLandmarkId}
+          onMarkerPick={selectLandmark}
+        >
+          {tag && <StageTag>{tag}</StageTag>}
+          {removed.size > 0 && (
+            <div className={styles.removedBar}>
+              <span>
+                {hiddenCount > 0 && `${hiddenCount} ${hiddenCount === 1 ? 'oculta' : 'ocultas'}`}
+                {hiddenCount > 0 && dimmedCount > 0 && ' · '}
+                {dimmedCount > 0 && `${dimmedCount} ${dimmedCount === 1 ? 'atenuada' : 'atenuadas'}`}
+              </span>
+              <button className={styles.barButton} onClick={undo} title="Deshacer (Ctrl+Z)">
+                Deshacer
+              </button>
+              <button className={styles.barButton} onClick={reset}>
+                Restablecer modelo
+              </button>
+            </div>
+          )}
+        </SkeletonStage>
+      </IndexedStage>
 
       <div className={plate.legend} aria-live="polite">
         {selected ? (
@@ -219,6 +244,8 @@ export function SkeletonViewer() {
             <PieceCard
               piece={selected}
               onFocus={() => setFocus({ kind: 'piece', id: selected.id })}
+              isolated={isolated}
+              onIsolate={() => setIsolated((v) => !v)}
               onDim={() => remove(selected.id, 'dimmed')}
               onHide={() => remove(selected.id, 'hidden')}
             />
@@ -248,11 +275,15 @@ export function SkeletonViewer() {
 function PieceCard({
   piece,
   onFocus,
+  isolated,
+  onIsolate,
   onDim,
   onHide,
 }: {
   piece: BonePiece
   onFocus: () => void
+  isolated: boolean
+  onIsolate: () => void
   onDim: () => void
   onHide: () => void
 }) {
@@ -273,6 +304,9 @@ function PieceCard({
       <div className={styles.actions}>
         <button className={plate.button} onClick={onFocus}>
           Enfocar
+        </button>
+        <button className={plate.button} onClick={onIsolate} aria-pressed={isolated}>
+          {isolated ? 'Ver todo' : 'Aislar'}
         </button>
         <button className={plate.button} onClick={onDim} title="Atenuar (A)">
           Atenuar

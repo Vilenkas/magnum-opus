@@ -5,7 +5,9 @@ import insertionsUrl from '../assets/insertions.glb?url'
 import { latinWithSide } from '../data/latin'
 import { pieceById, type BonePiece } from '../data/skeleton'
 import { insertionsOf, jointKindLabel, muscleOf, softById, softName, type SoftEntry } from '../data/soft-tissues'
+import { tissueEntryOf, tissueIndex, type TissueIndexEntry } from '../data/viewer-indexes'
 import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
+import { IndexedStage } from './skeleton/IndexedStage'
 import {
   SkeletonStage,
   StageTag,
@@ -46,22 +48,38 @@ function targetOf(id: string | null): string | null {
  * arises (red) and where it ends (blue) on the bones. Shared by Miología and Artrología,
  * which differ only in the layers they start with.
  */
-export function TissueViewer({ caption, initial }: { caption: string; initial: Partial<Record<LayerId, boolean>> }) {
+export function TissueViewer({
+  caption,
+  initial,
+  storageKey,
+}: {
+  caption: string
+  initial: Partial<Record<LayerId, boolean>>
+  /** Per plate: remembers whether the index is folded. */
+  storageKey: string
+}) {
   const [on, setOn] = useState<Record<LayerId, boolean>>({ bones: true, muscles: false, joints: false, insertions: false, ...initial })
   // A layer's model is fetched the first time it is needed, then kept.
   const [mounted, setMounted] = useState<Set<LayerId>>(() => new Set((Object.keys(on) as LayerId[]).filter((k) => on[k])))
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  // Usually one structure; from the index, both sides of a pair.
+  const [selection, setSelection] = useState<string[]>([])
+  const [isolated, setIsolated] = useState(false)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [reveal, setReveal] = useState(false)
-  const [removed, setRemoved] = useState<string[]>([])
+  // One undo step per entry: a pair is put away, and brought back, together.
+  const [removed, setRemoved] = useState<string[][]>([])
   const [focus, setFocus] = useState<Focus>({ kind: 'all' })
   const fullscreen = useFullscreen<HTMLElement>()
 
-  const selectedSoft = selectedId ? softById.get(selectedId) : undefined
-  const selectedMuscle = selectedSoft?.set === 'muscles' ? selectedSoft : undefined
-  const areas = useMemo(() => (selectedMuscle ? (insertionsOf.get(selectedMuscle.id) ?? []) : []), [selectedMuscle])
+  const selectedId = selection[0] ?? null
+  const selectedSet = useMemo(() => new Set(selection), [selection])
+  const areas = useMemo(
+    () => selection.filter((id) => softById.get(id)?.set === 'muscles').flatMap((id) => insertionsOf.get(id) ?? []),
+    [selection],
+  )
   const areaIds = useMemo(() => new Set(areas.map((a) => a.id)), [areas])
-  const removedSet = useMemo(() => new Set(removed), [removed])
+  const removedSet = useMemo(() => new Set(removed.flat()), [removed])
+  const isolating = isolated && selection.length > 0
   const hoveredTarget = targetOf(hoveredId)
 
   const mount = (id: LayerId) => setMounted((prev) => (prev.has(id) ? prev : new Set([...prev, id])))
@@ -70,22 +88,39 @@ export function TissueViewer({ caption, initial }: { caption: string; initial: P
     mount(id)
   }
 
+  const selectIds = (ids: string[]) => {
+    setSelection(ids)
+    setReveal(false)
+    setIsolated(false)
+    // A muscle's areas live in the insertions model.
+    if (ids.some((id) => softById.get(id)?.set === 'muscles')) mount('insertions')
+  }
+
   const select = (id: string | null) => {
     const target = targetOf(id)
-    setSelectedId(target)
-    setReveal(false)
-    // A muscle's areas live in the insertions model.
-    if (target && softById.get(target)?.set === 'muscles') mount('insertions')
+    selectIds(target ? [target] : [])
+  }
+
+  /** From the index: show the structure's layer, bring it back if it was hidden, and fly to it. */
+  const choose = (entry: TissueIndexEntry) => {
+    const layer = entry.set === 'muscles' ? 'muscles' : 'joints'
+    setOn((prev) => ({ ...prev, [layer]: true }))
+    mount(layer)
+    setRemoved((prev) => prev.filter((group) => !group.some((id) => entry.ids.includes(id))))
+    selectIds(entry.ids)
+    setFocus({ kind: 'node', id: entry.ids[0], context: 2 })
   }
 
   const boneLook = useCallback(
     (p: BonePiece): PieceLook => {
       if (!on.bones || removedSet.has(p.id)) return 'hidden'
-      if (p.id === selectedId) return 'selected'
+      if (selectedSet.has(p.id)) return 'selected'
+      // A bone alone: the rest of the skeleton steps back. A muscle alone keeps its bones.
+      if (isolating && pieceById.has(selection[0])) return 'ghost'
       if (p.id === hoveredTarget) return 'hover'
       return 'base'
     },
-    [on.bones, removedSet, selectedId, hoveredTarget],
+    [on.bones, removedSet, selectedSet, isolating, selection, hoveredTarget],
   )
 
   const layers = useMemo<TissueLayer[]>(() => {
@@ -98,8 +133,8 @@ export function TissueViewer({ caption, initial }: { caption: string; initial: P
           const e = softById.get(id)
           const muscle = muscleOf(id)?.id ?? id
           if (!on.muscles || !e || QUIET_KINDS.has(e.kind) || removedSet.has(muscle)) return 'hidden'
-          if (muscle === selectedId) return reveal ? 'ghost' : 'selected'
-          if (reveal) return 'faded'
+          if (selectedSet.has(muscle)) return reveal ? 'ghost' : 'selected'
+          if (reveal || isolating) return 'faded'
           if (muscle === hoveredTarget) return 'hover'
           return e.part === 'tendon' ? 'tendon' : 'muscle'
         },
@@ -112,7 +147,8 @@ export function TissueViewer({ caption, initial }: { caption: string; initial: P
         lookOf: (id): TissueLook => {
           const e = softById.get(id)
           if (!on.joints || !e || removedSet.has(id)) return 'hidden'
-          if (id === selectedId) return 'selected'
+          if (selectedSet.has(id)) return 'selected'
+          if (isolating) return 'faded'
           if (id === hoveredTarget) return 'hover'
           return e.kind === 'articular capsule' ? 'capsule' : e.kind === 'ligament' ? 'ligament' : 'cartilage'
         },
@@ -130,14 +166,15 @@ export function TissueViewer({ caption, initial }: { caption: string; initial: P
         isPickable: (id) => on.insertions || areaIds.has(id),
       })
     return list
-  }, [mounted, on, removedSet, selectedId, hoveredTarget, reveal, areaIds])
+  }, [mounted, on, removedSet, selectedSet, isolating, hoveredTarget, reveal, areaIds])
 
-  const remove = (id: string) => {
-    setRemoved((prev) => [...prev, id])
-    setSelectedId(null)
+  const remove = () => {
+    setRemoved((prev) => [...prev, selection])
+    selectIds([])
   }
 
-  const hoveredName = hoveredTarget && hoveredTarget !== selectedId ? nameOf(hoveredTarget) : null
+  const hoveredName = hoveredTarget && !selectedSet.has(hoveredTarget) ? nameOf(hoveredTarget) : null
+  const selectedKey = selectedId ? (tissueEntryOf.get(selectedId)?.key ?? selectedId) : null
 
   return (
     <figure className={plate.plate} ref={fullscreen.ref}>
@@ -156,32 +193,36 @@ export function TissueViewer({ caption, initial }: { caption: string; initial: P
         ))}
       </div>
 
-      <SkeletonStage lookOf={boneLook} layers={layers} focus={focus} onPick={select} onHoverChange={setHoveredId}>
-        {hoveredName && <StageTag>{hoveredName}</StageTag>}
-        {removed.length > 0 && (
-          <div className={styles.removedBar}>
-            <span>
-              {removed.length} {removed.length === 1 ? 'oculta' : 'ocultas'}
-            </span>
-            <button className={styles.barButton} onClick={() => setRemoved((prev) => prev.slice(0, -1))}>
-              Deshacer
-            </button>
-            <button className={styles.barButton} onClick={() => setRemoved([])}>
-              Restablecer
-            </button>
-          </div>
-        )}
-      </SkeletonStage>
+      <IndexedStage sections={tissueIndex} selectedKey={selectedKey} onChoose={choose} storageKey={storageKey} label="Buscar un músculo o un ligamento">
+        <SkeletonStage lookOf={boneLook} layers={layers} focus={focus} onPick={select} onHoverChange={setHoveredId}>
+          {hoveredName && <StageTag>{hoveredName}</StageTag>}
+          {removed.length > 0 && (
+            <div className={styles.removedBar}>
+              <span>
+                {removed.length} {removed.length === 1 ? 'oculta' : 'ocultas'}
+              </span>
+              <button className={styles.barButton} onClick={() => setRemoved((prev) => prev.slice(0, -1))}>
+                Deshacer
+              </button>
+              <button className={styles.barButton} onClick={() => setRemoved([])}>
+                Restablecer
+              </button>
+            </div>
+          )}
+        </SkeletonStage>
+      </IndexedStage>
 
       <div className={plate.legend} aria-live="polite">
         {selectedId ? (
           <SelectionCard
-            id={selectedId}
+            ids={selection}
             areas={areas}
             reveal={reveal}
+            isolated={isolated}
             onFocus={() => setFocus({ kind: 'node', id: selectedId })}
             onReveal={() => setReveal((v) => !v)}
-            onHide={() => remove(selectedId)}
+            onIsolate={() => setIsolated((v) => !v)}
+            onHide={remove}
           />
         ) : (
           <p className={plate.hint}>
@@ -200,20 +241,26 @@ function nameOf(id: string): string {
 }
 
 function SelectionCard({
-  id,
+  ids,
   areas,
   reveal,
+  isolated,
   onFocus,
   onReveal,
+  onIsolate,
   onHide,
 }: {
-  id: string
+  ids: string[]
   areas: SoftEntry[]
   reveal: boolean
+  isolated: boolean
   onFocus: () => void
   onReveal: () => void
+  onIsolate: () => void
   onHide: () => void
 }) {
+  const id = ids[0]
+  const pair = ids.length > 1
   const soft = softById.get(id)
   const bone = pieceById.get(id)
   const kicker = soft
@@ -236,7 +283,7 @@ function SelectionCard({
       <div className={styles.cardHead}>
         <div>
           <p className={plate.kicker}>{kicker}</p>
-          <h3 className={plate.title}>{nameOf(id)}</h3>
+          <h3 className={plate.title}>{pair && soft ? capitalize(softName(soft)) : nameOf(id)}</h3>
           <p className={plate.meta}>
             {latin && (
               <>
@@ -249,6 +296,7 @@ function SelectionCard({
             <span className={plate.english} lang="en">
               {en}
             </span>
+            {pair && <> · derecho e izquierdo</>}
           </p>
         </div>
         <div className={styles.actions}>
@@ -260,6 +308,9 @@ function SelectionCard({
               {reveal ? 'Ver el músculo' : 'Ver en el hueso'}
             </button>
           )}
+          <button className={plate.button} onClick={onIsolate} aria-pressed={isolated}>
+            {isolated ? 'Ver todo' : 'Aislar'}
+          </button>
           <button className={plate.button} onClick={onHide}>
             Ocultar
           </button>

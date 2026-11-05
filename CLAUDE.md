@@ -122,6 +122,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   thymus, spleen), named in generated `vessels.json` + hand-edited `data/vessel-names.ts` (wins over
   TA2). `components/VesselViewer.tsx` (Lámina IV of Angiología): layers over a ghosted skeleton and
   a searchable index that joins both sides of a paired vessel (`data/vessels.ts`, tested).
+- Every 3D viewer (skeleton, tissues, vessels) sits in `skeleton/IndexedStage.tsx`: the stage plus a
+  searchable, foldable index (folded state remembered per plate), fullscreen-aware. Index data is
+  pure: `data/structure-index.ts` (search), `data/viewer-indexes.ts` (bones by region; muscles and
+  ligaments with both sides on one line), `data/vessels.ts`. Viewers offer «Aislar» (the rest fades).
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
   Progress persists via `src/shell/storage.ts` (namespaced localStorage).
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and

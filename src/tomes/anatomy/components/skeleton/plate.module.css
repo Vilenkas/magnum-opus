@@ -183,6 +183,17 @@
   min-height: 0;
 }
 
+/* A stage with its index: the pair takes the free height, and the stage fills its row. */
+.plate:fullscreen > [data-stage-body] {
+  flex: 1 1 auto;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
+}
+.plate:fullscreen > [data-stage-body] > [data-stage] {
+  height: auto;
+  min-height: 0;
+}
+
 .plate:focus {
   outline: none;
 }

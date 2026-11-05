@@ -1,9 +1,8 @@
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import vesselsUrl from '../assets/vessels.glb?url'
 import lymphUrl from '../assets/lymph.glb?url'
 import {
   indexItemOf,
-  searchVessels,
   sectionLabel,
   sectionOf,
   vesselById,
@@ -13,6 +12,7 @@ import {
   type VesselEntry,
 } from '../data/vessels'
 import { FullscreenButton, useFullscreen } from './skeleton/Fullscreen'
+import { IndexedStage } from './skeleton/IndexedStage'
 import { SkeletonStage, StageTag, type Focus, type PieceLook, type TissueLayer, type TissueLook } from './skeleton/SkeletonStage'
 import plate from './skeleton/plate.module.css'
 import styles from './VesselViewer.module.css'
@@ -27,7 +27,20 @@ const LAYERS: { id: LayerId; label: string }[] = [
   { id: 'lymph', label: 'Linfoides' },
 ]
 
-const SECTIONS: Section[] = ['heart', 'arteries', 'veins', 'lymph']
+const SECTION_COLOR: Record<Section, string | undefined> = {
+  heart: undefined,
+  arteries: '#b8322a',
+  veins: '#3b5a92',
+  lymph: '#5f8240',
+}
+
+/** The index, in the order of the layers. */
+const SECTIONS = (['heart', 'arteries', 'veins', 'lymph'] as const).map((id) => ({
+  id,
+  label: sectionLabel[id],
+  color: SECTION_COLOR[id],
+  entries: vesselIndex.filter((item) => item.section === id),
+}))
 
 const lookOfKind = (e: VesselEntry): TissueLook =>
   e.kind === 'artery' || e.kind === 'pulmonary-artery'
@@ -55,8 +68,6 @@ export function VesselViewer() {
   const [isolate, setIsolate] = useState(false)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [focus, setFocus] = useState<Focus>({ kind: 'all' })
-  const [query, setQuery] = useState('')
-  const deferredQuery = useDeferredValue(query)
   const fullscreen = useFullscreen<HTMLElement>()
 
   const selectedIds = useMemo(() => new Set(selected?.ids ?? []), [selected])
@@ -100,8 +111,6 @@ export function VesselViewer() {
     return list
   }, [lookOf, lymphMounted])
 
-  const results = useMemo(() => searchVessels(deferredQuery), [deferredQuery])
-
   return (
     <figure className={plate.plate} ref={fullscreen.ref}>
       <figcaption className={plate.caption}>Lámina IV · El corazón y los vasos</figcaption>
@@ -119,9 +128,14 @@ export function VesselViewer() {
         ))}
       </div>
 
-      <div className={styles.body}>
+      <IndexedStage
+        sections={SECTIONS}
+        selectedKey={selected?.key ?? null}
+        onChoose={(item) => choose(item, true)}
+        storageKey="vessels"
+        label="Buscar un vaso"
+      >
         <SkeletonStage
-          className={styles.stage}
           lookOf={boneLook}
           isPickable={() => false}
           layers={layers}
@@ -131,15 +145,7 @@ export function VesselViewer() {
         >
           {hoveredItem && hoveredItem !== selected && <StageTag>{hoveredItem.name}</StageTag>}
         </SkeletonStage>
-
-        <VesselIndex
-          query={query}
-          onQuery={setQuery}
-          results={results}
-          selected={selected}
-          onChoose={(item) => choose(item, true)}
-        />
-      </div>
+      </IndexedStage>
 
       <div className={plate.legend} aria-live="polite">
         {selected ? (
@@ -157,64 +163,6 @@ export function VesselViewer() {
         )}
       </div>
     </figure>
-  )
-}
-
-function VesselIndex({
-  query,
-  onQuery,
-  results,
-  selected,
-  onChoose,
-}: {
-  query: string
-  onQuery: (q: string) => void
-  results: IndexItem[]
-  selected: IndexItem | null
-  onChoose: (item: IndexItem) => void
-}) {
-  const list = useRef<HTMLDivElement>(null)
-
-  // Picking on the model scrolls the index to the structure.
-  useEffect(() => {
-    if (!selected) return
-    list.current?.querySelector(`[data-key="${selected.key}"]`)?.scrollIntoView({ block: 'nearest' })
-  }, [selected])
-
-  return (
-    <nav className={styles.index} aria-label="Índice de vasos">
-      <input
-        type="search"
-        className={styles.search}
-        placeholder={`Buscar entre ${vesselIndex.length}…`}
-        value={query}
-        onChange={(e) => onQuery(e.target.value)}
-        aria-label="Buscar un vaso"
-      />
-      <div className={styles.list} ref={list}>
-        {SECTIONS.map((section) => {
-          const items = results.filter((r) => r.section === section)
-          if (!items.length) return null
-          return (
-            <section key={section}>
-              <h4 className={styles.sectionTitle} data-section={section}>
-                {sectionLabel[section]} <span className={styles.count}>{items.length}</span>
-              </h4>
-              <ul>
-                {items.map((item) => (
-                  <li key={item.key}>
-                    <button data-key={item.key} data-active={item === selected} onClick={() => onChoose(item)} title={item.la ?? item.en}>
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )
-        })}
-        {!results.length && <p className={styles.empty}>Nada coincide con «{query}».</p>}
-      </div>
-    </nav>
   )
 }
 

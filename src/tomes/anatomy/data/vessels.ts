@@ -1,5 +1,5 @@
 import raw from '../assets/vessels.json'
-import { normalize } from '@/forge/text'
+import { byName, haystackOf, searchIndex, type IndexEntry } from './structure-index'
 import { vesselNames } from './vessel-names'
 
 /**
@@ -68,7 +68,7 @@ export const vesselName = (e: VesselEntry) => capitalize(e.es ?? e.en)
  * One line of the index: a structure, with both sides together when it is paired
  * ("Arteria cubital" stands for the right and the left one).
  */
-export interface IndexItem {
+export interface IndexItem extends IndexEntry {
   key: string
   section: Section
   name: string
@@ -97,17 +97,14 @@ export const vesselIndex: IndexItem[] = (() => {
       la: e.la,
       en: e.en,
       ids: [e.id],
-      haystack: normalize([e.es, e.la, e.en].filter(Boolean).join(' ')),
+      haystack: haystackOf(e.es, e.la, e.en),
+      title: e.la ?? e.en,
     })
   }
-  return [...byKey.values()].sort((a, b) => a.name.localeCompare(b.name, 'es'))
+  return [...byKey.values()].sort(byName)
 })()
 
 export const indexItemOf = new Map(vesselIndex.flatMap((item) => item.ids.map((id) => [id, item] as const)))
 
 /** Index items whose names contain every word of the query, in any order and without accents. */
-export function searchVessels(query: string, items: IndexItem[] = vesselIndex): IndexItem[] {
-  const words = normalize(query).split(' ').filter(Boolean)
-  if (!words.length) return items
-  return items.filter((item) => words.every((w) => item.haystack.includes(w)))
-}
+export const searchVessels = (query: string, items: IndexItem[] = vesselIndex) => searchIndex(query, items)
