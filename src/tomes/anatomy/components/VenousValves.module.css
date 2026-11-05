@@ -1,0 +1,155 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.5rem 1.5rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 0 1 18rem;
+  min-width: 12rem;
+  font-family: var(--anatomy-display);
+}
+
+.text {
+  flex: 1 1 18rem;
+  max-width: 28rem;
+}
+.text p {
+  margin: 0.4rem 0 !important;
+}
+
+.end {
+  font-size: 13px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The vein ---------- */
+
+.segment {
+  transition: transform 450ms ease;
+}
+.segment[data-squeezed='true'] {
+  transform: scaleX(0.6);
+}
+
+.lumen {
+  fill: color-mix(in oklab, #3d5a8a 55%, var(--anatomy-paper));
+}
+
+.wall {
+  fill: none;
+  stroke: #2c3f63;
+  stroke-width: 3;
+}
+
+.flow {
+  fill: none;
+  stroke: rgb(255 248 236 / 0.85);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1 12;
+  animation: flow 1s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: 13;
+  }
+}
+
+.press {
+  fill: none;
+  stroke: rgb(255 248 236 / 0.9);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: press 1s ease-in-out infinite alternate;
+}
+
+@keyframes press {
+  from {
+    transform: translateY(-3px);
+  }
+  to {
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow,
+  .press {
+    animation: none;
+  }
+}
+
+/* ---------- Valves ---------- */
+
+.cusp {
+  fill: color-mix(in oklab, #3d5a8a 25%, var(--anatomy-paper));
+  stroke: #2c3f63;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transform: rotate(4deg);
+  transition: transform 450ms cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.valve[data-closed='true'] .cusp {
+  transform: rotate(60deg);
+}
+
+.sinus {
+  fill: color-mix(in oklab, #3d5a8a 55%, var(--anatomy-paper));
+  stroke: #2c3f63;
+  stroke-width: 2.5;
+  transform: scaleX(0);
+  transition: transform 450ms ease;
+}
+.valve[data-closed='true'] .sinus {
+  transform: scaleX(1);
+}
+
+/* ---------- Muscle and spacing ---------- */
+
+.muscle {
+  fill: color-mix(in oklab, #b0302a 55%, var(--anatomy-paper));
+  stroke: #7a2420;
+  stroke-width: 1.5;
+  opacity: 0;
+  transition:
+    opacity 300ms ease,
+    transform 450ms ease;
+}
+.muscle[data-on='true'] {
+  opacity: 0.9;
+  transform: translateX(var(--shift));
+}
+
+.spacing path {
+  fill: none;
+  stroke: var(--anatomy-ink-soft);
+  stroke-width: 1.2;
+}
+.spacing text {
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 700;
+  fill: var(--anatomy-accent);
+}
+
+.aside {
+  font-size: 0.95rem;
+  color: var(--anatomy-ink-soft);
+}
+
+.letter {
+  margin-right: 0.3em;
+  font-family: var(--anatomy-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--anatomy-accent);
+}

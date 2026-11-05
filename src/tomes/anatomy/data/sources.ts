@@ -30,6 +30,15 @@ export const sources = {
     publisher: 'Salvat',
     year: 1975,
   },
+  'testut-2': {
+    authors: 'L. Testut y A. Latarjet',
+    title: 'Tratado de anatomía humana',
+    volume: 'Tomo II: Angiología, Sistema nervioso central',
+    edition: '9.ª ed.',
+    place: 'Barcelona',
+    publisher: 'Salvat',
+    year: 1975,
+  },
   'z-anatomy': {
     title: 'Z-Anatomy',
     note: 'Atlas anatómico 3D de código abierto; origen del modelo del esqueleto de este tomo, derivado de BodyParts3D.',

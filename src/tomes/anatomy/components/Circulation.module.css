@@ -1,0 +1,190 @@
+.svg {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 0;
+  font-family: var(--anatomy-display);
+}
+
+/* ---------- Capillary beds and heart ---------- */
+
+.bed {
+  transition: opacity 300ms ease;
+}
+.bed ellipse {
+  fill: color-mix(in oklab, var(--anatomy-ink) 6%, transparent);
+  stroke: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+  stroke-dasharray: 3 4;
+}
+.bed path {
+  fill: none;
+  stroke-width: 2.5;
+  opacity: 0.55;
+}
+.bed text {
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--anatomy-ink);
+}
+.bed[data-dim='true'] {
+  opacity: 0.2;
+}
+
+.heart rect {
+  fill: color-mix(in oklab, #c9806b 22%, var(--anatomy-paper));
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.5;
+}
+.heart text {
+  font-size: 15px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Vessels ---------- */
+
+.stage {
+  transition: opacity 300ms ease;
+}
+.stage[data-dim='true'] {
+  opacity: 0.15;
+}
+
+.vessel,
+.flow,
+.hit {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vessel {
+  stroke-width: 11;
+}
+.stage[data-kind='capillaries'] .vessel {
+  stroke-width: 5;
+}
+/* Inside the heart the path is only a guide through the orifices. */
+.stage[data-kind='chamber'] .vessel {
+  stroke-width: 3;
+  stroke-dasharray: 2 5;
+  opacity: 0.7;
+}
+.stage[data-current='true'] .vessel {
+  filter: drop-shadow(0 0 4px rgb(255 240 200 / 0.9));
+}
+
+.flow {
+  stroke: rgb(255 248 236 / 0.75);
+  stroke-width: 2.5;
+  stroke-dasharray: 1 15;
+  animation: flow 1.2s linear infinite;
+}
+.stage[data-kind='capillaries'] .flow,
+.stage[data-kind='chamber'] .flow {
+  display: none;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow {
+    animation: none;
+  }
+}
+
+.hit {
+  stroke: transparent;
+  stroke-width: 22;
+  cursor: pointer;
+  pointer-events: stroke;
+}
+
+.labels text {
+  font-size: 16px;
+  font-style: italic;
+  fill: var(--anatomy-ink);
+  paint-order: stroke;
+  stroke: var(--anatomy-paper);
+  stroke-width: 4px;
+}
+
+.drop {
+  stroke: #fff8ec;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.4));
+  pointer-events: none;
+}
+
+/* ---------- Legend ---------- */
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.35em;
+  border-radius: 50%;
+  vertical-align: baseline;
+}
+
+.description {
+  margin: 0.6rem 0 0 !important;
+}
+
+.route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.2rem;
+  margin: 0.9rem 0 0 !important;
+  padding: 0 !important;
+  list-style: none;
+  counter-reset: route;
+}
+
+.route li {
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+}
+.route li:not(:last-child)::after {
+  content: '→';
+  margin-left: 0.2rem;
+  color: var(--anatomy-ink-soft);
+  font-size: 0.8rem;
+}
+
+.route button {
+  padding: 0.1rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.route button[data-circuit='minor'] {
+  font-style: italic;
+}
+.route button:hover {
+  border-color: color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+}
+.route button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}

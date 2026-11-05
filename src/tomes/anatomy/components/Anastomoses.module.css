@@ -1,0 +1,98 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.5rem 1.5rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 0 1 18rem;
+  min-width: 13rem;
+}
+
+.text {
+  flex: 1 1 18rem;
+  max-width: 28rem;
+}
+.text p {
+  margin: 0.4rem 0 !important;
+}
+
+.vessel,
+.flow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vessel {
+  stroke: #b0302a;
+  transition: stroke 400ms ease;
+}
+/* Blood that no longer moves darkens: below the thread, or in a dead end. */
+[data-flow='none'] .vessel {
+  stroke: color-mix(in oklab, #b0302a 45%, #4a3a30);
+}
+
+.flow {
+  stroke: rgb(255 248 236 / 0.85);
+  stroke-dasharray: 1 9;
+  animation: flow 0.9s linear infinite;
+}
+.flow[data-reverse='true'] {
+  animation-direction: reverse;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow {
+    animation: none;
+  }
+}
+
+.ligature path {
+  fill: none;
+  stroke: var(--anatomy-ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.ligature path + path {
+  stroke-width: 1.5;
+}
+.ligature {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.ligature[data-on='true'] {
+  opacity: 1;
+}
+
+.example {
+  font-size: 0.95rem;
+  color: var(--anatomy-ink-soft);
+}
+
+.label {
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--anatomy-ink);
+}
+
+.note {
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--anatomy-accent);
+  font-style: italic;
+}
+
+.text button {
+  margin-top: 0.6rem;
+}

@@ -114,6 +114,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   with an anatomical view (`front`/`side`/`top`…); size from the smallest bone or `frame`.
 - `data/levers.ts` + `components/LeverTypes.tsx` — Libro III's plate: Testut's three levers, each
   with fulcrum/effort/load on landmarks (markers with `size` and `onTop`, drawn over the bones).
+- Libro IV (Angiología) is written from Testut t. II (`testut-2`; figures `testut2-fig-N`, since its
+  numbering restarts). Its plates are SVG, no 3D: `Circulation` (the double circulation as a closed
+  loop of stages in `data/circulation.ts`, tested), `Anastomoses` (fig. 118's five kinds, with a
+  ligature that reroutes the flow) and `VenousValves` (valves closing, Bardeleben's distance D).
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
   Progress persists via `src/shell/storage.ts` (namespaced localStorage).
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and

@@ -36,7 +36,13 @@ export const books: Book[] = [
     summary: 'Los músculos y su acción sobre el esqueleto.',
     load: () => import('./chapters/myology.mdx'),
   },
-  { id: 'angiology', numeral: 'IV', title: 'Angiología', summary: 'El corazón y los vasos.' },
+  {
+    id: 'angiology',
+    numeral: 'IV',
+    title: 'Angiología',
+    summary: 'El corazón y los vasos: arterias, capilares, venas y linfáticos.',
+    load: () => import('./chapters/angiology.mdx'),
+  },
   { id: 'neurology', numeral: 'V', title: 'Neurología', summary: 'El sistema nervioso central y periférico.' },
   { id: 'splanchnology', numeral: 'VI', title: 'Esplacnología', summary: 'Las vísceras.' },
 ]
