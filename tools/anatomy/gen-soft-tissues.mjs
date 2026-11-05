@@ -66,8 +66,11 @@ for (const m of meta) {
     return { en: g, es: t.es }
   })
   let pieces
+  let exact
   if (m.set === 'insertions') {
     pieces = musclePieces(m)
+    // Named after the piece itself, or after the whole muscle the piece belongs to.
+    exact = muscleIds.has(m.muscle) || muscleIds.has(m.muscle.replace(/-[lr]$/, ''))
     if (!bones.has(m.bone)) unlinked.bone.push(`${m.id} -> ${m.bone}`)
     if (!pieces.length) unlinked.muscle.push(`${m.id} -> ${m.muscleEn}`)
   }
@@ -79,6 +82,8 @@ for (const m of meta) {
     es: names.es,
     groups: m.set === 'insertions' ? undefined : groups,
     musclePieces: pieces,
+    exact,
+    suffixKind: undefined,
   })
 }
 
@@ -90,6 +95,7 @@ const pct = (set) => {
   return `${all.size - missing[set].size}/${all.size}`
 }
 console.log('entries', out.length)
+console.log('insertions whose material disagrees with their .o/.e suffix:', meta.filter((m) => m.set === 'insertions' && m.kind !== m.suffixKind).length)
 console.log('named in TA2: muscles', pct('muscles'), '· joints', pct('joints'), '· insertions', pct('insertions'))
 console.log('groups without TA2 name:', missing.groups.size, [...missing.groups].slice(0, 12))
 console.log('insertions on unknown bones:', unlinked.bone.length, unlinked.bone.slice(0, 6))

@@ -83,7 +83,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   lists its sources at the end automatically (`components/Citations.tsx`). Testut–Latarjet t. I is
   in `library/anatomy/` (scanned: render pages with Ghostscript, see `testut-notes.md` there).
 - `assets/muscles.glb` (5.6 MB), `joints.glb`, `insertions.glb` + generated `soft-tissues.json`
-  (Latin/Spanish from TA2, insertion → bone and → muscle pieces). Not wired into a plate yet.
+  (Latin/Spanish from TA2, insertion → bone and → muscle pieces; area kind from the material,
+  a head inherits the whole muscle's areas only for the kind it lacks). `components/TissueViewer.tsx`
+  shows them as layers over the skeleton (`SkeletonStage` `layers`, each lazily loaded with its own
+  BVH); presets `<MuscleViewer>` (Miología) and `<LigamentViewer>` (Artrología).
   Source blend and TA2.csv live in `library/anatomy/z-anatomy/` (see `tools/anatomy/README.md`).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).

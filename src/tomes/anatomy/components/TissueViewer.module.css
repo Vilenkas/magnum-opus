@@ -1,0 +1,96 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+/* Origin and insertion bones, in the colours of their areas on the model. */
+.areas {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3rem 1rem;
+  margin: 0 !important;
+  padding-top: 0.6rem;
+  border-top: 1px dotted color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+}
+
+.areas dt {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.areas dd {
+  margin: 0;
+}
+
+.swatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+}
+
+.swatch[data-kind='origin'] {
+  background: #c0392b;
+}
+
+.swatch[data-kind='insertion'] {
+  background: #2f6ea5;
+}
+
+.removedBar {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.4rem 0.3rem 0.8rem;
+  background: rgb(43 33 24 / 0.88);
+  color: var(--anatomy-paper);
+  font-size: 0.9rem;
+}
+
+.barButton {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid rgb(239 230 210 / 0.4);
+  background: transparent;
+  color: var(--anatomy-paper);
+  font-family: var(--anatomy-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.barButton:hover {
+  background: var(--anatomy-paper);
+  color: var(--anatomy-ink);
+}
+
+@media (max-width: 560px) {
+  .actions {
+    justify-content: flex-start;
+  }
+  .areas {
+    grid-template-columns: 1fr;
+  }
+}

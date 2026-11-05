@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import soft from '../assets/soft-tissues.json'
 import { pieceById } from './skeleton'
+import { insertionsOf } from './soft-tissues'
 
 interface Entry {
   set: 'muscles' | 'joints' | 'insertions'
@@ -67,5 +68,13 @@ describe('soft tissues', () => {
       const named = all.filter((e) => e.es && e.la)
       expect(named.length / all.length, set).toBeGreaterThan(0.95)
     }
+  })
+
+  it("keeps a muscle head's own areas and inherits only the kind it lacks", () => {
+    const areas = insertionsOf.get('sternocostal-head-of-pectoralis-major-muscle-r') ?? []
+    const bones = (kind: string) => new Set(areas.filter((a) => a.kind === kind).map((a) => a.bone))
+    expect(bones('origin').has('body-of-sternum')).toBe(true)
+    expect(bones('origin').has('clavicle-r')).toBe(false)
+    expect(bones('insertion').has('humerus-r')).toBe(true)
   })
 })

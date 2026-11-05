@@ -146,9 +146,12 @@ for o in meshes('2: Muscular insertions'):
     bone = o.parent.name if o.parent else None
     bone_side = side_of(bone) if bone else None
     bone_id = (slug(strip_side(bone)) + ({'left': '-l', 'right': '-r'}[bone_side] if bone_side else '')) if bone else None
-    kind = 'origin' if oe == 'o' else 'insertion'
-    oid = f'{muscle_id}--{kind}{n or ""}--{bone_id}'
     mats = [x.name for x in o.data.materials if x]
+    # The material ("Origin-Flexion", "End-Adduction") is more reliable than the .o/.e suffix,
+    # which Z-Anatomy sometimes swaps; the id keeps the suffix so it stays stable.
+    prefix = mats[0].split('-', 1)[0].lower() if mats else ''
+    kind = {'origin': 'origin', 'end': 'insertion'}.get(prefix, 'origin' if oe == 'o' else 'insertion')
+    oid = f'{muscle_id}--{"origin" if oe == "o" else "insertion"}{n or ""}--{bone_id}'
     verts = len(o.data.vertices)
     # A patch on the bone needs its thickness (Solidify), not the ×10 vertices of its subdivision.
     for mod in [md for md in o.modifiers if md.type == 'SUBSURF']:
@@ -156,6 +159,7 @@ for o in meshes('2: Muscular insertions'):
     detach(o, oid)
     sets['insertions'].append(o)
     meta.append({'set': 'insertions', 'id': oid, 'muscle': muscle_id, 'muscleEn': muscle, 'kind': kind,
+                 'suffixKind': 'origin' if oe == 'o' else 'insertion',
                  'bone': bone_id, 'side': side, 'function': (mats[0].split('-', 1)[1] if mats and '-' in mats[0] else None),
                  'verts': verts})
 

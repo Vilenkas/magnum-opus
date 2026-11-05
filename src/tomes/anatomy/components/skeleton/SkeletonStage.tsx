@@ -22,9 +22,38 @@ export type PieceLook =
   /** Not drawn and not pickable. */
   | 'hidden'
 
+/** How a node of a soft-tissue layer is painted. */
+export type TissueLook =
+  | 'muscle'
+  | 'tendon'
+  | 'fascia'
+  | 'ligament'
+  | 'capsule'
+  | 'cartilage'
+  | 'origin'
+  | 'insertion'
+  | 'hover'
+  | 'selected'
+  | 'ghost'
+  | 'faded'
+  | 'hidden'
+
+/**
+ * An extra model drawn over the skeleton, in its coordinates (muscles, joints, insertions).
+ * Loaded on first mount, in its own Suspense, so the skeleton never waits for it.
+ */
+export interface TissueLayer {
+  id: string
+  url: string
+  lookOf: (nodeId: string, hoveredId: string | null) => TissueLook
+  isPickable?: (nodeId: string) => boolean
+}
+
 /** What the camera frames. Pass a new object to re-frame, even on the same target. */
 export type Focus =
   | { kind: 'all' }
+  /** Any node, of the skeleton or of a tissue layer. */
+  | { kind: 'node'; id: string; context?: number }
   | { kind: 'region'; region: RegionId }
   | { kind: 'group'; group: GroupId }
   /** `context` > 1 widens the frame so neighbouring bones stay visible. */
@@ -59,6 +88,8 @@ export interface Marker {
 
 export interface SkeletonStageProps {
   lookOf: (piece: BonePiece, hoveredId: string | null) => PieceLook
+  /** Soft-tissue models over the skeleton. Ids are unique across bones and layers. */
+  layers?: TissueLayer[]
   isPickable?: (piece: BonePiece) => boolean
   focus: Focus
   onPick?: (id: string | null) => void
@@ -97,6 +128,31 @@ function useMaterials() {
       faded: make('#bfb39c', { transparent: true, opacity: 0.12, depthWrite: false }),
       ghost: make('#e6d9bd', { transparent: true, opacity: 0.28, depthWrite: false }),
     }
+  }, [])
+}
+
+/** Soft tissues: muscle red, pearly tendon; origins red and insertions blue, as in the atlases. */
+function useTissueMaterials() {
+  return useMemo(() => {
+    const make = (color: string, extra: Partial<THREE.MeshStandardMaterialParameters> = {}) =>
+      new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0, ...extra })
+    // Areas sit on the bone surface: pull them forward so they never z-fight with it.
+    const onBone = { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }
+    const materials: Record<Exclude<TissueLook, 'hidden'>, THREE.Material> = {
+      muscle: make('#a8473c', { roughness: 0.62 }),
+      tendon: make('#ece4d0', { roughness: 0.45 }),
+      fascia: make('#d8c7b4', { transparent: true, opacity: 0.35, depthWrite: false, side: THREE.DoubleSide }),
+      ligament: make('#d9cfae', { roughness: 0.5 }),
+      capsule: make('#cfc6a8', { transparent: true, opacity: 0.55, depthWrite: false, side: THREE.DoubleSide }),
+      cartilage: make('#c9d3cf', { roughness: 0.5 }),
+      origin: make('#c0392b', { roughness: 0.5, ...onBone }),
+      insertion: make('#2f6ea5', { roughness: 0.5, ...onBone }),
+      hover: make('#e9b9a0', { emissive: '#9c3b26', emissiveIntensity: 0.2 }),
+      selected: make('#e0a526', { roughness: 0.5, emissive: '#6b4a08', emissiveIntensity: 0.25 }),
+      ghost: make('#d9b8a8', { transparent: true, opacity: 0.18, depthWrite: false }),
+      faded: make('#bfb39c', { transparent: true, opacity: 0.08, depthWrite: false }),
+    }
+    return materials
   }, [])
 }
 
@@ -294,6 +350,7 @@ function Markers({
 function SkeletonModel({
   lookOf,
   isPickable = defaultPickable,
+  layers,
   focus,
   onPick,
   hoveredId,
@@ -317,6 +374,14 @@ function SkeletonModel({
   const canvasWidth = useThree((s) => s.size.width)
   const canvasHeight = useThree((s) => s.size.height)
   const flyTo = useCameraFlight()
+
+  // Meshes of the tissue layers, by node id, filled in as each layer loads.
+  const layerMeshes = useRef(new Map<string, { layer: string; mesh: THREE.Mesh }>())
+  const [layersLoaded, setLayersLoaded] = useState(0)
+  const register = useCallback((layer: string, nodes: Map<string, THREE.Mesh>) => {
+    for (const [id, mesh] of nodes) layerMeshes.current.set(id, { layer, mesh })
+    setLayersLoaded((n) => n + 1)
+  }, [])
 
   const meshes = useMemo(() => {
     const map = new Map<string, THREE.Mesh>()
@@ -349,7 +414,15 @@ function SkeletonModel({
   useEffect(() => {
     const box = new THREE.Box3()
     let direction = FRONT
-    if (focus.kind === 'piece' && meshes.has(focus.id)) {
+    const nodeMesh = focus.kind === 'node' ? (meshes.get(focus.id) ?? layerMeshes.current.get(focus.id)?.mesh) : undefined
+    if (focus.kind === 'node' && nodeMesh) {
+      box.setFromObject(nodeMesh)
+      const center = box.getCenter(new THREE.Vector3())
+      const size = box.getSize(new THREE.Vector3())
+      const side = Math.max(size.x, size.y, size.z, 0.06) * (focus.context ?? 1.3)
+      box.setFromCenterAndSize(center, new THREE.Vector3(side, side, side))
+      direction = viewDirectionFor(center, bodyAxis)
+    } else if (focus.kind === 'piece' && meshes.has(focus.id)) {
       box.setFromObject(meshes.get(focus.id)!)
       const center = box.getCenter(new THREE.Vector3())
       const context = focus.context ?? 1
@@ -401,43 +474,97 @@ function SkeletonModel({
     }
     flyTo(box, direction)
     // Re-frame when the canvas is resized (e.g. entering fullscreen).
-  }, [focus, meshes, scene, bodyAxis, flyTo, canvasWidth, canvasHeight])
+    // layersLoaded: a node of a layer can only be framed once its model is in.
+  }, [focus, meshes, scene, bodyAxis, flyTo, canvasWidth, canvasHeight, layersLoaded])
 
   // Nearest pickable piece under the pointer. Faded, ghosted or hidden pieces let the
   // ray through (raycasting ignores `visible`, so hidden ones must be skipped here).
+  const pickable = (object: THREE.Object3D) => {
+    if (!object.visible) return false
+    const piece = pieceById.get(object.name)
+    if (piece) return isPickable(piece)
+    const node = layerMeshes.current.get(object.name)
+    if (!node) return false
+    const layer = layers?.find((l) => l.id === node.layer)
+    return layer ? (layer.isPickable?.(object.name) ?? true) : false
+  }
+  const firstHit = (e: ThreeEvent<PointerEvent | MouseEvent>) => e.intersections.find(({ object }) => pickable(object))
   const pick = (e: ThreeEvent<PointerEvent | MouseEvent>) => {
     e.stopPropagation()
-    const hit = e.intersections.find(({ object }) => {
-      const piece = pieceById.get(object.name)
-      return piece && object.visible && isPickable(piece)
-    })
-    return hit?.object.name ?? null
+    return firstHit(e)?.object.name ?? null
   }
 
   return (
     <>
-      <primitive
-        object={scene}
+      {/* One handler for bones and tissues: the nearest visible, pickable node wins. */}
+      <group
         onPointerMove={(e: ThreeEvent<PointerEvent>) => setHoveredId(pick(e))}
         onPointerLeave={() => setHoveredId(null)}
         onClick={(e: ThreeEvent<MouseEvent>) => {
           // Ignore clicks that were really the end of an orbit drag.
           if (e.delta > 4) return
           e.stopPropagation()
-          const hit = e.intersections.find(({ object }) => {
-            const piece = pieceById.get(object.name)
-            return piece && object.visible && isPickable(piece)
-          })
+          const hit = firstHit(e)
           const id = hit?.object.name ?? null
           onPick?.(id)
-          if (hit && id) onSurfacePick?.(id, hit.point.toArray() as Vec3)
+          if (hit && id && pieceById.has(id)) onSurfacePick?.(id, hit.point.toArray() as Vec3)
         }}
-      />
+      >
+        <primitive object={scene} />
+        {layers?.map((layer) => (
+          // Each layer loads on its own and gets its own BVH once it is in.
+          <Suspense key={layer.id} fallback={null}>
+            <Bvh firstHitOnly={false}>
+              <TissueLayerModel layer={layer} hoveredId={hoveredId} onLoad={register} />
+            </Bvh>
+          </Suspense>
+        ))}
+      </group>
       {markers && markers.length > 0 && (
         <Markers markers={markers} onHover={onMarkerHover} onPick={onMarkerPick} />
       )}
     </>
   )
+}
+
+function TissueLayerModel({
+  layer,
+  hoveredId,
+  onLoad,
+}: {
+  layer: TissueLayer
+  hoveredId: string | null
+  onLoad: (layer: string, meshes: Map<string, THREE.Mesh>) => void
+}) {
+  const gltf = useGLTF(layer.url, false, true)
+  const scene = useMemo(() => gltf.scene.clone(true), [gltf.scene])
+  const materials = useTissueMaterials()
+  const invalidate = useThree((s) => s.invalidate)
+
+  const meshes = useMemo(() => {
+    const map = new Map<string, THREE.Mesh>()
+    scene.traverse((o) => {
+      if ((o as THREE.Mesh).isMesh) map.set(o.name, o as THREE.Mesh)
+    })
+    return map
+  }, [scene])
+
+  useEffect(() => onLoad(layer.id, meshes), [layer.id, meshes, onLoad])
+
+  useEffect(() => {
+    for (const [id, mesh] of meshes) {
+      const look = layer.lookOf(id, hoveredId)
+      mesh.visible = look !== 'hidden'
+      if (look === 'hidden') continue
+      mesh.material = materials[look]
+      // Translucent pieces draw after solids; areas on the bone after the bone.
+      const translucent = look === 'ghost' || look === 'faded' || look === 'fascia' || look === 'capsule'
+      mesh.renderOrder = translucent ? 2 : look === 'origin' || look === 'insertion' ? 1 : 0
+    }
+    invalidate()
+  }, [meshes, materials, layer, hoveredId, invalidate])
+
+  return <primitive object={scene} />
 }
 
 /** Canvas + lights + the skeleton model + camera framing. Shared by the viewer and the quiz. */
