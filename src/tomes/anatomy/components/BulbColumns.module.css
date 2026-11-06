@@ -1,0 +1,135 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 1 1 22rem;
+  max-width: 32rem;
+  font-family: var(--anatomy-display);
+}
+
+.outline {
+  fill: #f6efe0;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+}
+.pyramid {
+  fill: #ece2cb;
+  stroke: #8a7a6c;
+  stroke-width: 0.6;
+}
+.olive {
+  fill: #c9b8a6;
+  stroke: #6e5f52;
+  stroke-width: 0.6;
+}
+/* The open fourth ventricle: a notch of paper in the posterior face. */
+.ventricle {
+  fill: color-mix(in oklab, var(--anatomy-paper) 85%, #d9c9a8);
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+}
+.canal {
+  fill: #f6efe0;
+  stroke: #6e5f52;
+  stroke-width: 0.5;
+}
+.cordH {
+  fill: #c9bcaf;
+  stroke: #8a7a6c;
+  stroke-width: 0.6;
+}
+
+.fibres path {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 4 2;
+}
+
+.column {
+  cursor: pointer;
+}
+.column ellipse {
+  stroke: #fbf6ea;
+  stroke-width: 0.8;
+}
+.column[data-selected='true'] ellipse {
+  stroke: #e0a526;
+  stroke-width: 2;
+}
+
+.orient {
+  font-size: 7px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.key li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+.key button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+.key button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.key button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+}
+
+.text {
+  margin: 0.4rem 0 !important;
+}
+
+.columnCard {
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--anatomy-accent);
+  background: color-mix(in oklab, var(--anatomy-accent) 6%, transparent);
+}
+.columnName {
+  margin: 0.1rem 0 0 !important;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}

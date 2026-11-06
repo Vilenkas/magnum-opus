@@ -142,6 +142,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.
+- `data/bulb-columns.ts` + `components/BulbColumns.tsx`: the cord's grey column becoming the medulla's
+  four columns in four stages (fig. 589: decussations behead the horns, the fourth ventricle opens);
+  tests check the beheading, the opening and the final floor/deep positions.
 - Netter's atlas (8.ª ed., `netter` source) is in `library/anatomy/` with a plate index
   (`netter-index.tsv`); its crops go to `figures/private` as `netter-s-N`.
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
