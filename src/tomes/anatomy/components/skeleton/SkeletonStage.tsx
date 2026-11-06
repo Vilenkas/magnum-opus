@@ -38,6 +38,25 @@ export type TissueLook =
   | 'valve'
   | 'node'
   | 'organ'
+  // Nervous system: each lobe its own colour, as in the atlases.
+  | 'frontal'
+  | 'parietal'
+  | 'temporal'
+  | 'occipital'
+  | 'limbic'
+  | 'insula'
+  | 'sulcus'
+  | 'nucleus'
+  | 'white'
+  | 'tract'
+  | 'csf'
+  | 'cerebellum'
+  | 'brainstem'
+  | 'cord-white'
+  | 'cord-grey'
+  | 'nerve'
+  | 'meninges'
+  | 'sense'
   | 'hover'
   | 'selected'
   | 'ghost'
@@ -160,6 +179,25 @@ function useTissueMaterials() {
       valve: make('#efe3c8', { roughness: 0.45 }),
       node: make('#5fae3a', { roughness: 0.5, emissive: '#2f6a14', emissiveIntensity: 0.35 }),
       organ: make('#8c4a5a', { roughness: 0.6 }),
+      frontal: make('#d69a7c', { roughness: 0.75 }),
+      parietal: make('#d9c27e', { roughness: 0.75 }),
+      temporal: make('#9fbb80', { roughness: 0.75 }),
+      occipital: make('#8eaacb', { roughness: 0.75 }),
+      limbic: make('#c49ab6', { roughness: 0.75 }),
+      insula: make('#d8a65e', { roughness: 0.75 }),
+      sulcus: make('#8a7462', { roughness: 0.8 }),
+      nucleus: make('#b8655a', { roughness: 0.6 }),
+      // The white matter is a mould around the deep nuclei: translucent, so they show through it.
+      white: make('#efe6d2', { transparent: true, opacity: 0.22, depthWrite: false }),
+      tract: make('#ece2cb', { roughness: 0.6 }),
+      csf: make('#7db4cb', { roughness: 0.3, transparent: true, opacity: 0.8 }),
+      cerebellum: make('#c39a8c', { roughness: 0.75 }),
+      brainstem: make('#d2b393', { roughness: 0.7 }),
+      'cord-white': make('#ebe0c9', { roughness: 0.7 }),
+      'cord-grey': make('#a8988a', { roughness: 0.7 }),
+      nerve: make('#e5c34f', { roughness: 0.5 }),
+      meninges: make('#c9b39f', { transparent: true, opacity: 0.3, depthWrite: false, side: THREE.DoubleSide }),
+      sense: make('#a7bdd0', { roughness: 0.5 }),
       hover: make('#e9b9a0', { emissive: '#9c3b26', emissiveIntensity: 0.2 }),
       selected: make('#e0a526', { roughness: 0.5, emissive: '#6b4a08', emissiveIntensity: 0.25 }),
       ghost: make('#d9b8a8', { transparent: true, opacity: 0.18, depthWrite: false }),
@@ -571,7 +609,7 @@ function TissueLayerModel({
       if (look === 'hidden') continue
       mesh.material = materials[look]
       // Translucent pieces draw after solids; areas on the bone after the bone.
-      const translucent = look === 'ghost' || look === 'faded' || look === 'fascia' || look === 'capsule'
+      const translucent = look === 'ghost' || look === 'faded' || look === 'fascia' || look === 'capsule' || look === 'meninges' || look === 'csf' || look === 'white'
       mesh.renderOrder = translucent ? 2 : look === 'origin' || look === 'insertion' ? 1 : 0
     }
     invalidate()

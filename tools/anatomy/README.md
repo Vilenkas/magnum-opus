@@ -108,3 +108,22 @@ node tools/anatomy/gen-vessels.mjs <out-dir>/vessels-meta.json library/anatomy/z
 tome's Spanish: "peroné", "ganglio" for TA2's "nodo", "aurícula" for "atrio". No lymphatic
 vessels are modelled in Z-Anatomy, only nodes and organs. `data/vessels.test.ts` checks the
 two .glb against `vessels.json` and that everything has a Spanish name.
+
+## Nervous system and sense organs
+
+```sh
+# 12. Export "7: Nervous system & Sense organs": brain (gyri, sulci, deep nuclei, white matter),
+#     cerebellum, brainstem, cord, meninges, ~260 nerves (curves → tubes), eye and ear. ~2 min.
+#     Faceless reference lines (the eyeball's equator and axes) are skipped.
+blender -b --factory-startup --disable-autoexec $BLEND --python tools/anatomy/export_nervous.py -- <out-dir>
+
+# 13. Compress, simplified like the muscles (~20 MB → 2.7 MB).
+pnpm dlx @gltf-transform/cli optimize <out-dir>/nervous-raw.glb src/tomes/anatomy/assets/nervous.glb \
+  --compress meshopt --texture-compress false --simplify true --simplify-ratio 0.5 --simplify-error 0.0005 \
+  --join false --instance false --flatten false
+
+# 14. Kinds (a lobe, a nucleus, a nerve…, from TA groups and Z-Anatomy materials) and TA2 names →
+#     assets/nervous.json. Missing names go in src/tomes/anatomy/data/nervous-names.ts.
+node tools/anatomy/gen-nervous.mjs <out-dir>/nervous-meta.json library/anatomy/z-anatomy/TA2.csv \
+  src/tomes/anatomy/assets/nervous.json
+```

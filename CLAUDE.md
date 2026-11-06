@@ -127,6 +127,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   thymus, spleen), named in generated `vessels.json` + hand-edited `data/vessel-names.ts` (wins over
   TA2). `components/VesselViewer.tsx` (Lámina IV of Angiología): layers over a ghosted skeleton and
   a searchable index that joins both sides of a paired vessel (`data/vessels.ts`, tested).
+- `components/SystemViewer.tsx` shows any body system over a ghosted skeleton (layers = index
+  sections, Aislar/Ocultar/Deshacer); `VesselViewer` and `NervousViewer` are configurations of it.
+  Data: `data/system-model.ts` (`buildSystem`: hand names win over TA2, both sides joined) +
+  `vessels.ts` / `nervous.ts`. `assets/nervous.glb` (581 pieces, 2.7 MB) + `nervous.json`; each
+  kind (lobe, nucleus, nerve…) has a `TissueLook` of the same name, checked with `satisfies`.
 - Every 3D viewer (skeleton, tissues, vessels) sits in `skeleton/IndexedStage.tsx`: the stage plus a
   searchable, foldable index (folded state remembered per plate), fullscreen-aware. Index data is
   pure: `data/structure-index.ts` (search), `data/viewer-indexes.ts` (bones by region; muscles and
