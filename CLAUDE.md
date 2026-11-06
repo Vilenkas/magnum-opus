@@ -114,6 +114,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   with an anatomical view (`front`/`side`/`top`…); size from the smallest bone or `frame`.
 - `data/levers.ts` + `components/LeverTypes.tsx` — Libro III's plate: Testut's three levers, each
   with fulcrum/effort/load on landmarks (markers with `size` and `onTop`, drawn over the bones).
+- `data/pelvis-dimorphism.ts` + `components/PelvisDimorphism.tsx` — Osteología's sex plate: Testut's 16
+  characters (t. I p. 386) on a parametric SVG pelvis that morphs man → woman (`pelvisShape(t)`); only
+  Testut's own figures are printed (arch, symphysis, inlet index), tests read them off the geometry.
+  The 3D models are male only (BodyParts3D; Z-Anatomy's female collections are empty): sex differences
+  get dedicated plates rather than a model toggle.
 - Libro IV (Angiología) is written from Testut t. II (`testut-2`; figures `testut2-fig-N`, since its
   numbering restarts). Its plates are SVG, no 3D: `Circulation` (the double circulation as a closed
   loop of stages in `data/circulation.ts`, tested), `Anastomoses` (fig. 118's five kinds, with a

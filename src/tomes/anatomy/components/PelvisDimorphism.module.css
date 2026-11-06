@@ -1,0 +1,221 @@
+/* Ink on ivory, like the other schematic plates; the selected character in the tome's red. */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 0.9rem;
+  padding: 0.75rem 1rem 0.5rem;
+}
+
+.sex {
+  padding: 0.2rem 0.6rem;
+  border: 0;
+  background: transparent;
+  color: var(--anatomy-ink-soft);
+  font-family: var(--anatomy-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sex[data-active='true'] {
+  color: var(--anatomy-accent);
+}
+
+.slider {
+  width: min(18rem, 50vw);
+  accent-color: var(--anatomy-accent);
+}
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  padding: 0.5rem 1.25rem 1.25rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 1 1 26rem;
+  max-width: 40rem;
+  font-family: var(--anatomy-display);
+}
+
+/* ---------- Bones ---------- */
+
+.bone {
+  fill: #efe3c8;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.sacrum {
+  fill: #dccaa6;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.4;
+}
+.foramen {
+  fill: var(--anatomy-ink);
+  opacity: 0.55;
+}
+.acetabulum {
+  fill: #d4c09b;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.2;
+}
+.symphysis {
+  fill: #e7d8b8;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.2;
+}
+/* The linea terminalis: the brim of the lesser pelvis. */
+.brim {
+  fill: none;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  opacity: 0.7;
+}
+
+.sexLabel {
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Overlay ---------- */
+
+.outlineMan,
+.outlineWoman {
+  fill: none;
+  stroke-width: 1.6;
+}
+.outlineMan path,
+.outlineWoman path {
+  fill: none;
+}
+.outlineMan {
+  stroke: var(--anatomy-ink);
+  stroke-dasharray: 5 4;
+}
+.outlineWoman {
+  stroke: var(--anatomy-accent);
+}
+
+.key text {
+  font-size: 12px;
+  fill: var(--anatomy-ink);
+}
+
+/* ---------- Highlight ---------- */
+
+.highlight {
+  pointer-events: none;
+}
+.area {
+  fill: color-mix(in oklab, var(--anatomy-accent) 28%, transparent);
+  stroke: var(--anatomy-accent);
+  stroke-width: 2;
+}
+.line {
+  fill: none;
+  stroke: var(--anatomy-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.dot {
+  fill: var(--anatomy-accent);
+}
+.dim line {
+  stroke: var(--anatomy-accent);
+  stroke-width: 1.3;
+}
+.dim text,
+.dimText {
+  font-size: 14px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--anatomy-accent);
+  paint-order: stroke;
+  stroke: #fbf6ea;
+  stroke-width: 4px;
+}
+
+/* ---------- Characters ---------- */
+
+.list {
+  flex: 0 1 16rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.list li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* The tome numbers ordered lists in Roman numerals; here Testut's own numbers are shown. */
+.list li::before,
+.list li::marker {
+  content: none !important;
+}
+.list button {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 0.15rem 0.45rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+.list button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.list button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.n {
+  min-width: 1.5rem;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+}
+
+.side {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-style: italic;
+  opacity: 0.65;
+}
+
+/* ---------- Legend ---------- */
+
+.compare {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3rem 1rem;
+  margin: 0.6rem 0 0 !important;
+}
+.compare dt {
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+  padding-top: 0.2rem;
+}
+.compare dd {
+  margin: 0;
+}
