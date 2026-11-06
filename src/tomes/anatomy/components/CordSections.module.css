@@ -1,0 +1,136 @@
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.section {
+  flex: 1 1 22rem;
+  max-width: 34rem;
+  font-family: var(--anatomy-display);
+}
+
+.silhouette {
+  flex: none;
+  width: 3.2rem;
+  height: 18rem;
+}
+
+/* ---------- Section ---------- */
+
+.white {
+  fill: #f6efe0;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+}
+
+.grey {
+  fill: #b9a99a;
+  stroke: #6e5f52;
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+}
+
+.canal {
+  fill: #f6efe0;
+  stroke: #6e5f52;
+  stroke-width: 0.5;
+}
+
+.fissure {
+  stroke: var(--anatomy-ink);
+  stroke-width: 2.4;
+}
+.septum {
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.6;
+}
+
+.fascicle {
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.fascicle path {
+  stroke: #fbf6ea;
+  stroke-width: 0.5;
+}
+.fascicle:hover path {
+  filter: brightness(1.15);
+}
+.fascicle[data-selected='true'] path {
+  stroke: #e0a526;
+  stroke-width: 1.6;
+}
+
+.orient {
+  font-size: 7px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+.dims line {
+  stroke: var(--anatomy-accent);
+  stroke-width: 0.6;
+}
+.dims text {
+  font-size: 7px;
+  font-weight: 700;
+  fill: var(--anatomy-accent);
+}
+
+/* ---------- Silhouette ---------- */
+
+.cord {
+  fill: #e9dcc4;
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.8;
+}
+.filum {
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.8;
+}
+.stop {
+  fill: transparent;
+  cursor: pointer;
+}
+.cut {
+  stroke: var(--anatomy-accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+  font-size: 0.88rem;
+}
+.key li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.2rem 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+
+.swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 2px;
+}
+
+.text {
+  margin: 0.4rem 0 !important;
+}

@@ -139,6 +139,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - Libro V (Neurología) starts with Testut t. II's general anatomy (pp. 565–615). `data/nerve-circuits.ts`
   + `components/NerveCircuits.tsx`: the reflex and the voluntary movement (figs. 471–472) as chains
   of neuron parts the impulse runs through; tests check dynamic polarization and the decussation.
+- `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
+  C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
+  and tests check Testut's diameters and Stilling's ordering of grey matter.
 - Netter's atlas (8.ª ed., `netter` source) is in `library/anatomy/` with a plate index
   (`netter-index.tsv`); its crops go to `figures/private` as `netter-s-N`.
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
