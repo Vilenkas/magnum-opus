@@ -43,6 +43,12 @@ export const books: Book[] = [
     summary: 'El corazón y los vasos: arterias, capilares, venas y linfáticos.',
     load: () => import('./chapters/angiology.mdx'),
   },
-  { id: 'neurology', numeral: 'V', title: 'Neurología', summary: 'El sistema nervioso central y periférico.' },
+  {
+    id: 'neurology',
+    numeral: 'V',
+    title: 'Neurología',
+    summary: 'El sistema nervioso central y periférico.',
+    load: () => import('./chapters/neurology.mdx'),
+  },
   { id: 'splanchnology', numeral: 'VI', title: 'Esplacnología', summary: 'Las vísceras.' },
 ]

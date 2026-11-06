@@ -30,6 +30,7 @@ export const mdxComponents: MDXComponents = {
   SkeletonQuiz: lazyPlate(() => import('./SkeletonQuiz').then((m) => m.SkeletonQuiz)),
   JointTypes: lazyPlate(() => import('./JointTypes').then((m) => m.JointTypes)),
   LeverTypes: lazyPlate(() => import('./LeverTypes').then((m) => m.LeverTypes)),
+  NerveCircuits: lazyPlate(() => import('./NerveCircuits').then((m) => m.NerveCircuits)),
   PelvisDimorphism: lazyPlate(() => import('./PelvisDimorphism').then((m) => m.PelvisDimorphism)),
   // Angiology's plates are SVG, but stay lazy so other books don't fetch them.
   Circulation: lazyPlate(() => import('./Circulation').then((m) => m.Circulation)),

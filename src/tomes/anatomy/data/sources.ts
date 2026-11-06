@@ -39,6 +39,14 @@ export const sources = {
     publisher: 'Salvat',
     year: 1975,
   },
+  netter: {
+    authors: 'F. H. Netter',
+    title: 'Atlas de anatomía humana. Abordaje por sistemas',
+    edition: '8.ª ed.',
+    place: 'Barcelona',
+    publisher: 'Elsevier',
+    year: 2023,
+  },
   'z-anatomy': {
     title: 'Z-Anatomy',
     note: 'Atlas anatómico 3D de código abierto; origen del modelo del esqueleto de este tomo, derivado de BodyParts3D.',

@@ -131,6 +131,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   searchable, foldable index (folded state remembered per plate), fullscreen-aware. Index data is
   pure: `data/structure-index.ts` (search), `data/viewer-indexes.ts` (bones by region; muscles and
   ligaments with both sides on one line), `data/vessels.ts`. Viewers offer «Aislar» (the rest fades).
+- Libro V (Neurología) starts with Testut t. II's general anatomy (pp. 565–615). `data/nerve-circuits.ts`
+  + `components/NerveCircuits.tsx`: the reflex and the voluntary movement (figs. 471–472) as chains
+  of neuron parts the impulse runs through; tests check dynamic polarization and the decussation.
+- Netter's atlas (8.ª ed., `netter` source) is in `library/anatomy/` with a plate index
+  (`netter-index.tsv`); its crops go to `figures/private` as `netter-s-N`.
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
   Progress persists via `src/shell/storage.ts` (namespaced localStorage).
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and
