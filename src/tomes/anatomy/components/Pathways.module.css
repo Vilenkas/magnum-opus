@@ -1,0 +1,248 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.group {
+  align-self: center;
+  margin: 0 0.15rem 0 0.4rem;
+  font-family: var(--anatomy-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--anatomy-ink-soft);
+}
+.group:first-child {
+  margin-left: 0;
+}
+
+.divider {
+  width: 1px;
+  margin: 0 0.4rem;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.schema {
+  flex: 1 1 20rem;
+  max-width: 28rem;
+  font-family: var(--anatomy-display);
+}
+
+.side {
+  flex: 1 1 16rem;
+  max-width: 24rem;
+}
+
+/* ---------- The neuraxis ---------- */
+
+.backdrop {
+  pointer-events: none;
+}
+.hemisphere {
+  fill: #f1e6d0;
+  stroke: #8a7a6c;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+.cerebellum {
+  fill: #ece0c8;
+  stroke: #a89c8f;
+  stroke-width: 1;
+}
+.stem {
+  fill: #f6efe0;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+}
+.nucleus {
+  fill: #ddd0b8;
+  stroke: #a89c8f;
+  stroke-width: 0.8;
+}
+.red {
+  fill: #e2b3a6;
+  stroke: #a07060;
+  stroke-width: 0.6;
+}
+.dentate {
+  fill: none;
+  stroke: #a07060;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.midline {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+  stroke-width: 0.6;
+  stroke-dasharray: 3 3;
+}
+.levelLine {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 15%, transparent);
+  stroke-width: 0.6;
+}
+.levelName,
+.label {
+  font-size: 8.5px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+.sideName {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+  text-transform: uppercase;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The pathways ---------- */
+
+.neuron {
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+.fibre,
+.flow {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.flow {
+  stroke: #fbf6ea;
+  stroke-dasharray: 2 12;
+  animation: flow 1.4s linear infinite;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow {
+    animation: none;
+  }
+}
+.soma {
+  fill: currentColor;
+  stroke: #fbf6ea;
+  stroke-width: 0.8;
+}
+.neuron[data-minor='true'] .fibre {
+  stroke-dasharray: 1 3;
+}
+/* The neuron the lesion crosses is interrupted; those after it no longer receive anything. */
+.neuron[data-state='cut'] .fibre {
+  stroke: #a89c8f;
+  stroke-dasharray: 2 3;
+}
+.neuron[data-state='silent'] {
+  opacity: 0.25;
+}
+
+.lesion {
+  stroke: #2a2420;
+  stroke-width: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ---------- Findings ---------- */
+
+.findings {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.findings th,
+.findings td {
+  padding: 0.3rem 0.4rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--anatomy-ink) 12%, transparent);
+  text-align: left;
+}
+.findings thead th {
+  font-family: var(--anatomy-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--anatomy-ink-soft);
+}
+.findings thead th:not(:first-child),
+.findings td {
+  width: 4.5rem;
+  text-align: center;
+}
+.findings tbody tr {
+  cursor: pointer;
+}
+.findings tbody tr:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 6%, transparent);
+}
+.findings tbody tr[data-active='true'] {
+  background: color-mix(in oklab, var(--anatomy-accent) 12%, transparent);
+}
+.findings tbody th {
+  font-weight: 400;
+}
+.findings td {
+  color: color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+}
+.findings td[data-lost='true'] {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--anatomy-accent);
+}
+.kind {
+  display: inline-block;
+  width: 1.1rem;
+  margin-right: 0.3rem;
+  font-family: var(--anatomy-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--anatomy-ink-soft);
+}
+
+/* ---------- Legend ---------- */
+
+.text {
+  margin: 0.4rem 0 !important;
+}
+
+.neurons {
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 15%, transparent);
+}
+.carries {
+  margin: 0 0 0.3rem !important;
+}
+.chain {
+  margin: 0.3rem 0 0 !important;
+  padding-left: 1.4rem !important;
+  font-size: 0.92rem;
+}
+.chain li {
+  margin: 0.1rem 0 !important;
+}
+.chain li[data-minor='true'] {
+  color: var(--anatomy-ink-soft);
+}
+.routeName {
+  margin: 0.4rem 0 0 !important;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.neuronName {
+  font-weight: 600;
+}
+.hit {
+  font-style: italic;
+  color: var(--anatomy-accent);
+}

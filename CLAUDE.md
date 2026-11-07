@@ -161,6 +161,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/internal-capsule.ts` + `components/InternalCapsule.tsx`: Flechsig's horizontal cut, the
   capsule's segments with their fibres and the effect of lesioning each; tests check the geometry
   (angle open laterally, genu medial) and the somatotopy (head, upper limb, lower limb).
+- `data/pathways.ts` + `components/Pathways.tsx`: the great pathways end to end (Testut pp. 1114–1137) as
+  chains of neurons on a frontal scheme, x signed towards the half of the body served (the other half
+  mirrored). A lesion is an ellipse; `deficits()` derives what is lost and on which side only from the
+  geometry, never by hand. Tests check the crossings and the syndromes (capsule, thalamus, Brown-Séquard,
+  syringomyelia, cerebellar). Alternative `routes` (touch) are lost only together; `minor` neurons don't count.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

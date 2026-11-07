@@ -16,8 +16,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       `MidbrainSections` plate (two sections; the pes after Testut and after today's description).
 - [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: ~~exterior and
       lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), ~~cortex and localizations (954–986)~~ (written, `CortexTypes` plate and the localizations mode of `Gyri`), ~~interior (987–1037)~~ (written, `Ventricles` plate and Netter S-35), ~~grey nuclei, internal
-      capsule and white matter (1038–1113)~~ (written, `InternalCapsule` plate), pathways (1114–1157), sensory pathways (1158–1189),
-      topography and circulation (1190–1237).
+      capsule and white matter (1038–1113)~~ (written, `InternalCapsule` plate), ~~motor and sensory
+      pathways (1114–1137)~~ (written, `Pathways` plate), special-sense pathways (Artículo VI, from 1138:
+      olfactory, optic, acoustic, vestibular, gustatory), topography and circulation (to 1237).
       Map the remaining pages in `testut-notes.md` first.
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
@@ -70,6 +71,14 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       Dejerine). Today's view of language as a network, and the sensory and motor maps after Penfield,
       have no source in the library yet. The layer shares of `cortex-types.ts` are read off fig. 795,
       not measured.
+
+- [ ] Pathways, current knowledge with no source in the library yet: the spinothalamic tract crossing
+      within one or two segments by the anterior white commissure; the small human rubrospinal tract and
+      the cerebellum and basal ganglia acting mainly through the thalamus on the motor cortex. The
+      `Pathways` plate follows Testut (dentate → red nucleus → rubrospinal; pallidum → red nucleus) and
+      draws the direct cerebellar fascicle ending in the cerebellar cortex of its side, not in the vermis.
+      Testut's pages on the thalamus mix Head's view (pain stops there) with the one the plate follows
+      (all general sensibility reaches the cortex).
 
 ## Ideas mentioned, not started
 

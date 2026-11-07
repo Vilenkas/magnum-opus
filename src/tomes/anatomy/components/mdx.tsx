@@ -46,6 +46,7 @@ export const mdxComponents: MDXComponents = {
   CortexTypes: lazyPlate(() => import('./CortexTypes').then((m) => m.CortexTypes)),
   Ventricles: lazyPlate(() => import('./Ventricles').then((m) => m.Ventricles)),
   InternalCapsule: lazyPlate(() => import('./InternalCapsule').then((m) => m.InternalCapsule)),
+  Pathways: lazyPlate(() => import('./Pathways').then((m) => m.Pathways)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),
   VesselViewer: lazyPlate(() => import('./VesselViewer').then((m) => m.VesselViewer)),
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.
