@@ -158,6 +158,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/ventricles.ts` + `components/Ventricles.tsx`: the ventricular cast (fig. 832) as stroked
   centrelines, and the CSF's course through it (Netter S-35); tests check the order of cavities,
   the aqueduct as the narrowest passage and its 15 mm.
+- `data/internal-capsule.ts` + `components/InternalCapsule.tsx`: Flechsig's horizontal cut, the
+  capsule's segments with their fibres and the effect of lesioning each; tests check the geometry
+  (angle open laterally, genu medial) and the somatotopy (head, upper limb, lower limb).
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

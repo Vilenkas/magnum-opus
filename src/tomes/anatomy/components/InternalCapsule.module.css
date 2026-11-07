@@ -1,0 +1,104 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2.5rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 0 1 20rem;
+  max-width: 22rem;
+  font-family: var(--anatomy-display);
+}
+.side {
+  flex: 1 1 18rem;
+  max-width: 26rem;
+}
+
+/* Grey nuclei and white capsule, as in a Weigert-stained section. */
+.nucleus {
+  fill: #b9aa98;
+  stroke: #6e5f52;
+  stroke-width: 0.8;
+}
+.nucleus[data-nucleus='thalamus'] {
+  fill: #c8bba8;
+}
+.nucleusName {
+  font-size: 10px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: #3a3028;
+  pointer-events: none;
+}
+
+.segment {
+  fill: #fbf6ea;
+  stroke: #8a7a6c;
+  stroke-width: 0.8;
+  cursor: pointer;
+  transition: fill 200ms ease;
+}
+.segment:hover {
+  fill: #fff3d6;
+}
+.segment[data-selected='true'] {
+  fill: #f6e3b3;
+  stroke: #e0a526;
+  stroke-width: 2;
+}
+.segment[data-lesioned='true'] {
+  fill: #2f2722;
+}
+
+.somato {
+  pointer-events: none;
+}
+.somato circle {
+  fill: #b8322a;
+  stroke: #fbf6ea;
+  stroke-width: 1;
+}
+.somato text {
+  font-size: 8px;
+  font-weight: 700;
+  fill: #b8322a;
+}
+
+.orient {
+  font-size: 8px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+.fibres {
+  margin: 0.4rem 0 0.8rem !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.fibres li {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0.4rem !important;
+  padding: 0.2rem 0 0.2rem 0.7rem !important;
+  border-left: 3px solid;
+}
+.fibres li::before,
+.fibres li::marker {
+  content: none !important;
+}
+.fibres li span {
+  font-size: 0.9rem;
+  color: var(--anatomy-ink-soft);
+}
+
+.lesion {
+  margin: 0.5rem 0 0 !important;
+  padding: 0.5rem 0.8rem;
+  border-left: 3px solid #2f2722;
+  background: color-mix(in oklab, #2f2722 6%, transparent);
+}
