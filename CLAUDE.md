@@ -166,6 +166,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   mirrored). A lesion is an ellipse; `deficits()` derives what is lost and on which side only from the
   geometry, never by hand. Tests check the crossings and the syndromes (capsule, thalamus, Brown-Séquard,
   syringomyelia, cerebellar). Alternative `routes` (touch) are lost only together; `minor` neurons don't count.
+- `data/visual-fields.ts` + `components/VisualFields.tsx`: the optic pathway on the base of the brain seen
+  from above, one bundle per retinal quadrant (ganglion cell → geniculocalcarine neuron, the ventral ones
+  round Meyer's loop). Same lesion-as-ellipse idea as `pathways.ts`; `fieldOf` inverts retina → field.
+  Tests check the semidecussation and each defect (monocular, bitemporal, homonymous, quadrantanopias).
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

@@ -17,9 +17,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 - [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: ~~exterior and
       lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), ~~cortex and localizations (954–986)~~ (written, `CortexTypes` plate and the localizations mode of `Gyri`), ~~interior (987–1037)~~ (written, `Ventricles` plate and Netter S-35), ~~grey nuclei, internal
       capsule and white matter (1038–1113)~~ (written, `InternalCapsule` plate), ~~motor and sensory
-      pathways (1114–1137)~~ (written, `Pathways` plate), special-sense pathways (Artículo VI, from 1138:
-      olfactory, optic, acoustic, vestibular, gustatory), topography and circulation (to 1237).
-      Map the remaining pages in `testut-notes.md` first.
+      pathways (1114–1137)~~ (written, `Pathways` plate), ~~special-sense pathways (1138–1189)~~ (written,
+      `VisualFields` plate), cranioencephalic topography (1190–1193) and cerebral circulation (1194–~1240,
+      end not mapped).
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
 - [ ] **Vasos de la médula espinal** (pp. 681–697), left out of the cord section.
@@ -79,6 +79,16 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       draws the direct cerebellar fascicle ending in the cerebellar cortex of its side, not in the vermis.
       Testut's pages on the thalamus mix Head's view (pain stops there) with the one the plate follows
       (all general sensibility reaches the cortex).
+
+- [ ] Special senses, current knowledge with no source in the library yet: the limbic lobe as Papez's
+      circuit (memory, emotion) rather than olfactory cortex; olfaction reaching the cortex without the
+      thalamus; ~1 million fibres per optic nerve, about half crossed (Testut: 150,000 direct, 250,000
+      crossed); the pituitary tumour as the usual cause of bitemporal hemianopia (the `VisualFields` plate
+      adds the chiasm lesion, deduced from the semidecussation, not described by Testut); vestibular input
+      reaching the cortex through the thalamus; taste going solitary nucleus → thalamus → insula and
+      frontal operculum (Testut, after Grasset: the hippocampal gyrus). Testut's fig. 964 (Favory) loops
+      the upper crossed fibres into the opposite nerve; Wilbrand's knee is usually said of the lower ones.
+      Macular fibres are left out of the plate.
 
 ## Ideas mentioned, not started
 
