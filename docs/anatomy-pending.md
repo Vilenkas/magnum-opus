@@ -12,7 +12,12 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       Netter S-42 for today's lobes.
 - [x] **Cuarto ventrículo** (pp. 835–857): written, with the `VentricleFloor` plate (figs. 694, 700)
       and Netter S-34/S-41 for today's names and the apertures.
-- [ ] **Pedúnculos cerebrales**, tubérculos cuadrigéminos y acueducto (858), **cerebro** (index p. XIV on).
+- [x] **Mesencéfalo** (pp. 858–895): pedúnculos, tubérculos cuadrigéminos y acueducto, with the
+      `MidbrainSections` plate (two sections; the pes after Testut and after today's description).
+- [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: exterior and
+      lobes (896–953), cortex and localizations (954–986), interior (987–1037), grey nuclei, internal
+      capsule and white matter (1038–1113), pathways (1114–1157), sensory pathways (1158–1189),
+      topography and circulation (1190–1237).
       Map the remaining pages in `testut-notes.md` first.
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
@@ -41,6 +46,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 
 - [ ] Cerebellum, current knowledge with no source in the library yet: climbing fibres come from
       the inferior olive; Purkinje and basket cells are inhibitory; Bolk's somatotopy not confirmed.
+
+- [ ] Mesencephalon, current knowledge with no source in the library yet: the pes' fifths as they
+      are described today (frontopontine, corticospinal and corticonuclear, parietotemporopontine).
 
 ## Ideas mentioned, not started
 

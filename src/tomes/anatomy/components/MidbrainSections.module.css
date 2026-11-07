@@ -1,0 +1,151 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.divider {
+  width: 1px;
+  margin: 0 0.4rem;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.svg {
+  flex: 1 1 22rem;
+  max-width: 32rem;
+  font-family: var(--anatomy-display);
+}
+
+.outline {
+  fill: #f1e6d0;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+}
+.notch {
+  fill: color-mix(in oklab, var(--anatomy-paper) 85%, #d9c9a8);
+  stroke: none;
+}
+
+.pes {
+  fill-opacity: 0.55;
+  stroke: #fbf6ea;
+  stroke-width: 0.8;
+  cursor: pointer;
+  transition: fill 300ms ease;
+}
+.nigra {
+  fill: #2f2722;
+  stroke: none;
+  cursor: pointer;
+}
+.pes[data-selected='true'],
+.nigra[data-selected='true'] {
+  stroke: #e0a526;
+  stroke-width: 2;
+  fill-opacity: 0.85;
+}
+
+.structure {
+  cursor: pointer;
+}
+.structure ellipse {
+  fill: #c9b8a6;
+  stroke: #6e5f52;
+  stroke-width: 0.6;
+}
+.structure[data-kind='anterior-colliculus'] ellipse,
+.structure[data-kind='posterior-colliculus'] ellipse {
+  fill: #ddcfb8;
+}
+.structure[data-kind='grey'] ellipse {
+  fill: #b9aa98;
+  stroke: none;
+}
+.structure[data-kind='aqueduct'] ellipse {
+  fill: #fbf6ea;
+}
+.structure[data-kind='red-nucleus'] ellipse {
+  fill: #d98c88;
+}
+.structure[data-kind='oculomotor'] ellipse,
+.structure[data-kind='trochlear'] ellipse {
+  fill: #b8322a;
+}
+.structure[data-kind='medial-lemniscus'] ellipse,
+.structure[data-kind='lateral-lemniscus'] ellipse {
+  fill: #7d97c4;
+}
+.structure[data-kind='meynert'] ellipse,
+.structure[data-kind='forel'] ellipse,
+.structure[data-kind='wernekink'] ellipse {
+  fill: none;
+  stroke: #6e5f52;
+  stroke-width: 1.4;
+  stroke-dasharray: 2 2;
+}
+.structure[data-selected='true'] ellipse {
+  stroke: #e0a526;
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+
+.orient {
+  font-size: 7px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.key li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+.key button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.15rem 0.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+.key button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.key button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.text {
+  margin: 0.4rem 0 !important;
+}
