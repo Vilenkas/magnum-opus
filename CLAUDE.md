@@ -144,6 +144,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   `NerveCircuits` and `CerebellarCortex` are configurations of it.
 - `data/cerebellar-cortex.ts` + `components/CerebellarCortex.tsx`: the cerebellum's plate (fig. 678):
   mossy fibre, climbing fibre and basket cell, all ending in the Purkinje cell; tests check the layers.
+- `data/ventricle-floor.ts` + `components/VentricleFloor.tsx`: the floor of the fourth ventricle
+  (figs. 694, 700). Shapes are `[u, y]`, u a fraction of the rhombus' half width at that height, so
+  they always stay inside; tests check the motor zone inside the sulcus limitans and the rest outside.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

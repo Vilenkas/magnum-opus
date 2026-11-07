@@ -1,0 +1,129 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 1 1 20rem;
+  max-width: 28rem;
+  font-family: var(--anatomy-display);
+}
+
+/* ---------- The floor ---------- */
+
+.floor {
+  fill: #efe2c9;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+.recess {
+  fill: #e6d6bb;
+  stroke: #8a7a6c;
+  stroke-width: 0.8;
+}
+.axis {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  stroke-width: 0.6;
+  stroke-dasharray: 3 3;
+}
+.median {
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.2;
+}
+
+.region {
+  fill: #dcc8a6;
+  fill-opacity: 0.85;
+  stroke: #8a7a6c;
+  stroke-width: 0.6;
+  cursor: pointer;
+  transition:
+    fill 300ms ease,
+    stroke 150ms ease;
+}
+.region:hover {
+  stroke: var(--anatomy-ink);
+}
+.region[data-selected='true'] {
+  stroke: #e0a526;
+  stroke-width: 1.8;
+}
+
+.stria {
+  fill: none;
+  stroke: #fbf6ea;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.sulcus {
+  fill: none;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 2;
+  pointer-events: none;
+}
+
+.label {
+  font-size: 8px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+  pointer-events: none;
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.key li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+.key button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+.key button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.key button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: #dcc8a6;
+  border: 1px solid #8a7a6c;
+}
+
+.text {
+  margin: 0.4rem 0 !important;
+}

@@ -10,7 +10,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       alternate hemiplegia, fig. 634) and figs. 625–646.
 - [x] **Cerebelo** (pp. 784–834): written, with the `CerebellarCortex` plate (fig. 678) and
       Netter S-42 for today's lobes.
-- [ ] **Cuarto ventrículo** (835), **pedúnculos cerebrales** (858), **cerebro** (index p. XIV on).
+- [x] **Cuarto ventrículo** (pp. 835–857): written, with the `VentricleFloor` plate (figs. 694, 700)
+      and Netter S-34/S-41 for today's names and the apertures.
+- [ ] **Pedúnculos cerebrales**, tubérculos cuadrigéminos y acueducto (858), **cerebro** (index p. XIV on).
       Map the remaining pages in `testut-notes.md` first.
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
