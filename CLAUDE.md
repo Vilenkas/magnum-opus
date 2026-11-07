@@ -139,6 +139,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - Libro V (Neurología) starts with Testut t. II's general anatomy (pp. 565–615). `data/nerve-circuits.ts`
   + `components/NerveCircuits.tsx`: the reflex and the voluntary movement (figs. 471–472) as chains
   of neuron parts the impulse runs through; tests check dynamic polarization and the decussation.
+- `components/ImpulseCircuit.tsx`: shared plate for chains of neurons with an impulse running through
+  them (stages typed in `data/nerve-circuits.ts`; each plate brings its backdrop and colours).
+  `NerveCircuits` and `CerebellarCortex` are configurations of it.
+- `data/cerebellar-cortex.ts` + `components/CerebellarCortex.tsx`: the cerebellum's plate (fig. 678):
+  mossy fibre, climbing fibre and basket cell, all ending in the Purkinje cell; tests check the layers.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.
