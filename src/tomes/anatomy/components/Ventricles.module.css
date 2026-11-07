@@ -1,0 +1,132 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 1 1 26rem;
+  max-width: 36rem;
+  font-family: var(--anatomy-display);
+}
+
+.thalamus {
+  fill: #e6d9c2;
+  stroke: #8a7a6c;
+  stroke-width: 0.8;
+  stroke-dasharray: 3 2;
+}
+
+/* The cast: a pale plaster body with a darker outline, as in fig. 832. */
+.cavity {
+  cursor: pointer;
+}
+.wall,
+.fill {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wall {
+  stroke: #6e5f52;
+}
+.fill {
+  stroke: #f4eee2;
+  transition: stroke 200ms ease;
+}
+.cavity:hover .fill {
+  stroke: #fbf3df;
+}
+.wall[data-selected='true'] {
+  stroke: #e0a526;
+}
+.cavity[data-selected='true'] .fill {
+  stroke: #f6e3b3;
+}
+
+.route {
+  fill: none;
+  stroke: #5b8fc4;
+  stroke-width: 2;
+  stroke-dasharray: 3 4;
+  stroke-linecap: round;
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+.route[data-passed='true'] {
+  opacity: 1;
+}
+.drop {
+  fill: #5b8fc4;
+  stroke: #fbf6ea;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 4px rgb(91 143 196 / 0.8));
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.note {
+  font-size: 10px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+  pointer-events: none;
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 1 15rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.key li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+.key button {
+  display: block;
+  width: 100%;
+  padding: 0.15rem 0.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+.key button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.key button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.flowText {
+  margin: 0.6rem 0 0 !important;
+  padding: 0.5rem 0.8rem;
+  border-left: 3px solid #5b8fc4;
+  background: color-mix(in oklab, #5b8fc4 7%, transparent);
+}
+.text {
+  margin: 0.5rem 0 0 !important;
+}
