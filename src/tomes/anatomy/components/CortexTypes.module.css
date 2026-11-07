@@ -1,0 +1,156 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2.5rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.svg {
+  flex: 0 1 22rem;
+  max-width: 24rem;
+  font-family: var(--anatomy-display);
+}
+
+.pia {
+  stroke: #8a7a6c;
+  stroke-width: 2;
+}
+
+/* Nissl staining: violet cells on a pale ground, as in the preparations. */
+.band {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 12%, transparent);
+  stroke-width: 0.5;
+  cursor: pointer;
+}
+.band[data-layer='I'] {
+  fill: #f7f0e3;
+}
+.band[data-layer='II'],
+.band[data-layer='IV'] {
+  fill: #ece2d6;
+}
+.band[data-layer='III'],
+.band[data-layer='V'] {
+  fill: #f3ebde;
+}
+.band[data-layer='VI'] {
+  fill: #eee5d6;
+}
+.band[data-selected='true'] {
+  fill: color-mix(in oklab, #e0a526 22%, #f3ebde);
+}
+
+.grain {
+  fill: #6d5a8a;
+  pointer-events: none;
+}
+.sparse {
+  fill: #8f7fa8;
+  pointer-events: none;
+}
+.pyramid {
+  fill: #5e4a7c;
+  pointer-events: none;
+}
+.spindle {
+  fill: #7a6894;
+  pointer-events: none;
+}
+.betz {
+  fill: #3f2d5a;
+  pointer-events: none;
+}
+
+.white {
+  fill: #fbf8f2;
+}
+.whiteLabel {
+  font-size: 10px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+}
+
+.numeral {
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: end;
+  fill: var(--anatomy-ink);
+}
+
+.ruler {
+  stroke: var(--anatomy-ink-soft);
+  stroke-width: 1;
+}
+.rulerLabel {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.key li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+.key button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+.key button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.key button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+.numeralKey {
+  min-width: 1.8rem;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+}
+
+.text {
+  margin: 0.4rem 0 !important;
+}
+.where {
+  margin: 0.3rem 0 0 !important;
+  font-size: 0.95rem;
+}
+.layerCard {
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--anatomy-accent);
+  background: color-mix(in oklab, var(--anatomy-accent) 6%, transparent);
+}
+.layerName {
+  margin: 0.1rem 0 0 !important;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}

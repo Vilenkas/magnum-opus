@@ -151,7 +151,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   the pes and the substantia nigra are arcs of one ring, the pes split in fifths after Testut or today.
 - `data/gyri.ts` + `components/Gyri.tsx`: the convolutions of the outer and inner faces as polygons
   after Testut's schemes (figs. 767, 777), with Testut's names, today's (Netter) and synonyms; tests
-  check the lobes against the fissures of Rolando, Sylvius and the calcarine.
+  check the lobes against the fissures of Rolando, Sylvius and the calcarine. Each gyrus may carry
+  Testut's `localization` (motor, sensory, visual…), shown in the plate's «Localizaciones» mode.
+- `data/cortex-types.ts` + `components/CortexTypes.tsx`: the six layers gliding through Economo's
+  five types (fig. 795); layer shares are schematic, tests check only their ordering.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

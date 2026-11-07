@@ -144,3 +144,25 @@
   font-style: italic;
   color: var(--anatomy-ink-soft);
 }
+
+.function {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0 !important;
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+}
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin: 0.6rem 0 0 !important;
+  font-size: 0.85rem;
+  color: var(--anatomy-ink-soft);
+}
+.areas > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}

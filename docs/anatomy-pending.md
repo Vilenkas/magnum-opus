@@ -15,7 +15,7 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 - [x] **Mesencéfalo** (pp. 858–895): pedúnculos, tubérculos cuadrigéminos y acueducto, with the
       `MidbrainSections` plate (two sections; the pes after Testut and after today's description).
 - [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: ~~exterior and
-      lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), cortex and localizations (954–986), interior (987–1037), grey nuclei, internal
+      lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), ~~cortex and localizations (954–986)~~ (written, `CortexTypes` plate and the localizations mode of `Gyri`), interior (987–1037), grey nuclei, internal
       capsule and white matter (1038–1113), pathways (1114–1157), sensory pathways (1158–1189),
       topography and circulation (1190–1237).
       Map the remaining pages in `testut-notes.md` first.
@@ -53,6 +53,11 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 - [ ] Brain: Testut's pages on brain weight and gyral patterns compare sexes and "races" (fig. 769, the
       pie of the third frontal in three "ethnic types"; symmetry as a mark of "superiority"). Left out
       on purpose, along with that figure; only the measurements were kept.
+
+- [ ] Cortex: Testut's localizations are those of 1975 (the classical language centres, Pierre Marie,
+      Dejerine). Today's view of language as a network, and the sensory and motor maps after Penfield,
+      have no source in the library yet. The layer shares of `cortex-types.ts` are read off fig. 795,
+      not measured.
 
 ## Ideas mentioned, not started
 

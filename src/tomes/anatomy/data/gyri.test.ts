@@ -60,4 +60,14 @@ describe('the convolutions of the hemisphere', () => {
     expect(gyri.find((g) => g.id === 'fa')!.modern).toBe('Giro precentral')
     expect(gyri.find((g) => g.id === 'f3')!.synonyms).toMatch(/Broca/)
   })
+
+  it('places Testut’s localizations: motor before Rolando, sensory behind, sight on the calcarine, hearing on the first temporal, speech on the third frontal', () => {
+    const area = (id: string) => gyri.find((g) => g.id === id)!.localization?.area
+    expect([area('fa'), area('paracentral')]).toEqual(['motor', 'motor'])
+    expect(area('pa')).toBe('sensory')
+    expect([area('cuneus'), area('lingual')]).toEqual(['visual', 'visual'])
+    expect(area('t1')).toBe('auditory')
+    expect(area('f3')).toBe('language')
+    for (const g of gyri.filter((g) => g.localization)) expect(g.localization!.text.length, g.id).toBeGreaterThan(20)
+  })
 })
