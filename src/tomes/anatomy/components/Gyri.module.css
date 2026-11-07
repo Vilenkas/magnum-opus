@@ -1,0 +1,146 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.divider {
+  width: 1px;
+  margin: 0 0.4rem;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.svg {
+  flex: 1 1 26rem;
+  max-width: 38rem;
+  font-family: var(--anatomy-display);
+}
+
+.outline {
+  fill: #efe2c9;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.gyrus {
+  cursor: pointer;
+}
+.gyrus path {
+  fill-opacity: 0.75;
+  stroke: #fbf6ea;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  transition: fill-opacity 150ms ease;
+}
+.gyrus:hover path {
+  fill-opacity: 0.95;
+}
+.gyrus[data-selected='true'] path {
+  fill-opacity: 1;
+  stroke: #e0a526;
+  stroke-width: 3;
+}
+
+.abbr {
+  font-size: 13px;
+  font-weight: 700;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink);
+  pointer-events: none;
+}
+
+.fissure {
+  fill: none;
+  stroke: #2f2722;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.callosum {
+  fill: #fbf6ea;
+  stroke: #8a7a6c;
+  stroke-width: 1;
+  pointer-events: none;
+}
+.cut {
+  fill: #d8ccb8;
+  stroke: #8a7a6c;
+  stroke-width: 0.8;
+}
+
+.note {
+  font-size: 10px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--anatomy-ink-soft);
+  pointer-events: none;
+}
+
+/* ---------- Key and legend ---------- */
+
+.key {
+  flex: 0 1 17rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.key li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.key li::before,
+.key li::marker {
+  content: none !important;
+}
+.key button {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.12rem 0.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--anatomy-ink);
+  font-family: var(--anatomy-body);
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+}
+.key button:hover {
+  background: color-mix(in oklab, var(--anatomy-accent) 10%, transparent);
+}
+.key button[data-active='true'] {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+
+.swatch {
+  flex: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+}
+.abbrKey {
+  flex: none;
+  min-width: 2.4rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.text {
+  margin: 0.4rem 0 !important;
+}
+.synonyms {
+  margin: 0.3rem 0 0 !important;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}

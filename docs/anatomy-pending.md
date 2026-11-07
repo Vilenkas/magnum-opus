@@ -14,8 +14,8 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       and Netter S-34/S-41 for today's names and the apertures.
 - [x] **Mesencéfalo** (pp. 858–895): pedúnculos, tubérculos cuadrigéminos y acueducto, with the
       `MidbrainSections` plate (two sections; the pes after Testut and after today's description).
-- [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: exterior and
-      lobes (896–953), cortex and localizations (954–986), interior (987–1037), grey nuclei, internal
+- [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: ~~exterior and
+      lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), cortex and localizations (954–986), interior (987–1037), grey nuclei, internal
       capsule and white matter (1038–1113), pathways (1114–1157), sensory pathways (1158–1189),
       topography and circulation (1190–1237).
       Map the remaining pages in `testut-notes.md` first.
@@ -49,6 +49,10 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 
 - [ ] Mesencephalon, current knowledge with no source in the library yet: the pes' fifths as they
       are described today (frontopontine, corticospinal and corticonuclear, parietotemporopontine).
+
+- [ ] Brain: Testut's pages on brain weight and gyral patterns compare sexes and "races" (fig. 769, the
+      pie of the third frontal in three "ethnic types"; symmetry as a mark of "superiority"). Left out
+      on purpose, along with that figure; only the measurements were kept.
 
 ## Ideas mentioned, not started
 
