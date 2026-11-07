@@ -1,0 +1,61 @@
+/* The layers of a cerebellar folium, as in Cajal's schemes: pale molecular layer, dotted granular. */
+
+.layer {
+  stroke: none;
+}
+.layer[data-layer='molecular'] {
+  fill: #f4ecdc;
+}
+.layer[data-layer='purkinje'] {
+  fill: #eee2cb;
+}
+.layer[data-layer='granular'] {
+  fill: #e6d6bb;
+}
+.layer[data-layer='medulla'] {
+  fill: #faf6ee;
+}
+
+.layerName {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+  pointer-events: none;
+}
+
+.pia {
+  stroke: #8a7a6c;
+  stroke-width: 2;
+}
+
+.parallel {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 16%, transparent);
+  stroke-width: 0.8;
+}
+
+.granule {
+  fill: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+}
+
+.dendrite,
+.axon {
+  fill: none;
+  stroke: color-mix(in oklab, #b8322a 32%, transparent);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+}
+.purkinje {
+  fill: color-mix(in oklab, #b8322a 35%, #f4ecdc);
+  stroke: #8a4a44;
+  stroke-width: 1;
+}
+
+.neighbour {
+  opacity: 0.55;
+}
+
+.nucleus {
+  fill: color-mix(in oklab, var(--anatomy-ink) 18%, var(--anatomy-paper));
+  stroke: var(--anatomy-ink);
+  stroke-width: 1;
+}

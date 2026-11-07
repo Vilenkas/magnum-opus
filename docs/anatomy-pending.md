@@ -8,8 +8,12 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 
 - [x] **Protuberancia anular** (pp. 754–783): written, with the `Hemiplegia` plate (crossed and
       alternate hemiplegia, fig. 634) and figs. 625–646.
-- [ ] **Cerebelo** (784), **cuarto ventrículo** (835), **pedúnculos cerebrales** (858),
-      **cerebro** (index p. XIV on). Map the remaining pages in `testut-notes.md` first.
+- [x] **Cerebelo** (pp. 784–834): written, with the `CerebellarCortex` plate (fig. 678) and
+      Netter S-42 for today's lobes.
+- [ ] **Cuarto ventrículo** (835), **pedúnculos cerebrales** (858), **cerebro** (index p. XIV on).
+      Map the remaining pages in `testut-notes.md` first.
+- [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
+      Netter S-42) on one unfolded cerebellum (fig. 660).
 - [ ] **Vasos de la médula espinal** (pp. 681–697), left out of the cord section.
 - [ ] **Núcleos del bulbo** in detail (pp. 719–750): better written together with the cranial
       nerves, where they make sense.
@@ -32,6 +36,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       the eye muscles' nuclei and of the upper face are current knowledge, not in Testut: no source
       in the library cites them yet. The plate places each corticonuclear crossing just above its
       nucleus, a simplification.
+
+- [ ] Cerebellum, current knowledge with no source in the library yet: climbing fibres come from
+      the inferior olive; Purkinje and basket cells are inhibitory; Bolk's somatotopy not confirmed.
 
 ## Ideas mentioned, not started
 

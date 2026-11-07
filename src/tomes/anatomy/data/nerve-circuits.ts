@@ -10,6 +10,8 @@ export type PartKind = 'receptor' | 'dendrite' | 'cell' | 'axon' | 'synapse' | '
 export interface NeuronInfo {
   name: string
   role: string
+  /** Its colour in the plate, when the plate doesn't give one per position. */
+  color?: string
 }
 
 export interface CircuitStage {
