@@ -28,6 +28,18 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       de la médula), S-31/S-33 (cerebro), S-34/S-35 (ventrículos y LCR), S-40 (tronco del encéfalo),
       S-54/S-55 (núcleos de los nervios craneales).
 
+## Depth of the first four books
+
+Osteología, Artrología, Miología and Angiología only cover Testut's *general* anatomy chapters
+(~4,000 words each); the *descriptive* part (each bone, each joint, each muscle, each artery's course)
+lives only in the 3D viewers and the quiz, without prose. Neurología covers both (~18,000 words so
+far). Pending, after the cerebrum: decide with the user whether and in what order to write it.
+
+- [ ] Osteología descriptiva: vértebras, cráneo, cara, miembros (t. I pp. 44–473).
+- [ ] Artrología descriptiva: las articulaciones región por región (t. I pp. 493–735).
+- [ ] Miología descriptiva: los músculos región por región (t. I, from p. 764).
+- [ ] Angiología descriptiva: arterias, venas y linfáticos en su trayecto (t. II pp. 167–563).
+
 ## To review (the user, as domain expert)
 
 - [ ] `src/tomes/anatomy/data/nervous-names.ts`: hand-written names. Cranial nerves follow TA2
