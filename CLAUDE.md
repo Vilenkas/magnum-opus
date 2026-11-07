@@ -145,6 +145,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/bulb-columns.ts` + `components/BulbColumns.tsx`: the cord's grey column becoming the medulla's
   four columns in four stages (fig. 589: decussations behead the horns, the fourth ventricle opens);
   tests check the beheading, the opening and the final floor/deep positions.
+- `data/hemiplegia.ts` + `components/Hemiplegia.tsx`: the pons' plate. The motor pathway of both
+  hemispheres to III, VII, XII and the limbs; a lesion at a level paralyses `paralysis(y, side)`:
+  nuclei at its level on its side, uncrossed contingents on the other (fig. 634). Tests check the
+  common and the three alternate hemiplegias.
 - Netter's atlas (8.ª ed., `netter` source) is in `library/anatomy/` with a plate index
   (`netter-index.tsv`); its crops go to `figures/private` as `netter-s-N`.
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.

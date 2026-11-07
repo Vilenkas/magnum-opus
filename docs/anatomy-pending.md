@@ -6,9 +6,8 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
 
 ## Next: Libro V · Neurología
 
-- [ ] **Protuberancia anular** (pp. 751–783): general considerations, exterior and interior
-      conformation. Look for a plate in the spirit of `BulbColumns` (what the pons adds to the
-      medulla) and figures for `figures/private`.
+- [x] **Protuberancia anular** (pp. 754–783): written, with the `Hemiplegia` plate (crossed and
+      alternate hemiplegia, fig. 634) and figs. 625–646.
 - [ ] **Cerebelo** (784), **cuarto ventrículo** (835), **pedúnculos cerebrales** (858),
       **cerebro** (index p. XIV on). Map the remaining pages in `testut-notes.md` first.
 - [ ] **Vasos de la médula espinal** (pp. 681–697), left out of the cord section.
@@ -28,6 +27,11 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       "tricúspide".
 - [ ] `CordSections`: below the cervical cord the whole posterior funiculus is drawn as Goll's
       fascicle (the paramedian septum is only seen above). Fascicles are schematic, not measured.
+
+- [ ] `Hemiplegia` plate: the eponyms (Weber, Millard-Gubler, Jackson) and the bilateral supply of
+      the eye muscles' nuclei and of the upper face are current knowledge, not in Testut: no source
+      in the library cites them yet. The plate places each corticonuclear crossing just above its
+      nucleus, a simplification.
 
 ## Ideas mentioned, not started
 
