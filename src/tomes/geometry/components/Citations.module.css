@@ -1,0 +1,86 @@
+.mark {
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+  padding: 0 0.15em;
+}
+
+.mark a {
+  color: var(--accent, #1d4ed8);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mark a:hover {
+  text-decoration: underline;
+}
+
+.unknown {
+  color: #dc2626;
+  font-size: 0.8em;
+}
+
+.sources {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.title {
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: baseline;
+  line-height: 1.5;
+}
+
+.index {
+  font-weight: 700;
+  color: var(--accent, #1d4ed8);
+}
+
+.entry {
+  color: #334155;
+}
+
+.author {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.bookTitle {
+  font-style: italic;
+}
+
+.pages {
+  font-size: 0.85em;
+  color: #64748b;
+  margin-left: 0.4rem;
+}
+
+.note {
+  display: block;
+  font-size: 0.85em;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
