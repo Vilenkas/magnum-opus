@@ -194,6 +194,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   section of the vault where every boundary is a function of x; a bleed opens one interface and pushes what lies
   below by its own thickness. Where it stops follows from where the dura is fixed (bone at the sutures, falx at the
   midline); tests check the order of the layers and each bleed's limits.
+- `neurology/cranial-nerves-1.mdx`: nerves in general and cranial nerves I–VI (Testut t. III pp. 45–126).
+  `data/eye-nerves.ts` + `components/EyeNerves.tsx` (Lámina XIX): each muscle of the eye with Testut's nerve and
+  Moore's pull (abduction, elevation, intorsion). A palsy is derived: at rest the eye drifts by minus the paralysed
+  muscles' pulls; in each of the nine gazes it fails where the one muscle that moves it there is lost, and the eyes
+  see double there or where a marked drift persists. Tests check the VI, III, IV and Horner pictures.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

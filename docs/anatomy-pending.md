@@ -66,10 +66,12 @@ modern references and write it, as was done for the ossification and the endoste
 ## Next: the rest of Neurología from Testut t. III (2026-11-08 plan)
 
 - [x] Meninges y líquido cefalorraquídeo (pp. 1–44).
-- [ ] Nervios: anatomía general (pp. 45–52).
-- [ ] Nervios craneales I–VI (pp. 53–125), with the **núcleos del bulbo** (t. II pp. 719–750). Plate idea: the nuclei
-      of the cranial nerves on the brainstem.
-- [ ] Nervios craneales VII–XII (pp. 126–196).
+- [x] Nervios: anatomía general (pp. 45–52), and cranial nerves I–VI (pp. 53–126), with the `EyeNerves` plate
+      (Lámina XIX). To review: Moore 8.ª pp. 902–909 for the optic nerve as a CNS tract is a range (no index entry
+      found); Duval and Laborde's fascicle from the VI nucleus to the opposite medial rectus, rejected by Testut, is
+      today's internuclear pathway in the medial longitudinal fasciculus, but no book in the library says so.
+- [ ] Nervios craneales VII–XII (pp. 126–196), with the **núcleos del bulbo** (t. II pp. 719–750). Plate idea: the
+      nuclei of all the cranial nerves on the brainstem.
 - [ ] Nervios raquídeos (pp. 197–356): raíces y territorios radiculares (plate idea: dermatomes, Testut against today),
       plexos cervical, braquial (plate idea), intercostales, lumbar, sacro.
 - [ ] Sistema vegetativo (pp. 357–~440). Plate idea: sympathetic against parasympathetic.

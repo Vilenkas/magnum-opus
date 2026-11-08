@@ -1,0 +1,104 @@
+.divider {
+  width: 1px;
+  align-self: stretch;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 13rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.25rem 1rem;
+}
+@media (max-width: 52rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.face,
+.grid {
+  width: 100%;
+  display: block;
+}
+
+.side {
+  font-family: var(--anatomy-body);
+  font-style: italic;
+  font-size: 10px;
+  fill: var(--anatomy-ink-soft);
+}
+.note {
+  font-family: var(--anatomy-body);
+  font-size: 9px;
+  fill: var(--anatomy-accent);
+}
+
+.sclera {
+  fill: #fbf7ef;
+}
+.iris {
+  fill: #6f8a6a;
+}
+.pupil {
+  fill: #1d1a17;
+}
+.lid {
+  fill: #d8b9a0;
+}
+/* A closed lid is drawn see-through, so the eye's position under it still shows. */
+.lid[data-closed='true'] {
+  fill-opacity: 0.55;
+}
+.outline {
+  fill: none;
+  stroke: #5a4a3c;
+  stroke-width: 1.2;
+}
+
+.cell rect {
+  fill: transparent;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 15%, transparent);
+}
+.cell[data-diplopia='true'] rect {
+  fill: color-mix(in oklab, #b0473c 10%, transparent);
+  stroke: #b0473c;
+  stroke-width: 1.4;
+}
+.gridNote {
+  margin: 0.25rem 0 0 !important;
+  text-align: center;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+
+.muscles {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.85rem;
+}
+.muscles li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.12rem 0;
+  border-bottom: 1px dotted color-mix(in oklab, var(--anatomy-ink) 15%, transparent);
+}
+.muscles li[data-lost='true'] {
+  color: #9e2a24;
+  font-weight: 700;
+}
+.muscles li[data-lost='true'] span:first-child {
+  text-decoration: line-through;
+}
+.nerve {
+  font-family: var(--anatomy-display);
+  color: var(--anatomy-ink-soft);
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+}
