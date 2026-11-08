@@ -51,4 +51,5 @@ export const books: Book[] = [
     load: () => import('./chapters/neurology.mdx'),
   },
   { id: 'splanchnology', numeral: 'VI', title: 'Esplacnología', summary: 'Las vísceras.' },
+  { id: 'aesthesiology', numeral: 'VII', title: 'Estesiología', summary: 'Los órganos de los sentidos.' },
 ]
