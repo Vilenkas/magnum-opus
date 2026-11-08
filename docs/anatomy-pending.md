@@ -10,9 +10,12 @@ The general chapters follow Testut and leave out topics a modern reader expects 
 endosteum had only a passing mention until 2026-11-08). Go through each book, list what is missing, check it in the
 modern references and write it, as was done for the ossification and the endosteum:
 
-- [ ] Osteología: bone marrow and haematopoiesis beyond the four kinds of marrow; bone remodelling and fracture
-      healing (the callus); bone age; the endosteum's uncited points (single cell layer, osteoclasts on it, the callus
-      from inside, thinning from within in old age) need a source.
+- [x] Osteología (2026-11-08): «La médula ósea» (organ apart, fetal liver and spleen, red marrow retreating, sinusoids,
+      sternal puncture), «La edad ósea» (Moore's two criteria, arrest lines) and «El hueso vivo: remodelado y reparación»
+      (disuse and load, the fracture callus in three steps, greenstick, avascular necrosis, osteoporosis), from Pró
+      pp. 24–30, Latarjet–Ruiz pp. 9–13 and Moore's clinical boxes. The endosteum's renewal now cites them; still with no
+      source in the library: the endosteum as a single cell layer with osteoclasts, and the callus formed from the
+      medullary side (none of the four modern books describes the endosteum's cells).
 - [ ] Artrología: how the articular cartilage is nourished (synovial fluid, no vessels) and how it wears; the synovial
       membrane's cells and how it makes the synovia; the joints' nerves (Hilton's law); stability (surfaces,
       ligaments, muscles).
