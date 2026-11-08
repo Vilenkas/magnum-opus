@@ -37,7 +37,7 @@ export function MidbrainSections() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina VIII · El mesencéfalo en dos cortes</figcaption>
+      <figcaption className={plate.caption}>Lámina IX · El mesencéfalo en dos cortes</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Corte">
         {levels.map((l) => (

@@ -46,7 +46,7 @@ export function Gyri() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina IX · Las circunvoluciones cerebrales</figcaption>
+      <figcaption className={plate.caption}>Lámina X · Las circunvoluciones cerebrales</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Cara y nomenclatura">
         <button className={plate.chip} data-active={face === 'lateral'} onClick={() => switchFace('lateral')}>

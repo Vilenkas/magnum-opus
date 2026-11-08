@@ -37,7 +37,7 @@ export function VisualFields() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina XIV · Los campos visuales</figcaption>
+      <figcaption className={plate.caption}>Lámina XV · Los campos visuales</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Lesión">
         <button className={plate.chip} data-active={!lesion} onClick={() => setLesionId(null)}>

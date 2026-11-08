@@ -62,7 +62,7 @@ export function CranialTopography() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina XV · La topografía craneoencefálica</figcaption>
+      <figcaption className={plate.caption}>Lámina XVI · La topografía craneoencefálica</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Procedimiento">
         {STEPS.map((s) => (

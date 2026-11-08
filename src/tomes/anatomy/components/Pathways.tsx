@@ -54,7 +54,7 @@ export function Pathways() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina XIII · Las grandes vías de conducción</figcaption>
+      <figcaption className={plate.caption}>Lámina XIV · Las grandes vías de conducción</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Vía">
         <span className={styles.group}>Sensitivas</span>

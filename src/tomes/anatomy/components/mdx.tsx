@@ -48,6 +48,7 @@ export const mdxComponents: MDXComponents = {
   InternalCapsule: lazyPlate(() => import('./InternalCapsule').then((m) => m.InternalCapsule)),
   Pathways: lazyPlate(() => import('./Pathways').then((m) => m.Pathways)),
   VisualFields: lazyPlate(() => import('./VisualFields').then((m) => m.VisualFields)),
+  SpinalReflexes: lazyPlate(() => import('./SpinalReflexes').then((m) => m.SpinalReflexes)),
   CranialTopography: lazyPlate(() => import('./CranialTopography').then((m) => m.CranialTopography)),
   WillisCircle: lazyPlate(() => import('./WillisCircle').then((m) => m.WillisCircle)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),

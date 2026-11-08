@@ -1,0 +1,143 @@
+.body {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.divider {
+  width: 1px;
+  margin: 0 0.4rem;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.schema {
+  width: 100%;
+  max-width: 36rem;
+  font-family: var(--anatomy-display);
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.columnHead {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The cord ---------- */
+
+.segment {
+  cursor: pointer;
+}
+.segment rect {
+  fill: #efe4cf;
+  stroke: #b9ab95;
+  stroke-width: 0.8;
+  transition: fill 200ms ease;
+}
+.segment text {
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--anatomy-ink-soft);
+  pointer-events: none;
+}
+.segment:hover rect {
+  fill: #e4d3b4;
+}
+.segment[data-below='true'] rect {
+  fill: #e8e0d4;
+}
+.segment[data-cut='true'] rect {
+  fill: #2a2420;
+}
+.segment[data-cut='true'] text {
+  fill: #f6efe0;
+}
+
+/* ---------- Reflexes ---------- */
+
+.reflex {
+  --state: var(--anatomy-ink);
+  pointer-events: none;
+}
+.reflex[data-state='diminished'] {
+  --state: #b07a1c;
+}
+.reflex[data-state='abolished'] {
+  --state: #b8322a;
+}
+.reflex[data-state='exaggerated'] {
+  --state: #3b5a92;
+}
+.reflex[data-state='released'] {
+  --state: #4c7a3d;
+}
+.bracket {
+  stroke: var(--state);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.leader {
+  fill: none;
+  stroke: var(--state);
+  stroke-width: 0.7;
+  stroke-dasharray: 2 2;
+  opacity: 0.7;
+}
+.label {
+  font-size: 10.5px;
+  fill: var(--state);
+}
+.reflex[data-state='abolished'] .label {
+  text-decoration: line-through;
+}
+.reflex[data-state='exaggerated'] .label {
+  font-weight: 700;
+}
+.reflex[data-kind='centre'] .label {
+  font-style: italic;
+}
+.level {
+  font-size: 9px;
+  opacity: 0.75;
+}
+
+.changes {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0.5rem 0 0 !important;
+  font-size: 0.95rem;
+}
+.changes div {
+  display: flex;
+  gap: 0.6rem;
+}
+.changes dt {
+  flex: 0 0 11rem;
+  font-weight: 700;
+}
+.changes dd {
+  margin: 0;
+}
+.changes div[data-state='abolished'] dt {
+  color: #b8322a;
+}
+.changes div[data-state='diminished'] dt {
+  color: #8a5e12;
+}
+.changes div[data-state='exaggerated'] dt,
+.changes div[data-state='inverted'] dt {
+  color: #3b5a92;
+}
+.changes div[data-state='released'] dt {
+  color: #4c7a3d;
+}
+
+.reflex[data-state='inverted'] {
+  --state: #6d4a8a;
+}

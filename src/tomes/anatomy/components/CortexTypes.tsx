@@ -62,7 +62,7 @@ export function CortexTypes() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina X · Los cinco tipos de corteza</figcaption>
+      <figcaption className={plate.caption}>Lámina XI · Los cinco tipos de corteza</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Tipo de corteza">
         {types.map((ty, i) => (

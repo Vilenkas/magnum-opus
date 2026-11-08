@@ -28,7 +28,7 @@ export function WillisCircle() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina XVI · El polígono de Willis y los territorios arteriales</figcaption>
+      <figcaption className={plate.caption}>Lámina XVII · El polígono de Willis y los territorios arteriales</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Oclusión">
         <button className={plate.chip} data-active={!occluded} onClick={() => setOccluded(null)}>

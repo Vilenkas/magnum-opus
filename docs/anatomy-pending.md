@@ -22,8 +22,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       cerebral circulation (Art. VIII, 1195–~1240, end not mapped).
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
-- [x] **Vasos de la médula espinal** (pp. 681–689): written, with figs. 557–560 bis; no plate. Still unwritten in the
-      cord: the conus and filum terminale (~pp. 674–681) and its functional value (pp. 689–697).
+- [x] **Vasos de la médula espinal** (pp. 681–689): written, with figs. 557–560 bis; no plate. The rest of the cord
+      (collaterals, neuroglia, filum terminale, pp. 674–681; functional value, pp. 689–697) written too, with the
+      `SpinalReflexes` plate. The cord is now complete.
 - [ ] **Núcleos del bulbo** in detail (pp. 719–750): better written together with the cranial
       nerves, where they make sense.
 - [x] Netter plates for neurology (2026-11-08): S-16, S-23–S-25, S-28, S-36–S-38, S-40, S-43, S-44, S-47, S-50,

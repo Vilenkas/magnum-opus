@@ -40,7 +40,7 @@ export function BulbColumns() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina IV · De la médula al bulbo</figcaption>
+      <figcaption className={plate.caption}>Lámina V · De la médula al bulbo</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Etapa">
         {stages.map((st, i) => (

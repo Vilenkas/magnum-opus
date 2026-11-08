@@ -179,6 +179,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   direction, with the communicating arteries optionally threadlike. Cortical territories are polygons on the faces
   of `gyri.ts` (figs. 1009–1010); lost gyri come from their centroids. Tests check Lefort's carotid, the basilar
   fed by the carotids, and each syndrome's centres.
+- `data/spinal-reflexes.ts` + `components/SpinalReflexes.tsx` (Lámina IV of Neurología): Dejerine's reflex centres
+  (fig. 566) on the segments C1–S5; a transverse lesion abolishes what it takes whole, weakens what it takes in part,
+  and below it the shock, then the automatism. «Niveles de hoy» swaps in Moore's and Pró's levels and the pyramidal
+  signs (abdominal reflexes lost, Babinski). Neurology plates are numbered in order of appearance: inserting one
+  means renumbering the captions after it.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

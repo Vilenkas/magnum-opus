@@ -37,7 +37,7 @@ export function VentricleFloor() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina VII · El suelo del cuarto ventrículo</figcaption>
+      <figcaption className={plate.caption}>Lámina VIII · El suelo del cuarto ventrículo</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Vista">
         <button className={plate.chip} data-active={!nuclei} onClick={() => setView('reliefs')}>

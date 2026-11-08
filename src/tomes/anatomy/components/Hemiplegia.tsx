@@ -65,7 +65,7 @@ export function Hemiplegia() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina V · Hemiplejía cruzada y alterna</figcaption>
+      <figcaption className={plate.caption}>Lámina VI · Hemiplejía cruzada y alterna</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Asiento de la lesión">
         {lesions.map((l) => (

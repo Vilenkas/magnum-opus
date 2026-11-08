@@ -73,7 +73,7 @@ export function Ventricles() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina XI · Los ventrículos y el líquido cefalorraquídeo</figcaption>
+      <figcaption className={plate.caption}>Lámina XII · Los ventrículos y el líquido cefalorraquídeo</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Recorrido del líquido">
         {flow.map((s, i) => (

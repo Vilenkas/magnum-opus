@@ -68,7 +68,7 @@ function backdrop() {
 export function CerebellarCortex() {
   return (
     <ImpulseCircuit
-      caption="Lámina VI · El cerebelo histológico"
+      caption="Lámina VII · El cerebelo histológico"
       tabsLabel="Vía"
       chains={chains}
       viewBox="40 10 540 560"

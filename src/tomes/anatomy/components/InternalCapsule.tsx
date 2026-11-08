@@ -25,7 +25,7 @@ export function InternalCapsule() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina XII · La cápsula interna</figcaption>
+      <figcaption className={plate.caption}>Lámina XIII · La cápsula interna</figcaption>
 
       <div className={plate.chipBar} role="group" aria-label="Segmento">
         {segments.map((s) => (
