@@ -252,6 +252,15 @@ function jointViewDirection(view: JointView | undefined, center: THREE.Vector3, 
 const FLIGHT_SECONDS = 0.7
 /** Breathing room around whatever is framed (1 = touching the edges). */
 const FRAME_MARGIN = 1.12
+/**
+ * Zoom limits, in metres from the target (the model is life-size). Close enough to read a tooth or an
+ * ossicle, far enough to see the whole body with room around it; flights obey them too, so the
+ * controls never jump when the reader takes over. Wheel and pinch zoom are slowed for laptops.
+ */
+export const MIN_DISTANCE = 0.06
+export const MAX_DISTANCE = 3.5
+const ZOOM_SPEED = 0.6
+
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
 /**
@@ -307,7 +316,7 @@ function useCameraFlight() {
       const hHalf = Math.atan(Math.tan(vHalf) * camera.aspect)
       const horizontal = Math.max(size.x, size.z)
       const fit = Math.max(size.y / 2 / Math.tan(vHalf), horizontal / 2 / Math.tan(hHalf))
-      const distance = fit * FRAME_MARGIN + horizontal / 2
+      const distance = THREE.MathUtils.clamp(fit * FRAME_MARGIN + horizontal / 2, MIN_DISTANCE, MAX_DISTANCE)
       flight.current = {
         fromPos: camera.position.clone(),
         fromTarget: controls?.target.clone() ?? center.clone(),
@@ -642,7 +651,7 @@ export function SkeletonStage({ children, className, onHoverChange, onPick, ...m
             <SkeletonModel {...modelProps} onPick={onPick} hoveredId={hoveredId} setHoveredId={setHoveredId} />
           </Bvh>
         </Suspense>
-        <OrbitControls makeDefault enablePan enableDamping={false} />
+        <OrbitControls makeDefault enablePan enableDamping={false} minDistance={MIN_DISTANCE} maxDistance={MAX_DISTANCE} zoomSpeed={ZOOM_SPEED} />
       </Canvas>
       <LoadingOverlay />
       {children}
