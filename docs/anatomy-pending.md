@@ -109,6 +109,17 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       thirds, posterior spinal arteries → posterior third; the upper thoracic watershed; paraplegia after injury to the
       artery of Adamkiewicz.
 
+- [x] Modern references added (Latarjet–Ruiz Liard, Rouvière–Delmas, Moore, Pró; see `library/anatomy/testut-notes.md`).
+      Neurology's "today" claims now cite them: climbing fibres from the olive, the fourth ventricle's apertures, the
+      spinothalamic crossing, dentate → thalamus → cortex, Papez, the pituitary and bitemporal hemianopia, the taste
+      pathway (corrected: inferior postcentral gyrus, frontoparietal operculum and upper insula), the middle cerebral as
+      the largest terminal branch of the carotid, the frequency of middle cerebral syndromes, Willis variants (rewritten
+      after Moore: no "under half" figure), Rosenthal's vein, the spinal arteries and Adamkiewicz, the facial nucleus.
+      Still without a source in these four books: Purkinje cells inhibiting the deep nuclei, ~1 million optic fibres,
+      olfaction bypassing the thalamus, a vestibular cortex reached through the thalamus, bilateral supply of the eye
+      muscles' nuclei, the basal ganglia's loop through the thalamus, the glymphatic system and meningeal lymphatics.
+      Rouvière t. 4 p. 276 still says the granular layer inhibits Purkinje cells (granule cells are excitatory today).
+
 ## Ideas mentioned, not started
 
 - [ ] Sexual dimorphism of the **skull** (Testut t. I p. 300), as a second view of the pelvis plate
