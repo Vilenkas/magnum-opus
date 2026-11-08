@@ -256,7 +256,7 @@ export function SkeletonQuiz() {
 
   return (
     <figure className={plate.plate} ref={fullscreen.ref}>
-      <figcaption className={plate.caption}>Lámina IV · Examen de osteología</figcaption>
+      <figcaption className={plate.caption}>Lámina V · Examen de osteología</figcaption>
       {fullscreen.supported && (
         <div className={plate.tools}>
           <FullscreenButton active={fullscreen.active} onClick={fullscreen.toggle} />

@@ -82,7 +82,8 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 
 - `assets/skeleton.glb` — 269 pieces (210 bones, 31 cartilages, 28 teeth) from Z-Anatomy,
   CC BY-SA: keep attribution visible. Rebuild via `tools/anatomy/README.md`.
-- `data/sources.ts` — bibliography. Chapters cite with `<Cita fuente="testut-1" p="12" />`; each book
+- `data/sources.ts` — bibliography. A figure with `source`/`ref` (the private helpers set them) lists its work and
+  figure or plate number among the book's sources by itself (`useFigureSource`). Chapters cite with `<Cita fuente="testut-1" p="12" />`; each book
   lists its sources at the end automatically (`components/Citations.tsx`). Testut–Latarjet t. I is
   in `library/anatomy/` (scanned: render pages with Ghostscript, see `testut-notes.md` there).
 - `assets/muscles.glb` (5.6 MB), `joints.glb`, `insertions.glb` + generated `soft-tissues.json`
@@ -114,6 +115,9 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   with an anatomical view (`front`/`side`/`top`…); size from the smallest bone or `frame`.
 - `data/levers.ts` + `components/LeverTypes.tsx` — Libro III's plate: Testut's three levers, each
   with fulcrum/effort/load on landmarks (markers with `size` and `onTop`, drawn over the bones).
+- `data/bone-growth.ts` + `components/BoneGrowth.tsx` (Osteología, Lámina III): the building of a long bone after
+  Testut fig. 21, from the cartilage model to the adult. One inequality (the fertile end grows twice as much)
+  yields the nutrient canal's slant, Bérard's order of fusion and Duhamel–Hunter's nails; tests check all three.
 - `data/pelvis-dimorphism.ts` + `components/PelvisDimorphism.tsx` — Osteología's sex plate: Testut's 16
   characters (t. I p. 386) on a parametric SVG pelvis that morphs man → woman (`pelvisShape(t)`); only
   Testut's own figures are printed (arch, symphysis, inlet index), tests read them off the geometry.

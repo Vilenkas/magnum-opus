@@ -37,4 +37,8 @@ export interface FigureEntry {
   url?: string
   /** What was changed, as CC licences require: "Recortada y entintada". */
   changes?: string
+  /** The bibliography entry the figure comes from (`data/sources.ts`): a figure cites its work. */
+  source?: string
+  /** Where in that work: "fig. 12", "lám. S-120". Listed under the source at the end of the book. */
+  ref?: string
 }

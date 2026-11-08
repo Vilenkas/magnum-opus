@@ -1,5 +1,6 @@
 import { licenseLabel } from '../figures/types'
 import { resolveFigure } from '../figures/registry'
+import { useFigureSource } from './Citations'
 import styles from './Figure.module.css'
 
 /**
@@ -10,6 +11,7 @@ import styles from './Figure.module.css'
  */
 export function Figure({ id, caption, wide = false }: { id: string | string[]; caption?: string; wide?: boolean }) {
   const figure = resolveFigure(id)
+  useFigureSource(figure?.source, figure?.ref)
 
   if (!figure) {
     if (!import.meta.env.DEV) return null

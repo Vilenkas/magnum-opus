@@ -11,12 +11,24 @@ import styles from './Citations.module.css'
 class Registry {
   readonly order: SourceId[] = []
   readonly pages = new Map<SourceId, Set<string>>()
+  /** Figures and plates reproduced from each source: "fig. 12", "lám. S-120". */
+  readonly figures = new Map<SourceId, Set<string>>()
 
-  cite(id: SourceId, page?: string): number {
+  private add(id: SourceId) {
     if (!this.pages.has(id)) {
       this.order.push(id)
       this.pages.set(id, new Set())
+      this.figures.set(id, new Set())
     }
+  }
+
+  figure(id: SourceId, ref?: string) {
+    this.add(id)
+    if (ref) this.figures.get(id)!.add(ref)
+  }
+
+  cite(id: SourceId, page?: string): number {
+    this.add(id)
     // "475, 483" cites two places.
     for (const p of page?.split(',') ?? []) if (p.trim()) this.pages.get(id)!.add(p.trim())
     return this.order.indexOf(id) + 1
@@ -30,6 +42,31 @@ export function CitationProvider({ children }: { children: ReactNode }) {
 }
 
 const isSource = (id: string): id is SourceId => id in sources
+
+/** A figure reproduced from a work lists that work among the book's sources, with its figure number. */
+export function useFigureSource(source?: string, ref?: string) {
+  const registry = useContext(CitationContext)
+  if (registry && source && isSource(source)) registry.figure(source, ref)
+}
+
+/** {"fig. 12", "fig. 3", "lám. S-120"} → "Figs. 3, 12. Lám. S-120" (numbers in order, figures before plates). */
+export function figureList(refs: Iterable<string>): string {
+  const groups = new Map<string, string[]>()
+  for (const r of refs) {
+    const m = r.match(/^(figs?|láms?)\.\s*(.+)$/)
+    const kind = m?.[1].startsWith('fig') ? 'fig' : 'lám'
+    groups.set(kind, [...(groups.get(kind) ?? []), m ? m[2] : r])
+  }
+  const key = (s: string) => parseFloat(s.replace(/^S-/, '')) || 0
+  return (['fig', 'lám'] as const)
+    .filter((k) => groups.has(k))
+    .map((k) => {
+      const items = groups.get(k)!.sort((a, b) => key(a) - key(b))
+      const label = k === 'fig' ? (items.length > 1 ? 'Figs.' : 'Fig.') : items.length > 1 ? 'Láms.' : 'Lám.'
+      return `${label} ${items.join(', ')}`
+    })
+    .join('. ')
+}
 
 /** MDX: <Cita fuente="testut-1" p="12" /> → a superscript number linking to the book's sources. */
 export function Cite({ fuente, p }: { fuente: string; p?: string | number }) {
@@ -93,6 +130,7 @@ export function Sources() {
         {registry.order.map((id, i) => {
           const s: Source = sources[id]
           const pages = registry.pages.get(id)!
+          const figures = registry.figures.get(id)!
           return (
             <li key={id} id={`fuente-${i + 1}`}>
               {s.authors && `${s.authors}. `}
@@ -112,6 +150,7 @@ export function Sources() {
                   {/^\d+$/.test(pageList(pages)) ? 'Pág.' : 'Págs.'} {pageList(pages)}.
                 </span>
               )}
+              {figures.size > 0 && <span className={styles.pages}> {figureList(figures)}.</span>}
             </li>
           )
         })}

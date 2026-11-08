@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { shortRef, sources } from '../data/sources'
-import { pageList } from './Citations'
+import { figureList, pageList } from './Citations'
 
 describe('pageList', () => {
   it('merges single pages and ranges into runs', () => {
@@ -26,5 +26,13 @@ describe('sources', () => {
   it('states the licence of every reused model or dataset', () => {
     expect(sources['z-anatomy'].license).toBe('CC BY-SA 4.0')
     expect(sources.bodyparts3d.license).toBe('CC BY-SA 2.1 Japón')
+  })
+})
+
+describe('figureList', () => {
+  it('orders figures by number and lists plates after them', () => {
+    expect(figureList(['fig. 12', 'fig. 3', 'lám. S-120', 'lám. S-1'])).toBe('Figs. 3, 12. Láms. S-1, S-120')
+    expect(figureList(['fig. 560 bis'])).toBe('Fig. 560 bis')
+    expect(figureList(['lám. S-34'])).toBe('Lám. S-34')
   })
 })

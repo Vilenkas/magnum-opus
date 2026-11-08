@@ -113,7 +113,8 @@ describe('checkTyped across the whole catalogue', () => {
       }
     }
     expect(confusions).toEqual([])
-  }, 30_000)
+    // Every pair of pieces (~70k checks): ~25 s alone, more when the machine is busy.
+  }, 90_000)
 
   it("accepts every piece's own name and aliases", () => {
     for (const p of pieces) {
@@ -266,7 +267,8 @@ describe('checkTyped for landmarks', () => {
       }
     }
     expect(confusions).toEqual([])
-  }, 30_000)
+    // Every pair of pieces (~70k checks): ~25 s alone, more when the machine is busy.
+  }, 90_000)
 })
 
 describe('stats', () => {

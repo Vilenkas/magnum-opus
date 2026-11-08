@@ -4,6 +4,24 @@ Where we left off (2026-11-05). Page numbers are Testut–Latarjet t. II book pa
 (PDF = book + 14, + 16 from ~p. 580; check the running header). Index of both volumes and of
 Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter-index.tsv`.
 
+## Next session (from 2026-11-09): general topics missing in each book
+
+The general chapters follow Testut and leave out topics a modern reader expects (the ossification was one; the
+endosteum had only a passing mention until 2026-11-08). Go through each book, list what is missing, check it in the
+modern references and write it, as was done for the ossification and the endosteum:
+
+- [ ] Osteología: bone marrow and haematopoiesis beyond the four kinds of marrow; bone remodelling and fracture
+      healing (the callus); bone age; the endosteum's uncited points (single cell layer, osteoclasts on it, the callus
+      from inside, thinning from within in old age) need a source.
+- [ ] Artrología: how the articular cartilage is nourished (synovial fluid, no vessels) and how it wears; the synovial
+      membrane's cells and how it makes the synovia; the joints' nerves (Hilton's law); stability (surfaces,
+      ligaments, muscles).
+- [ ] Miología: the fibre's structure (sarcomere, actin, myosin), types of fibres, kinds of contraction (isometric,
+      isotonic), muscle tone; the motor unit is only mentioned.
+- [ ] Angiología: the heart's development and fetal circulation (Netter S-305); the cardiac cycle and the conduction
+      system (S-319); blood pressure along the tree; how lymph is formed.
+- [ ] Neurología: the meninges are in Testut t. III, not in the library; Rouvière t. 4 and Latarjet-Ruiz ch. 25 have them.
+
 ## Next: Libro V · Neurología
 
 - [x] **Protuberancia anular** (pp. 754–783): written, with the `Hemiplegia` plate (crossed and
@@ -129,6 +147,11 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       Testut's muscle names against TA; heart weight (200–250 g today against Testut's 270–275), precapillary sphincters
       and pericytes, no lymphatics in the CNS, atrium and lymph node, right lymphatic duct. Pró (p. 44) defines the
       endomysium as Testut does (round the primary fascicles), not round each fibre: left as it was.
+
+- [ ] Ossification (written 2026-11-08 from Testut t. I pp. 25–42, with the `BoneGrowth` plate): current knowledge with
+      no source in the library yet: osteoclasts from blood precursors of the monocyte line; the endosteum lining the
+      trabeculae and Haversian canals as well as the medullary cavity; the zones of the growth plate under today's
+      names. The plate is schematic: the same shape for the four bones, the fertile end growing twice the other.
 
 ## Ideas mentioned, not started
 

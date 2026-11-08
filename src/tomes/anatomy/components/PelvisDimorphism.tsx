@@ -37,7 +37,7 @@ export function PelvisDimorphism() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina III · La pelvis del hombre y de la mujer</figcaption>
+      <figcaption className={plate.caption}>Lámina IV · La pelvis del hombre y de la mujer</figcaption>
 
       <div className={styles.controls}>
         <button className={styles.sex} data-active={t < 0.05} onClick={() => glideTo(0)}>
