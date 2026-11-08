@@ -92,7 +92,16 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
 - [ ] Osteología descriptiva: vértebras, cráneo, cara, miembros (t. I pp. 44–473).
 - [ ] Artrología descriptiva: las articulaciones región por región (t. I pp. 493–735).
 - [ ] Miología descriptiva: los músculos región por región (t. I, from p. 764).
-- [ ] Angiología descriptiva: arterias, venas y linfáticos en su trayecto (t. II pp. 167–563).
+- [ ] Angiología descriptiva: arterias, venas y linfáticos en su trayecto (t. II pp. 167–563). Started 2026-11-08 with
+      the heart's interior («Los surcos de la superficie», «El corazón por dentro», from Testut pp. 28–62 and
+      Latarjet–Ruiz t. 2 pp. 861–881) and descriptions for the heart's pieces in the viewer. Pending in the heart: its
+      structure and the pericardium (Testut pp. 71–155).
+
+Agreed format (2026-11-08): short, region by region, the viewers as illustrations; relations, clinical points and
+Testut's names beside today's. Each region also fills `data/descriptions/<region>.ts` for the viewers' «Descripción»
+button. Order: the heart; then the clinical regions of Miología and Artrología (inguinal canal, rectus sheath,
+shoulder, knee, temporomandibular); then Osteología (ask the user whether he wants prose per bone). Neurología paused
+by the user's choice (spinal nerves and the vegetative system still pending).
 
 ## To review (the user, as domain expert)
 

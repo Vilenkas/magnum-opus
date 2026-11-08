@@ -219,6 +219,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   common and the three alternate hemiplegias.
 - Netter's atlas (8.ª ed., `netter` source) is in `library/anatomy/` with a plate index
   (`netter-index.tsv`); its crops go to `figures/private` as `netter-s-N`.
+- Every 3D viewer's selection card has a «Descripción» button (`skeleton/Description.tsx`): the text comes from
+  `data/descriptions/<region>.ts`, keyed by the structure's TA English name without side, registered in
+  `data/descriptions/index.ts`; structures without one say so. Add a region's file as its descriptive chapter is
+  written (heart first, from «El corazón por dentro» in Angiología). Tests check every key exists in some model.
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
   Progress persists via `src/shell/storage.ts` (namespaced localStorage).
 - Visual check of WebGL in headless Edge needs real-time waiting (DevTools protocol) and

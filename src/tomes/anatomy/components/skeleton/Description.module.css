@@ -1,0 +1,22 @@
+.panel {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--anatomy-accent);
+  background: color-mix(in oklab, var(--anatomy-paper) 70%, transparent);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.panel p {
+  margin: 0 0 0.5rem !important;
+}
+.panel[data-empty] {
+  border-left-color: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.sources {
+  margin: 0.25rem 0 0 !important;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
