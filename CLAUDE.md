@@ -174,6 +174,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   nasion, y up from the zygomatic arch). The skull is drawn to average measures (lambda from Testut's 6–7 cm above
   the inion); every construction (Poirier, Lucas-Championnière, Chipault, Testut and Jacob, Marie–Foix–Bertrand)
   is computed from it with the authors' distances. Tests check independent methods against each other.
+- `data/cerebral-arteries.ts` + `components/WillisCircle.tsx`: the circle of Willis as a graph (carotids and
+  vertebrals in, terminal arteries out); an occluded vessel is removed and perfusion is reachability, in any
+  direction, with the communicating arteries optionally threadlike. Cortical territories are polygons on the faces
+  of `gyri.ts` (figs. 1009–1010); lost gyri come from their centroids. Tests check Lefort's carotid, the basilar
+  fed by the carotids, and each syndrome's centres.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

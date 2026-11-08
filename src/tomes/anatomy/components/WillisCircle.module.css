@@ -1,0 +1,179 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.divider {
+  width: 1px;
+  margin: 0 0.4rem;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.circle {
+  flex: 1 1 16rem;
+  max-width: 20rem;
+  font-family: var(--anatomy-display);
+}
+
+.faces {
+  flex: 1 1 22rem;
+  max-width: 30rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.face {
+  width: 100%;
+  font-family: var(--anatomy-display);
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0.6rem 0 0 !important;
+  padding: 0 !important;
+  list-style: none;
+  font-size: 0.92rem;
+}
+.areas em {
+  color: var(--anatomy-ink-soft);
+}
+
+/* ---------- The base of the brain ---------- */
+
+.base {
+  pointer-events: none;
+}
+.chiasm {
+  fill: none;
+  stroke: #d8c8ad;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.stalk {
+  fill: #e6d8bf;
+  stroke: #b9ab95;
+}
+.pons {
+  fill: #efe4cf;
+  stroke: #c6b79f;
+}
+.label {
+  font-size: 10.5px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Vessels ---------- */
+
+.vessel {
+  cursor: pointer;
+}
+.hit {
+  stroke: transparent;
+  stroke-width: 16;
+}
+.wall,
+.blood {
+  stroke-linecap: round;
+  transition:
+    stroke 250ms ease,
+    stroke-width 250ms ease;
+}
+.wall {
+  stroke: #7a2a22;
+  stroke-width: 9;
+}
+.blood {
+  stroke: #c8463a;
+  stroke-width: 6;
+}
+.vessel[data-kind='trunk'] .wall {
+  stroke-width: 11;
+}
+.vessel[data-kind='trunk'] .blood {
+  stroke-width: 8;
+}
+.vessel[data-kind='communicating'] .wall {
+  stroke-width: 6;
+}
+.vessel[data-kind='communicating'] .blood {
+  stroke-width: 3.5;
+}
+.vessel[data-territory='acha'] .wall {
+  stroke-width: 4.5;
+}
+.vessel[data-territory='acha'] .blood {
+  stroke-width: 2;
+}
+.vessel[data-thin='true'] .wall {
+  stroke-width: 2.5;
+}
+.vessel[data-thin='true'] .blood {
+  stroke-width: 0.8;
+}
+.vessel[data-on='false'] .wall {
+  stroke: #9c8f82;
+}
+.vessel[data-on='false'] .blood {
+  stroke: #ece3d3;
+}
+.vessel:hover .wall {
+  stroke: var(--anatomy-ink);
+}
+.clot circle {
+  fill: #2a2420;
+}
+.clot path {
+  stroke: #f6efe0;
+  stroke-width: 1.6;
+}
+
+/* ---------- The hemisphere's faces ---------- */
+
+.territory {
+  transition: fill 250ms ease;
+}
+.gyrus {
+  fill: none;
+  stroke: rgb(90 70 60 / 0.35);
+  stroke-width: 1.2;
+}
+.core {
+  fill: #ece3d3;
+  stroke: none;
+}
+.callosum {
+  fill: #f6efe0;
+  stroke: #a89c8f;
+  stroke-width: 1.2;
+}
+.outline {
+  fill: none;
+  stroke: #6e5f55;
+  stroke-width: 2;
+}
+.fissure {
+  fill: none;
+  stroke: #3a2f28;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.faceName {
+  font-size: 18px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}

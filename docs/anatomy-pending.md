@@ -14,7 +14,7 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       and Netter S-34/S-41 for today's names and the apertures.
 - [x] **Mesencéfalo** (pp. 858–895): pedúnculos, tubérculos cuadrigéminos y acueducto, with the
       `MidbrainSections` plate (two sections; the pes after Testut and after today's description).
-- [ ] **Cerebro** (pp. 896–1237, index p. XIV): too long for one go. Split it, roughly: ~~exterior and
+- [x] **Cerebro** (pp. 896–1237, index p. XIV): written in parts. Split it, roughly: ~~exterior and
       lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), ~~cortex and localizations (954–986)~~ (written, `CortexTypes` plate and the localizations mode of `Gyri`), ~~interior (987–1037)~~ (written, `Ventricles` plate and Netter S-35), ~~grey nuclei, internal
       capsule and white matter (1038–1113)~~ (written, `InternalCapsule` plate), ~~motor and sensory
       pathways (1114–1137)~~ (written, `Pathways` plate), ~~special-sense pathways (1138–1189)~~ (written,
@@ -95,6 +95,14 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       Testut and Jacob's ventricle ends ~1 cm behind the lambdoid suture where Marie, Foix and Bertrand put it 1 cm in
       front. Fig. 990 draws Lucas-Championnière's Sylvian line rising backwards, while the text says parallel to the
       arch: the plate follows the text. The 10-20 EEG system mentioned at the end has no source in the library.
+
+- [ ] Cerebral circulation, current knowledge with no source in the library yet: the middle cerebral as a terminal
+      branch of the carotid (Testut: a collateral of the anterior, after embryology); a complete, regular circle in
+      under half of people; middle cerebral occlusion as the commonest infarct; Testut's veins of Galen = internal
+      cerebral veins, his ampulla = great cerebral vein, his basilar veins = basal veins of Rosenthal; the glymphatic
+      system and the meningeal lymphatics (2015). The territories of `WillisCircle` are drawn by eye after figs.
+      1009–1010; each gyrus goes wholly to the territory of its centroid (the superior parietal falls to the middle
+      cerebral, though Testut splits it).
 
 ## Ideas mentioned, not started
 
