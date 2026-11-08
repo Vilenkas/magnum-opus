@@ -26,9 +26,9 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       cord: the conus and filum terminale (~pp. 674–681) and its functional value (pp. 689–697).
 - [ ] **Núcleos del bulbo** in detail (pp. 719–750): better written together with the cranial
       nerves, where they make sense.
-- [ ] Netter plates for neurology: S-16 (médula y nervios espinales), S-23/S-25 (arterias y venas
-      de la médula), S-31/S-33 (cerebro), S-34/S-35 (ventrículos y LCR), S-40 (tronco del encéfalo),
-      S-54/S-55 (núcleos de los nervios craneales).
+- [x] Netter plates for neurology (2026-11-08): S-16, S-23–S-25, S-28, S-36–S-38, S-40, S-43, S-44, S-47, S-50,
+      S-54–S-57; and general plates for the other books: S-1, S-120, S-477 (Osteología), S-170 (Artrología), S-183
+      (Miología), S-302, S-304, S-307 (Angiología).
 
 ## Depth of the first four books
 
