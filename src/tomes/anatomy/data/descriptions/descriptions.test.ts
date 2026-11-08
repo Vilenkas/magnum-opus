@@ -2,11 +2,12 @@ import { describe, expect, it } from 'vitest'
 import nervous from '../../assets/nervous.json'
 import soft from '../../assets/soft-tissues.json'
 import vessels from '../../assets/vessels.json'
+import { JOINTS } from '../joint-index'
 import { pieces } from '../skeleton'
 import { DESCRIPTION_FILES, descriptionKey, descriptionOf, sourceLabel } from './index'
 
 const known = new Set(
-  [...pieces, ...(soft as { en: string }[]), ...(vessels as { en: string }[]), ...(nervous as { en: string }[])].map((e) => descriptionKey(e.en)),
+  [...pieces, ...(soft as { en: string }[]), ...(vessels as { en: string }[]), ...(nervous as { en: string }[]), ...JOINTS].map((e) => descriptionKey(e.en)),
 )
 
 describe('descriptions', () => {
@@ -22,6 +23,16 @@ describe('descriptions', () => {
         expect(d.sources.length, en).toBeGreaterThan(0)
         for (const p of d.text) expect((p.match(/\*\*/g) ?? []).length % 2, en).toBe(0)
       }
+  })
+
+  it('describe every joint and every piece of the upper limb, and every bone of it', () => {
+    const upper = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.set === 'joints' && e.groups?.some((g) => /upper limb|pectoral girdle|of hand/i.test(g.en)),
+    )
+    for (const e of upper) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const j of JOINTS.filter((j) => j.region === 'upper-limb')) expect(descriptionOf(j.en), j.en).toBeDefined()
+    for (const p of pieces.filter((p) => ['pectoral-girdle', 'arm-forearm', 'carpals', 'metacarpals', 'hand-phalanges'].includes(p.group)))
+      expect(descriptionOf(p.en), p.en).toBeDefined()
   })
 
   it('are found whatever the case, and missing ones say nothing', () => {

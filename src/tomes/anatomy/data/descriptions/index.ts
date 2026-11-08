@@ -6,6 +6,8 @@
  */
 import { sources, type SourceId } from '../sources'
 import { heart } from './heart'
+import { upperLimbBones } from './upper-limb-bones'
+import { upperLimbJoints } from './upper-limb-joints'
 
 export interface DescriptionSource {
   fuente: SourceId
@@ -21,7 +23,7 @@ export interface Description {
 export const descriptionKey = (en: string) => en.trim().toLowerCase()
 
 /** Every file of descriptions, by region; the tests check the keys against the models. */
-export const DESCRIPTION_FILES: Record<string, Record<string, Description>> = { heart }
+export const DESCRIPTION_FILES: Record<string, Record<string, Description>> = { heart, upperLimbBones, upperLimbJoints }
 
 const all = new Map<string, Description>()
 for (const file of Object.values(DESCRIPTION_FILES)) for (const [en, d] of Object.entries(file)) all.set(descriptionKey(en), d)
