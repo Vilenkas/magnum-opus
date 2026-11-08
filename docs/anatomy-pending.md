@@ -16,9 +16,11 @@ modern references and write it, as was done for the ossification and the endoste
       pp. 24–30, Latarjet–Ruiz pp. 9–13 and Moore's clinical boxes. The endosteum's renewal now cites them; still with no
       source in the library: the endosteum as a single cell layer with osteoclasts, and the callus formed from the
       medullary side (none of the four modern books describes the endosteum's cells).
-- [ ] Artrología: how the articular cartilage is nourished (synovial fluid, no vessels) and how it wears; the synovial
-      membrane's cells and how it makes the synovia; the joints' nerves (Hilton's law); stability (surfaces,
-      ligaments, muscles).
+- [x] Artrología (2026-11-08): the cartilage's nourishment and wear (artrosis), today's synovia and the synovial's
+      vulnerability, «Vasos y nervios» (periarticular circles, Hilton's law, pain and proprioception) and «Lo que mantiene
+      unida una articulación» (surfaces, ligaments, muscles as active ligaments; shoulder, elbow, hip), from Moore 8.ª,
+      Pró pp. 36–38, Latarjet–Ruiz pp. 18–19 and Rouvière t. 3 p. 615. Still with no source in the library: the synovial
+      membrane's cells (synoviocytes) and hyaluronic acid as what makes the synovia viscous.
 - [ ] Miología: the fibre's structure (sarcomere, actin, myosin), types of fibres, kinds of contraction (isometric,
       isotonic), muscle tone; the motor unit is only mentioned.
 - [ ] Angiología: the heart's development and fetal circulation (Netter S-305); the cardiac cycle and the conduction
