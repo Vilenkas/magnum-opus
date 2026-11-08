@@ -99,9 +99,19 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
 
 Agreed format (2026-11-08): short, region by region, the viewers as illustrations; relations, clinical points and
 Testut's names beside today's. Each region also fills `data/descriptions/<region>.ts` for the viewers' «Descripción»
-button. Order: the heart; then the clinical regions of Miología and Artrología (inguinal canal, rectus sheath,
-shoulder, knee, temporomandibular); then Osteología (ask the user whether he wants prose per bone). Neurología paused
-by the user's choice (spinal nerves and the vegetative system still pending).
+button.
+
+Revised plan (2026-11-08, agreed with the user): equity between the books is measured in the viewers' descriptions,
+not in chapter length. Chapters keep general anatomy plus regions that need explaining; every structure gets a
+60–100-word description card. Work goes **by body region, all five books at once** (bones, joints, muscles, vessels,
+nerves). The arthrology viewer indexes whole joints (`data/joint-index.ts`). Osteology: one card per kind of bone, for
+the user to review.
+
+- [x] Upper limb (Latarjet–Ruiz t. 1 chs. 54–62, Moore 8.ª): bones, joints and their pieces, muscles, vessels,
+      brachial plexus — `data/descriptions/upper-limb-*.ts`. Its chapter sections (shoulder…) still pending.
+- [ ] Lower limb · [ ] Thorax and back · [ ] Abdomen and pelvis · [ ] Head and neck (incl. the encephalon's
+      cards from neurology's text) · [ ] the heart's structure and pericardium (Testut pp. 71–155).
+- Neurología paused by the user's choice (spinal nerves and the vegetative system still pending).
 
 ## To review (the user, as domain expert)
 

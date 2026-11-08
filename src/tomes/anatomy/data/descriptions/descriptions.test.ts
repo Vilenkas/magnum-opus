@@ -25,7 +25,7 @@ describe('descriptions', () => {
       }
   })
 
-  it('describe every bone, joint, joint piece and muscle of the upper limb', () => {
+  it('describe every bone, joint, joint piece, muscle and nerve of the upper limb, and its main vessels', () => {
     const upper = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
       (e) => e.set === 'joints' && e.groups?.some((g) => /upper limb|pectoral girdle|of hand/i.test(g.en)),
     )
@@ -41,6 +41,11 @@ describe('descriptions', () => {
     expect(muscles.length).toBeGreaterThan(50)
     for (const e of muscles) expect(descriptionOf(e.en), e.en).toBeDefined()
     for (const en of ['Serratus anterior muscle', 'Pectoralis minor muscle', 'Subclavius muscle', 'Rhomboid major muscle', 'Levator scapulae'])
+      expect(descriptionOf(en), en).toBeDefined()
+    const plexus = (nervous as { en: string; groups?: { en: string }[] }[]).filter((e) => e.groups?.some((g) => g.en === 'Brachial plexus'))
+    expect(plexus.length).toBeGreaterThan(50)
+    for (const e of plexus) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const en of ['Axillary artery', 'Brachial artery', 'Radial artery', 'Ulnar artery', 'Superficial palmar arch', 'Deep palmar arch', 'Cephalic vein', 'Basilic vein', 'Axillary vein', 'Apical axillary nodes'])
       expect(descriptionOf(en), en).toBeDefined()
     for (const p of pieces.filter((p) => ['pectoral-girdle', 'arm-forearm', 'carpals', 'metacarpals', 'hand-phalanges'].includes(p.group)))
       expect(descriptionOf(p.en), p.en).toBeDefined()
