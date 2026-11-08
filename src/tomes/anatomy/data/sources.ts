@@ -99,7 +99,15 @@ export const sources = {
     edition: '9.ª ed.',
     publisher: 'Wolters Kluwer',
     year: 2023,
-    note: 'Consultado en una traducción automática al español, sin la paginación del original: se cita sin página.',
+    note: 'Se cita con la paginación del original inglés (Moore’s Clinically Oriented Anatomy, 9th ed.); sólo para lo que no recoge la 8.ª edición en español.',
+  },
+  'moore-8': {
+    authors: 'K. L. Moore, A. F. Dalley y A. M. R. Agur',
+    title: 'Moore. Anatomía con orientación clínica',
+    edition: '8.ª ed.',
+    place: 'Barcelona',
+    publisher: 'Wolters Kluwer',
+    year: 2017,
   },
   pro: {
     authors: 'E. A. Pró',

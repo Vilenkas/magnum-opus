@@ -41,7 +41,7 @@ export interface Reflex {
   /** Dejerine's segments, as Testut prints them. */
   range: Range
   /** The level a modern reference gives, when it gives one. */
-  today?: { range: Range; source: 'moore' | 'pro'; p?: string }
+  today?: { range: Range; source: 'moore-8' | 'pro'; p?: string }
 }
 
 export const REFLEXES: Reflex[] = [
@@ -57,16 +57,16 @@ export const REFLEXES: Reflex[] = [
   { id: 'bulbocavernous', name: 'Bulbocavernoso', kind: 'cutaneous', range: ['S3', 'S3'] },
   // Tendinous and periosteal reflexes (right).
   { id: 'scm', name: 'Esternocleidomastoideo', kind: 'deep', range: ['C3', 'C4'] },
-  { id: 'biceps', name: 'Bicipital', kind: 'deep', range: ['C4', 'C6'], today: { range: ['C5', 'C6'], source: 'moore' } },
+  { id: 'biceps', name: 'Bicipital', kind: 'deep', range: ['C4', 'C6'], today: { range: ['C5', 'C6'], source: 'moore-8', p: '211' } },
   { id: 'radial', name: 'Perióstico radial', kind: 'deep', range: ['C5', 'C6'] },
   { id: 'triceps', name: 'Tricipital', kind: 'deep', range: ['C6', 'C8'] },
   { id: 'ulnar', name: 'Perióstico cubital', kind: 'deep', range: ['C6', 'D1'] },
   { id: 'scapula', name: 'Del omóplato', kind: 'deep', range: ['C7', 'D1'] },
   { id: 'flexors', name: 'De los flexores', kind: 'deep', range: ['C8', 'D1'] },
   { id: 'adductors', name: 'Perióstico de los aductores', kind: 'deep', range: ['L2', 'L4'] },
-  { id: 'patellar', name: 'Rotuliano', kind: 'deep', range: ['L2', 'L4'], today: { range: ['L2', 'L4'], source: 'moore' } },
+  { id: 'patellar', name: 'Rotuliano', kind: 'deep', range: ['L2', 'L4'], today: { range: ['L2', 'L4'], source: 'moore-8', p: '717' } },
   { id: 'hamstrings', name: 'Perióstico del bíceps y semitendinoso', kind: 'deep', range: ['L4', 'S1'] },
-  { id: 'achilles', name: 'Aquíleo', kind: 'deep', range: ['L5', 'S2'], today: { range: ['S1', 'S2'], source: 'moore' } },
+  { id: 'achilles', name: 'Aquíleo', kind: 'deep', range: ['L5', 'S2'], today: { range: ['S1', 'S2'], source: 'moore-8', p: '765' } },
   // Visceral centres (bottom right).
   { id: 'erection', name: 'Centro de la erección', kind: 'centre', range: ['S2', 'S3'] },
   { id: 'ejaculation', name: 'Centro sacro de la eyaculación', kind: 'centre', range: ['S3', 'S3'] },
