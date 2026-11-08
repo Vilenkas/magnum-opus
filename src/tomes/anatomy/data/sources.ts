@@ -39,6 +39,15 @@ export const sources = {
     publisher: 'Salvat',
     year: 1975,
   },
+  'testut-3': {
+    authors: 'L. Testut y A. Latarjet',
+    title: 'Tratado de anatomía humana',
+    volume: 'Tomo III: Meninges, Sistema nervioso periférico, Órganos de los sentidos, Aparato de la respiración y de la fonación, Glándulas de secreción interna',
+    edition: '9.ª ed.',
+    place: 'Barcelona',
+    publisher: 'Salvat',
+    year: 1975,
+  },
   'latarjet-ruiz-1': {
     authors: 'M. Latarjet y A. Ruiz Liard',
     title: 'Anatomía humana',

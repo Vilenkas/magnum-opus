@@ -1,0 +1,140 @@
+.schema {
+  display: block;
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 0;
+}
+
+.divider {
+  width: 1px;
+  align-self: stretch;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.bone,
+.periosteal,
+.meningeal,
+.arachnoid,
+.subarachnoid,
+.cortex {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 40%, transparent);
+  stroke-width: 0.5;
+  cursor: pointer;
+  transition: filter 150ms ease;
+}
+.bone {
+  fill: #e7dcc4;
+}
+.periosteal {
+  fill: #e2c87c;
+}
+.meningeal {
+  fill: #edd99b;
+}
+.arachnoid {
+  fill: #b9cbe0;
+}
+.subarachnoid {
+  fill: #dce8f2;
+}
+.cortex {
+  fill: #cfb7b0;
+}
+[data-picked='true'] {
+  filter: brightness(0.86) saturate(1.4);
+}
+
+.borderLine,
+.piaLine {
+  fill: none;
+  stroke-width: 1.6;
+  cursor: pointer;
+}
+.borderLine {
+  stroke: #8a7550;
+  stroke-dasharray: 3 2;
+}
+.piaLine {
+  stroke: #b0473c;
+}
+.arachLine {
+  stroke: #7d95b3;
+  stroke-width: 1.2;
+}
+
+.sinus {
+  fill: #3e5a87;
+  stroke: #2b3f60;
+}
+.granulation path {
+  fill: #b9cbe0;
+  stroke: #7d95b3;
+}
+.suture {
+  fill: none;
+  stroke: #7a6a4f;
+  stroke-width: 1.1;
+}
+.vein {
+  fill: none;
+  stroke: #3e5a87;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.vein[data-hot='true'] {
+  stroke: #9e2a24;
+}
+.artery {
+  fill: #b0473c;
+  stroke: #6d231e;
+}
+.artery[data-hot='true'] {
+  fill: #e04a3b;
+  r: 4.5;
+}
+
+.blood {
+  fill: #9e2a24;
+  fill-opacity: 0.88;
+  stroke: #6d1a16;
+  stroke-width: 0.8;
+  pointer-events: none;
+}
+.blood[data-kind='subarachnoid'] {
+  fill-opacity: 0.55;
+}
+
+.tag {
+  font-family: var(--anatomy-body);
+  font-style: italic;
+  font-size: 9.5px;
+  fill: var(--anatomy-ink-soft);
+}
+
+.label {
+  cursor: pointer;
+}
+.label path {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 45%, transparent);
+  stroke-width: 0.6;
+}
+.label text {
+  font-family: var(--anatomy-body);
+  font-size: 10px;
+  fill: var(--anatomy-ink);
+}
+.label[data-picked='true'] text {
+  font-weight: 700;
+  filter: none;
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+}
+.alt {
+  margin: 0.2rem 0 0 !important;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}

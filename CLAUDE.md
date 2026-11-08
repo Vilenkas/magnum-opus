@@ -188,6 +188,12 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   and below it the shock, then the automatism. «Niveles de hoy» swaps in Moore's and Pró's levels and the pyramidal
   signs (abdominal reflexes lost, Babinski). Neurology plates are numbered in order of appearance: inserting one
   means renumbering the captions after it.
+- Neurología grows in parts: `chapters/neurology.mdx` ends by rendering `chapters/neurology/*.mdx` (passing
+  `props.components` down, since there is no MDX provider). `neurology/meninges.mdx` is Testut t. III pp. 1–44
+  (`testut-3`; figures `testut3-fig-N`). `data/meninges.ts` + `components/Meninges.tsx` (Lámina XVIII): a frontal
+  section of the vault where every boundary is a function of x; a bleed opens one interface and pushes what lies
+  below by its own thickness. Where it stops follows from where the dura is fixed (bone at the sutures, falx at the
+  midline); tests check the order of the layers and each bleed's limits.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

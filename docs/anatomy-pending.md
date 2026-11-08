@@ -33,7 +33,8 @@ modern references and write it, as was done for the ossification and the endoste
       No pressure figures (mmHg): no book in the library gives them along the tree.
 - [ ] Moore 8.ª citations were checked against its index (2026-11-08); a few still rest on the page map alone (±1–2):
       the motor unit (33), the sternal puncture (24), the shoulder (265–266, 177–178), the hip capsule (787–789).
-- [ ] Neurología: the meninges are in Testut t. III, not in the library; Rouvière t. 4 and Latarjet-Ruiz ch. 25 have them.
+- [x] Neurología (2026-11-08): the meninges and the CSF, from Testut t. III pp. 1–44 (now in the library), contrasted
+      with Moore 8.ª, Latarjet–Ruiz ch. 25 and Pró, with the `Meninges` plate (Lámina XVIII).
 
 ## Next: Libro V · Neurología
 
@@ -61,6 +62,20 @@ modern references and write it, as was done for the ossification and the endoste
 - [x] Netter plates for neurology (2026-11-08): S-16, S-23–S-25, S-28, S-36–S-38, S-40, S-43, S-44, S-47, S-50,
       S-54–S-57; and general plates for the other books: S-1, S-120, S-477 (Osteología), S-170 (Artrología), S-183
       (Miología), S-302, S-304, S-307 (Angiología).
+
+## Next: the rest of Neurología from Testut t. III (2026-11-08 plan)
+
+- [x] Meninges y líquido cefalorraquídeo (pp. 1–44).
+- [ ] Nervios: anatomía general (pp. 45–52).
+- [ ] Nervios craneales I–VI (pp. 53–125), with the **núcleos del bulbo** (t. II pp. 719–750). Plate idea: the nuclei
+      of the cranial nerves on the brainstem.
+- [ ] Nervios craneales VII–XII (pp. 126–196).
+- [ ] Nervios raquídeos (pp. 197–356): raíces y territorios radiculares (plate idea: dermatomes, Testut against today),
+      plexos cervical, braquial (plate idea), intercostales, lumbar, sacro.
+- [ ] Sistema vegetativo (pp. 357–~440). Plate idea: sympathetic against parasympathetic.
+- Libro VII · Estesiología is a placeholder in `books.ts`: Testut t. III pp. 447 onwards (piel, gusto, olfato, vista, oído).
+- [ ] Meninges, to review: the plate's layers are not to scale; Testut's 100–150 g and 100 mm of water for the CSF
+      are left as his (no modern volume or pressure in the library besides Moore's 400–500 ml/day secretion).
 
 ## Depth of the first four books
 
