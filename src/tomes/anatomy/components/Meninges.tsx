@@ -58,10 +58,9 @@ export function Meninges() {
     const rows: { x: number; ys: number[]; bloodTop: number | null }[] = []
     for (let x = MID - HALF; x <= MID + HALF; x += STEP) rows.push({ x, ...boundaries(x, bleed, -1) })
     const at = (i: number) => rows.map((r) => [r.x, r.ys[i]] as [number, number])
-    const periostealBottom = bleed && bleed.at === 2 ? at(2) : at(2)
     return [
       { layer: 'bone' as LayerId, d: band(at(0), rows.map((r) => [r.x, bleed?.at === 1 && r.bloodTop !== null ? r.bloodTop : r.ys[1]] as [number, number])) },
-      { layer: 'periosteal' as LayerId, d: band(at(1), periostealBottom) },
+      { layer: 'periosteal' as LayerId, d: band(at(1), at(2)) },
     ]
   }, [bleed])
   const yAt = (x: number, i: number) => boundaries(x, bleed, -1).ys[i]
