@@ -120,6 +120,15 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       muscles' nuclei, the basal ganglia's loop through the thalamus, the glymphatic system and meningeal lymphatics.
       Rouvière t. 4 p. 276 still says the granular layer inhibits Purkinje cells (granule cells are excitatory today).
 
+- [x] The general chapters of Osteología, Artrología, Miología and Angiología contrasted with the modern references
+      (2026-11-08). Changed or added: proximal/distal (Testut: towards the median plane; today: towards the trunk or
+      origin), epiphyseal cartilage and metaphysis, osteons and bone cells, only red and yellow marrow, lymphatics in the
+      periosteum; joints by tissue (fibrous, cartilaginous, synovial) with today's names for Testut's six genera, the
+      sacroiliac as a synovial joint; three kinds of muscle, origin and insertion, epimysium, motor unit, a table of
+      Testut's muscle names against TA; heart weight (200–250 g today against Testut's 270–275), precapillary sphincters
+      and pericytes, no lymphatics in the CNS, atrium and lymph node, right lymphatic duct. Pró (p. 44) defines the
+      endomysium as Testut does (round the primary fascicles), not round each fibre: left as it was.
+
 ## Ideas mentioned, not started
 
 - [ ] Sexual dimorphism of the **skull** (Testut t. I p. 300), as a second view of the pelvis plate
