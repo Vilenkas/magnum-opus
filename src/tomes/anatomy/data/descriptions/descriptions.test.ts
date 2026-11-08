@@ -51,7 +51,7 @@ describe('descriptions', () => {
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })
 
-  it('describe every bone, joint, joint piece and muscle of the pelvis and the lower limb', () => {
+  it('describe every bone, joint, joint piece, muscle and nerve of the pelvis and the lower limb, and its main vessels', () => {
     const lower = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
       (e) => e.set === 'joints' && (!e.groups?.length || e.groups.some((g) => /lower limb|pelvic girdle|of foot|ankle/i.test(g.en))),
     )
@@ -63,6 +63,13 @@ describe('descriptions', () => {
     )
     expect(muscles.length).toBeGreaterThan(50)
     for (const e of muscles) expect(descriptionOf(e.en), e.en).toBeDefined()
+    const plexus = (nervous as { en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.groups?.some((g) => /^(Lumbar|Sacral) plexus$/.test(g.en)) && e.en !== 'Superior subscapular nerve',
+    )
+    expect(plexus.length).toBeGreaterThan(30)
+    for (const e of plexus) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const en of ['Femoral artery', 'Popliteal artery', 'Anterior tibial artery', 'Posterior tibial artery', 'Dorsalis pedis artery', 'Plantar arch', 'Great saphenous vein', 'Small saphenous vein', 'Femoral vein'])
+      expect(descriptionOf(en), en).toBeDefined()
     for (const p of pieces.filter((p) => ['pelvic-girdle', 'thigh-leg', 'tarsals', 'metatarsals', 'foot-phalanges', 'foot-sesamoids'].includes(p.group)))
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })

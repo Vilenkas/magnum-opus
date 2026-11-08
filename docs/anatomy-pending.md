@@ -109,7 +109,9 @@ the user to review.
 
 - [x] Upper limb (Latarjet–Ruiz t. 1 chs. 54–62, Moore 8.ª): bones, joints and their pieces, muscles, vessels,
       brachial plexus — `data/descriptions/upper-limb-*.ts`. Its chapter sections (shoulder…) still pending.
-- [ ] Lower limb · [ ] Thorax and back · [ ] Abdomen and pelvis · [ ] Head and neck (incl. the encephalon's
+- [x] Lower limb and pelvic girdle (Latarjet–Ruiz t. 1 chs. 63–70): `data/descriptions/lower-limb-*.ts`. Left for the
+      pelvis pass: gluteal and external iliac nodes; the fibular and posterior tibial nodes are in no source read.
+- [ ] Thorax and back · [ ] Abdomen and pelvis · [ ] Head and neck (incl. the encephalon's
       cards from neurology's text) · [ ] the heart's structure and pericardium (Testut pp. 71–155).
 - Neurología paused by the user's choice (spinal nerves and the vegetative system still pending).
 
