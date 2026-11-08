@@ -26,8 +26,13 @@ modern references and write it, as was done for the ossification and the endoste
       «Los papeles de un músculo» (prime mover, fixator, synergist, antagonist; shunt and spurt muscles) and «Crecimiento,
       atrofia y reparación» (hypertrophy, satellite cells), from Moore 8.ª pp. 31–35 and 757, Pró pp. 43–45 and
       Latarjet–Ruiz p. 245. Still with no source in the library: the sarcomere and its bands (no book describes them).
-- [ ] Angiología: the heart's development and fetal circulation (Netter S-305); the cardiac cycle and the conduction
-      system (S-319); blood pressure along the tree; how lymph is formed.
+- [x] Angiología (2026-11-08): «El latido» (cardiac cycle, conduction system with Keith–Flack, Aschoff–Tawara, His and
+      Purkinje, autonomic control; Netter S-319), «El corazón antes de nacer» (the fetal shunts and what remains of them;
+      Netter S-305), «La presión a lo largo del árbol» (elastic, muscular, arterioles, veins; valves and pumps, varices) and
+      «Cómo se forma la linfa» (Starling, oedema, lymph capillaries), from Moore 8.ª and Latarjet–Ruiz t. 2 pp. 878–879.
+      No pressure figures (mmHg): no book in the library gives them along the tree.
+- [ ] Moore 8.ª citations were checked against its index (2026-11-08); a few still rest on the page map alone (±1–2):
+      the motor unit (33), the sternal puncture (24), the shoulder (265–266, 177–178), the hip capsule (787–789).
 - [ ] Neurología: the meninges are in Testut t. III, not in the library; Rouvière t. 4 and Latarjet-Ruiz ch. 25 have them.
 
 ## Next: Libro V · Neurología
