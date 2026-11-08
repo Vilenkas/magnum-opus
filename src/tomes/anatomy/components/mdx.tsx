@@ -66,7 +66,7 @@ export const mdxComponents: MDXComponents = {
   ),
   LigamentViewer: lazyPlate(() =>
     import('./TissueViewer').then(({ TissueViewer }) => () => (
-      <TissueViewer caption="Lámina III · Los ligamentos" initial={{ joints: true }} storageKey="ligaments" />
+      <TissueViewer caption="Lámina III · Los ligamentos" initial={{ joints: true }} storageKey="ligaments" joints />
     )),
   ),
 }

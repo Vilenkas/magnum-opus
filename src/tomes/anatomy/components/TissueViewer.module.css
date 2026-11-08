@@ -94,3 +94,40 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* A joint's pieces: a run of links, each opening the piece's own card. */
+.parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.part {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline dotted color-mix(in oklab, var(--anatomy-ink) 45%, transparent);
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.part:hover,
+.part:focus-visible {
+  color: var(--anatomy-accent);
+}
+
+.parts li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.parts li::before,
+.parts li::marker {
+  content: none !important;
+}

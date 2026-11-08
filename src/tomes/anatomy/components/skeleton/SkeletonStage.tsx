@@ -90,6 +90,8 @@ export type Focus =
    * in model units), seen from an anatomical view (default: the joint's own side).
    */
   | { kind: 'joint'; position: Vec3; pieceIds: string[]; view?: JointView; frame?: number }
+  /** Several nodes of any model (a joint's ligaments), framed together from an anatomical view. */
+  | { kind: 'nodes'; ids: string[]; view?: JointView }
 
 type Vec3 = [number, number, number]
 
@@ -518,6 +520,17 @@ function SkeletonModel({
       const smallest = Math.min(...focus.pieceIds.map(largest))
       const side = focus.frame ?? THREE.MathUtils.clamp(Number.isFinite(smallest) ? smallest * 1.1 : 0.15, 0.06, 0.3)
       box.setFromCenterAndSize(center, new THREE.Vector3(side, side, side))
+      direction = jointViewDirection(focus.view, center, bodyAxis)
+    } else if (focus.kind === 'nodes') {
+      for (const id of focus.ids) {
+        const mesh = meshes.get(id) ?? layerMeshes.current.get(id)?.mesh
+        if (mesh) box.expandByObject(mesh)
+      }
+      if (box.isEmpty()) box.setFromObject(scene)
+      const center = box.getCenter(new THREE.Vector3())
+      // A finger's ligaments still get a frame wide enough to show the bones they join.
+      const size = box.getSize(new THREE.Vector3()).max(new THREE.Vector3(0.07, 0.07, 0.07))
+      box.setFromCenterAndSize(center, size)
       direction = jointViewDirection(focus.view, center, bodyAxis)
     } else if (focus.kind === 'region' || focus.kind === 'group') {
       for (const [id, mesh] of meshes) {

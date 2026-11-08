@@ -91,6 +91,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   a head inherits the whole muscle's areas only for the kind it lacks). `components/TissueViewer.tsx`
   shows them as layers over the skeleton (`SkeletonStage` `layers`, each lazily loaded with its own
   BVH); presets `<MuscleViewer>` (Miología) and `<LigamentViewer>` (Artrología).
+- `data/joint-index.ts`: every piece of `joints.glb` belongs to one joint (by its nearest TA group, plus single
+  pieces); each joint names its bones. `<LigamentViewer>` indexes whole joints first: choosing one shows its
+  bones and pieces on one side (the rest ghosted, the stage's `{ kind: 'nodes' }` focus frames them), and its
+  card lists the pieces. Tests check no piece is left without a joint.
   Source blend and TA2.csv live in `library/anatomy/z-anatomy/` (see `tools/anatomy/README.md`).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).
