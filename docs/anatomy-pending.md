@@ -22,7 +22,8 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       cerebral circulation (Art. VIII, 1195–~1240, end not mapped).
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
-- [ ] **Vasos de la médula espinal** (pp. 681–697), left out of the cord section.
+- [x] **Vasos de la médula espinal** (pp. 681–689): written, with figs. 557–560 bis; no plate. Still unwritten in the
+      cord: the conus and filum terminale (~pp. 674–681) and its functional value (pp. 689–697).
 - [ ] **Núcleos del bulbo** in detail (pp. 719–750): better written together with the cranial
       nerves, where they make sense.
 - [ ] Netter plates for neurology: S-16 (médula y nervios espinales), S-23/S-25 (arterias y venas
@@ -103,6 +104,10 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       system and the meningeal lymphatics (2015). The territories of `WillisCircle` are drawn by eye after figs.
       1009–1010; each gyrus goes wholly to the territory of its centroid (the superior parietal falls to the middle
       cerebral, though Testut splits it).
+
+- [ ] Spinal cord vessels, current knowledge with no source in the library yet: anterior spinal artery → anterior two
+      thirds, posterior spinal arteries → posterior third; the upper thoracic watershed; paraplegia after injury to the
+      artery of Adamkiewicz.
 
 ## Ideas mentioned, not started
 
