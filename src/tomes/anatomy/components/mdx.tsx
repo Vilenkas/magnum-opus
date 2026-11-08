@@ -54,6 +54,8 @@ export const mdxComponents: MDXComponents = {
   WillisCircle: lazyPlate(() => import('./WillisCircle').then((m) => m.WillisCircle)),
   Meninges: lazyPlate(() => import('./Meninges').then((m) => m.Meninges)),
   EyeNerves: lazyPlate(() => import('./EyeNerves').then((m) => m.EyeNerves)),
+  CranialNuclei: lazyPlate(() => import('./CranialNuclei').then((m) => m.CranialNuclei)),
+  FacialPalsy: lazyPlate(() => import('./FacialPalsy').then((m) => m.FacialPalsy)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),
   VesselViewer: lazyPlate(() => import('./VesselViewer').then((m) => m.VesselViewer)),
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.

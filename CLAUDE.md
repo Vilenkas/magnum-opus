@@ -199,6 +199,14 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   Moore's pull (abduction, elevation, intorsion). A palsy is derived: at rest the eye drifts by minus the paralysed
   muscles' pulls; in each of the nine gazes it fails where the one muscle that moves it there is lost, and the eyes
   see double there or where a marked drift persists. Tests check the VI, III, IV and Horner pictures.
+- `neurology/cranial-nerves-2.mdx`: the nuclei of the cranial nerves (t. II pp. 719–724) and nerves VII–XII (t. III
+  pp. 126–196). `data/cranial-nuclei.ts` + `components/CranialNuclei.tsx` (Lámina XX): every nucleus III–XII on a dorsal
+  view (mm), with Testut's columns (bases and heads of the horns, lateral horn) and today's functional ones (Latarjet–Ruiz);
+  tests check the two map onto each other (only the mesencephalic V changes sides), the medial→lateral order on the floor
+  and Testut's heights. `data/facial-palsy.ts` + `components/FacialPalsy.tsx` (Lámina XXI): the facial as a line of
+  stations; a trunk lesion cuts the branches leaving at or beyond it, only for fibres already in the trunk (the intermediary
+  joins at the emergence); central lesions spare the upper face. Tests check Moore's levels. The bulb's own nuclei and its
+  vessels (Foix–Hillemand, t. II pp. 724–753) are in `neurology.mdx`.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

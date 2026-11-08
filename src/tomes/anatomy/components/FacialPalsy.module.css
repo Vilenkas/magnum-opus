@@ -1,0 +1,229 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem 1.5rem;
+  padding: 0.5rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+@media (max-width: 48rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.facePane,
+.nervePane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.face {
+  width: 100%;
+  max-width: 15rem;
+  font-family: var(--anatomy-body);
+}
+.nerve {
+  width: 100%;
+  font-family: var(--anatomy-body);
+}
+
+/* ---------- The face ---------- */
+
+.head {
+  fill: #f1dcc0;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.2;
+}
+.neckLine,
+.nose {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 70%, transparent);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+.brow {
+  fill: none;
+  stroke: #5a4433;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: d 300ms ease;
+}
+.wrinkle {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 45%, transparent);
+  stroke-width: 1;
+}
+.eyeWhite {
+  fill: #fbf7ef;
+  stroke: none;
+}
+.iris {
+  fill: #5d7a8c;
+  transition: cy 300ms ease;
+}
+.lidLine {
+  fill: none;
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.fold {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 45%, transparent);
+  stroke-width: 1.2;
+}
+.lip {
+  fill: none;
+  stroke: #9b3b33;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  transition: d 300ms ease;
+}
+.teeth {
+  fill: #fbf7ef;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 40%, transparent);
+  stroke-width: 0.6;
+}
+.cord {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 50%, transparent);
+  stroke-width: 1.2;
+}
+.side {
+  font-style: italic;
+  font-size: 10px;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The nerve ---------- */
+
+.trunk,
+.branch,
+.branchIntermediary,
+.intermediary,
+.central,
+.auditory {
+  fill: none;
+  stroke-linecap: round;
+  transition:
+    stroke 250ms ease,
+    opacity 250ms ease;
+}
+.trunk,
+.branch {
+  stroke: #d9762b;
+  stroke-width: 4;
+}
+.intermediary,
+.branchIntermediary {
+  stroke: #3b5a92;
+  stroke-width: 2.4;
+}
+.central {
+  stroke: #b8322a;
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+.auditory {
+  stroke: #8a7a6c;
+  stroke-width: 3;
+}
+.branch[data-cut='true'],
+.branchIntermediary[data-cut='true'],
+.central[data-cut='true'],
+.auditory[data-cut='true'] {
+  stroke: #b9a98f;
+  stroke-dasharray: 3 4;
+}
+.trunk[data-cut='true'] {
+  opacity: 0.85;
+}
+.neighbour {
+  fill: #b8322a;
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.6;
+}
+.neighbour[data-cut='true'] {
+  fill: #b9a98f;
+}
+.ganglion {
+  fill: #3b5a92;
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.6;
+}
+.tick {
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.8;
+}
+.box {
+  fill: #efe2c9;
+  stroke: var(--anatomy-ink);
+  stroke-width: 0.8;
+}
+.boxText,
+.station {
+  font-size: 10px;
+  fill: var(--anatomy-ink);
+}
+.station {
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+.small {
+  font-size: 9px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+.lesion circle {
+  fill: rgb(255 255 255 / 0.8);
+  stroke: #b8322a;
+  stroke-width: 2;
+}
+.lesion path {
+  stroke: #b8322a;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+/* ---------- Signs ---------- */
+
+.signs {
+  width: 100%;
+  margin: 0.5rem 0 0 !important;
+  padding: 0 !important;
+  list-style: none;
+  columns: 2 16rem;
+  column-gap: 1.5rem;
+  font-size: 0.9rem;
+}
+.signs li {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0 0 0.25rem !important;
+  padding: 0 !important;
+  break-inside: avoid;
+  color: var(--anatomy-ink-soft);
+}
+.signs li::before,
+.signs li::marker {
+  content: none !important;
+}
+.signs li[data-lost='true'] {
+  color: var(--anatomy-ink);
+}
+.mark {
+  flex: none;
+  width: 1rem;
+  text-align: center;
+}
+.signs li[data-lost='true'] .mark {
+  color: #b8322a;
+  font-weight: 700;
+}
+
+.text {
+  margin: 0.5rem 0 0 !important;
+}

@@ -57,8 +57,8 @@ modern references and write it, as was done for the ossification and the endoste
 - [x] **Vasos de la médula espinal** (pp. 681–689): written, with figs. 557–560 bis; no plate. The rest of the cord
       (collaterals, neuroglia, filum terminale, pp. 674–681; functional value, pp. 689–697) written too, with the
       `SpinalReflexes` plate. The cord is now complete.
-- [ ] **Núcleos del bulbo** in detail (pp. 719–750): better written together with the cranial
-      nerves, where they make sense.
+- [x] **Núcleos del bulbo** in detail (pp. 719–753): the cranial nerve nuclei with the cranial nerves
+      (`CranialNuclei`, Lámina XX); the bulb's own nuclei and its vessels in the bulb section (2026-11-08).
 - [x] Netter plates for neurology (2026-11-08): S-16, S-23–S-25, S-28, S-36–S-38, S-40, S-43, S-44, S-47, S-50,
       S-54–S-57; and general plates for the other books: S-1, S-120, S-477 (Osteología), S-170 (Artrología), S-183
       (Miología), S-302, S-304, S-307 (Angiología).
@@ -70,8 +70,11 @@ modern references and write it, as was done for the ossification and the endoste
       (Lámina XIX). To review: Moore 8.ª pp. 902–909 for the optic nerve as a CNS tract is a range (no index entry
       found); Duval and Laborde's fascicle from the VI nucleus to the opposite medial rectus, rejected by Testut, is
       today's internuclear pathway in the medial longitudinal fasciculus, but no book in the library says so.
-- [ ] Nervios craneales VII–XII (pp. 126–196), with the **núcleos del bulbo** (t. II pp. 719–750). Plate idea: the
-      nuclei of all the cranial nerves on the brainstem.
+- [x] Nervios craneales VII–XII (pp. 126–196), with the núcleos del bulbo (t. II pp. 719–753) and the plates
+      `CranialNuclei` (Lámina XX) and `FacialPalsy` (Lámina XXI). To review: no book in the library describes the
+      bulbar syndromes (Wallenberg, medial medullary), so the Foix–Hillemand territories are given without them; the
+      positions of the nuclei in the plate are schematic except Testut's heights; Testut's 12.5 + 2.5 mm for the XII
+      nucleus does not add up to his own 16–18 mm.
 - [ ] Nervios raquídeos (pp. 197–356): raíces y territorios radiculares (plate idea: dermatomes, Testut against today),
       plexos cervical, braquial (plate idea), intercostales, lumbar, sacro.
 - [ ] Sistema vegetativo (pp. 357–~440). Plate idea: sympathetic against parasympathetic.
