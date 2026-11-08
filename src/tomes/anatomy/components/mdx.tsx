@@ -48,6 +48,7 @@ export const mdxComponents: MDXComponents = {
   InternalCapsule: lazyPlate(() => import('./InternalCapsule').then((m) => m.InternalCapsule)),
   Pathways: lazyPlate(() => import('./Pathways').then((m) => m.Pathways)),
   VisualFields: lazyPlate(() => import('./VisualFields').then((m) => m.VisualFields)),
+  CranialTopography: lazyPlate(() => import('./CranialTopography').then((m) => m.CranialTopography)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),
   VesselViewer: lazyPlate(() => import('./VesselViewer').then((m) => m.VesselViewer)),
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.

@@ -1,0 +1,145 @@
+.body {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+
+.divider {
+  width: 1px;
+  margin: 0 0.4rem;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.schema {
+  width: 100%;
+  max-width: 34rem;
+  font-family: var(--anatomy-display);
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---------- The skull ---------- */
+
+.skull,
+.brain {
+  pointer-events: none;
+}
+.bone {
+  fill: #f4ead6;
+  stroke: #8a7a6c;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.zygoma {
+  fill: #ecdfc6;
+  stroke: #8a7a6c;
+  stroke-width: 1;
+}
+.orbit {
+  fill: #d9cab0;
+  stroke: #8a7a6c;
+  stroke-width: 1;
+}
+.suture {
+  fill: none;
+  stroke: #a89c8f;
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+.boneLabel {
+  font-size: 9px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The brain under it ---------- */
+
+.hemisphere {
+  fill: rgb(214 170 160 / 0.32);
+  stroke: #b0786c;
+  stroke-width: 1.1;
+}
+.cerebellum {
+  fill: rgb(190 150 170 / 0.32);
+  stroke: #9a7088;
+  stroke-width: 1.1;
+}
+.region {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- Constructions ---------- */
+
+.dot {
+  fill: var(--anatomy-ink);
+  stroke: #fbf6ea;
+  stroke-width: 1;
+}
+.label {
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: var(--anatomy-ink);
+  paint-order: stroke;
+  stroke: #f6efe0;
+  stroke-width: 3px;
+}
+.construction {
+  fill: none;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 3;
+}
+.tape {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+.measure {
+  fill: none;
+  stroke-width: 1;
+}
+.measureText {
+  font-size: 10px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: #f6efe0;
+  stroke-width: 3px;
+}
+.fissure {
+  fill: none;
+  stroke: #2a2420;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+.fissureLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  font-style: italic;
+  fill: #2a2420;
+  paint-order: stroke;
+  stroke: #f6efe0;
+  stroke-width: 3px;
+}
+.centre {
+  fill: none;
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+.centreLabel {
+  font-size: 10px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: #f6efe0;
+  stroke-width: 3px;
+}
+.box {
+  stroke-width: 1.5;
+}

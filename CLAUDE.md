@@ -170,6 +170,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   from above, one bundle per retinal quadrant (ganglion cell → geniculocalcarine neuron, the ventral ones
   round Meyer's loop). Same lesion-as-ellipse idea as `pathways.ts`; `fieldOf` inverts retina → field.
   Tests check the semidecussation and each defect (monocular, bitemporal, homonymous, quadrantanopias).
+- `data/cranial-topography.ts` + `components/CranialTopography.tsx`: the head in profile in cm (x back from the
+  nasion, y up from the zygomatic arch). The skull is drawn to average measures (lambda from Testut's 6–7 cm above
+  the inion); every construction (Poirier, Lucas-Championnière, Chipault, Testut and Jacob, Marie–Foix–Bertrand)
+  is computed from it with the authors' distances. Tests check independent methods against each other.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

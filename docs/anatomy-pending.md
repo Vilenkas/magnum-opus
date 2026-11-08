@@ -18,8 +18,8 @@ Netter's plates in `library/anatomy/testut-notes.md` and `library/anatomy/netter
       lobes (896–953)~~ (written, with the `Gyri` plate and Netter S-31 to S-33), ~~cortex and localizations (954–986)~~ (written, `CortexTypes` plate and the localizations mode of `Gyri`), ~~interior (987–1037)~~ (written, `Ventricles` plate and Netter S-35), ~~grey nuclei, internal
       capsule and white matter (1038–1113)~~ (written, `InternalCapsule` plate), ~~motor and sensory
       pathways (1114–1137)~~ (written, `Pathways` plate), ~~special-sense pathways (1138–1189)~~ (written,
-      `VisualFields` plate), cranioencephalic topography (1190–1193) and cerebral circulation (1194–~1240,
-      end not mapped).
+      `VisualFields` plate), ~~cranioencephalic topography (1190–1195)~~ (written, `CranialTopography` plate) and
+      cerebral circulation (Art. VIII, 1195–~1240, end not mapped).
 - [ ] A plate for the cerebellum's lobes: classical names, Bolk, Edinger and today's (Larsell I–X,
       Netter S-42) on one unfolded cerebellum (fig. 660).
 - [ ] **Vasos de la médula espinal** (pp. 681–697), left out of the cord section.
@@ -89,6 +89,12 @@ far). Pending, after the cerebrum: decide with the user whether and in what orde
       frontal operculum (Testut, after Grasset: the hippocampal gyrus). Testut's fig. 964 (Favory) loops
       the upper crossed fibres into the opposite nerve; Wilbrand's knee is usually said of the lower ones.
       Macular fibres are left out of the plate.
+
+- [ ] Cranioencephalic topography: the skull of the `CranialTopography` plate is drawn to average measures, not
+      taken from a specimen; on it Poirier's and Lucas-Championnière's upper ends of Rolando differ by ~2 cm, and
+      Testut and Jacob's ventricle ends ~1 cm behind the lambdoid suture where Marie, Foix and Bertrand put it 1 cm in
+      front. Fig. 990 draws Lucas-Championnière's Sylvian line rising backwards, while the text says parallel to the
+      arch: the plate follows the text. The 10-20 EEG system mentioned at the end has no source in the library.
 
 ## Ideas mentioned, not started
 
