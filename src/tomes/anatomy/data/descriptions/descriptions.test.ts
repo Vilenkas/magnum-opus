@@ -51,13 +51,18 @@ describe('descriptions', () => {
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })
 
-  it('describe every bone, joint and joint piece of the pelvis and the lower limb', () => {
+  it('describe every bone, joint, joint piece and muscle of the pelvis and the lower limb', () => {
     const lower = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
       (e) => e.set === 'joints' && (!e.groups?.length || e.groups.some((g) => /lower limb|pelvic girdle|of foot|ankle/i.test(g.en))),
     )
     expect(lower.length).toBeGreaterThan(80)
     for (const e of lower) expect(descriptionOf(e.en), e.en).toBeDefined()
     for (const j of JOINTS.filter((j) => j.region === 'lower-limb' || j.region === 'pelvis')) expect(descriptionOf(j.en), j.en).toBeDefined()
+    const muscles = (soft as { set: string; kind: string; part?: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.set === 'muscles' && e.kind === 'muscle' && e.part === 'belly' && e.groups?.some((g) => /lower limb/i.test(g.en)),
+    )
+    expect(muscles.length).toBeGreaterThan(50)
+    for (const e of muscles) expect(descriptionOf(e.en), e.en).toBeDefined()
     for (const p of pieces.filter((p) => ['pelvic-girdle', 'thigh-leg', 'tarsals', 'metatarsals', 'foot-phalanges', 'foot-sesamoids'].includes(p.group)))
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })
