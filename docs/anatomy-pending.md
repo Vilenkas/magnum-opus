@@ -21,8 +21,11 @@ modern references and write it, as was done for the ossification and the endoste
       unida una articulación» (surfaces, ligaments, muscles as active ligaments; shoulder, elbow, hip), from Moore 8.ª,
       Pró pp. 36–38, Latarjet–Ruiz pp. 18–19 and Rouvière t. 3 p. 615. Still with no source in the library: the synovial
       membrane's cells (synoviocytes) and hyaluronic acid as what makes the synovia viscous.
-- [ ] Miología: the fibre's structure (sarcomere, actin, myosin), types of fibres, kinds of contraction (isometric,
-      isotonic), muscle tone; the motor unit is only mentioned.
+- [x] Miología (2026-11-08): «La fibra muscular» (myofibrils, actin and myosin, dystrophies, red and white fibres in the
+      soleus and gastrocnemius), the motor unit's size, «Tono y contracción» (tonic, isometric, concentric, eccentric),
+      «Los papeles de un músculo» (prime mover, fixator, synergist, antagonist; shunt and spurt muscles) and «Crecimiento,
+      atrofia y reparación» (hypertrophy, satellite cells), from Moore 8.ª pp. 31–35 and 757, Pró pp. 43–45 and
+      Latarjet–Ruiz p. 245. Still with no source in the library: the sarcomere and its bands (no book describes them).
 - [ ] Angiología: the heart's development and fetal circulation (Netter S-305); the cardiac cycle and the conduction
       system (S-319); blood pressure along the tree; how lymph is formed.
 - [ ] Neurología: the meninges are in Testut t. III, not in the library; Rouvière t. 4 and Latarjet-Ruiz ch. 25 have them.
