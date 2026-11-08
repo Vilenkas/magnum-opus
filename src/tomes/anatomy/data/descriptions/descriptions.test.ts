@@ -25,12 +25,23 @@ describe('descriptions', () => {
       }
   })
 
-  it('describe every joint and every piece of the upper limb, and every bone of it', () => {
+  it('describe every bone, joint, joint piece and muscle of the upper limb', () => {
     const upper = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
       (e) => e.set === 'joints' && e.groups?.some((g) => /upper limb|pectoral girdle|of hand/i.test(g.en)),
     )
     for (const e of upper) expect(descriptionOf(e.en), e.en).toBeDefined()
     for (const j of JOINTS.filter((j) => j.region === 'upper-limb')) expect(descriptionOf(j.en), j.en).toBeDefined()
+    const muscles = (soft as { set: string; kind: string; part?: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) =>
+        e.set === 'muscles' &&
+        e.kind === 'muscle' &&
+        e.part === 'belly' &&
+        e.groups?.some((g) => g.en === 'Muscles of upper limb' || /^(Trapezius|Latissimus dorsi|Pectoralis major) muscle$/.test(g.en)),
+    )
+    expect(muscles.length).toBeGreaterThan(50)
+    for (const e of muscles) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const en of ['Serratus anterior muscle', 'Pectoralis minor muscle', 'Subclavius muscle', 'Rhomboid major muscle', 'Levator scapulae'])
+      expect(descriptionOf(en), en).toBeDefined()
     for (const p of pieces.filter((p) => ['pectoral-girdle', 'arm-forearm', 'carpals', 'metacarpals', 'hand-phalanges'].includes(p.group)))
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })
