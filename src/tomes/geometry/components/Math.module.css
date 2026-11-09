@@ -1,0 +1,21 @@
+/* The panel itself is drawn by the tome's .katex-display rule, shared with the chapter's $$…$$. */
+.block {
+  display: block;
+}
+
+/* Formulas inside SVG plates: the colour sits on the foreignObject so a plate's own class on the
+   inner box (e.g. a red directrix label) overrides it. */
+.svgTex {
+  overflow: visible;
+  color: #0f172a;
+}
+.svgTex > div {
+  font-size: 12px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+/* A formula and the punctuation right after it never part at a line break. */
+.glued {
+  white-space: nowrap;
+}

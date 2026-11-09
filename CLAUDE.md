@@ -258,6 +258,19 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - Inscription style: `toInscription()` (U→V, interpuncts), Marcellus + Alegreya fonts,
   marble = SVG turbulence noise inline; exercises sit on a wax tablet (`plates.module.css`).
 
+## Geometry tome
+
+- All mathematics is LaTeX typeset by KaTeX — never hand-typed (`√`, `x²`, `P₁`, `≠`…; tests fail on it).
+  Chapters: `$…$` inline, `$$…$$` block (remark-math + rehype-katex at build time, `strict: 'error'`,
+  only for `tomes/geometry/**/*.mdx` in `vite.config.ts`). Plates and quiz: `<Tex>` / `<Tex block>` /
+  `<SvgTex>` (foreignObject in SVG) and `<MathText>` for prose with `$…$` (`components/Math.tsx`).
+  Write LaTeX in `String.raw` templates: a plain string silently eats `\D`, `\o`… (tested).
+- Inline formulas keep KaTeX's italics and stacking at the text's size; a formula and the punctuation
+  after it never part (`splitMath`'s `trailing`, `rehype-glue-math.ts`). Block formulas sit centred in
+  a panel with equal space above and below (`.katex-display` in `tome.module.css`).
+- One KaTeX version only: `pnpm.overrides` pins every `katex` to ours, since its CSS renames classes
+  between versions (0.19: `sizing` → `katex-sizing`) and a mismatch breaks sub/superscripts silently.
+
 ## Commands
 
 - `pnpm dev` — dev server

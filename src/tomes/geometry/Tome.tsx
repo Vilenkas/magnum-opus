@@ -4,6 +4,8 @@ import '@fontsource/cinzel/600.css'
 import '@fontsource/cinzel/700.css'
 import '@fontsource-variable/eb-garamond'
 import '@fontsource-variable/eb-garamond/wght-italic.css'
+// KaTeX's stylesheet and fonts (bundled, offline) for the LaTeX in chapters, plates and quiz.
+import 'katex/dist/katex.min.css'
 import { useOutline } from '@/forge/useOutline'
 import type { TomeProps } from '../types'
 import { books, type Book } from './books'

@@ -4,11 +4,27 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@mdx-js/rollup'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import rehypeGlueMath from './src/tomes/geometry/rehype-glue-math'
+
+const GEOMETRY_MDX = /\/tomes\/geometry\/.*\.mdx$/
 
 export default defineConfig({
   plugins: [
     // MDX must run before the React plugin so its JSX output gets transformed.
-    { enforce: 'pre', ...mdx({ remarkPlugins: [remarkGfm], providerImportSource: undefined }) },
+    // Geometry writes its math in LaTeX ($…$ inline, $$…$$ block), typeset by KaTeX at build time;
+    // only there, so a dollar sign keeps meaning a dollar sign in every other tome.
+    {
+      enforce: 'pre',
+      ...mdx({
+        include: GEOMETRY_MDX,
+        remarkPlugins: [remarkGfm, remarkMath],
+        rehypePlugins: [[rehypeKatex, { strict: 'error' }], rehypeGlueMath],
+        providerImportSource: undefined,
+      }),
+    },
+    { enforce: 'pre', ...mdx({ exclude: GEOMETRY_MDX, remarkPlugins: [remarkGfm], providerImportSource: undefined }) },
     react({ include: /\.(mdx|tsx|ts|jsx|js)$/ }),
     tailwindcss(),
   ],

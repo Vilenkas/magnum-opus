@@ -50,19 +50,19 @@ describe('Geometry Quiz Question Bank Integrity', () => {
   it('correctly verifies distance calculation in geo-coord-1', () => {
     const q = GEOMETRY_QUESTIONS.find((item) => item.id === 'geo-coord-1')!
     expect(q).toBeDefined()
-    expect(q.options[q.correctIndex]).toBe('5')
+    expect(q.options[q.correctIndex]).toBe('$5$')
   })
 
   it('correctly verifies slope perpendicularity condition in geo-line-2', () => {
     const q = GEOMETRY_QUESTIONS.find((item) => item.id === 'geo-line-2')!
     expect(q).toBeDefined()
-    expect(q.options[q.correctIndex]).toBe('m₁ · m₂ = -1')
+    expect(q.options[q.correctIndex]).toBe('$m_1 m_2 = -1$')
   })
 
   it('correctly identifies ellipse eccentricity in geo-conic-3', () => {
     const q = GEOMETRY_QUESTIONS.find((item) => item.id === 'geo-conic-3')!
     expect(q).toBeDefined()
-    expect(q.options[q.correctIndex]).toContain('e = 4/5')
+    expect(q.options[q.correctIndex]).toContain(String.raw`e = \frac{4}{5}`)
   })
 })
 

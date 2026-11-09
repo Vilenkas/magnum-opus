@@ -65,7 +65,7 @@
 .axisLabel {
   font-size: 11px;
   fill: #64748b;
-  font-family: monospace;
+  font-family: KaTeX_Main, "Times New Roman", serif;
 }
 
 .segment {
@@ -91,12 +91,6 @@
 
 .pointDiv {
   fill: #16a34a;
-}
-
-.pointLabel {
-  font-size: 12px;
-  font-weight: bold;
-  fill: #0f172a;
 }
 
 .controls {
@@ -146,7 +140,7 @@
   padding: 0.25rem 0.5rem;
   border: 1px solid #cbd5e1;
   border-radius: 0.25rem;
-  font-family: monospace;
+  font-family: KaTeX_Main, "Times New Roman", serif;
   background: #fff;
 }
 
@@ -182,7 +176,5 @@
 }
 
 .statValue {
-  font-family: monospace;
-  font-weight: 600;
   color: #0f172a;
 }

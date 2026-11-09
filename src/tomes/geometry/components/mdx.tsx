@@ -3,7 +3,6 @@ import { Cite } from './Citations'
 import { MarginNote } from './MarginNote'
 import { CartesianPlane } from './CartesianPlane'
 import { ConicExplorer } from './ConicExplorer'
-import { Formula, Frac } from './Formula'
 import { GeometryQuiz } from './GeometryQuiz'
 
 /** Components available inside every geometry MDX chapter without importing. */
@@ -12,8 +11,6 @@ export const mdxComponents: MDXComponents = {
   MarginNote,
   CartesianPlane,
   ConicExplorer,
-  Formula,
-  Frac,
   GeometryQuiz,
   ExamenGeometria: GeometryQuiz,
 }

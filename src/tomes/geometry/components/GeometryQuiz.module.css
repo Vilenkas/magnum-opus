@@ -170,26 +170,19 @@
   border-radius: 0.25rem;
 }
 
-.prompt {
-  font-size: 1.25rem;
-  font-weight: 600;
+/* The question reads as prose, in the book's Garamond: the chapter's h3 style (Cinzel, capitals
+   only) is overridden, two classes deep to win over `.prose h3`. */
+.questionBox .prompt {
+  font-family: 'EB Garamond Variable', Garamond, Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: normal;
   color: #0f172a;
   line-height: 1.5;
-  margin: 0 0 1rem 0;
+  margin: 0.25rem 0 1.25rem 0;
+  text-wrap: pretty;
 }
 
-.formulaBox {
-  background: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  font-family: 'EB Garamond Variable', serif;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #1e293b;
-  margin-bottom: 1.25rem;
-  display: inline-block;
-}
 
 /* Options */
 .optionsGrid {

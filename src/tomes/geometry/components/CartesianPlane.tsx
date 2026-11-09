@@ -8,11 +8,22 @@ import {
   slope,
   type Point2D,
 } from '../data/analytic-geometry'
+import { texNum } from '../data/math-text'
+import { MathText, SvgTex, Tex } from './Math'
 import styles from './CartesianPlane.module.css'
 
 const VIEW_SIZE = 400
 const COORD_RANGE = 10 // from -10 to 10
 const STEP = VIEW_SIZE / (2 * COORD_RANGE)
+
+/** $Ax + By + C = 0$ with the signs folded in: $2x - 3y + 1 = 0$, never $2x + -3y$. */
+function generalEquation(a: number, b: number, c: number): string {
+  const term = (k: number, v: string) => `${k < 0 ? '-' : '+'} ${texNum(Math.abs(k))}${v}`
+  return `${texNum(a)}x ${term(b, 'y')} ${term(c, '')} = 0`
+}
+
+/** Axis numbers with a true minus sign, set in KaTeX's roman like the formulas around them. */
+const tick = (n: number) => (n < 0 ? `\u2212${-n}` : String(n))
 
 function toSvgCoord(p: Point2D): { x: number; y: number } {
   return {
@@ -88,7 +99,7 @@ export function CartesianPlane() {
       <header className={styles.header}>
         <h3 className={styles.title}>Lámina interactiva: El plano cartesiano y el segmento</h3>
         <p className={styles.subtitle}>
-          Arrastra los puntos P₁ y P₂ o ajusta sus valores para ver la distancia, pendiente, ecuación y división del
+          <MathText>{'Arrastra los puntos $P_1$ y $P_2$ o ajusta sus valores'}</MathText> para ver la distancia, pendiente, ecuación y división del
           segmento (Lehmann, Cap. I y III).
         </p>
       </header>
@@ -111,10 +122,10 @@ export function CartesianPlane() {
                   <line x1={pos} y1={0} x2={pos} y2={VIEW_SIZE} className={styles.gridLine} />
                   <line x1={0} y1={pos} x2={VIEW_SIZE} y2={pos} className={styles.gridLine} />
                   <text x={pos} y={VIEW_SIZE / 2 + 14} className={styles.axisLabel} textAnchor="middle">
-                    {t}
+                    {tick(t)}
                   </text>
                   <text x={VIEW_SIZE / 2 - 6} y={pos + 4} className={styles.axisLabel} textAnchor="end">
-                    {-t}
+                    {tick(-t)}
                   </text>
                 </g>
               )
@@ -122,7 +133,7 @@ export function CartesianPlane() {
 
             {/* Axes */}
             <line x1={0} y1={VIEW_SIZE / 2} x2={VIEW_SIZE} y2={VIEW_SIZE / 2} className={styles.axis} />
-            <line x1={VIEW_SIZE / 2} y1={0} x2={VIEW_SIZE} y2={VIEW_SIZE} className={styles.axis} />
+            <line x1={VIEW_SIZE / 2} y1={0} x2={VIEW_SIZE / 2} y2={VIEW_SIZE} className={styles.axis} />
 
             {/* Projections right triangle: Delta x and Delta y */}
             <line x1={svgP1.x} y1={svgP1.y} x2={svgCorner.x} y2={svgCorner.y} className={styles.triangleLeg} />
@@ -135,26 +146,20 @@ export function CartesianPlane() {
             {svgDiv && (
               <g>
                 <circle cx={svgDiv.x} cy={svgDiv.y} r={5} className={styles.pointDiv} />
-                <text x={svgDiv.x + 8} y={svgDiv.y - 8} className={styles.pointLabel}>
-                  P(r={ratio})
-                </text>
+                <SvgTex x={svgDiv.x + 8} y={svgDiv.y - 8}>{String.raw`P\,(r = ${texNum(ratio, 1)})`}</SvgTex>
               </g>
             )}
 
             {/* Point P1 */}
             <g onMouseDown={() => handlePointerDown('p1')}>
               <circle cx={svgP1.x} cy={svgP1.y} r={8} className={styles.pointP1} />
-              <text x={svgP1.x - 10} y={svgP1.y - 12} className={styles.pointLabel}>
-                P₁({p1.x}, {p1.y})
-              </text>
+              <SvgTex x={svgP1.x - 10} y={svgP1.y - 12}>{`P_1(${texNum(p1.x, 1)}, ${texNum(p1.y, 1)})`}</SvgTex>
             </g>
 
             {/* Point P2 */}
             <g onMouseDown={() => handlePointerDown('p2')}>
               <circle cx={svgP2.x} cy={svgP2.y} r={8} className={styles.pointP2} />
-              <text x={svgP2.x + 10} y={svgP2.y - 12} className={styles.pointLabel}>
-                P₂({p2.x}, {p2.y})
-              </text>
+              <SvgTex x={svgP2.x + 10} y={svgP2.y - 12}>{`P_2(${texNum(p2.x, 1)}, ${texNum(p2.y, 1)})`}</SvgTex>
             </g>
           </svg>
         </div>
@@ -164,7 +169,7 @@ export function CartesianPlane() {
             <h4 className={styles.panelTitle}>Coordenadas de los puntos</h4>
             <div className={styles.coordRow}>
               <div className={styles.coordInput}>
-                <label>X₁:</label>
+                <label><Tex>{'x_1'}</Tex></label>
                 <input
                   type="number"
                   step="0.5"
@@ -173,7 +178,7 @@ export function CartesianPlane() {
                 />
               </div>
               <div className={styles.coordInput}>
-                <label>Y₁:</label>
+                <label><Tex>{'y_1'}</Tex></label>
                 <input
                   type="number"
                   step="0.5"
@@ -184,7 +189,7 @@ export function CartesianPlane() {
             </div>
             <div className={styles.coordRow}>
               <div className={styles.coordInput}>
-                <label>X₂:</label>
+                <label><Tex>{'x_2'}</Tex></label>
                 <input
                   type="number"
                   step="0.5"
@@ -193,7 +198,7 @@ export function CartesianPlane() {
                 />
               </div>
               <div className={styles.coordInput}>
-                <label>Y₂:</label>
+                <label><Tex>{'y_2'}</Tex></label>
                 <input
                   type="number"
                   step="0.5"
@@ -205,8 +210,12 @@ export function CartesianPlane() {
 
             <div className={styles.sliderGroup}>
               <div className={styles.sliderLabel}>
-                <span>Razón de división r = P₁P / PP₂:</span>
-                <strong>{ratio}</strong>
+                <span>
+                  Razón de división <Tex>{String.raw`r = \overline{P_1P} \,/\, \overline{PP_2}`}</Tex>
+                </span>
+                <strong>
+                  <Tex>{texNum(ratio, 1)}</Tex>
+                </strong>
               </div>
               <input
                 type="range"
@@ -224,36 +233,60 @@ export function CartesianPlane() {
             <h4 className={styles.panelTitle}>Resultados analíticos (Lehmann)</h4>
             <div className={styles.statsList}>
               <div className={styles.statRow}>
-                <span className={styles.statLabel}>Distancia d(P₁, P₂):</span>
-                <span className={styles.statValue}>{dist.toFixed(3)} u</span>
-              </div>
-              <div className={styles.statRow}>
-                <span className={styles.statLabel}>Δx = x₂ - x₁:</span>
-                <span className={styles.statValue}>{(p2.x - p1.x).toFixed(1)}</span>
-              </div>
-              <div className={styles.statRow}>
-                <span className={styles.statLabel}>Δy = y₂ - y₁:</span>
-                <span className={styles.statValue}>{(p2.y - p1.y).toFixed(1)}</span>
-              </div>
-              <div className={styles.statRow}>
-                <span className={styles.statLabel}>Pendiente m:</span>
-                <span className={styles.statValue}>{m === null ? '∞ (Vertical)' : m.toFixed(3)}</span>
-              </div>
-              <div className={styles.statRow}>
-                <span className={styles.statLabel}>Ángulo de inclinación α:</span>
-                <span className={styles.statValue}>{angleDeg.toFixed(1)}°</span>
-              </div>
-              <div className={styles.statRow}>
-                <span className={styles.statLabel}>Punto medio M (r = 1):</span>
+                <span className={styles.statLabel}>
+                  Distancia <Tex>{'d(P_1, P_2)'}</Tex>
+                </span>
                 <span className={styles.statValue}>
-                  ({mid.x.toFixed(2)}, {mid.y.toFixed(2)})
+                  <Tex>{String.raw`${texNum(dist, 3)}\ \text{u}`}</Tex>
+                </span>
+              </div>
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>
+                  <Tex>{String.raw`\Delta x = x_2 - x_1`}</Tex>
+                </span>
+                <span className={styles.statValue}>
+                  <Tex>{texNum(p2.x - p1.x, 1)}</Tex>
+                </span>
+              </div>
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>
+                  <Tex>{String.raw`\Delta y = y_2 - y_1`}</Tex>
+                </span>
+                <span className={styles.statValue}>
+                  <Tex>{texNum(p2.y - p1.y, 1)}</Tex>
+                </span>
+              </div>
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>
+                  Pendiente <Tex>{'m'}</Tex>
+                </span>
+                <span className={styles.statValue}>
+                  <Tex>{m === null ? String.raw`\infty\ \text{(vertical)}` : texNum(m, 3)}</Tex>
+                </span>
+              </div>
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>
+                  Ángulo de inclinación <Tex>{String.raw`\alpha`}</Tex>
+                </span>
+                <span className={styles.statValue}>
+                  <Tex>{String.raw`${texNum(angleDeg, 1)}^\circ`}</Tex>
+                </span>
+              </div>
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>
+                  Punto medio <Tex>{String.raw`M\ (r = 1)`}</Tex>
+                </span>
+                <span className={styles.statValue}>
+                  <Tex>{`(${texNum(mid.x)}, ${texNum(mid.y)})`}</Tex>
                 </span>
               </div>
               {divPoint && (
                 <div className={styles.statRow}>
-                  <span className={styles.statLabel}>Punto de división P(r):</span>
+                  <span className={styles.statLabel}>
+                    Punto de división <Tex>{'P(r)'}</Tex>
+                  </span>
                   <span className={styles.statValue}>
-                    ({divPoint.x.toFixed(2)}, {divPoint.y.toFixed(2)})
+                    <Tex>{`(${texNum(divPoint.x)}, ${texNum(divPoint.y)})`}</Tex>
                   </span>
                 </div>
               )}
@@ -261,8 +294,7 @@ export function CartesianPlane() {
                 <div className={styles.statRow}>
                   <span className={styles.statLabel}>Ecuación general:</span>
                   <span className={styles.statValue}>
-                    {line.a.toFixed(2)}x {line.b >= 0 ? '+' : '-'} {Math.abs(line.b).toFixed(2)}y{' '}
-                    {line.c >= 0 ? '+' : '-'} {Math.abs(line.c).toFixed(2)} = 0
+                    <Tex>{generalEquation(line.a, line.b, line.c)}</Tex>
                   </span>
                 </div>
               )}

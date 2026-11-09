@@ -1,7 +1,8 @@
 {/*
   Libro I: Geometría analítica.
   Escrito a partir del tratado de Charles H. Lehmann, "Geometría analítica" (Limusa / Wiley).
-  Componentes disponibles sin importar: <Cita fuente="..." p="..." />, <MarginNote>, <CartesianPlane>, <ConicExplorer>, <Formula>, <Frac>.
+  Componentes disponibles sin importar: <Cita fuente="..." p="..." />, <MarginNote>, <CartesianPlane>, <ConicExplorer>.
+  Matemáticas siempre en LaTeX: $…$ en línea, $$…$$ en bloque (KaTeX, al compilar).
 */}
 
 La **geometría analítica** es la rama de las matemáticas que establece una correspondencia perfecta y bidireccional entre las figuras geométricas y las ecuaciones algebraicas.<Cita fuente="lehmann" p="10" /> Antes de su formulación por René Descartes<Cita fuente="descartes" /> y Pierre de Fermat en el siglo XVII, la geometría clásica —heredera directa de Euclides<Cita fuente="euclides" />— avanzaba mediante construcciones sintéticas, razonamientos particulares sobre figuras trazadas y proposiciones deductivas que requerían un destello de ingenio específico para cada problema.
@@ -18,52 +19,52 @@ Todo el edificio de la geometría analítica descansa sobre dos investigaciones 
 Para abordar el primer problema, el método analítico analiza sistemáticamente las **intersecciones** con los ejes de coordenadas, las **simetrías** respecto a los ejes y al origen, la **extensión** o dominio de las variables reales, y la existencia de **asíntotas** o direcciones límites.<Cita fuente="lehmann" p="34–45" />
 
 <MarginNote title="El método de Fermat y Descartes">
-  Descartes publicó en 1637 su célebre apéndice *La Géométrie*, introduciendo las últimas letras del alfabeto (x, y, z) para las incógnitas y las primeras (a, b, c) para las constantes. Fermat, por su parte, desarrolló simultáneamente la aplicación del álgebra al estudio de las cónicas en su tratado *Ad locos planos et solidos isagoge*, sentando las bases del cálculo diferencial.
+  Descartes publicó en 1637 su célebre apéndice *La Géométrie*, introduciendo las últimas letras del alfabeto ($x$, $y$, $z$) para las incógnitas y las primeras ($a$, $b$, $c$) para las constantes. Fermat, por su parte, desarrolló simultáneamente la aplicación del álgebra al estudio de las cónicas en su tratado *Ad locos planos et solidos isagoge*, sentando las bases del cálculo diferencial.
 </MarginNote>
 
 ## Sistemas de coordenadas en el plano
 
-El punto de partida es el **segmento rectilíneo dirigido**.<Cita fuente="lehmann" p="1" /> Sobre una recta cualquiera, fijamos un sentido positivo de recorrido; la longitud del segmento comprendido entre dos puntos *A* y *B*, denotada por *AB*, adquiere un signo algebraico:
+El punto de partida es el **segmento rectilíneo dirigido**.<Cita fuente="lehmann" p="1" /> Sobre una recta cualquiera, fijamos un sentido positivo de recorrido; la longitud del segmento comprendido entre dos puntos $A$ y $B$, denotada por $\overline{AB}$, adquiere un signo algebraico:
 
-<Formula>
-  <em>AB</em> = −<em>BA</em>
-</Formula>
+$$
+\overline{AB} = -\overline{BA}
+$$
 
-Para tres puntos cualesquiera *A*, *B* y *C* situados sobre la misma recta dirigida, se verifica de manera rigurosa la **relación fundamental de Chasles**:<Cita fuente="lehmann" p="2" />
+Para tres puntos cualesquiera $A$, $B$ y $C$ situados sobre la misma recta dirigida, se verifica de manera rigurosa la **relación fundamental de Chasles**:<Cita fuente="lehmann" p="2" />
 
-<Formula>
-  <em>AB</em> + <em>BC</em> = <em>AC</em>
-</Formula>
+$$
+\overline{AB} + \overline{BC} = \overline{AC}
+$$
 
-Al cruzar perpendicularmente dos rectas dirigidas en un punto común *O* (el **origen**), obtenemos el **sistema de coordenadas cartesianas rectangulares**:<Cita fuente="lehmann" p="5" /> el eje horizontal o eje de las abscisas (*X*) y el eje vertical o eje de las ordenadas (*Y*). Todo punto *P* del plano queda unívocamente determinado por el par ordenado (*x*, *y*).
+Al cruzar perpendicularmente dos rectas dirigidas en un punto común $O$ (el **origen**), obtenemos el **sistema de coordenadas cartesianas rectangulares**:<Cita fuente="lehmann" p="5" /> el eje horizontal o eje de las abscisas ($X$) y el eje vertical o eje de las ordenadas ($Y$). Todo punto $P$ del plano queda unívocamente determinado por el par ordenado $(x, y)$.
 
 ### Distancia entre dos puntos
 
-Sean *P*₁(*x*₁, *y*₁) y *P*₂(*x*₂, *y*₂) dos puntos dados cualesquiera en el plano cartesiano. Al trazar por *P*₁ una paralela al eje *X* y por *P*₂ una paralela al eje *Y*, ambas se cortan en un vértice común formando un triángulo rectángulo cuyos catetos miden |*x*₂ − *x*₁| y |*y*₂ − *y*₁|.<Cita fuente="lehmann" p="11" /> Por aplicación directa del teorema de Pitágoras, la **distancia** euclidiana *d* entre ambos puntos viene dada por:
+Sean $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ dos puntos dados cualesquiera en el plano cartesiano. Al trazar por $P_1$ una paralela al eje $X$ y por $P_2$ una paralela al eje $Y$, ambas se cortan en un vértice común formando un triángulo rectángulo cuyos catetos miden $\lvert x_2 - x_1 \rvert$ y $\lvert y_2 - y_1 \rvert$.<Cita fuente="lehmann" p="11" /> Por aplicación directa del teorema de Pitágoras, la **distancia** euclidiana $d$ entre ambos puntos viene dada por:
 
-<Formula>
-  <em>d</em> = √[ (<em>x</em>₂ − <em>x</em>₁)² + (<em>y</em>₂ − <em>y</em>₁)² ]
-</Formula>
+$$
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+$$
 
 ### División de un segmento en una razón dada
 
-Si *P*(*x*, *y*) es un punto situado sobre la recta que pasa por *P*₁(*x*₁, *y*₁) y *P*₂(*x*₂, *y*₂), de tal modo que divide al segmento dirigido *P*₁*P*₂ en la razón fija:
+Si $P(x, y)$ es un punto situado sobre la recta que pasa por $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$, de tal modo que divide al segmento dirigido $\overline{P_1P_2}$ en la razón fija:
 
-<Formula>
-  <em>r</em> = <Frac num={<><em>P</em>₁<em>P</em></>} den={<><em>P</em><em>P</em>₂</>} /> &nbsp;&nbsp; (<em>r</em> ≠ −1)
-</Formula>
+$$
+r = \frac{\overline{P_1P}}{\overline{PP_2}} \qquad (r \neq -1)
+$$
 
-las coordenadas de *P* se obtienen por semejanza de triángulos proyectados sobre los ejes coordenados:<Cita fuente="lehmann" p="12" />
+las coordenadas de $P$ se obtienen por semejanza de triángulos proyectados sobre los ejes coordenados:<Cita fuente="lehmann" p="12" />
 
-<Formula>
-  <em>x</em> = <Frac num={<><em>x</em>₁ + <em>r</em> <em>x</em>₂</>} den={<>1 + <em>r</em></>} /> , &nbsp;&nbsp;&nbsp;&nbsp; <em>y</em> = <Frac num={<><em>y</em>₁ + <em>r</em> <em>y</em>₂</>} den={<>1 + <em>r</em></>} />
-</Formula>
+$$
+x = \frac{x_1 + r x_2}{1 + r}, \qquad y = \frac{y_1 + r y_2}{1 + r}
+$$
 
-Cuando el punto *P* es el **punto medio** del segmento *P*₁*P*₂, los dos segmentos dirigidos son iguales (*P*₁*P* = *P**P*₂), con lo que la razón es *r* = 1, reduciéndose la fórmula a la media aritmética de las coordenadas:<Cita fuente="lehmann" p="14" />
+Cuando el punto $P$ es el **punto medio** del segmento $\overline{P_1P_2}$, los dos segmentos dirigidos son iguales ($\overline{P_1P} = \overline{PP_2}$), con lo que la razón es $r = 1$, reduciéndose la fórmula a la media aritmética de las coordenadas:<Cita fuente="lehmann" p="14" />
 
-<Formula>
-  <em>x</em><sub>m</sub> = <Frac num={<><em>x</em>₁ + <em>x</em>₂</>} den="2" /> , &nbsp;&nbsp;&nbsp;&nbsp; <em>y</em><sub>m</sub> = <Frac num={<><em>y</em>₁ + <em>y</em>₂</>} den="2" />
-</Formula>
+$$
+x_m = \frac{x_1 + x_2}{2}, \qquad y_m = \frac{y_1 + y_2}{2}
+$$
 
 <CartesianPlane />
 
@@ -73,22 +74,22 @@ La línea recta es el lugar geométrico más elemental. Se define geométricamen
 
 ### Pendiente y ángulo de inclinación
 
-Se denomina **ángulo de inclinación** α de una recta dirigida respecto al eje *X* al ángulo formado por la semirrecta positiva del eje de abscisas y la recta, medido en sentido antihorario (0 ≤ α &lt; π). Se define la **pendiente** *m* de la recta como la tangente trigonométrica de dicho ángulo:<Cita fuente="lehmann" p="16" />
+Se denomina **ángulo de inclinación** $\alpha$ de una recta dirigida respecto al eje $X$ al ángulo formado por la semirrecta positiva del eje de abscisas y la recta, medido en sentido antihorario ($0 \le \alpha < \pi$). Se define la **pendiente** $m$ de la recta como la tangente trigonométrica de dicho ángulo:<Cita fuente="lehmann" p="16" />
 
-<Formula>
-  <em>m</em> = tan α = <Frac num={<><em>y</em>₂ − <em>y</em>₁</>} den={<><em>x</em>₂ − <em>x</em>₁</>} /> &nbsp;&nbsp; (<em>x</em>₁ ≠ <em>x</em>₂)
-</Formula>
+$$
+m = \tan \alpha = \frac{y_2 - y_1}{x_2 - x_1} \qquad (x_1 \neq x_2)
+$$
 
-A partir de las pendientes de dos rectas no verticales *l*₁ y *l*₂, se deducen de inmediato dos criterios fundamentales:<Cita fuente="lehmann" p="18–20" />
+A partir de las pendientes de dos rectas no verticales $l_1$ y $l_2$, se deducen de inmediato dos criterios fundamentales:<Cita fuente="lehmann" p="18–20" />
 
-- **Paralelismo**: *l*₁ ∥ *l*₂ ⟺ *m*₁ = *m*₂.
-- **Perpendicularidad**: *l*₁ ⊥ *l*₂ ⟺ *m*₁ · *m*₂ = −1 (o bien 1 + *m*₁ *m*₂ = 0).
+- **Paralelismo**: $l_1 \parallel l_2 \iff m_1 = m_2$.
+- **Perpendicularidad**: $l_1 \perp l_2 \iff m_1 m_2 = -1$ (o bien $1 + m_1 m_2 = 0$).
 
-El ángulo θ medido en sentido antihorario desde la recta *l*₁ de pendiente *m*₁ hacia la recta *l*₂ de pendiente *m*₂ satisface:<Cita fuente="lehmann" p="20" />
+El ángulo $\theta$ medido en sentido antihorario desde la recta $l_1$ de pendiente $m_1$ hacia la recta $l_2$ de pendiente $m_2$ satisface:<Cita fuente="lehmann" p="20" />
 
-<Formula>
-  tan θ = <Frac num={<><em>m</em>₂ − <em>m</em>₁</>} den={<>1 + <em>m</em>₁ <em>m</em>₂</>} /> &nbsp;&nbsp; (<em>m</em>₁ <em>m</em>₂ ≠ −1)
-</Formula>
+$$
+\tan \theta = \frac{m_2 - m_1}{1 + m_1 m_2} \qquad (m_1 m_2 \neq -1)
+$$
 
 ### Formas analíticas de la ecuación de la recta
 
@@ -96,99 +97,99 @@ Según los elementos geométricos conocidos, la recta admite diversas formulacio
 
 | Denominación | Datos conocidos | Ecuación algebraica |
 | :--- | :--- | :--- |
-| **Punto-pendiente** | Punto *P*₁(*x*₁, *y*₁) y pendiente *m* | *y* − *y*₁ = *m*(*x* − *x*₁) |
-| **Pendiente y ordenada al origen** | Pendiente *m* e intercepción *b* con el eje *Y* | *y* = *m**x* + *b* |
-| **Cartesiana (dos puntos)** | Dos puntos distintos *P*₁(*x*₁, *y*₁) y *P*₂(*x*₂, *y*₂) | (*y* − *y*₁) / (*x* − *x*₁) = (*y*₂ − *y*₁) / (*x*₂ − *x*₁) |
-| **Simétrica o canónica** | Intercepciones *a* con el eje *X* y *b* con el eje *Y* | *x*/*a* + *y*/*b* = 1 |
-| **Forma general** | Coeficientes reales con *A* y *B* no simultáneamente nulos | *A**x* + *B**y* + *C* = 0 |
-| **Forma normal de Hesse** | Longitud *p* de la perpendicular al origen y ángulo ω | *x* cos ω + *y* sen ω − *p* = 0 |
+| **Punto-pendiente** | Punto $P_1(x_1, y_1)$ y pendiente $m$ | $y - y_1 = m(x - x_1)$ |
+| **Pendiente y ordenada al origen** | Pendiente $m$ e intercepción $b$ con el eje $Y$ | $y = mx + b$ |
+| **Cartesiana (dos puntos)** | Dos puntos distintos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ | $\dfrac{y - y_1}{x - x_1} = \dfrac{y_2 - y_1}{x_2 - x_1}$ |
+| **Simétrica o canónica** | Intercepciones $a$ con el eje $X$ y $b$ con el eje $Y$ | $\dfrac{x}{a} + \dfrac{y}{b} = 1$ |
+| **Forma general** | Coeficientes reales con $A$ y $B$ no simultáneamente nulos | $Ax + By + C = 0$ |
+| **Forma normal de Hesse** | Longitud $p$ de la perpendicular al origen y ángulo $\omega$ | $x \cos \omega + y \operatorname{sen} \omega - p = 0$ |
 
 ### Distancia de un punto a una recta
 
-Uno de los resultados más hermosos y útiles del método analítico permite calcular la distancia perpendicular *d* desde un punto arbitrario *P*₀(*x*₀, *y*₀) hasta una recta dada en su forma general *Ax* + *By* + *C* = 0:<Cita fuente="lehmann" p="78" />
+Uno de los resultados más hermosos y útiles del método analítico permite calcular la distancia perpendicular $d$ desde un punto arbitrario $P_0(x_0, y_0)$ hasta una recta dada en su forma general $Ax + By + C = 0$:<Cita fuente="lehmann" p="78" />
 
-<Formula>
-  <em>d</em> = <Frac num={<>|<em>A</em> <em>x</em>₀ + <em>B</em> <em>y</em>₀ + <em>C</em>|</>} den={<>√(<em>A</em>² + <em>B</em>²)</>} />
-</Formula>
+$$
+d = \frac{\lvert A x_0 + B y_0 + C \rvert}{\sqrt{A^2 + B^2}}
+$$
 
-Asimismo, el **área de un triángulo** determinado por tres vértices *P*₁(*x*₁, *y*₁), *P*₂(*x*₂, *y*₂) y *P*₃(*x*₃, *y*₃) se calcula mediante el determinante ordenado de sus coordenadas:<Cita fuente="lehmann" p="86" />
+Asimismo, el **área de un triángulo** determinado por tres vértices $P_1(x_1, y_1)$, $P_2(x_2, y_2)$ y $P_3(x_3, y_3)$ se calcula mediante el determinante ordenado de sus coordenadas:<Cita fuente="lehmann" p="86" />
 
-<Formula>
-  Área = ½ | <em>x</em>₁(<em>y</em>₂ − <em>y</em>₃) + <em>x</em>₂(<em>y</em>₃ − <em>y</em>₁) + <em>x</em>₃(<em>y</em>₁ − <em>y</em>₂) |
-</Formula>
+$$
+\text{Área} = \frac{1}{2} \left\lvert\, x_1 (y_2 - y_3) + x_2 (y_3 - y_1) + x_3 (y_1 - y_2) \,\right\rvert
+$$
 
 ## Las secciones cónicas
 
 Apolonio de Pérgamo demostró en la antigüedad clásica que al seccionar un cono circular recto mediante un plano se engendran cuatro curvas fundamentales: la circunferencia, la elipse, la parábola y la hipérbola. La geometría analítica unifica todas las cónicas bajo una **definición focal universal**:<Cita fuente="lehmann" p="138, 165, 195" />
 
-> Una cónica es el lugar geométrico de un punto *P* que se mueve en el plano de tal manera que la razón de su distancia a un punto fijo *F* (denominado **foco**) y a una recta fija *d* (denominada **directriz**) es una constante positiva *e*, llamada **excentricidad**.
+> Una cónica es el lugar geométrico de un punto $P$ que se mueve en el plano de tal manera que la razón de su distancia a un punto fijo $F$ (denominado **foco**) y a una recta fija $d$ (denominada **directriz**) es una constante positiva $e$, llamada **excentricidad**.
 
-<Formula>
-  <Frac num={<>dist(<em>P</em>, <em>F</em>)</>} den={<>dist(<em>P</em>, <em>d</em>)</>} /> = <em>e</em>
-</Formula>
+$$
+\frac{\operatorname{dist}(P, F)}{\operatorname{dist}(P, d)} = e
+$$
 
-El valor de la excentricidad *e* determina la naturaleza intrínseca de la curva:
+El valor de la excentricidad $e$ determina la naturaleza intrínseca de la curva:
 
-- Si *e* = 0, la curva es una **circunferencia** (caso límite donde la directriz se halla en el infinito).
-- Si 0 &lt; *e* &lt; 1, la curva es una **elipse** (curva cerrada y acotada).
-- Si *e* = 1, la curva es una **parábola** (curva abierta de una sola rama).
-- Si *e* &gt; 1, la curva es una **hipérbola** (curva abierta de dos ramas asintóticas).
+- Si $e = 0$, la curva es una **circunferencia** (caso límite donde la directriz se halla en el infinito).
+- Si $0 < e < 1$, la curva es una **elipse** (curva cerrada y acotada).
+- Si $e = 1$, la curva es una **parábola** (curva abierta de una sola rama).
+- Si $e > 1$, la curva es una **hipérbola** (curva abierta de dos ramas asintóticas).
 
 ### La circunferencia
 
-La circunferencia es el lugar geométrico de los puntos cuya distancia a un centro fijo *C*(*h*, *k*) es igual a una constante *r* (el radio).<Cita fuente="lehmann" p="95" /> Elevando al cuadrado la fórmula de distancia euclidiana:
+La circunferencia es el lugar geométrico de los puntos cuya distancia a un centro fijo $C(h, k)$ es igual a una constante $r$ (el radio).<Cita fuente="lehmann" p="95" /> Elevando al cuadrado la fórmula de distancia euclidiana:
 
-<Formula>
-  (<em>x</em> − <em>h</em>)² + (<em>y</em> − <em>k</em>)² = <em>r</em>²
-</Formula>
+$$
+(x - h)^2 + (y - k)^2 = r^2
+$$
 
-Desarrollando los binomios se obtiene la forma general *x*² + *y*² + *Dx* + *Ey* + *F* = 0, cuyo centro es (−*D*/2, −*E*/2) y cuyo radio real existe si y sólo si *D*² + *E*² − 4*F* &gt; 0.<Cita fuente="lehmann" p="98" />
+Desarrollando los binomios se obtiene la forma general $x^2 + y^2 + Dx + Ey + F = 0$, cuyo centro es $\left(-\frac{D}{2}, -\frac{E}{2}\right)$ y cuyo radio real existe si y sólo si $D^2 + E^2 - 4F > 0$.<Cita fuente="lehmann" p="98" />
 
 ### La parábola
 
-En la parábola (*e* = 1), cada punto equidista rigurosamente de su foco y de su recta directriz.<Cita fuente="lehmann" p="138" /> Si situamos el vértice en el origen *V*(0,0) y el foco sobre el eje *X* en *F*(*p*, 0), la directriz es la recta vertical *x* = −*p*. Aplicando la condición métrica dist(*P*, *F*) = dist(*P*, *d*):
+En la parábola ($e = 1$), cada punto equidista rigurosamente de su foco y de su recta directriz.<Cita fuente="lehmann" p="138" /> Si situamos el vértice en el origen $V(0, 0)$ y el foco sobre el eje $X$ en $F(p, 0)$, la directriz es la recta vertical $x = -p$. Aplicando la condición métrica $\operatorname{dist}(P, F) = \operatorname{dist}(P, d)$:
 
-<Formula>
-  √[ (<em>x</em> − <em>p</em>)² + <em>y</em>² ] = |<em>x</em> + <em>p</em>| &nbsp;⟹&nbsp; <em>y</em>² = 4<em>p</em><em>x</em>
-</Formula>
+$$
+\sqrt{(x - p)^2 + y^2} = \lvert x + p \rvert \quad\Longrightarrow\quad y^2 = 4px
+$$
 
-El segmento perpendicular al eje de simetría que pasa por el foco y une dos puntos de la parábola es el **lado recto**, cuya longitud es exactamente 4|*p*|.<Cita fuente="lehmann" p="140" />
+El segmento perpendicular al eje de simetría que pasa por el foco y une dos puntos de la parábola es el **lado recto**, cuya longitud es exactamente $4\lvert p \rvert$.<Cita fuente="lehmann" p="140" />
 
 ### La elipse
 
-La elipse (0 &lt; *e* &lt; 1) posee dos focos simétricos *F*₁(*c*, 0) y *F*₂(−*c*, 0). La suma de las distancias desde cualquier punto de la elipse a los dos focos es una constante igual a la longitud del eje mayor, 2*a* (*a* &gt; *c*):<Cita fuente="lehmann" p="165" />
+La elipse ($0 < e < 1$) posee dos focos simétricos $F_1(c, 0)$ y $F_2(-c, 0)$. La suma de las distancias desde cualquier punto de la elipse a los dos focos es una constante igual a la longitud del eje mayor, $2a$ ($a > c$):<Cita fuente="lehmann" p="165" />
 
-<Formula>
-  dist(<em>P</em>, <em>F</em>₁) + dist(<em>P</em>, <em>F</em>₂) = 2<em>a</em>
-</Formula>
+$$
+\operatorname{dist}(P, F_1) + \operatorname{dist}(P, F_2) = 2a
+$$
 
-Definiendo el semieje menor como *b* = √(<em>a</em>² − <em>c</em>²), la ecuación ordinaria con centro en el origen adopta la forma canónica:<Cita fuente="lehmann" p="167" />
+Definiendo el semieje menor como $b = \sqrt{a^2 - c^2}$, la ecuación ordinaria con centro en el origen adopta la forma canónica:<Cita fuente="lehmann" p="167" />
 
-<Formula>
-  <Frac num={<><em>x</em>²</>} den={<><em>a</em>²</>} /> + <Frac num={<><em>y</em>²</>} den={<><em>b</em>²</>} /> = 1
-</Formula>
+$$
+\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+$$
 
-La excentricidad viene dada por *e* = *c*/*a* = √(<em>a</em>² − <em>b</em>²) / *a* &lt; 1, y la longitud de cada uno de sus dos lados rectos es 2*b*²/*a*.<Cita fuente="lehmann" p="168" />
+La excentricidad viene dada por $e = \dfrac{c}{a} = \dfrac{\sqrt{a^2 - b^2}}{a} < 1$, y la longitud de cada uno de sus dos lados rectos es $\dfrac{2b^2}{a}$.<Cita fuente="lehmann" p="168" />
 
 ### La hipérbola
 
-En la hipérbola (*e* &gt; 1), el valor absoluto de la diferencia de las distancias de un punto cualquiera a dos focos fijos es constante e igual a 2*a* (*c* &gt; *a*):<Cita fuente="lehmann" p="195" />
+En la hipérbola ($e > 1$), el valor absoluto de la diferencia de las distancias de un punto cualquiera a dos focos fijos es constante e igual a $2a$ ($c > a$):<Cita fuente="lehmann" p="195" />
 
-<Formula>
-  |dist(<em>P</em>, <em>F</em>₁) − dist(<em>P</em>, <em>F</em>₂)| = 2<em>a</em>
-</Formula>
+$$
+\left\lvert \operatorname{dist}(P, F_1) - \operatorname{dist}(P, F_2) \right\rvert = 2a
+$$
 
-Definiendo el semieje imaginario *b* = √(<em>c</em>² − <em>a</em>²), la ecuación canónica con centro en el origen es:<Cita fuente="lehmann" p="197" />
+Definiendo el semieje imaginario $b = \sqrt{c^2 - a^2}$, la ecuación canónica con centro en el origen es:<Cita fuente="lehmann" p="197" />
 
-<Formula>
-  <Frac num={<><em>x</em>²</>} den={<><em>a</em>²</>} /> − <Frac num={<><em>y</em>²</>} den={<><em>b</em>²</>} /> = 1
-</Formula>
+$$
+\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+$$
 
 A diferencia de la elipse, la hipérbola se aproxima indefinidamente a dos rectas que pasan por su centro sin llegar a tocarlas, las **asíntotas**:<Cita fuente="lehmann" p="204" />
 
-<Formula>
-  <em>y</em> = ± <Frac num={<><em>b</em></>} den={<><em>a</em></>} /> <em>x</em>
-</Formula>
+$$
+y = \pm \frac{b}{a} x
+$$
 
 <ConicExplorer />
 
@@ -196,61 +197,61 @@ A diferencia de la elipse, la hipérbola se aproxima indefinidamente a dos recta
 
 La ecuación más general de segundo grado en dos variables reales es:<Cita fuente="lehmann" p="235" />
 
-<Formula>
-  <em>A</em><em>x</em>² + <em>B</em><em>x</em><em>y</em> + <em>C</em><em>y</em>² + <em>D</em><em>x</em> + <em>E</em><em>y</em> + <em>F</em> = 0
-</Formula>
+$$
+Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+$$
 
-donde *A*, *B* y *C* no son simultáneamente nulos. El término rectangular *Bxy* indica que los ejes de la cónica están rotados respecto a los ejes de coordenadas. Mediante una rotación de ejes en un ángulo θ tal que:<Cita fuente="lehmann" p="238" />
+donde $A$, $B$ y $C$ no son simultáneamente nulos. El término rectangular $Bxy$ indica que los ejes de la cónica están rotados respecto a los ejes de coordenadas. Mediante una rotación de ejes en un ángulo $\theta$ tal que:<Cita fuente="lehmann" p="238" />
 
-<Formula>
-  tan(2θ) = <Frac num={<><em>B</em></>} den={<><em>A</em> − <em>C</em></>} /> &nbsp;&nbsp; (<em>A</em> ≠ <em>C</em>)
-</Formula>
+$$
+\tan 2\theta = \frac{B}{A - C} \qquad (A \neq C)
+$$
 
-el término cruzado *Bxy* desaparece. La cantidad Δ = *B*² − 4*AC* es un **invariante algebraico** bajo traslaciones y rotaciones del sistema coordenado,<Cita fuente="lehmann" p="244" /> y clasifica unívocamente la cónica:
+el término cruzado $Bxy$ desaparece. La cantidad $\Delta = B^2 - 4AC$ es un **invariante algebraico** bajo traslaciones y rotaciones del sistema coordenado,<Cita fuente="lehmann" p="244" /> y clasifica unívocamente la cónica:
 
-- Si *B*² − 4*AC* &lt; 0, la curva es de tipo **elíptico** (una elipse, una circunferencia, un punto o el conjunto vacío).
-- Si *B*² − 4*AC* = 0, la curva es de tipo **parabólico** (una parábola, dos rectas paralelas o ninguna recta).
-- Si *B*² − 4*AC* &gt; 0, la curva es de tipo **hiperbólico** (una hipérbola o dos rectas secantes).
+- Si $B^2 - 4AC < 0$, la curva es de tipo **elíptico** (una elipse, una circunferencia, un punto o el conjunto vacío).
+- Si $B^2 - 4AC = 0$, la curva es de tipo **parabólico** (una parábola, dos rectas paralelas o ninguna recta).
+- Si $B^2 - 4AC > 0$, la curva es de tipo **hiperbólico** (una hipérbola o dos rectas secantes).
 
 ## Coordenadas polares y ecuaciones paramétricas
 
-El plano también admite sistemas no ortogonales. En el **sistema de coordenadas polares**, la posición de un punto *P* se determina por su distancia dirigida *r* al polo *O* y el ángulo polar θ medido desde el eje polar horizontal.<Cita fuente="lehmann" p="270" /> Las transformaciones entre coordenadas polares y rectangulares son inmediatas:
+El plano también admite sistemas no ortogonales. En el **sistema de coordenadas polares**, la posición de un punto $P$ se determina por su distancia dirigida $r$ al polo $O$ y el ángulo polar $\theta$ medido desde el eje polar horizontal.<Cita fuente="lehmann" p="270" /> Las transformaciones entre coordenadas polares y rectangulares son inmediatas:
 
-<Formula>
-  <em>x</em> = <em>r</em> cos θ, &nbsp;&nbsp;&nbsp;&nbsp; <em>y</em> = <em>r</em> sen θ
-</Formula>
+$$
+x = r \cos \theta, \qquad y = r \operatorname{sen} \theta
+$$
 
-<Formula>
-  <em>r</em> = √(<em>x</em>² + <em>y</em>²), &nbsp;&nbsp;&nbsp;&nbsp; tan θ = <Frac num="y" den="x" />
-</Formula>
+$$
+r = \sqrt{x^2 + y^2}, \qquad \tan \theta = \frac{y}{x}
+$$
 
-Por otra parte, cuando las coordenadas de un punto en movimiento se expresan en función de una tercera variable independiente *t* (llamada **parámetro**, frecuentemente asociada al tiempo o a un ángulo de rotación), se obtienen las **ecuaciones paramétricas**:<Cita fuente="lehmann" p="295" />
+Por otra parte, cuando las coordenadas de un punto en movimiento se expresan en función de una tercera variable independiente $t$ (llamada **parámetro**, frecuentemente asociada al tiempo o a un ángulo de rotación), se obtienen las **ecuaciones paramétricas**:<Cita fuente="lehmann" p="295" />
 
-<Formula>
-  <em>x</em> = <em>f</em>(<em>t</em>), &nbsp;&nbsp;&nbsp;&nbsp; <em>y</em> = <em>g</em>(<em>t</em>)
-</Formula>
+$$
+x = f(t), \qquad y = g(t)
+$$
 
 Este método permite describir con elegancia curvas mecánicas de gran complejidad, como la cicloide engendrada por un punto de una circunferencia que rueda sobre una recta, o las trayectorias planetarias de la mecánica celeste.
 
 ## Extensión al espacio tridimensional
 
-La potencia del método analítico se despliega plenamente al extenderlo al espacio euclidiano tridimensional ℝ³. Con tres ejes ortogonales (*X*, *Y*, *Z*), la distancia entre dos puntos en el espacio viene dada por la extensión natural del teorema de Pitágoras:<Cita fuente="lehmann" p="321" />
+La potencia del método analítico se despliega plenamente al extenderlo al espacio euclidiano tridimensional $\mathbb{R}^3$. Con tres ejes ortogonales ($X$, $Y$, $Z$), la distancia entre dos puntos en el espacio viene dada por la extensión natural del teorema de Pitágoras:<Cita fuente="lehmann" p="321" />
 
-<Formula>
-  <em>d</em> = √[ (<em>x</em>₂ − <em>x</em>₁)² + (<em>y</em>₂ − <em>y</em>₁)² + (<em>z</em>₂ − <em>z</em>₁)² ]
-</Formula>
+$$
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}
+$$
 
 En el espacio, una ecuación lineal en tres variables representa un **plano**:<Cita fuente="lehmann" p="341" />
 
-<Formula>
-  <em>A</em><em>x</em> + <em>B</em><em>y</em> + <em>C</em><em>z</em> + <em>D</em> = 0
-</Formula>
+$$
+Ax + By + Cz + D = 0
+$$
 
-donde el vector (*A*, *B*, *C*) es perpendicular (normal) a dicho plano. Por su parte, una **línea recta en el espacio** no puede expresarse mediante una sola ecuación escalar, sino como la intersección de dos planos no paralelos o, de modo más elegante, en su forma simétrica continua mediante números directores (*a*, *b*, *c*):<Cita fuente="lehmann" p="372" />
+donde el vector $(A, B, C)$ es perpendicular (normal) a dicho plano. Por su parte, una **línea recta en el espacio** no puede expresarse mediante una sola ecuación escalar, sino como la intersección de dos planos no paralelos o, de modo más elegante, en su forma simétrica continua mediante números directores $(a, b, c)$:<Cita fuente="lehmann" p="372" />
 
-<Formula>
-  <Frac num={<><em>x</em> − <em>x</em>₁</>} den="a" /> = <Frac num={<><em>y</em> − <em>y</em>₁</>} den="b" /> = <Frac num={<><em>z</em> − <em>z</em>₁</>} den="c" />
-</Formula>
+$$
+\frac{x - x_1}{a} = \frac{y - y_1}{b} = \frac{z - z_1}{c}
+$$
 
 Así, desde el punto aislado hasta las superficies cuádricas en tres dimensiones (elipsoides, paraboloides e hiperboloides), la geometría analítica de Lehmann erige un puente indestructible entre la intuición espacial y el rigor algebraico.
 
@@ -261,4 +262,3 @@ Así, desde el punto aislado hasta las superficies cuádricas en tres dimensione
 Pon a prueba los conocimientos adquiridos a lo largo de este libro. Resuelve problemas numéricos y deductivos sobre sistemas de coordenadas, rectas en el plano y propiedades de las secciones cónicas, con retroalimentación paso a paso fundamentada en los teoremas de Lehmann.
 
 <GeometryQuiz />
-

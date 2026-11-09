@@ -294,3 +294,40 @@ a.bookEntry:hover {
   border-radius: 0.25rem;
   font-size: 0.9em;
 }
+
+/* ---------- Mathematics (KaTeX) ----------
+ * Inline: sits in the line at the text's size, KaTeX's own italics and stacking intact.
+ * Block: the formula centred in its own panel, the same space above and below it. The chapter's
+ * $$…$$ and the plates' <Tex block> both come out as .katex-display. */
+.root :global(.katex) {
+  font-size: 1.08em;
+  line-height: 1.2;
+  text-rendering: auto;
+}
+
+.root :global(.katex-display) {
+  margin: 1.75rem 0;
+  padding: 1.1rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  color: #0f172a;
+  /* A long formula scrolls inside its panel instead of widening the page. */
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.root :global(.katex-display > .katex) {
+  font-size: 1.2em;
+}
+
+/* In a list or a table a formula never breaks between lines. */
+.root li :global(.katex),
+.root td :global(.katex) {
+  white-space: nowrap;
+}
+
+/* An inline formula and the punctuation after it (glued at build time by rehype-glue-math). */
+.root :global(.math-glued) {
+  white-space: nowrap;
+}

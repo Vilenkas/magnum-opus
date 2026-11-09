@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { texNum } from '../data/math-text'
+import { SvgTex, Tex } from './Math'
 import styles from './ConicExplorer.module.css'
 
 type ConicType = 'parabola' | 'ellipse' | 'hyperbola' | 'circle'
@@ -42,25 +44,25 @@ export function ConicExplorer() {
           className={`${styles.tab} ${conic === 'parabola' ? styles.tabActive : ''}`}
           onClick={() => setConic('parabola')}
         >
-          Parábola (e = 1)
+          Parábola <Tex>{'(e = 1)'}</Tex>
         </button>
         <button
           className={`${styles.tab} ${conic === 'ellipse' ? styles.tabActive : ''}`}
           onClick={() => setConic('ellipse')}
         >
-          Elipse (e &lt; 1)
+          Elipse <Tex>{'(e < 1)'}</Tex>
         </button>
         <button
           className={`${styles.tab} ${conic === 'hyperbola' ? styles.tabActive : ''}`}
           onClick={() => setConic('hyperbola')}
         >
-          Hipérbola (e &gt; 1)
+          Hipérbola <Tex>{'(e > 1)'}</Tex>
         </button>
         <button
           className={`${styles.tab} ${conic === 'circle' ? styles.tabActive : ''}`}
           onClick={() => setConic('circle')}
         >
-          Circunferencia (e = 0)
+          Circunferencia <Tex>{'(e = 0)'}</Tex>
         </button>
       </nav>
 
@@ -80,7 +82,7 @@ export function ConicExplorer() {
 
             {/* Axes */}
             <line x1={0} y1={VIEW_SIZE / 2} x2={VIEW_SIZE} y2={VIEW_SIZE / 2} className={styles.axis} />
-            <line x1={VIEW_SIZE / 2} y1={0} x2={VIEW_SIZE} y2={VIEW_SIZE} className={styles.axis} />
+            <line x1={VIEW_SIZE / 2} y1={0} x2={VIEW_SIZE / 2} y2={VIEW_SIZE} className={styles.axis} />
 
             {/* Render selected conic */}
             {conic === 'parabola' && <ParabolaSvg p={p} />}
@@ -93,13 +95,13 @@ export function ConicExplorer() {
         <div className={styles.panel}>
           {conic === 'parabola' && (
             <>
-              <div className={styles.equationBox}>
-                y² = {4 * p}x
-              </div>
+              <Tex block>{`y^2 = ${texNum(4 * p)}x`}</Tex>
               <div className={styles.controlGroup}>
                 <div className={styles.controlLabel}>
-                  <span>Parámetro p (distancia vértice-foco):</span>
-                  <span>{p.toFixed(1)}</span>
+                  <span>
+                    Parámetro <Tex>{'p'}</Tex> (distancia vértice-foco)
+                  </span>
+                  <Tex>{texNum(p, 2)}</Tex>
                 </div>
                 <input
                   type="range"
@@ -112,24 +114,44 @@ export function ConicExplorer() {
               </div>
               <div className={styles.propertiesList}>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Vértice V:</span>
-                  <span className={styles.propVal}>(0, 0)</span>
+                  <span className={styles.propName}>
+                    Vértice <Tex>{'V'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{'(0, 0)'}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Foco F:</span>
-                  <span className={styles.propVal}>({p.toFixed(2)}, 0)</span>
+                  <span className={styles.propName}>
+                    Foco <Tex>{'F'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{`(${texNum(p)}, 0)`}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Directriz D:</span>
-                  <span className={styles.propVal}>x = -{p.toFixed(2)}</span>
+                  <span className={styles.propName}>
+                    Directriz <Tex>{'D'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{`x = -${texNum(p)}`}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Lado recto (4p):</span>
-                  <span className={styles.propVal}>{(4 * p).toFixed(2)} u</span>
+                  <span className={styles.propName}>
+                    Lado recto <Tex>{'4p'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{String.raw`${texNum(4 * p)}\ \text{u}`}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Excentricidad e:</span>
-                  <span className={styles.propVal}>1</span>
+                  <span className={styles.propName}>
+                    Excentricidad <Tex>{'e'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{'1'}</Tex>
+                  </span>
                 </div>
               </div>
             </>
@@ -137,13 +159,13 @@ export function ConicExplorer() {
 
           {conic === 'ellipse' && (
             <>
-              <div className={styles.equationBox}>
-                x² / {Math.pow(a, 2).toFixed(1)} + y² / {Math.pow(b, 2).toFixed(1)} = 1
-              </div>
+              <Tex block>{String.raw`\frac{x^2}{${texNum(a * a)}} + \frac{y^2}{${texNum(b * b)}} = 1`}</Tex>
               <div className={styles.controlGroup}>
                 <div className={styles.controlLabel}>
-                  <span>Semieje mayor a:</span>
-                  <span>{a.toFixed(1)}</span>
+                  <span>
+                    Semieje mayor <Tex>{'a'}</Tex>
+                  </span>
+                  <Tex>{texNum(a, 2)}</Tex>
                 </div>
                 <input
                   type="range"
@@ -160,8 +182,10 @@ export function ConicExplorer() {
               </div>
               <div className={styles.controlGroup}>
                 <div className={styles.controlLabel}>
-                  <span>Semieje menor b:</span>
-                  <span>{b.toFixed(1)}</span>
+                  <span>
+                    Semieje menor <Tex>{'b'}</Tex>
+                  </span>
+                  <Tex>{texNum(b, 2)}</Tex>
                 </div>
                 <input
                   type="range"
@@ -179,20 +203,36 @@ export function ConicExplorer() {
                 return (
                   <div className={styles.propertiesList}>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Semidistancia focal c:</span>
-                      <span className={styles.propVal}>{c.toFixed(2)}</span>
+                      <span className={styles.propName}>
+                        Semidistancia focal <Tex>{'c'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{texNum(c)}</Tex>
+                      </span>
                     </div>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Focos F₁, F₂:</span>
-                      <span className={styles.propVal}>(±{c.toFixed(2)}, 0)</span>
+                      <span className={styles.propName}>
+                        Focos <Tex>{'F_1, F_2'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{String.raw`(\pm ${texNum(c)}, 0)`}</Tex>
+                      </span>
                     </div>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Excentricidad e = c/a:</span>
-                      <span className={styles.propVal}>{e.toFixed(3)} (&lt; 1)</span>
+                      <span className={styles.propName}>
+                        Excentricidad <Tex>{'e = c/a'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{`${texNum(e, 3)} < 1`}</Tex>
+                      </span>
                     </div>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Lado recto 2b²/a:</span>
-                      <span className={styles.propVal}>{lr.toFixed(2)} u</span>
+                      <span className={styles.propName}>
+                        Lado recto <Tex>{'2b^2/a'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{String.raw`${texNum(lr)}\ \text{u}`}</Tex>
+                      </span>
                     </div>
                   </div>
                 )
@@ -202,13 +242,13 @@ export function ConicExplorer() {
 
           {conic === 'hyperbola' && (
             <>
-              <div className={styles.equationBox}>
-                x² / {Math.pow(a, 2).toFixed(1)} - y² / {Math.pow(b, 2).toFixed(1)} = 1
-              </div>
+              <Tex block>{String.raw`\frac{x^2}{${texNum(a * a)}} - \frac{y^2}{${texNum(b * b)}} = 1`}</Tex>
               <div className={styles.controlGroup}>
                 <div className={styles.controlLabel}>
-                  <span>Semieje real a:</span>
-                  <span>{a.toFixed(1)}</span>
+                  <span>
+                    Semieje real <Tex>{'a'}</Tex>
+                  </span>
+                  <Tex>{texNum(a, 2)}</Tex>
                 </div>
                 <input
                   type="range"
@@ -221,8 +261,10 @@ export function ConicExplorer() {
               </div>
               <div className={styles.controlGroup}>
                 <div className={styles.controlLabel}>
-                  <span>Semieje imaginario b:</span>
-                  <span>{b.toFixed(1)}</span>
+                  <span>
+                    Semieje imaginario <Tex>{'b'}</Tex>
+                  </span>
+                  <Tex>{texNum(b, 2)}</Tex>
                 </div>
                 <input
                   type="range"
@@ -240,20 +282,36 @@ export function ConicExplorer() {
                 return (
                   <div className={styles.propertiesList}>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Semidistancia focal c:</span>
-                      <span className={styles.propVal}>{c.toFixed(2)}</span>
+                      <span className={styles.propName}>
+                        Semidistancia focal <Tex>{'c'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{texNum(c)}</Tex>
+                      </span>
                     </div>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Focos F₁, F₂:</span>
-                      <span className={styles.propVal}>(±{c.toFixed(2)}, 0)</span>
+                      <span className={styles.propName}>
+                        Focos <Tex>{'F_1, F_2'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{String.raw`(\pm ${texNum(c)}, 0)`}</Tex>
+                      </span>
                     </div>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Excentricidad e = c/a:</span>
-                      <span className={styles.propVal}>{e.toFixed(3)} (&gt; 1)</span>
+                      <span className={styles.propName}>
+                        Excentricidad <Tex>{'e = c/a'}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{`${texNum(e, 3)} > 1`}</Tex>
+                      </span>
                     </div>
                     <div className={styles.propRow}>
-                      <span className={styles.propName}>Asíntotas y = ±(b/a)x:</span>
-                      <span className={styles.propVal}>y = ±{slopeAsymp.toFixed(2)}x</span>
+                      <span className={styles.propName}>
+                        Asíntotas <Tex>{String.raw`y = \pm \tfrac{b}{a}x`}</Tex>
+                      </span>
+                      <span className={styles.propVal}>
+                        <Tex>{String.raw`y = \pm ${texNum(slopeAsymp)}\,x`}</Tex>
+                      </span>
                     </div>
                   </div>
                 )
@@ -263,13 +321,13 @@ export function ConicExplorer() {
 
           {conic === 'circle' && (
             <>
-              <div className={styles.equationBox}>
-                x² + y² = {Math.pow(r, 2).toFixed(1)}
-              </div>
+              <Tex block>{`x^2 + y^2 = ${texNum(r * r)}`}</Tex>
               <div className={styles.controlGroup}>
                 <div className={styles.controlLabel}>
-                  <span>Radio r:</span>
-                  <span>{r.toFixed(1)}</span>
+                  <span>
+                    Radio <Tex>{'r'}</Tex>
+                  </span>
+                  <Tex>{texNum(r, 2)}</Tex>
                 </div>
                 <input
                   type="range"
@@ -282,24 +340,44 @@ export function ConicExplorer() {
               </div>
               <div className={styles.propertiesList}>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Centro C:</span>
-                  <span className={styles.propVal}>(0, 0)</span>
+                  <span className={styles.propName}>
+                    Centro <Tex>{'C'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{'(0, 0)'}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Radio r:</span>
-                  <span className={styles.propVal}>{r.toFixed(2)} u</span>
+                  <span className={styles.propName}>
+                    Radio <Tex>{'r'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{String.raw`${texNum(r)}\ \text{u}`}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Perímetro 2πr:</span>
-                  <span className={styles.propVal}>{(2 * Math.PI * r).toFixed(2)} u</span>
+                  <span className={styles.propName}>
+                    Perímetro <Tex>{String.raw`2\pi r`}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{String.raw`${texNum(2 * Math.PI * r)}\ \text{u}`}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Área πr²:</span>
-                  <span className={styles.propVal}>{(Math.PI * r * r).toFixed(2)} u²</span>
+                  <span className={styles.propName}>
+                    Área <Tex>{String.raw`\pi r^2`}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{String.raw`${texNum(Math.PI * r * r)}\ \text{u}^2`}</Tex>
+                  </span>
                 </div>
                 <div className={styles.propRow}>
-                  <span className={styles.propName}>Excentricidad e:</span>
-                  <span className={styles.propVal}>0</span>
+                  <span className={styles.propName}>
+                    Excentricidad <Tex>{'e'}</Tex>
+                  </span>
+                  <span className={styles.propVal}>
+                    <Tex>{'0'}</Tex>
+                  </span>
                 </div>
               </div>
             </>
@@ -329,23 +407,17 @@ function ParabolaSvg({ p }: { p: number }) {
     <g>
       {/* Directrix */}
       <line x1={directrixSvgX} y1={0} x2={directrixSvgX} y2={VIEW_SIZE} className={styles.directrix} />
-      <text x={directrixSvgX + 4} y={20} className={styles.label} fill="#dc2626">
-        x = -{p}
-      </text>
+      <SvgTex x={directrixSvgX + 4} y={20} className={styles.texDirectrix}>{`x = -${texNum(p)}`}</SvgTex>
 
       {/* Curve */}
       <polyline points={points.join(' ')} className={styles.curve} />
 
       {/* Focus & Vertex */}
       <circle cx={focusSvg.x} cy={focusSvg.y} r={5} className={styles.focus} />
-      <text x={focusSvg.x + 6} y={focusSvg.y - 6} className={styles.label}>
-        F({p}, 0)
-      </text>
+      <SvgTex x={focusSvg.x + 6} y={focusSvg.y - 6}>{`F(${texNum(p)}, 0)`}</SvgTex>
 
       <circle cx={vertexSvg.x} cy={vertexSvg.y} r={4} className={styles.vertex} />
-      <text x={vertexSvg.x - 14} y={vertexSvg.y + 14} className={styles.label}>
-        V(0,0)
-      </text>
+      <SvgTex x={vertexSvg.x - 14} y={vertexSvg.y + 18}>{'V(0, 0)'}</SvgTex>
     </g>
   )
 }
@@ -363,13 +435,9 @@ function EllipseSvg({ a, b }: { a: number; b: number }) {
       <ellipse cx={centerSvg.x} cy={centerSvg.y} rx={rx} ry={ry} className={styles.curve} />
       {/* Foci */}
       <circle cx={f1Svg.x} cy={f1Svg.y} r={5} className={styles.focus} />
-      <text x={f1Svg.x - 8} y={f1Svg.y - 8} className={styles.label}>
-        F₁
-      </text>
+      <SvgTex x={f1Svg.x - 8} y={f1Svg.y - 8}>{'F_1'}</SvgTex>
       <circle cx={f2Svg.x} cy={f2Svg.y} r={5} className={styles.focus} />
-      <text x={f2Svg.x - 8} y={f2Svg.y - 8} className={styles.label}>
-        F₂
-      </text>
+      <SvgTex x={f2Svg.x - 8} y={f2Svg.y - 8}>{'F_2'}</SvgTex>
     </g>
   )
 }
@@ -425,13 +493,9 @@ function HyperbolaSvg({ a, b }: { a: number; b: number }) {
 
       {/* Foci */}
       <circle cx={f1Svg.x} cy={f1Svg.y} r={5} className={styles.focus} />
-      <text x={f1Svg.x + 6} y={f1Svg.y - 6} className={styles.label}>
-        F₁
-      </text>
+      <SvgTex x={f1Svg.x + 6} y={f1Svg.y - 6}>{'F_1'}</SvgTex>
       <circle cx={f2Svg.x} cy={f2Svg.y} r={5} className={styles.focus} />
-      <text x={f2Svg.x - 18} y={f2Svg.y - 6} className={styles.label}>
-        F₂
-      </text>
+      <SvgTex x={f2Svg.x - 18} y={f2Svg.y - 6}>{'F_2'}</SvgTex>
     </g>
   )
 }
@@ -444,9 +508,7 @@ function CircleSvg({ r }: { r: number }) {
     <g>
       <circle cx={centerSvg.x} cy={centerSvg.y} r={radiusSvg} className={styles.curve} />
       <circle cx={centerSvg.x} cy={centerSvg.y} r={4} className={styles.vertex} />
-      <text x={centerSvg.x + 6} y={centerSvg.y - 6} className={styles.label}>
-        C(0,0)
-      </text>
+      <SvgTex x={centerSvg.x + 6} y={centerSvg.y - 6}>{'C(0, 0)'}</SvgTex>
       {/* Radius line */}
       <line
         x1={centerSvg.x}
@@ -457,9 +519,7 @@ function CircleSvg({ r }: { r: number }) {
         strokeWidth="1.5"
         strokeDasharray="3 3"
       />
-      <text x={centerSvg.x + radiusSvg / 2} y={centerSvg.y - 6} className={styles.label} fill="#1d4ed8">
-        r = {r}
-      </text>
+      <SvgTex x={centerSvg.x + radiusSvg / 2 - 10} y={centerSvg.y - 6} className={styles.texRadius}>{`r = ${texNum(r)}`}</SvgTex>
     </g>
   )
 }

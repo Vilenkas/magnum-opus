@@ -7,6 +7,7 @@ import {
 } from '../quiz/engine'
 import { loadStats, recordAnswer, type PracticeStats } from '../quiz/stats'
 import { TOPICS, type QuestionAnswer, type QuizSettings, type TopicId } from '../quiz/types'
+import { MathText, Tex } from './Math'
 import styles from './GeometryQuiz.module.css'
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'] as const
@@ -168,7 +169,7 @@ export function GeometryQuiz() {
               return (
                 <div key={ans.questionId} className={styles.breakdownItem}>
                   <span className={styles.itemPrompt}>
-                    {idx + 1}. {q.prompt}
+                    {idx + 1}. <MathText>{q.prompt}</MathText>
                   </span>
                   <span className={ans.isCorrect ? styles.statusCorrect : styles.statusWrong}>
                     {ans.isCorrect ? '✓ Correcto' : '✗ Incorrecto'}
@@ -208,10 +209,12 @@ export function GeometryQuiz() {
               </span>
             </div>
 
-            <h3 className={styles.prompt}>{currentQuestion.prompt}</h3>
+            <h3 className={styles.prompt}>
+              <MathText>{currentQuestion.prompt}</MathText>
+            </h3>
 
             {currentQuestion.formula && (
-              <div className={styles.formulaBox}>{currentQuestion.formula}</div>
+              <Tex block>{currentQuestion.formula}</Tex>
             )}
 
             <div className={styles.optionsGrid} role="radiogroup">
@@ -240,7 +243,9 @@ export function GeometryQuiz() {
                     aria-checked={isSelected}
                   >
                     <span className={styles.letterBadge}>{OPTION_LETTERS[optIdx]}</span>
-                    <span>{optText}</span>
+                    <span>
+                      <MathText>{optText}</MathText>
+                    </span>
                   </button>
                 )
               })}
@@ -261,11 +266,13 @@ export function GeometryQuiz() {
                   ? '✓ ¡Respuesta correcta!'
                   : '✗ Respuesta incorrecta'}
               </h4>
-              <p className={styles.explanation}>{currentQuestion.explanation}</p>
+              <p className={styles.explanation}>
+                <MathText>{currentQuestion.explanation}</MathText>
+              </p>
               <div className={styles.sourceFooter}>
                 <span>Referencia:</span>
                 <span className={styles.sourceBook}>
-                  C. H. Lehmann, <em>Geometría analítica</em> — {currentQuestion.lehmannRef.title} (Art.{' '}
+                  C. H. Lehmann, <em>Geometría analítica</em> — <MathText>{currentQuestion.lehmannRef.title}</MathText> (Art.{' '}
                   {currentQuestion.lehmannRef.article}
                   {currentQuestion.lehmannRef.page ? `, pág. ${currentQuestion.lehmannRef.page}` : ''})
                 </span>

@@ -124,10 +124,11 @@
   fill: #0f172a;
 }
 
-.label {
-  font-size: 11px;
-  font-weight: bold;
-  fill: #1e293b;
+.texDirectrix {
+  color: #dc2626;
+}
+.texRadius {
+  color: #1d4ed8;
 }
 
 .panel {
@@ -185,7 +186,5 @@
 }
 
 .propVal {
-  font-family: monospace;
-  font-weight: 600;
   color: #0f172a;
 }
