@@ -13,7 +13,7 @@ import styles from './tome.module.css'
 
 export default function LatinTome({ path }: TomeProps) {
   const book = books.find((b) => b.id === path && b.load)
-  return <div className={styles.root}>{book ? <BookView book={book} /> : <Frontispiece />}</div>
+  return <div className={styles.root}>{book ? <BookView key={book.id} book={book} /> : <Frontispiece />}</div>
 }
 
 function Frontispiece() {

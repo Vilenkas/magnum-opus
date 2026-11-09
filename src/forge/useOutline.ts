@@ -3,7 +3,8 @@
  * arrive late, as lazy MDX parts load), gives them ids, follows which one is being read, and
  * scrolls to one. Each tome draws the index itself.
  */
-import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
+import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent, type RefObject } from 'react'
+import { PHONE, useMediaQuery } from '@/shell/chrome'
 import { loadJSON, saveJSON } from '@/shell/storage'
 import { activeEntry, buildOutline, type HeadingLevel, type OutlineEntry } from './outline'
 
@@ -13,7 +14,7 @@ const HEADINGS = ':scope > h2, :scope > h3, :scope > section > h2, :scope > foot
 /** Where the reader's eye is, as a fraction of the viewport's height. */
 const READING_LINE = 0.25
 
-/** Wide enough for the index to sit beside a 42rem column, so it starts open. */
+/** Wide enough for the index to sit beside a 42rem column, so it starts open there. */
 const WIDE = '(min-width: 80rem)'
 
 export function useOutline(container: RefObject<HTMLElement | null>) {
@@ -60,25 +61,77 @@ export function useOutline(container: RefObject<HTMLElement | null>) {
     }
   }, [container])
 
+  const cancelJump = useRef<() => void>(() => {})
+  useEffect(() => () => cancelJump.current(), [])
+
   const jump = useCallback((id: string | null) => {
-    if (id === null) window.scrollTo({ top: 0, behavior: 'smooth' })
-    else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    cancelJump.current()
+    if (id === null) return window.scrollTo({ top: 0, behavior: 'smooth' })
+    const el = document.getElementById(id)
+    if (el) cancelJump.current = scrollUntilSettled(el)
   }, [])
 
   return { entries, active, jump }
 }
+
+/**
+ * Scrolls a heading to the top, and again each time the page comes to rest with the heading
+ * elsewhere: figures and plates load lazily above it and push it down while we travel. Gives up
+ * after a few tries or as soon as the reader takes over. Returns a cancel function.
+ */
+function scrollUntilSettled(el: HTMLElement): () => void {
+  let tries = 0
+  let timer = 0
+  const go = () => el.scrollIntoView({ behavior: tries > 2 ? 'instant' : 'smooth', block: 'start' })
+  const onScroll = () => {
+    clearTimeout(timer)
+    timer = window.setTimeout(settle, 150)
+  }
+  const settle = () => {
+    const off = el.getBoundingClientRect().top - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)
+    if (Math.abs(off) > 4 && tries++ < 5) {
+      go()
+      onScroll() // in case it is already there and no scroll event comes
+    } else stop()
+  }
+  const stop = () => {
+    clearTimeout(timer)
+    window.removeEventListener('scroll', onScroll)
+    for (const type of TAKEOVER) window.removeEventListener(type, stop)
+  }
+  window.addEventListener('scroll', onScroll, { passive: true })
+  for (const type of TAKEOVER) window.addEventListener(type, stop, { passive: true })
+  go()
+  onScroll()
+  return stop
+}
+
+/** The reader scrolling on their own. */
+const TAKEOVER = ['wheel', 'touchstart', 'keydown'] as const
 
 function sameOutline(a: OutlineEntry[], b: OutlineEntry[]) {
   return a.length === b.length && a.every((e, i) => e.id === b[i].id && e.text === b[i].text)
 }
 
 /**
- * Whether the index is open. On wide screens it sits beside the text: open unless closed
- * there, remembered per tome. On narrow ones it is an overlay: it starts closed and closes
- * after a jump (`closeIfNarrow`).
+ * How a book's index shows, and whether it is open.
+ * - `side` (wide screens): a panel beside the text, open unless closed there (remembered per tome).
+ * - `drop` (tablets): a panel over the text, starts closed, closes after a jump.
+ * - `sheet` (phones): a sheet rising from the bottom, same as `drop`; while it is open the page
+ *   doesn't scroll under it.
+ * Escape closes it in the two overlay modes.
  */
 export function useIndexOpen(key: string, wide = WIDE) {
+  const isWide = useMediaQuery(wide)
+  const isPhone = useMediaQuery(PHONE)
+  const mode: 'side' | 'drop' | 'sheet' = isWide ? 'side' : isPhone ? 'sheet' : 'drop'
   const [open, setOpenState] = useState(() => matchMedia(wide).matches && loadJSON(key, true))
+
+  // Crossing into the side layout restores the remembered choice; leaving it closes the overlay.
+  useEffect(() => {
+    setOpenState(isWide && loadJSON(key, true))
+  }, [isWide, key])
+
   const setOpen = useCallback(
     (next: boolean) => {
       setOpenState(next)
@@ -86,8 +139,55 @@ export function useIndexOpen(key: string, wide = WIDE) {
     },
     [key, wide],
   )
-  const closeIfNarrow = useCallback(() => {
+  const closeIfOverlay = useCallback(() => {
     if (!matchMedia(wide).matches) setOpenState(false)
   }, [wide])
-  return { open, setOpen, closeIfNarrow }
+
+  const overlay = open && mode !== 'side'
+  useEffect(() => {
+    if (!overlay) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpenState(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [overlay])
+
+  const locked = open && mode === 'sheet'
+  useEffect(() => {
+    if (!locked) return
+    const html = document.documentElement
+    const before = html.style.overflow
+    html.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = before
+    }
+  }, [locked])
+
+  return { open, mode, setOpen, closeIfOverlay }
+}
+
+/**
+ * Drag-to-dismiss for a bottom sheet: spread `handle` on its grip; `offset` is how far it has
+ * been pulled down (px). Let go past `threshold` and it closes.
+ */
+export function useSheetDrag(close: () => void, threshold = 80) {
+  const [offset, setOffset] = useState(0)
+  const start = useRef<number | null>(null)
+  const end = () => {
+    if (start.current === null) return
+    start.current = null
+    if (offset > threshold) close()
+    setOffset(0)
+  }
+  const handle = {
+    onPointerDown(e: ReactPointerEvent<HTMLElement>) {
+      start.current = e.clientY
+      e.currentTarget.setPointerCapture(e.pointerId)
+    },
+    onPointerMove(e: ReactPointerEvent<HTMLElement>) {
+      if (start.current !== null) setOffset(Math.max(0, e.clientY - start.current))
+    },
+    onPointerUp: end,
+    onPointerCancel: end,
+  }
+  return { offset, dragging: offset > 0, handle }
 }

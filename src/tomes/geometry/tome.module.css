@@ -162,6 +162,8 @@ a.bookEntry:hover {
 .book {
   max-width: 52rem;
   margin: 0 auto;
+  /* Clear of the shell's chrome row (3rem) on phones, where it spans the top. */
+  padding-top: 2rem;
 }
 
 .bookHeader {
@@ -211,7 +213,7 @@ a.bookEntry:hover {
 /* Jumps from the book index land a little below the top edge. */
 .prose h2,
 .prose h3 {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 4rem; /* below the chrome row */
 }
 
 .prose h2 {

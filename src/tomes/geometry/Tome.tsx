@@ -21,7 +21,7 @@ export default function GeometryTome({ manifest, path }: TomeProps) {
   const book = books.find((b) => b.id === path && b.load)
   return (
     <div className={styles.root}>
-      {book ? <BookView book={book} /> : <Frontispiece title={manifest.title} subtitle={manifest.subtitle} />}
+      {book ? <BookView key={book.id} book={book} /> : <Frontispiece title={manifest.title} subtitle={manifest.subtitle} />}
     </div>
   )
 }

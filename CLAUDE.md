@@ -18,16 +18,20 @@ Three layers:
   `shell/atlas/` is the home: three switchable views of the same `buildAtlas()` model
   (Estantes, Índice, Mapa; `?view=` in the URL, last one remembered). The Ctrl+K search over
   tomes, areas and facets lives in `GlobalSearch.tsx`, wrapping every route (also inside tomes;
-  `useGlobalSearch()` gives the atlas and `open`). Tomes get one chrome pill: Atlas, the tome's
-  front page (only when deeper inside it, e.g. a book) and search. The Mapa is a progressive constellation
+  `useGlobalSearch()` gives the atlas and `open`). Tomes get one chrome row (`TomePage.tsx`): the
+  pill (Atlas, the tome's front page when deeper inside it, search) and a slot where the tome portals
+  its own actions with `<ChromeActions>` (`shell/chrome.tsx`; portalled outside the tome's root, so
+  they carry their own colours). Below `PHONE` (48rem) the pill is icon-only and the row hides while
+  scrolling down; overlays become bottom sheets. The Mapa is a progressive constellation
   (`focusLayout`: the focused area at the centre, two rings around it, deeper levels counted as
   "+N"; `?area=` holds the focus, clicks re-centre with a tween). Pure logic (`model.ts`,
   `search.ts`, `layout.ts`) is tested.
 - `src/forge/` — building blocks shared by tomes, extracted only once two tomes needed them:
   `practice.ts` (persisted per-item stats, weighted pick of what you miss, `seededRng` for
   tests), `text.ts` (normalize, diacritics, levenshtein) and `outline.ts` + `useOutline.ts` (a book's
-  index: ids for its h2/h3, the section being read, open state; each tome draws its own `BookIndex`
-  under the chrome pill). Tome-specific logic (anatomy's
+  index: ids for its h2/h3, the section being read, jumps that re-aim while lazy plates push the
+  heading down, open state per layout — side panel / drop-down / bottom sheet with drag-to-dismiss).
+  Each tome draws its own `BookIndex`, its toggle in the chrome row. Tome-specific logic (anatomy's
   name parsing, Latin morphology) stays in its tome. Visual components are not shared:
   each tome draws its own.
 - `src/tomes/<id>/` — one self-contained folder per tome:

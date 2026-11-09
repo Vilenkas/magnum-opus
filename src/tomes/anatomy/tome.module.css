@@ -201,7 +201,7 @@ a.bookEntry:hover {
 /* Jumps from the book index land a little below the top edge. */
 .prose h2,
 .prose h3 {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 4rem; /* below the chrome row */
 }
 
 .prose h2 {
