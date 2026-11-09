@@ -241,6 +241,12 @@ a.book:hover {
 
 /* ---------- Prose ---------- */
 
+/* Jumps from the book index land a little below the top edge. */
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 1.5rem;
+}
+
 .prose h2 {
   font-family: var(--lat-carved);
   font-weight: 400;

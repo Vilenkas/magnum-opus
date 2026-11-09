@@ -3,7 +3,7 @@ import { Link, useParams } from '@tanstack/react-router'
 import { getTome } from '@/tomes/registry'
 import { SearchIcon } from './atlas/parts'
 import { useGlobalSearch } from './GlobalSearch'
-import { Icon, SHELVES_PATH } from './icons'
+import { BOOK_PATH, Icon, SHELVES_PATH } from './icons'
 import { NotFound } from './NotFound'
 
 export function TomePage() {
@@ -23,7 +23,7 @@ export function TomePage() {
   return (
     // data-tome lets a tome scope global styles to itself if it needs to.
     <div data-tome={manifest.id} style={{ background: manifest.palette.background, minHeight: '100dvh' }}>
-      <TomeChrome />
+      <TomeChrome tomeId={manifest.id} title={manifest.title} inside={Boolean(_splat)} />
       <Suspense fallback={<TomeLoading color={manifest.palette.accent} />}>
         <Component manifest={manifest} path={_splat ?? ''} />
       </Suspense>
@@ -31,8 +31,11 @@ export function TomePage() {
   )
 }
 
-/** The only shell chrome drawn on top of a tome: back to the Atlas, and the universal search. */
-function TomeChrome() {
+/**
+ * The only shell chrome drawn on top of a tome: back to the Atlas, back to the tome's own
+ * front page when deeper inside it (a book, an exam…), and the universal search.
+ */
+function TomeChrome({ tomeId, title, inside }: { tomeId: string; title: string; inside: boolean }) {
   const { open } = useGlobalSearch()
   const pill = 'flex h-8 items-center gap-1.5 px-3 text-white/80 transition hover:bg-black/30 hover:text-white'
   return (
@@ -44,6 +47,15 @@ function TomeChrome() {
         <Icon path={SHELVES_PATH} className="size-4" />
         <span>Atlas</span>
       </Link>
+      {inside && (
+        <>
+          <span aria-hidden="true" className="w-px bg-white/15" />
+          <Link to="/tomes/$tomeId" params={{ tomeId }} title={`Volver al tomo: ${title}`} className={pill}>
+            <Icon path={BOOK_PATH} className="size-4" />
+            <span>{title}</span>
+          </Link>
+        </>
+      )}
       <span aria-hidden="true" className="w-px bg-white/15" />
       <button type="button" onClick={open} title="Buscar (Ctrl + K)" aria-label="Buscar" className={pill}>
         <SearchIcon className="size-4" />

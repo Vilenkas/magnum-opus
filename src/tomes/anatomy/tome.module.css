@@ -198,6 +198,12 @@ a.bookEntry:hover {
 
 /* ---------- MDX prose ---------- */
 
+/* Jumps from the book index land a little below the top edge. */
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 1.5rem;
+}
+
 .prose h2 {
   font-family: var(--anatomy-display);
   font-weight: 700;

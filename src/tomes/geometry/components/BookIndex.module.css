@@ -1,0 +1,129 @@
+/* The book's index: a drafting card pinned under the shell's pill (which ends ~3.1rem down). */
+.index {
+  position: fixed;
+  top: 3.6rem;
+  left: 1rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-family: 'EB Garamond Variable', Garamond, Georgia, serif;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2rem;
+  padding: 0 0.9rem;
+  border: 1px solid color-mix(in oklab, #0f172a 25%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, #f4f6f9 88%, white);
+  box-shadow: 0 1px 4px rgb(15 23 42 / 0.12);
+  color: #475569;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease;
+}
+.toggle:hover,
+.toggle[aria-expanded='true'] {
+  color: #1d4ed8;
+  border-color: color-mix(in oklab, #1d4ed8 50%, transparent);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: min(17rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 7.5rem);
+  border: 1px solid color-mix(in oklab, #0f172a 22%, transparent);
+  border-radius: 0.4rem;
+  background:
+    radial-gradient(circle at 30% 0%, rgb(255 255 255 / 0.8), transparent 60%),
+    color-mix(in oklab, #f4f6f9 92%, white);
+  box-shadow: 0 6px 24px rgb(15 23 42 / 0.16);
+  animation: unfold 180ms ease-out;
+}
+
+@keyframes unfold {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.heading {
+  padding: 0.85rem 1rem 0.7rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, #1d4ed8 35%, transparent);
+  background: none;
+  color: #0f172a;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+.heading:hover {
+  color: #1d4ed8;
+}
+
+.numeral {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.list {
+  position: relative; /* offsetTop of the entries is measured against the list */
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.4rem 0 0.6rem;
+  list-style: none;
+  overscroll-behavior: contain;
+}
+
+.entry {
+  display: block;
+  width: 100%;
+  padding: 0.28rem 1rem 0.28rem 0.9rem;
+  border: 0;
+  border-left: 2px solid transparent;
+  background: none;
+  color: #475569;
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+.entry:hover {
+  color: #0f172a;
+  background: color-mix(in oklab, #1d4ed8 7%, transparent);
+}
+.entry[data-section] {
+  color: #0f172a;
+  font-weight: 600;
+}
+.entry[aria-current] {
+  border-left-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+.sub .entry {
+  padding-left: 1.8rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 400;
+}

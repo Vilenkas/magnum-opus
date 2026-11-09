@@ -1,12 +1,14 @@
-import { lazy, Suspense, useMemo } from 'react'
+import { lazy, Suspense, useMemo, useRef } from 'react'
 import { Link } from '@tanstack/react-router'
 import '@fontsource/cormorant-garamond/500.css'
 import '@fontsource/cormorant-garamond/600-italic.css'
 import '@fontsource/cormorant-garamond/700.css'
 import '@fontsource-variable/eb-garamond'
 import '@fontsource-variable/eb-garamond/wght-italic.css'
+import { useOutline } from '@/forge/useOutline'
 import type { TomeProps } from '../types'
 import { books, type Book } from './books'
+import { BookIndex } from './components/BookIndex'
 import { CitationProvider, Sources } from './components/Citations'
 import { Loading } from './components/Loading'
 import { mdxComponents } from './components/mdx'
@@ -67,8 +69,11 @@ function BookEntry({ book }: { book: Book }) {
 
 function BookView({ book }: { book: Book }) {
   const Content = useMemo(() => lazy(book.load!), [book])
+  const prose = useRef<HTMLDivElement>(null)
+  const outline = useOutline(prose)
   return (
     <article className={styles.book}>
+      <BookIndex numeral={book.numeral} title={book.title} {...outline} />
       <header className={styles.bookHeader}>
         <Link to="/tomes/$tomeId" params={{ tomeId: 'anatomy' }} className={styles.crumb}>
           Anatomía
@@ -79,7 +84,7 @@ function BookView({ book }: { book: Book }) {
           ❦
         </div>
       </header>
-      <div className={styles.prose}>
+      <div ref={prose} className={styles.prose}>
         <CitationProvider>
           <Suspense fallback={<Loading label="Abriendo el libro…" />}>
             <Content components={mdxComponents} />
