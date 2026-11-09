@@ -74,6 +74,31 @@ describe('descriptions', () => {
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })
 
+  it('describe every bone, joint, joint piece, muscle and wall nerve of the trunk, and its parietal vessels and nodes', () => {
+    const trunk = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.set === 'joints' && e.groups?.some((g) => /^(Joints of vertebral column|Thoracic joints)$/.test(g.en)),
+    )
+    expect(trunk.length).toBeGreaterThan(50)
+    for (const e of trunk) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const j of JOINTS.filter((j) => j.region === 'spine' || j.region === 'thorax')) expect(descriptionOf(j.en), j.en).toBeDefined()
+    const muscles = (soft as { set: string; kind: string; part?: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.set === 'muscles' && e.kind === 'muscle' && e.groups?.some((g) => /^(Dorsal|Thoracic|Abdominal) part of muscular system$/.test(g.en)),
+    )
+    expect(muscles.length).toBeGreaterThan(50)
+    for (const e of muscles) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const en of ['Intercostal nerves', 'Anterior root of spinal nerve', 'Posterior root of spinal nerve', 'Spinal ganglion', 'Sympathetic trunk', 'Ganglia of sympathetic trunk', 'Iliohypogastric nerve', 'Ilio-inguinal nerve'])
+      expect(descriptionOf(en), en).toBeDefined()
+    for (const en of ['Thoracic aorta', 'Posterior intercostal arteries', 'Supreme intercostal artery', 'Subcostal artery', 'Internal thoracic artery', 'Internal thoracic veins', 'Superior vena cava', 'Azygos vein', 'Hemi-azygos vein', 'Accessory hemi-azygos vein', 'Right ascending lumbar vein', 'Left ascending lumbar vein'])
+      expect(descriptionOf(en), en).toBeDefined()
+    const nodes = (vessels as { en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.groups?.some((g) => g.en === 'Thoracic lymph nodes') && !e.groups.some((g) => g.en === 'Pulmonary lymph nodes'),
+    )
+    expect(nodes.length).toBeGreaterThan(10)
+    for (const e of nodes) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const p of pieces.filter((p) => ['cervical-vertebrae', 'thoracic-vertebrae', 'lumbar-vertebrae', 'sacrum-coccyx', 'sternum', 'ribs', 'costal-cartilages'].includes(p.group)))
+      expect(descriptionOf(p.en), p.en).toBeDefined()
+  })
+
   it('are found whatever the case, and missing ones say nothing', () => {
     expect(descriptionOf('right atrium')).toBeDefined()
     expect(descriptionOf('Not a structure')).toBeUndefined()

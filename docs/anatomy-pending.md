@@ -111,7 +111,14 @@ the user to review.
       brachial plexus — `data/descriptions/upper-limb-*.ts`. Its chapter sections (shoulder…) still pending.
 - [x] Lower limb and pelvic girdle (Latarjet–Ruiz t. 1 chs. 63–70): `data/descriptions/lower-limb-*.ts`. Left for the
       pelvis pass: gluteal and external iliac nodes; the fibular and posterior tibial nodes are in no source read.
-- [ ] Thorax and back · [ ] Abdomen and pelvis · [ ] Head and neck (incl. the encephalon's
+- [x] Thorax and back (2026-11-08; Latarjet–Ruiz t. 1 chs. 4–8, 19, 23, 37–41 and t. 2 chs. 71–75, 81–90, 102, 106, Rouvière
+      t. 2 for the thoracic nodes): `data/descriptions/trunk-*.ts`. Vertebrae C1–coccyx, sternum, ribs, cartilages, the column's
+      and thorax's joints with every disc and nucleus, back, nape, thorax, diaphragm **and the abdominal wall's muscles**,
+      thoracolumbar and clavipectoral fasciae, the thoracic aorta, intercostals, internal thoracic, cavae, azygos system and
+      parietal and mediastinal nodes, intercostal and L1 nerves, roots, ganglion, dura, cauda equina, sympathetic trunk.
+      Left out: pulmonary arteries and nodes (with the lungs), vertebral artery and vein, cervical nodes, phrenic and vagus
+      (head and neck). Fasciae of the limbs and pectoral fascia still undescribed; no Moore citations in this pass.
+- [ ] Abdomen and pelvis · [ ] Head and neck (incl. the encephalon's
       cards from neurology's text) · [ ] the heart's structure and pericardium (Testut pp. 71–155).
 - Neurología paused by the user's choice (spinal nerves and the vegetative system still pending).
 
