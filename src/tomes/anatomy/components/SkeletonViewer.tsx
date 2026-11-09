@@ -359,7 +359,7 @@ export function SkeletonViewer() {
           </>
         ) : (
           <p className={plate.hint}>
-            Arrastra para girar · rueda para acercar · clic para identificar ·
+            Pulsa ▶ y arrastra para girar · rueda para acercar · clic para identificar ·
             doble clic para enfocar · selecciona y pulsa O para ocultar o A para
             atenuar
           </p>

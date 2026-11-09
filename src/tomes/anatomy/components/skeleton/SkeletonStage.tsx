@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode, type RefObject } from 'react'
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import { Bvh, OrbitControls, useGLTF, useProgress } from '@react-three/drei'
 import * as THREE from 'three'
@@ -640,14 +640,24 @@ function TissueLayerModel({
   return <primitive object={scene} />
 }
 
-/** Canvas + lights + the skeleton model + camera framing. Shared by the viewer and the quiz. */
+/**
+ * Canvas + lights + the skeleton model + camera framing. Shared by the viewer and the quiz.
+ *
+ * The camera only follows gestures while the stage is live (the ▶ button): paused, a swipe or the
+ * wheel over the plate scroll the page instead of turning the model, so reading past a plate never
+ * moves it by accident. Picking still works paused, and so do flights the plate asks for. The stage
+ * goes live in fullscreen (no page to scroll there) and pauses again when it leaves the screen.
+ */
 export function SkeletonStage({ children, className, onHoverChange, onPick, ...modelProps }: SkeletonStageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const stage = useRef<HTMLDivElement>(null)
+  const [live, setLive] = useLiveGestures(stage)
+  const hint = usePausedDragHint(live)
 
   useEffect(() => onHoverChange?.(hoveredId), [hoveredId, onHoverChange])
 
   return (
-    <div className={`${styles.stage} ${className ?? ''}`} data-stage>
+    <div ref={stage} className={`${styles.stage} ${className ?? ''}`} data-stage data-live={live} {...hint.handlers}>
       <Canvas
         frameloop="demand"
         dpr={[1, 2]}
@@ -664,11 +674,102 @@ export function SkeletonStage({ children, className, onHoverChange, onPick, ...m
             <SkeletonModel {...modelProps} onPick={onPick} hoveredId={hoveredId} setHoveredId={setHoveredId} />
           </Bvh>
         </Suspense>
-        <OrbitControls makeDefault enablePan enableDamping={false} minDistance={MIN_DISTANCE} maxDistance={MAX_DISTANCE} zoomSpeed={ZOOM_SPEED} />
+        <OrbitControls
+          makeDefault
+          enabled={live}
+          enablePan
+          enableDamping={false}
+          minDistance={MIN_DISTANCE}
+          maxDistance={MAX_DISTANCE}
+          zoomSpeed={ZOOM_SPEED}
+        />
+        <ControlsTouchAction live={live} />
       </Canvas>
       <LoadingOverlay />
+      <LiveButton live={live} onClick={() => setLive(!live)} />
+      {hint.shown && <div className={styles.hint}>Pulsa ▶ para mover el modelo</div>}
       {children}
     </div>
+  )
+}
+
+/**
+ * OrbitControls sets `touch-action: none` on its element when it connects, which would keep a
+ * finger from scrolling the page even while paused: follow the live state instead.
+ */
+function ControlsTouchAction({ live }: { live: boolean }) {
+  const controls = useThree((s) => s.controls) as { domElement?: HTMLElement } | null
+  useEffect(() => {
+    const el = controls?.domElement
+    if (el) el.style.touchAction = live ? 'none' : 'auto'
+  }, [controls, live])
+  return null
+}
+
+/** Whether the stage follows gestures: off by default, on in fullscreen, off once scrolled away. */
+function useLiveGestures(stage: RefObject<HTMLDivElement | null>) {
+  const [live, setLive] = useState(false)
+
+  useEffect(() => {
+    const sync = () => setLive(Boolean(stage.current && document.fullscreenElement?.contains(stage.current)))
+    document.addEventListener('fullscreenchange', sync)
+    return () => document.removeEventListener('fullscreenchange', sync)
+  }, [stage])
+
+  useEffect(() => {
+    const el = stage.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio < 0.3 && !document.fullscreenElement) setLive(false)
+      },
+      { threshold: [0, 0.3] },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [stage])
+
+  return [live, setLive] as const
+}
+
+/** A short nudge when someone drags a paused stage with the mouse (on touch a drag is a scroll). */
+function usePausedDragHint(live: boolean) {
+  const [shown, setShown] = useState(false)
+  const start = useRef<{ x: number; y: number } | null>(null)
+  const timer = useRef(0)
+
+  useEffect(() => {
+    if (live) setShown(false)
+    return () => clearTimeout(timer.current)
+  }, [live])
+
+  const handlers = {
+    onPointerDown(e: ReactPointerEvent) {
+      start.current = !live && e.pointerType === 'mouse' && e.button === 0 ? { x: e.clientX, y: e.clientY } : null
+    },
+    onPointerMove(e: ReactPointerEvent) {
+      const from = start.current
+      if (!from || Math.hypot(e.clientX - from.x, e.clientY - from.y) < 8) return
+      start.current = null
+      setShown(true)
+      clearTimeout(timer.current)
+      timer.current = window.setTimeout(() => setShown(false), 2200)
+    },
+    onPointerUp() {
+      start.current = null
+    },
+  }
+  return { shown, handlers }
+}
+
+function LiveButton({ live, onClick }: { live: boolean; onClick: () => void }) {
+  const label = live ? 'Pausar: los gestos vuelven a desplazar la página' : 'Mover el modelo con el ratón o los dedos'
+  return (
+    <button type="button" className={styles.live} onClick={onClick} title={label} aria-label={label} aria-pressed={live}>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden>
+        {live ? <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /> : <path d="M8 5.5v13l10.5-6.5z" />}
+      </svg>
+    </button>
   )
 }
 

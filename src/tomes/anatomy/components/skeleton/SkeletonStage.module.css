@@ -2,11 +2,62 @@
   position: relative;
   height: min(78vh, 46rem);
   min-height: 24rem;
+}
+/* Paused, gestures belong to the page (touch scrolls through); live, to the camera. */
+.stage[data-live='true'] {
   cursor: grab;
   touch-action: none;
 }
-.stage:active {
+.stage[data-live='true']:active {
   cursor: grabbing;
+}
+
+/* The ▶ / ❚❚ switch, top-left of the stage (bottom-left is the viewers' undo bar). */
+.live {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--anatomy-paper) 80%, white);
+  color: var(--anatomy-ink);
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+.live:hover {
+  background: var(--anatomy-ink);
+  color: var(--anatomy-paper);
+}
+.live[aria-pressed='true'] {
+  background: var(--anatomy-accent);
+  border-color: var(--anatomy-accent);
+  color: var(--anatomy-paper);
+}
+
+.hint {
+  position: absolute;
+  top: 0.85rem;
+  left: 3.3rem;
+  z-index: 2;
+  padding: 0.15rem 0.7rem;
+  background: rgb(43 33 24 / 0.85);
+  color: var(--anatomy-paper);
+  font-size: 0.9rem;
+  pointer-events: none;
+  animation: hint-in 200ms ease-out;
+}
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
 }
 
 .loading {
