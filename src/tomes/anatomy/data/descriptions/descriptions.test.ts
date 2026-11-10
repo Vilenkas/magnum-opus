@@ -99,6 +99,40 @@ describe('descriptions', () => {
       expect(descriptionOf(p.en), p.en).toBeDefined()
   })
 
+  it('describe every bone, tooth, cartilage, joint, muscle and cranial nerve of the head and the neck, and its vessels, sinuses and nodes', () => {
+    const joints = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.set === 'joints' && e.groups?.some((g) => /^(Joints of skull|Laryngeal joints)$/.test(g.en)),
+    )
+    expect(joints.length).toBeGreaterThan(10)
+    for (const e of joints) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const j of JOINTS.filter((j) => j.region === 'head')) expect(descriptionOf(j.en), j.en).toBeDefined()
+    const muscles = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.set === 'muscles' && e.groups?.some((g) => /^(Cranial part of muscular system|Cervical part of muscular system|Fasciae of head|Cervical fasciae)$/.test(g.en)),
+    )
+    expect(muscles.length).toBeGreaterThan(100)
+    for (const e of muscles) expect(descriptionOf(e.en), e.en).toBeDefined()
+    const nerves = (nervous as { en: string; groups?: { en: string }[] }[]).filter(
+      (e) => e.en === 'Accessory nerve (XI)' || e.groups?.some((g) => /^(Cranial nerves|Eye|Ear|Meninges)$/.test(g.en)),
+    )
+    expect(nerves.length).toBeGreaterThan(40)
+    for (const e of nerves) expect(descriptionOf(e.en), e.en).toBeDefined()
+    const vascular = (vessels as { en: string; groups?: { en: string }[] }[]).filter((e) =>
+      e.groups?.some((g) => /^(Lymph nodes of (head|neck)|Dural venous sinuses|Orbital veins|Cerebral arterial circle|Pharyngeal lymphoid ring)$/.test(g.en)),
+    )
+    expect(vascular.length).toBeGreaterThan(40)
+    for (const e of vascular) expect(descriptionOf(e.en), e.en).toBeDefined()
+    for (const en of [
+      'Right common carotid artery', 'Left common carotid artery', 'External carotid artery', 'Internal carotid artery', 'Facial artery', 'Maxillary artery',
+      'Superficial temporal artery', 'Middle meningeal artery', 'Ophthalmic artery', 'Vertebral artery', 'Basilar artery', 'Anterior cerebral artery',
+      'Middle cerebral artery (M1-segment)', 'Posterior cerebral artery', 'Right subclavian artery', 'Left subclavian artery', 'Thyrocervical trunk',
+      'Costocervical trunk', 'Internal jugular vein', 'External jugular vein', 'Anterior jugular vein', 'Facial vein', 'Retromandibular vein',
+      'Right brachiocephalic vein', 'Left brachiocephalic vein', 'Right subclavian vein', 'Left subclavian vein',
+    ])
+      expect(descriptionOf(en), en).toBeDefined()
+    for (const p of pieces.filter((p) => ['cranium', 'mandible', 'hyoid', 'auditory-ossicles', 'nasal-cartilages', 'teeth', 'laryngeal-cartilages'].includes(p.group)))
+      expect(descriptionOf(p.en), p.en).toBeDefined()
+  })
+
   it('are found whatever the case, and missing ones say nothing', () => {
     expect(descriptionOf('right atrium')).toBeDefined()
     expect(descriptionOf('Not a structure')).toBeUndefined()

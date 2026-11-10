@@ -250,8 +250,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - Every 3D viewer's selection card has a «Descripción» button (`skeleton/Description.tsx`): the text comes from
   `data/descriptions/<region>.ts`, keyed by the structure's TA English name without side, registered in
   `data/descriptions/index.ts`; structures without one say so. Written region by region for all five books at once
-  (`upper-limb-*.ts`, `lower-limb-*.ts`, `trunk-*.ts`: bones, joints, muscles, vessels, nerves; after Latarjet–Ruiz t. 1, PDF page = printed + 20,
-  and t. 2, printed ≈ PDF + 823…828); a whole
+  (`upper-limb-*.ts`, `lower-limb-*.ts`, `trunk-*.ts`, `head-neck-*.ts`: bones, joints, muscles, vessels, nerves; after Latarjet–Ruiz t. 1, PDF page = printed + 20,
+  and t. 2, printed ≈ PDF + 823…828, whose running heads carry the printed number; Rouvière t. 1, printed = PDF + 1, for the facial nodes).
+  Head and neck also covers the teeth, ossicles, nasal and laryngeal cartilages, the brain's arteries, the dural sinuses, the eye, the ear
+  and the dural folds; the brain and the spinal cord themselves are not described yet. A whole
   joint is keyed by its `joint-index.ts` `en`, a muscle's heads share its text led by a line of their own. Tests check
   every key exists in some model and that each finished region is fully covered.
 - `quiz/` — pure logic (engine, answer checking, weighted stats), unit-tested with Vitest.
