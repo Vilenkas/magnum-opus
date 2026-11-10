@@ -222,6 +222,19 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   stations; a trunk lesion cuts the branches leaving at or beyond it, only for fibres already in the trunk (the intermediary
   joins at the emergence); central lesions spare the upper face. Tests check Moore's levels. The bulb's own nuclei and its
   vessels (Foix–Hillemand, t. II pp. 724–753) are in `neurology.mdx`.
+- `neurology/spinal-nerves-1.mdx` (spinal nerves in general, cervical and brachial plexuses, t. III pp. 197–301) and
+  `spinal-nerves-2.mdx` (intercostals, lumbar and sacral plexuses, pp. 301–356). `data/plexuses.ts` +
+  `components/PlexusLesions.tsx` (Láminas XXII `<BrachialPlexus>` and XXIII `<LumbosacralPlexus>`): each plexus is a graph
+  root → trunk → division → cord → nerve; every muscle, skin area and reflex names its nerve, its roots and where along the
+  nerve its branch leaves (`at`). A lesion cuts nodes (optionally only beyond `at`); a fibre lives if it climbs from its
+  branch to its root without crossing the cut. All fibres lost = paralysed/anaesthetic, some = weak; one root never
+  anaesthetises (Sherrington). Signs (Erb, Klumpke, claw, wrist drop, foot drop, Trendelenburg…) are predicates on the
+  outcome; tests check Testut's constitution and Moore's palsies.
+- `neurology/autonomic.mdx`: the vegetative system (pp. 357–428). `data/autonomic.ts` + `components/AutonomicSystem.tsx`
+  (Lámina XXIV): every organ with its sympathetic and parasympathetic way (centre, nodes, `relay` ganglion, what it does,
+  what is seen without it). A lesion cuts the ways through it; the organ is left to the other system or loses the function.
+  Tests check thoracolumbar/craniosacral origins, Testut's law that the parasympathetic relays near the organ, and Horner,
+  III, vagotomy, sacral roots, presacral nerve and sympathectomies. This part closes Libro V.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

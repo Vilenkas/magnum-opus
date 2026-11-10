@@ -1,0 +1,178 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+@media (max-width: 48rem) {
+  .body {
+    padding: 0.5rem 0.5rem 1rem;
+  }
+}
+
+.svg {
+  width: 100%;
+  max-width: 58rem;
+  align-self: center;
+  font-family: var(--anatomy-body);
+}
+
+/* ---------- The neuraxis ---------- */
+
+.brainstem {
+  fill: #ead9bd;
+  stroke: #8a6a4a;
+  stroke-width: 1;
+}
+.cord {
+  fill: #f1e6d0;
+  stroke: #8a6a4a;
+  stroke-width: 1;
+}
+.seg {
+  fill: transparent;
+}
+.segSym {
+  fill: color-mix(in oklab, #c0392b 22%, transparent);
+}
+.segPara {
+  fill: color-mix(in oklab, #2f6fa8 28%, transparent);
+}
+.segText {
+  font-size: 9px;
+  fill: color-mix(in oklab, var(--anatomy-ink) 70%, transparent);
+}
+.nucleus {
+  fill: #2f6fa8;
+}
+
+/* ---------- The ways ---------- */
+
+.pre,
+.post {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  opacity: 0.85;
+  transition:
+    stroke 250ms ease,
+    opacity 250ms ease;
+}
+.post {
+  stroke-dasharray: 4 3;
+}
+.pre[data-system='sympathetic'],
+.post[data-system='sympathetic'] {
+  stroke: #c0392b;
+}
+.pre[data-system='parasympathetic'],
+.post[data-system='parasympathetic'] {
+  stroke: #2f6fa8;
+}
+.pre[data-cut='true'],
+.post[data-cut='true'] {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 22%, transparent);
+  stroke-dasharray: 1.5 3.5;
+  opacity: 1;
+}
+
+.ganglion[data-system='sympathetic'] {
+  fill: #f3c9c2;
+  stroke: #c0392b;
+  stroke-width: 1.2;
+}
+.ganglion[data-system='parasympathetic'] {
+  fill: #c9dcef;
+  stroke: #2f6fa8;
+  stroke-width: 1.2;
+}
+.dot[data-system='sympathetic'] {
+  fill: #c0392b;
+}
+.dot[data-system='parasympathetic'] {
+  fill: #2f6fa8;
+}
+.nodeText {
+  font-size: 8px;
+  fill: color-mix(in oklab, var(--anatomy-ink) 75%, transparent);
+  paint-order: stroke;
+  stroke: var(--anatomy-paper);
+  stroke-width: 2.5px;
+}
+
+.lesion circle {
+  fill: none;
+  stroke: #7a1f17;
+  stroke-width: 2;
+}
+.lesion path {
+  stroke: #7a1f17;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+/* ---------- The organs ---------- */
+
+.organ circle {
+  fill: var(--anatomy-ink);
+}
+.organ text {
+  font-size: 10px;
+  fill: var(--anatomy-ink);
+}
+.organ[data-state='sympathetic'] circle {
+  fill: #c0392b;
+}
+.organ[data-state='parasympathetic'] circle {
+  fill: #2f6fa8;
+}
+.organ[data-state='lost'] circle {
+  fill: none;
+  stroke: #7a1f17;
+  stroke-width: 1.5;
+}
+.organ:not([data-state='normal']) text {
+  font-weight: 700;
+  fill: #7a1f17;
+}
+
+/* ---------- The side ---------- */
+
+.side {
+  font-size: 0.88rem;
+}
+.side .list {
+  columns: 2 18rem;
+  column-gap: 2rem;
+}
+.side .list li {
+  break-inside: avoid;
+}
+.key {
+  margin: 0.3rem 0 0.6rem;
+  color: color-mix(in oklab, var(--anatomy-ink) 70%, transparent);
+}
+.keySym {
+  color: #a1301f;
+}
+.keyPara {
+  color: #24578a;
+}
+.list {
+  margin: 0;
+  padding-left: 1rem;
+}
+.list li::before {
+  content: none !important;
+}
+.list li::marker {
+  content: none;
+}
+.list li {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+.text {
+  margin: 0.25rem 0;
+}

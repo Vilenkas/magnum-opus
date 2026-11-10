@@ -1,0 +1,174 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+@media (max-width: 48rem) {
+  .body {
+    padding: 0.5rem 0.5rem 1rem;
+  }
+}
+
+.graph {
+  width: 100%;
+  max-width: 54rem;
+  align-self: center;
+  font-family: var(--anatomy-body);
+}
+
+/* ---------- The graph ---------- */
+
+.edge {
+  stroke: #b8862e;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  transition:
+    stroke 250ms ease,
+    opacity 250ms ease;
+}
+.edge[data-status='weak'] {
+  stroke: #d8b56a;
+  stroke-dasharray: 5 3;
+}
+.edge[data-status='lost'] {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  stroke-dasharray: 2 4;
+}
+
+.node circle {
+  fill: #f3e2b8;
+  stroke: #8a6a2a;
+  stroke-width: 1.2;
+  transition: fill 250ms ease;
+}
+.node[data-kind='division'] circle {
+  fill: #8a6a2a;
+  stroke: none;
+}
+.node[data-status='weak'] circle {
+  fill: #f6eed8;
+}
+.node[data-status='lost'] circle {
+  fill: color-mix(in oklab, var(--anatomy-paper, #fbf7ef) 80%, var(--anatomy-ink));
+  stroke: color-mix(in oklab, var(--anatomy-ink) 35%, transparent);
+}
+.node[data-status='lost'] text {
+  fill: color-mix(in oklab, var(--anatomy-ink) 45%, transparent);
+}
+
+.rootText {
+  font-size: 8.5px;
+  font-weight: 600;
+  fill: var(--anatomy-ink);
+}
+.label {
+  font-size: 9.5px;
+  fill: var(--anatomy-ink);
+  paint-order: stroke;
+  stroke: var(--anatomy-paper);
+  stroke-width: 3px;
+}
+
+.lesion circle {
+  fill: none;
+  stroke: #a3322a;
+  stroke-width: 2;
+}
+.lesion path {
+  stroke: #a3322a;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+/* ---------- The lists ---------- */
+
+.lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.25rem 1.5rem;
+  font-size: 0.85rem;
+}
+.muscles {
+  grid-column: span 2;
+  columns: 2 14rem;
+  column-gap: 1.5rem;
+}
+@media (max-width: 48rem) {
+  .muscles {
+    grid-column: auto;
+  }
+}
+.muscles .head {
+  column-span: all;
+}
+.group {
+  break-inside: avoid;
+}
+
+.head {
+  margin: 0.4rem 0 0.2rem;
+  font-family: var(--anatomy-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.group {
+  margin-bottom: 0.3rem;
+}
+.region {
+  margin: 0.2rem 0 0.1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--anatomy-ink) 60%, transparent);
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list li::before {
+  content: none !important;
+}
+.list li::marker {
+  content: none;
+}
+.list li {
+  padding: 0.05rem 0;
+  line-height: 1.35;
+  color: color-mix(in oklab, var(--anatomy-ink) 55%, transparent);
+}
+.list li[data-status='weak'] {
+  color: #8a6a2a;
+}
+.list li[data-status='lost'] {
+  color: #a3322a;
+  font-weight: 600;
+}
+.mark {
+  display: inline-block;
+  width: 1.1rem;
+}
+.say {
+  font-weight: 400;
+  font-style: italic;
+}
+.none {
+  margin: 0;
+  font-style: italic;
+  color: color-mix(in oklab, var(--anatomy-ink) 60%, transparent);
+}
+
+/* ---------- The legend ---------- */
+
+.text {
+  margin: 0.25rem 0;
+}
+.signs {
+  margin: 0.4rem 0;
+  padding-left: 1.1rem;
+}
+.signs li {
+  margin: 0.2rem 0;
+}
