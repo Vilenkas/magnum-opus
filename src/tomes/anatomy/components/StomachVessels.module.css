@@ -1,0 +1,178 @@
+.divider {
+  width: 1px;
+  align-self: stretch;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.5rem 1.25rem 1rem;
+}
+@media (max-width: 52rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+.scheme {
+  width: 100%;
+  display: block;
+  font-family: var(--anatomy-body);
+}
+
+.zone {
+  cursor: pointer;
+  transition: fill 0.3s ease;
+  stroke: #fffaf3;
+  stroke-width: 1;
+}
+.zone[data-fill='direct'],
+.swatch[data-fill='direct'] {
+  fill: #e7aa98;
+  background: #e7aa98;
+}
+.zone[data-fill='collateral'],
+.swatch[data-fill='collateral'] {
+  fill: #e8c48e;
+  background: #e8c48e;
+}
+.zone[data-fill='wall'],
+.swatch[data-fill='wall'] {
+  fill: #ead9b8;
+  background: #ead9b8;
+}
+.zone[data-fill='lost'],
+.swatch[data-fill='lost'] {
+  fill: #7d7066;
+  background: #7d7066;
+}
+.zone[data-fill='territory'] {
+  fill: #b9cfe0;
+}
+.zone[data-fill='none'] {
+  fill: #ecdfd2;
+}
+.outline {
+  fill: none;
+  stroke: #8f5a4e;
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+.spleen {
+  fill: #9e5a62;
+  opacity: 0.6;
+}
+.oesophagus,
+.duodenum {
+  stroke: #e6b6a6;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+.small {
+  font-size: 8.5px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+.artery {
+  fill: none;
+  stroke: #b8322a;
+  stroke-width: 2.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: opacity 0.3s ease;
+}
+.vessel[data-anastomosis='true'] .artery {
+  stroke-width: 1.8;
+  stroke-dasharray: 4 2.5;
+}
+.artery[data-tied='true'] {
+  opacity: 0.35;
+}
+.vessel[data-dim='true'] .artery {
+  opacity: 0.25;
+}
+.hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 12;
+  cursor: pointer;
+}
+.hit:hover + .tie,
+.vessel:hover .artery {
+  stroke: #e0452f;
+}
+.tie {
+  fill: #2c2723;
+  pointer-events: none;
+}
+
+.tumour {
+  fill: #5a2a6a;
+  stroke: #fffaf3;
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+.chain {
+  fill: none;
+  stroke: #3b6a92;
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+  pointer-events: none;
+}
+.node {
+  fill: #fffaf3;
+  stroke: #6f8aa0;
+  stroke-width: 1.5;
+}
+.node[data-on='true'] {
+  fill: #3b6a92;
+  stroke: #1e3d58;
+}
+
+.read {
+  font-size: 0.93rem;
+}
+.zones {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.zones li {
+  display: grid;
+  grid-template-columns: 1rem 1fr;
+  gap: 0.45rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--anatomy-ink) 12%, transparent);
+}
+.swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: 0.25rem;
+  border-radius: 2px;
+  border: 1px solid #8f5a4e;
+}
+.hint {
+  margin: 0.6rem 0 0 !important;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.text {
+  margin: 0.4rem 0 0 !important;
+  line-height: 1.5;
+}
+.chainList {
+  margin: 0.5rem 0 0 !important;
+  padding-left: 1.3rem !important;
+  color: #1e3d58;
+}
+
+.aorta {
+  stroke: #c98a80;
+  stroke-width: 9;
+  opacity: 0.35;
+  stroke-linecap: round;
+}

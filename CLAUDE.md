@@ -278,6 +278,12 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   regurgitation, aspiration before, during, after). `data/oesophagus.ts` + `components/Oesophagus.tsx` (Lámina IV): the distended
   oesophagus' width as a function of the distance from the incisors (Testut's widths at Moore's distances); a swallowed body stops
   at the first narrower point. Tests check the ranges, the order and that the cricoid narrowing is the narrowest.
+  `splanchnology/stomach.mdx` (pp. 184–255). `data/stomach-shapes.ts` + `components/StomachShapes.tsx` (Lámina V): Schlesinger's four
+  tones as one scale over a fixed cardia and pylorus, standing or lying (Delort's shadows, schematic); tests check the J, the horn
+  and the climb back to the pylorus. `data/stomach-vessels.ts` + `components/StomachVessels.tsx` (Lámina VI): the arterial circle
+  from the coeliac trunk as a graph (anastomoses can't be tied); each zone is fed directly, by collaterals, through the wall
+  network or lost, derived from the ties; Testut's three lymphatic territories with their chains. Tests check the coeliac bypass
+  by the pancreaticoduodenal arcades and that tying every pedicle kills nothing (Testut p. 251).
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

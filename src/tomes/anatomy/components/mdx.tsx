@@ -70,6 +70,8 @@ export const mdxComponents: MDXComponents = {
   Dentition: lazyPlate(() => import('./Dentition').then((m) => m.Dentition)),
   Swallowing: lazyPlate(() => import('./Swallowing').then((m) => m.Swallowing)),
   Oesophagus: lazyPlate(() => import('./Oesophagus').then((m) => m.Oesophagus)),
+  StomachShapes: lazyPlate(() => import('./StomachShapes').then((m) => m.StomachShapes)),
+  StomachVessels: lazyPlate(() => import('./StomachVessels').then((m) => m.StomachVessels)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),
   VesselViewer: lazyPlate(() => import('./VesselViewer').then((m) => m.VesselViewer)),
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.
