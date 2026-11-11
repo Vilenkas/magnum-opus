@@ -152,7 +152,7 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   ligature that reroutes the flow) and `VenousValves` (valves closing, Bardeleben's distance D).
 - `assets/vessels.glb` (heart + ~630 arteries and veins as tubes) and `lymph.glb` (node groups,
   thymus, spleen), named in generated `vessels.json` + hand-edited `data/vessel-names.ts` (wins over
-  TA2). `components/VesselViewer.tsx` (Lámina IV of Angiología): layers over a ghosted skeleton and
+  TA2). `components/VesselViewer.tsx` (Lámina II of Angiología): layers over a ghosted skeleton and
   a searchable index that joins both sides of a paired vessel (`data/vessels.ts`, tested).
 - `components/SystemViewer.tsx` shows any body system over a ghosted skeleton (layers = index
   sections, Aislar/Ocultar/Deshacer); `VesselViewer` and `NervousViewer` are configurations of it.
@@ -163,6 +163,12 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   searchable, foldable index (folded state remembered per plate), fullscreen-aware. Index data is
   pure: `data/structure-index.ts` (search), `data/viewer-indexes.ts` (bones by region; muscles and
   ligaments with both sides on one line), `data/vessels.ts`. Viewers offer «Aislar» (the rest fades).
+- `data/venous-return.ts` + `components/VenousReturn.tsx` (Lámina V of Angiología, Latarjet–Ruiz t. 2 pp. 1006–1008, Moore 8
+  pp. 502–504): cavae, azygos and portal vein as a graph; an obstruction closes veins, and a territory that no longer drains
+  normally opens every anastomosis with one end in its congested veins and another in veins that still drain
+  (`onlyFrom`: portocaval routes carry portal blood outwards only, except the rectal one, as the sources describe them). Tests check
+  cirrhosis (four portocaval routes, caput medusae), portal trunk thrombosis (no caput medusae) and the caval obstructions.
+  Angiología plates are numbered in order of appearance (I circulation, II viewer, III anastomoses, IV valves, V venous return).
 - Libro V (Neurología) starts with Testut t. II's general anatomy (pp. 565–615). `data/nerve-circuits.ts`
   + `components/NerveCircuits.tsx`: the reflex and the voluntary movement (figs. 471–472) as chains
   of neuron parts the impulse runs through; tests check dynamic polarization and the decussation.

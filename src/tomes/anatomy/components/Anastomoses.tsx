@@ -12,7 +12,7 @@ export function Anastomoses() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina II · Las anastomosis arteriales</figcaption>
+      <figcaption className={plate.caption}>Lámina III · Las anastomosis arteriales</figcaption>
 
       <div className={plate.chipBar} role="tablist" aria-label="Variedades de anastomosis">
         {anastomoses.map((k) => (

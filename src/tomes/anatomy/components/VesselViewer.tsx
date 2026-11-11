@@ -27,7 +27,7 @@ const lookOf = (e: SystemEntry): TissueLook => LOOK[e.kind] ?? 'heart'
 export function VesselViewer() {
   return (
     <SystemViewer
-      caption="Lámina IV · El corazón y los vasos"
+      caption="Lámina II · El corazón y los vasos"
       model={vessels}
       urls={{ vessels: vesselsUrl, lymph: lymphUrl }}
       sections={SECTIONS}

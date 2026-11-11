@@ -1,0 +1,149 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 0.5rem 1.25rem 1rem;
+}
+@media (max-width: 44rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+.scheme {
+  width: 100%;
+  display: block;
+}
+
+.vein {
+  fill: none;
+  stroke: #3f5f8a;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.vein[data-portal='true'] {
+  stroke: #6a5aa0;
+}
+.vein[data-congested='true'] {
+  stroke: #1f2a44;
+  stroke-width: 9;
+}
+.vein[data-closed='true'] {
+  stroke: #b0473c;
+  stroke-dasharray: 2 5;
+}
+
+.liver {
+  fill: color-mix(in oklab, #8a4a3a 30%, transparent);
+  stroke: #8a4a3a;
+}
+.liver[data-congested='true'] {
+  fill: color-mix(in oklab, #8a4a3a 55%, transparent);
+}
+.liver[data-closed='true'] {
+  stroke: #b0473c;
+  stroke-width: 2;
+  stroke-dasharray: 3 3;
+}
+.atrium {
+  fill: color-mix(in oklab, #3f5f8a 25%, transparent);
+  stroke: #3f5f8a;
+}
+.organ {
+  font-family: var(--anatomy-body);
+  font-size: 10px;
+  fill: var(--anatomy-ink);
+}
+
+.cross line {
+  stroke: #b0473c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.collateral path {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+}
+.collateral circle {
+  fill: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+}
+.collateral text {
+  font-family: var(--anatomy-body);
+  font-style: italic;
+  font-size: 9px;
+  fill: var(--anatomy-ink-soft);
+}
+.collateral[data-used='true'] path {
+  stroke-dasharray: none;
+  stroke-width: 3.5;
+}
+.collateral[data-used='true'][data-kind='portocaval'] path,
+.collateral[data-used='true'][data-kind='portocaval'] circle {
+  stroke: #4c8a5a;
+  fill: #4c8a5a;
+}
+.collateral[data-used='true'][data-kind='portocaval'] path {
+  fill: none;
+}
+.collateral[data-used='true'][data-kind='intercaval'] path,
+.collateral[data-used='true'][data-kind='intercaval'] circle {
+  stroke: #3d7fb8;
+  fill: #3d7fb8;
+}
+.collateral[data-used='true'][data-kind='intercaval'] path {
+  fill: none;
+}
+.collateral[data-used='true'] text {
+  font-weight: 700;
+  font-style: normal;
+  fill: var(--anatomy-ink);
+}
+
+.territory {
+  font-family: var(--anatomy-body);
+  font-size: 10px;
+  fill: var(--anatomy-ink-soft);
+}
+.name {
+  font-family: var(--anatomy-display);
+  font-size: 10px;
+  fill: var(--anatomy-ink);
+}
+.feeder {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+}
+
+.side {
+  font-size: 0.92rem;
+}
+.text {
+  margin: 0.3rem 0 0.6rem !important;
+}
+.outcome {
+  padding: 0.4rem 0;
+  border-top: 1px dotted color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+.territoryName {
+  margin: 0 !important;
+  font-family: var(--anatomy-display);
+}
+.outcome ul {
+  margin: 0.15rem 0 0 !important;
+  padding-left: 1.1rem !important;
+}
+.outcome li {
+  margin: 0 !important;
+}
+.sign {
+  margin: 0.2rem 0 0 !important;
+  color: #9e2a24;
+  font-style: italic;
+}
+.lost {
+  margin: 0.15rem 0 0 !important;
+  color: #9e2a24;
+}
