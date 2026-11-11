@@ -56,7 +56,7 @@ export function VenousValves() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina IV · Las válvulas de las venas</figcaption>
+      <figcaption className={plate.caption}>Lámina V · Las válvulas de las venas</figcaption>
 
       <div className={plate.chipBar} role="tablist" aria-label="Estado de la vena">
         {(Object.keys(modes) as Mode[]).map((m) => (

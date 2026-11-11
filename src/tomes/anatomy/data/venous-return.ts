@@ -1,6 +1,6 @@
 /**
  * The great veins of return as a graph: the venae cavae, the azygos system and the portal vein, with the anastomoses
- * that join them (Angiología, Lámina V). After Latarjet–Ruiz Liard t. 2, chapters 87–89 (intercaval routes, pp.
+ * that join them (Angiología, Lámina VI). After Latarjet–Ruiz Liard t. 2, chapters 87–89 (intercaval routes, pp.
  * 1006–1007; portocaval anastomoses, pp. 1007–1008) and Moore 8.ª (portosystemic anastomoses, pp. 502–504, 513).
  *
  * An obstruction removes a vein. A territory whose blood can no longer reach the right atrium along the normal veins

@@ -1,0 +1,156 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 0.5rem 1.25rem 1rem;
+}
+@media (max-width: 44rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.scheme {
+  width: 100%;
+  display: block;
+}
+.limbName {
+  font-family: var(--anatomy-body);
+  font-style: italic;
+  font-size: 11px;
+  fill: var(--anatomy-ink-soft);
+}
+
+.segment {
+  cursor: pointer;
+}
+.hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+.artery {
+  fill: none;
+  stroke: #b8322a;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s;
+}
+.segment:hover .artery {
+  stroke-width: 8;
+}
+.segment[data-flow='collateral'] .artery {
+  stroke: #d3766e;
+  stroke-dasharray: 5 4;
+}
+.segment[data-flow='none'] .artery {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+.segment[data-tied='true'] .artery {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 40%, transparent);
+  stroke-dasharray: 2 4;
+}
+.tie line {
+  stroke: var(--anatomy-ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.network path {
+  fill: none;
+  stroke: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 3;
+}
+.network circle {
+  fill: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+}
+.network[data-open='true'] path {
+  stroke: #c8803a;
+  stroke-width: 3;
+  stroke-dasharray: none;
+}
+.network[data-open='true'] circle {
+  fill: #c8803a;
+}
+
+.pulse circle {
+  fill: #b8322a;
+  stroke: var(--anatomy-paper, #fbf7ef);
+  stroke-width: 1.5;
+}
+.pulse[data-compression='true'] circle {
+  stroke: var(--anatomy-ink);
+  stroke-width: 1.8;
+}
+.pulse[data-felt='false'] circle {
+  fill: var(--anatomy-paper, #fbf7ef);
+  stroke: color-mix(in oklab, var(--anatomy-ink) 50%, transparent);
+}
+
+.side {
+  font-size: 0.9rem;
+}
+.verdict {
+  margin: 0.3rem 0 0 !important;
+  font-weight: 700;
+}
+.verdict[data-flow='none'] {
+  color: #9e2a24;
+}
+.verdict[data-flow='collateral'] {
+  color: #a8662a;
+}
+.networkText {
+  margin: 0.35rem 0 0 !important;
+  font-size: 0.85rem;
+}
+.heading {
+  margin: 0.9rem 0 0.25rem !important;
+  font-family: var(--anatomy-display);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+}
+.pulses {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.pulses li {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 0.5rem;
+  margin: 0 !important;
+  padding: 0.2rem 0 !important;
+  border-bottom: 1px dotted color-mix(in oklab, var(--anatomy-ink) 18%, transparent);
+  font-size: 0.84rem;
+}
+.pulses li::before {
+  content: none !important;
+}
+.pulses li[data-felt='false'] .pulseName {
+  color: #9e2a24;
+  text-decoration: line-through;
+}
+.pulseName {
+  font-family: var(--anatomy-display);
+}
+.badge {
+  display: block;
+  font-family: var(--anatomy-body);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.where {
+  color: var(--anatomy-ink-soft);
+}

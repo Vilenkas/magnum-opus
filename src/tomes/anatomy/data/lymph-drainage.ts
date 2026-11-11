@@ -1,5 +1,5 @@
 /**
- * Where the lymph of each territory goes (Angiología, Lámina VI): territories → node groups → lymphatic trunks → the two
+ * Where the lymph of each territory goes (Angiología, Lámina VII): territories → node groups → lymphatic trunks → the two
  * terminal ducts → the venous angles. A directed graph, since valves set the sense of the lymph. After Latarjet–Ruiz
  * Liard t. 2, chapter 90 (pp. 1012–1022; head, neck, thorax, pelvis, abdomen, ducts) and t. 1, chapters 61 and 69
  * (axillary nodes, pp. 598–599; inguinal nodes, pp. 797–798), with Moore 8.ª (p. 44).

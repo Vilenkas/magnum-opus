@@ -30,7 +30,7 @@ const DUCT_ES: Record<string, string> = {
   none: 'Sin vía principal',
 }
 
-/** Lámina VI of Angiología: where the lymph of every territory goes. */
+/** Lámina VII of Angiología: where the lymph of every territory goes. */
 export function LymphDrainage() {
   const [selected, setSelected] = useState('lower-limb-right')
   const [lesionId, setLesionId] = useState<LymphLesionId | null>(null)
@@ -44,7 +44,7 @@ export function LymphDrainage() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina VI · Adónde va la linfa</figcaption>
+      <figcaption className={plate.caption}>Lámina VII · Adónde va la linfa</figcaption>
       <div className={plate.chipBar} role="group" aria-label="Lesión">
         <button className={plate.chip} data-active={lesionId === null} onClick={() => setLesionId(null)}>
           Sin lesión

@@ -105,7 +105,7 @@ function anchor(vein: VeinId, p: Pt): Pt {
 
 const line = (pts: Pt[]) => pts.map(([x, y], i) => `${i ? 'L' : 'M'} ${x} ${y}`).join(' ')
 
-/** Lámina V of Angiología: the great veins of return and the routes blood takes round an obstruction. */
+/** Lámina VI of Angiología: the great veins of return and the routes blood takes round an obstruction. */
 export function VenousReturn() {
   const [lesionId, setLesionId] = useState<LesionId | null>('cirrhosis')
   const lesion = LESIONS.find((l) => l.id === lesionId)
@@ -117,7 +117,7 @@ export function VenousReturn() {
 
   return (
     <figure className={plate.plate}>
-      <figcaption className={plate.caption}>Lámina V · Las grandes venas y sus vías colaterales</figcaption>
+      <figcaption className={plate.caption}>Lámina VI · Las grandes venas y sus vías colaterales</figcaption>
       <div className={plate.chipBar} role="group" aria-label="Obstrucción">
         <button className={plate.chip} data-active={lesionId === null} onClick={() => setLesionId(null)}>
           Ninguna
