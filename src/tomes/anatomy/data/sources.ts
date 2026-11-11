@@ -48,6 +48,15 @@ export const sources = {
     publisher: 'Salvat',
     year: 1975,
   },
+  'testut-4': {
+    authors: 'L. Testut y A. Latarjet',
+    title: 'Tratado de anatomía humana',
+    volume: 'Tomo IV: Aparato de la digestión, Peritoneo, Aparato urogenital',
+    edition: '9.ª ed.',
+    place: 'Barcelona',
+    publisher: 'Salvat',
+    year: 1975,
+  },
   'latarjet-ruiz-1': {
     authors: 'M. Latarjet y A. Ruiz Liard',
     title: 'Anatomía humana',

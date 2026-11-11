@@ -1,0 +1,216 @@
+.divider {
+  width: 1px;
+  align-self: stretch;
+  background: color-mix(in oklab, var(--anatomy-ink) 25%, transparent);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) 15rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.25rem 1rem;
+}
+@media (max-width: 56rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.front,
+.sagittal {
+  width: 100%;
+  display: block;
+  font-family: var(--anatomy-body);
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.signs {
+  margin: 0.35rem 0 0 !important;
+  padding-left: 1.2rem !important;
+  color: #8e2f22;
+}
+
+/* ---------- The front view ---------- */
+
+.lips {
+  fill: #c98a7c;
+}
+.mouthEdge {
+  fill: none;
+  stroke: #7d4a3e;
+  stroke-width: 2;
+}
+.pharynx {
+  fill: #6e2a28;
+}
+.velum {
+  fill: #e0a29a;
+  stroke: #9d5a50;
+  stroke-width: 1.2;
+  transition: d 0.45s ease;
+}
+.raphe {
+  stroke: #c47f75;
+  stroke-width: 1.2;
+}
+.anteriorPillar,
+.posteriorPillar {
+  fill: none;
+  stroke-linecap: round;
+  transition: d 0.45s ease;
+}
+.anteriorPillar {
+  stroke: #d69188;
+  stroke-width: 9;
+}
+.posteriorPillar {
+  stroke: #a85b55;
+  stroke-width: 8;
+}
+.tonsil {
+  fill: #b9675e;
+  stroke: #8a4540;
+  stroke-dasharray: 2 2;
+}
+.tongue {
+  fill: #d4877e;
+  stroke: #9d5a50;
+  stroke-width: 1.2;
+}
+.tongueGroove {
+  stroke: #b06a62;
+  stroke-width: 1.2;
+}
+.tooth {
+  fill: #f6f0e2;
+  stroke: #b9ad96;
+  stroke-width: 0.6;
+}
+.sideLabel {
+  font-size: 10px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The sagittal cut ---------- */
+
+.cavity {
+  fill: color-mix(in oklab, #e8c9b6 55%, var(--anatomy-paper));
+}
+.bone {
+  fill: #ecdfc2;
+  stroke: #9b8a6c;
+}
+.velumSide {
+  fill: none;
+  stroke: #c9776d;
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: d 0.45s ease;
+}
+.wall {
+  stroke: #8f4a43;
+  stroke-width: 5;
+}
+.tube {
+  fill: #3a1f1c;
+  stroke: #8f4a43;
+}
+.tube[data-open='true'] {
+  fill: #fbf3ea;
+  stroke: #2f6f8f;
+  stroke-width: 1.4;
+}
+.leak {
+  fill: none;
+  stroke: #2f6f8f;
+  stroke-width: 2.2;
+  stroke-dasharray: 4 3;
+}
+.arrowHead {
+  fill: #2f6f8f;
+}
+.region {
+  font-size: 10px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+.small {
+  font-size: 8.5px;
+  fill: var(--anatomy-ink-soft);
+}
+.state {
+  font-size: 10.5px;
+  font-weight: 700;
+  fill: #2c6a3f;
+}
+.state[data-state='incomplete'] {
+  fill: #a8641c;
+}
+.state[data-state='open'] {
+  fill: #a3392b;
+}
+
+/* ---------- The muscles ---------- */
+
+.muscles {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.92rem;
+}
+.muscle,
+.head {
+  display: grid;
+  grid-template-columns: 1fr 1.3rem 1.3rem;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--anatomy-ink) 12%, transparent);
+}
+.head {
+  font-family: var(--anatomy-display);
+  font-weight: 700;
+  color: var(--anatomy-ink-soft);
+  text-align: center;
+}
+.name {
+  display: block;
+  line-height: 1.2;
+}
+.nerve {
+  display: block;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.dot {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  justify-self: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--anatomy-ink-soft);
+  vertical-align: -0.1rem;
+}
+.dot[data-state='active'] {
+  background: #c9776d;
+  border-color: #8e3b31;
+}
+.dot[data-state='paralysed'] {
+  border-color: #a3392b;
+  background: repeating-linear-gradient(45deg, #a3392b 0 2px, transparent 2px 4px);
+}
+.key {
+  margin: 0.45rem 0 0 !important;
+  font-size: 0.78rem;
+  color: var(--anatomy-ink-soft);
+}
+.key .dot {
+  margin: 0 0.15rem 0 0.4rem;
+}

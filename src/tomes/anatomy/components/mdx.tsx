@@ -65,6 +65,9 @@ export const mdxComponents: MDXComponents = {
   BrachialPlexus: lazyPlate(() => import('./PlexusLesions').then((m) => m.BrachialPlexus)),
   LumbosacralPlexus: lazyPlate(() => import('./PlexusLesions').then((m) => m.LumbosacralPlexus)),
   AutonomicSystem: lazyPlate(() => import('./AutonomicSystem').then((m) => m.AutonomicSystem)),
+  // Splanchnology's plates.
+  SoftPalate: lazyPlate(() => import('./SoftPalate').then((m) => m.SoftPalate)),
+  Dentition: lazyPlate(() => import('./Dentition').then((m) => m.Dentition)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),
   VesselViewer: lazyPlate(() => import('./VesselViewer').then((m) => m.VesselViewer)),
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.

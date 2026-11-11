@@ -50,6 +50,12 @@ export const books: Book[] = [
     summary: 'El sistema nervioso central y periférico.',
     load: () => import('./chapters/neurology.mdx'),
   },
-  { id: 'splanchnology', numeral: 'VI', title: 'Esplacnología', summary: 'Las vísceras.' },
+  {
+    id: 'splanchnology',
+    numeral: 'VI',
+    title: 'Esplacnología',
+    summary: 'Las vísceras: el aparato digestivo, el peritoneo y el aparato urogenital.',
+    load: () => import('./chapters/splanchnology.mdx'),
+  },
   { id: 'aesthesiology', numeral: 'VII', title: 'Estesiología', summary: 'Los órganos de los sentidos.' },
 ]

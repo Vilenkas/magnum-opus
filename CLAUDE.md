@@ -262,6 +262,15 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   what is seen without it). A lesion cuts the ways through it; the organ is left to the other system or loses the function.
   Tests check thoracolumbar/craniosacral origins, Testut's law that the parasympathetic relays near the organ, and Horner,
   III, vagotomy, sacral roots, presacral nerve and sympathectomies. This part closes Libro V.
+- Libro VI (Esplacnología) is written from Testut t. IV (`testut-4`; figures `testut4-fig-N`; scanned, PDF page = book + 10 at
+  the start). `chapters/splanchnology.mdx` covers the digestive apparatus in general and the mouth (walls, gums, teeth,
+  tonsils, pp. 1–107); later parts go in `chapters/splanchnology/*.mdx`, rendered at its end like Neurología's. Plates are
+  numbered in order of appearance. `data/soft-palate.ts` + `components/SoftPalate.tsx` (Lámina I): the five pairs of muscles of
+  the velum with Testut's and today's names and nerve (vagus, the tensor V3); an act contracts some, a palsy removes a nerve's,
+  and the rise, the deviation (curtain sign), each isthmus and each auditory tube are summed from what is left. Tests check
+  the healthy acts and the X, both-X and V3 pictures. `data/dentition.ts` + `components/Dentition.tsx` (Lámina II): the eight
+  places of a half-jaw, milk and permanent teeth erupting and falling over Testut's tables (pp. 91–93) or Moore's (tablas
+  8-13); tests check the formulas, the order of eruption and fall, and the counts (20 at three years, 28 before the wisdom teeth).
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

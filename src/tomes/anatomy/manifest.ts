@@ -8,8 +8,8 @@ const manifest: TomeManifest = {
   tier: 'codex',
   status: 'draft',
   home: 'health/basic-sciences/anatomy',
-  facets: { system: ['skeletal', 'cardiovascular', 'lymphatic', 'nervous'] },
-  tags: ['esqueleto', 'huesos', 'accidentes óseos', 'corazón', 'arterias', 'venas', 'linfáticos', 'neurona', 'sistema nervioso'],
+  facets: { system: ['skeletal', 'cardiovascular', 'lymphatic', 'nervous', 'digestive'] },
+  tags: ['esqueleto', 'huesos', 'accidentes óseos', 'corazón', 'arterias', 'venas', 'linfáticos', 'neurona', 'sistema nervioso', 'boca', 'dientes', 'velo del paladar', 'vísceras'],
   palette: {
     background: '#efe6d2',
     foreground: '#2b2118',

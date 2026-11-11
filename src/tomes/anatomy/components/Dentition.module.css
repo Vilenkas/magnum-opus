@@ -1,0 +1,132 @@
+.body {
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem 1rem 0.75rem;
+}
+
+.chart {
+  width: 100%;
+  max-width: 44rem;
+  display: block;
+  font-family: var(--anatomy-body);
+}
+
+.text {
+  margin: 0.35rem 0 0 !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.info {
+  margin: 0.45rem 0 0 !important;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--anatomy-accent);
+}
+.key {
+  margin: 0.5rem 0 0 !important;
+  font-size: 0.8rem;
+  color: var(--anatomy-ink-soft);
+}
+.swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin: 0 0.2rem 0 0.5rem;
+  border: 1px solid #6e5f55;
+  border-radius: 2px;
+  vertical-align: -0.08rem;
+}
+.swatch:first-child {
+  margin-left: 0;
+}
+
+/* Testut's colours in fig. 102: milk teeth blue, their replacements pink. */
+.tooth[data-kind='primary'] path {
+  fill: #a9bfd8;
+}
+.tooth[data-kind='replacement'] path {
+  fill: #ecb4a6;
+}
+.tooth[data-kind='new'] path {
+  fill: #f4ecd8;
+}
+.swatch[data-kind='primary'] {
+  background: #a9bfd8;
+}
+.swatch[data-kind='replacement'] {
+  background: #ecb4a6;
+}
+.swatch[data-kind='new'] {
+  background: #f4ecd8;
+}
+
+.tooth {
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.tooth path {
+  stroke: #5e5048;
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
+.tooth:hover path {
+  stroke: var(--anatomy-accent);
+  stroke-width: 1.6;
+}
+.tooth[data-selected='true'] path {
+  stroke: var(--anatomy-accent);
+  stroke-width: 2.2;
+}
+
+.bone {
+  fill: #e9dcc0;
+  fill-opacity: 0.74;
+  stroke: none;
+  pointer-events: none;
+}
+.gum {
+  stroke: #c3776d;
+  stroke-width: 3;
+  pointer-events: none;
+}
+.midline {
+  stroke: color-mix(in oklab, var(--anatomy-ink) 30%, transparent);
+  stroke-dasharray: 3 4;
+  pointer-events: none;
+}
+.jawLabel,
+.sideLabel {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+
+/* ---------- The age line ---------- */
+
+.timeline {
+  padding: 0.5rem 2rem 1.6rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+.timeline input {
+  width: 100%;
+  accent-color: var(--anatomy-accent);
+}
+.ticks {
+  position: relative;
+  height: 1rem;
+}
+.tick {
+  position: absolute;
+  transform: translateX(-50%);
+  padding: 0 0.2rem;
+  border: 0;
+  background: none;
+  font-family: var(--anatomy-display);
+  font-size: 0.85rem;
+  color: var(--anatomy-ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tick:hover {
+  color: var(--anatomy-accent);
+}
