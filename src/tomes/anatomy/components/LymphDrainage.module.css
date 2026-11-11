@@ -1,0 +1,135 @@
+.body {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  padding: 0.5rem 1.25rem 1rem;
+}
+@media (max-width: 44rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+.figure {
+  width: 100%;
+  max-width: 15rem;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Destinations: right duct, thoracic duct, both, none. */
+:where(.zone, .key li, .pick) {
+  --dest: #9a9a9a;
+}
+[data-dest='right'] {
+  --dest: #c8803a;
+}
+[data-dest='left'] {
+  --dest: #4c8a5a;
+}
+[data-dest='both'] {
+  --dest: #7d62a8;
+}
+[data-dest='none'] {
+  --dest: #b0473c;
+}
+
+.zone {
+  fill: color-mix(in oklab, var(--dest) 45%, transparent);
+  stroke: color-mix(in oklab, var(--dest) 80%, black);
+  stroke-width: 0.8;
+  cursor: pointer;
+  transition: fill 0.2s;
+}
+.zone:hover {
+  fill: color-mix(in oklab, var(--dest) 65%, transparent);
+}
+.zone[data-dest='none'] {
+  fill: color-mix(in oklab, var(--dest) 18%, transparent);
+  stroke-dasharray: 3 2;
+}
+.zone[data-selected='true'] {
+  stroke: var(--anatomy-ink);
+  stroke-width: 2.2;
+}
+.side {
+  font-family: var(--anatomy-body);
+  font-style: italic;
+  font-size: 10px;
+  fill: var(--anatomy-ink-soft);
+}
+
+.key {
+  list-style: none;
+  margin: 0.5rem 0 0 !important;
+  padding: 0 !important;
+  font-size: 0.8rem;
+}
+.key li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.1rem 0 !important;
+  padding: 0 !important;
+}
+.key li::before {
+  content: '' !important;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 2px;
+  flex: none;
+  background: color-mix(in oklab, var(--dest) 55%, transparent);
+  border: 1px solid var(--dest);
+}
+
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+.pick {
+  padding: 0.1rem 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--dest) 60%, transparent);
+  border-left: 4px solid var(--dest);
+  border-radius: 3px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.pick[data-active='true'] {
+  background: color-mix(in oklab, var(--dest) 18%, transparent);
+  font-weight: 700;
+}
+
+.route {
+  margin: 0.4rem 0 0.6rem !important;
+  padding-left: 1.4rem !important;
+  font-size: 0.9rem;
+}
+.route li {
+  margin: 0.05rem 0 !important;
+}
+.route li[data-kind='trunk'],
+.route li[data-kind='duct'] {
+  font-weight: 700;
+}
+.route li[data-kind='angle'] {
+  font-style: italic;
+}
+.route li[data-cut='true'] {
+  color: #9e2a24;
+  text-decoration: line-through;
+}
+.lost {
+  margin: 0.3rem 0 0 !important;
+  color: #9e2a24;
+}
+.text {
+  margin: 0.5rem 0 0 !important;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}

@@ -168,7 +168,12 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   normally opens every anastomosis with one end in its congested veins and another in veins that still drain
   (`onlyFrom`: portocaval routes carry portal blood outwards only, except the rectal one, as the sources describe them). Tests check
   cirrhosis (four portocaval routes, caput medusae), portal trunk thrombosis (no caput medusae) and the caval obstructions.
-  Angiología plates are numbered in order of appearance (I circulation, II viewer, III anastomoses, IV valves, V venous return).
+  Angiología plates are numbered in order of appearance (I circulation, II viewer, III anastomoses, IV valves, V venous return,
+  VI lymph).
+- `data/lymph-drainage.ts` + `components/LymphDrainage.tsx` (Lámina VI of Angiología, Latarjet–Ruiz t. 2 pp. 1012–1022): a
+  directed graph territory → nodes → trunk → duct → venous angle; each zone of the body is coloured by the angles it reaches.
+  Tests check the right upper quadrant, the right lower intercostals via the cisterna, the left lung to both ducts, and the
+  thoracic duct cut in the neck.
 - Libro V (Neurología) starts with Testut t. II's general anatomy (pp. 565–615). `data/nerve-circuits.ts`
   + `components/NerveCircuits.tsx`: the reflex and the voluntary movement (figs. 471–472) as chains
   of neuron parts the impulse runs through; tests check dynamic polarization and the decussation.
