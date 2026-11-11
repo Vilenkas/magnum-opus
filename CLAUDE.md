@@ -271,6 +271,13 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   the healthy acts and the X, both-X and V3 pictures. `data/dentition.ts` + `components/Dentition.tsx` (Lámina II): the eight
   places of a half-jaw, milk and permanent teeth erupting and falling over Testut's tables (pp. 91–93) or Moore's (tablas
   8-13); tests check the formulas, the order of eruption and fall, and the counts (20 at three years, 28 before the wisdom teeth).
+  `splanchnology/pharynx-oesophagus.mdx` (pp. 108–184). `data/swallowing.ts` + `components/Swallowing.tsx` (Lámina III): the
+  pharynx as chambers joined by four gates (velum, fauces, larynx, upper oesophageal sphincter); breathing and the three phases of
+  swallowing are sets of shut gates, the bolus spreads through open ones (upwards only under the constrictors' pressure), and a
+  failure leaves one gate open or shut out of time. Tests check the normal swallow and each failure's outcome (nasal
+  regurgitation, aspiration before, during, after). `data/oesophagus.ts` + `components/Oesophagus.tsx` (Lámina IV): the distended
+  oesophagus' width as a function of the distance from the incisors (Testut's widths at Moore's distances); a swallowed body stops
+  at the first narrower point. Tests check the ranges, the order and that the cricoid narrowing is the narrowest.
 - `data/cord-sections.ts` + `components/CordSections.tsx`: the spinal cord in section, gliding from
   C6 to the conus (fig. 512) with the fascicles of fig. 548; every shape is a function of the height,
   and tests check Testut's diameters and Stilling's ordering of grey matter.

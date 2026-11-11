@@ -68,6 +68,8 @@ export const mdxComponents: MDXComponents = {
   // Splanchnology's plates.
   SoftPalate: lazyPlate(() => import('./SoftPalate').then((m) => m.SoftPalate)),
   Dentition: lazyPlate(() => import('./Dentition').then((m) => m.Dentition)),
+  Swallowing: lazyPlate(() => import('./Swallowing').then((m) => m.Swallowing)),
+  Oesophagus: lazyPlate(() => import('./Oesophagus').then((m) => m.Oesophagus)),
   NervousViewer: lazyPlate(() => import('./NervousViewer').then((m) => m.NervousViewer)),
   VesselViewer: lazyPlate(() => import('./VesselViewer').then((m) => m.VesselViewer)),
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.

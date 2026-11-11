@@ -1,0 +1,130 @@
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+  padding: 0.25rem 1.5rem 0.75rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+  font-size: 0.92rem;
+}
+@media (max-width: 40rem) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.controls input {
+  accent-color: var(--anatomy-accent);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.25rem;
+  padding: 0.75rem 1.25rem 1rem;
+}
+@media (max-width: 48rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tube {
+  width: 100%;
+  max-width: 21rem;
+  justify-self: center;
+  display: block;
+  font-family: var(--anatomy-body);
+}
+.tick {
+  stroke: var(--anatomy-ink-soft);
+  stroke-width: 0.8;
+}
+.cm,
+.level {
+  font-size: 8.5px;
+  fill: var(--anatomy-ink-soft);
+}
+.level {
+  font-style: italic;
+}
+.small {
+  font-size: 9px;
+  font-style: italic;
+  fill: var(--anatomy-ink-soft);
+}
+.pharynx {
+  fill: color-mix(in oklab, #e8c9b6 55%, var(--anatomy-paper));
+  stroke: #9d6a5c;
+}
+.wall {
+  fill: #e9b7a8;
+  stroke: #9d5a50;
+  stroke-width: 1.2;
+}
+.lead {
+  stroke: #9d5a50;
+}
+.narrow {
+  font-size: 8.5px;
+  fill: #7d3a2f;
+}
+.diaphragm {
+  fill: none;
+  stroke: #8f4a43;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+.stomach {
+  fill: #e3b0a2;
+  stroke: #9d5a50;
+}
+.ball {
+  fill: #6f6a63;
+  fill-opacity: 0.85;
+  stroke: #2c2723;
+  transition: cy 0.4s ease;
+}
+.ball[data-stuck='true'] {
+  fill: #b03a2a;
+}
+.scope {
+  stroke: #2f6f8f;
+  stroke-width: 2;
+}
+.tip {
+  fill: #2f6f8f;
+}
+.depth {
+  stroke: #2f6f8f;
+  stroke-dasharray: 2 2;
+}
+
+.read {
+  font-size: 0.95rem;
+}
+.where {
+  margin: 0 !important;
+  font-family: var(--anatomy-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+}
+.text {
+  margin: 0.4rem 0 0 !important;
+  line-height: 1.5;
+}
+.stop {
+  margin: 0.8rem 0 0 !important;
+  line-height: 1.5;
+  color: #2c6a3f;
+}
+.stop[data-stuck='true'] {
+  color: #8e2f22;
+}
