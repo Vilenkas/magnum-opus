@@ -19,7 +19,7 @@ export interface JointDef {
   aliases?: string[]
   region: JointRegion
   /**
-   * Latin names of the rows of Lámina II (`joint-count.ts`) it stands for, besides `la`: a joint the
+   * Latin names of the rows of Lámina IV (`joint-count.ts`) it stands for, besides `la`: a joint the
    * model keeps in one capsule (the elbow) or one series (the interphalangeals) covers several rows.
    */
   covers?: string[]

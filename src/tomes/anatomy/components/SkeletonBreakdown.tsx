@@ -16,12 +16,12 @@ export function SkeletonBreakdown() {
   return <CountBreakdown caption={`Lámina I · Los ${total} huesos del esqueleto adulto`} divisions={boneCount} label="División del esqueleto" />
 }
 
-/** Lámina II of Artrología: every joint, grouped as Testut does. */
+/** Lámina IV of Artrología: every joint, grouped as Testut does. */
 export function JointBreakdown() {
   const total = jointCount.reduce((sum, d) => sum + divisionCount(d), 0)
   return (
     <CountBreakdown
-      caption={`Lámina II · Las ${total} articulaciones del esqueleto`}
+      caption={`Lámina IV · Las ${total} articulaciones del esqueleto`}
       divisions={jointCount}
       label="Grupos de articulaciones"
       footnote={jointCountCriterion}

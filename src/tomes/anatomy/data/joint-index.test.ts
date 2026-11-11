@@ -34,7 +34,7 @@ describe('joint index', () => {
     }
   })
 
-  it('opens every joint of Lámina II, by its Latin name', () => {
+  it('opens every joint of Lámina IV, by its Latin name', () => {
     const latin = new Set(JOINTS.flatMap((j) => [j.la, ...(j.covers ?? [])]))
     const leaves = (nodes: CountNode[]): CountNode[] => nodes.flatMap((n) => (n.children ? leaves(n.children) : [n]))
     const missing = jointCount.flatMap((d) => leaves(d.regions)).filter((n) => !latin.has(n.latin!)).map((n) => `${n.name} (${n.latin})`)

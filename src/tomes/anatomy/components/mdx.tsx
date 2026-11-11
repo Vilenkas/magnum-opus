@@ -29,6 +29,8 @@ export const mdxComponents: MDXComponents = {
   SkeletonViewer: lazyPlate(() => import('./SkeletonViewer').then((m) => m.SkeletonViewer)),
   SkeletonQuiz: lazyPlate(() => import('./SkeletonQuiz').then((m) => m.SkeletonQuiz)),
   JointTypes: lazyPlate(() => import('./JointTypes').then((m) => m.JointTypes)),
+  JointMotions: lazyPlate(() => import('./JointMotions').then((m) => m.JointMotions)),
+  MuscleActions: lazyPlate(() => import('./JointMotions').then((m) => m.MuscleActions)),
   LeverTypes: lazyPlate(() => import('./LeverTypes').then((m) => m.LeverTypes)),
   NerveCircuits: lazyPlate(() => import('./NerveCircuits').then((m) => m.NerveCircuits)),
   PelvisDimorphism: lazyPlate(() => import('./PelvisDimorphism').then((m) => m.PelvisDimorphism)),
@@ -64,12 +66,12 @@ export const mdxComponents: MDXComponents = {
   // Two presets of the same layered plate: muscles first in Miología, ligaments in Artrología.
   MuscleViewer: lazyPlate(() =>
     import('./TissueViewer').then(({ TissueViewer }) => () => (
-      <TissueViewer caption="Lámina II · Los músculos sobre el esqueleto" initial={{ muscles: true }} storageKey="muscles" />
+      <TissueViewer caption="Lámina III · Los músculos sobre el esqueleto" initial={{ muscles: true }} storageKey="muscles" />
     )),
   ),
   LigamentViewer: lazyPlate(() =>
     import('./TissueViewer').then(({ TissueViewer }) => () => (
-      <TissueViewer caption="Lámina III · Los ligamentos" initial={{ joints: true }} storageKey="ligaments" joints />
+      <TissueViewer caption="Lámina II · Los ligamentos" initial={{ joints: true }} storageKey="ligaments" joints />
     )),
   ),
 }

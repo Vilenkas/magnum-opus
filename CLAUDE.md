@@ -103,7 +103,7 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   bones and pieces on one side (the rest ghosted, the stage's `{ kind: 'nodes' }` focus frames them), and its
   card lists the pieces. Tests check no piece is left without a joint. Joints with no piece in the model (sutures and
   synchondroses, region `skull`; ossicles, gomphosis, craniovertebral, zygapophysial, most of the thorax, thumb CMC) list
-  only their bones and the stage frames those. Every row of Lámina II (`joint-count.ts`) opens a viewer joint by its Latin
+  only their bones and the stage frames those. Every row of Lámina IV (`joint-count.ts`) opens a viewer joint by its Latin
   name (`la` or `covers`), tested; the tarsus is split joint by joint (subtalar, Chopart's two, the anterior tarsus).
   Source blend and TA2.csv live in `library/anatomy/z-anatomy/` (see `tools/anatomy/README.md`).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
@@ -128,6 +128,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   tests ~650k triangles. Not first-hit-only, because picking skips ghosted/hidden pieces.
 - Camera moves use the stage's own `useCameraFlight` (drei `Bounds` doesn't request frames
   with `frameloop="demand"`, so its animations stall).
+- `data/joint-movements.ts` + `components/JointMotions.tsx`: Artrología's Lámina III (`<JointMotions>`, by joint: a dial per
+  pair of opposite movements lights its prime movers and helpers) and Miología's Lámina II (`<MuscleActions>`, by muscle). Motors
+  are Spanish labels over muscles.glb pieces; ranges only where Moore 9 (`moore`) or Latarjet–Ruiz state them (unstated sides are
+  drawn dashed). Tests check the pieces exist and derive the two-joint muscles (hamstrings yes, short head of biceps femoris no).
+  Artrología and Miología plates are numbered in order of appearance too.
 - `data/joints.ts` + `components/JointTypes.tsx` — Libro II's classification plate (Testut's classes
   and genera, each shown on real joints). The stage's `{ kind: 'joint' }` focus frames a landmark
   with an anatomical view (`front`/`side`/`top`…); size from the smallest bone or `frame`.
