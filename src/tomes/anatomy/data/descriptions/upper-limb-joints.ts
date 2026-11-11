@@ -253,10 +253,24 @@ const joints: Record<string, Description> = {
   // ---------- Carpus ----------
   'Intercarpal joints': {
     text: [
-      'Las uniones de los huesos del carpo: dentro de cada fila, articulaciones **planas** unidas por ligamentos palmares, dorsales e interóseos; entre las dos filas, la **mediocarpiana**, bicondílea, que se mueve con la radiocarpiana en la flexión y la extensión de la mano.',
-      'Todas comparten una sola cavidad sinovial que se prolonga hasta las carpometacarpianas; sólo la **pisipiramidal** tiene la suya. El conjunto forma un macizo cóncavo hacia delante, el canal del carpo.',
+      'Las uniones de los huesos del carpo dentro de cada fila: en la primera, del escafoides con el semilunar y de éste con el piramidal; en la segunda, del trapecio con el trapezoide, de éste con el grande y del grande con el ganchoso. Son **planas**, de superficies cubiertas de cartílago, con cápsulas propias reforzadas por ligamentos palmares, dorsales e **interóseos**, éstos cerca del borde superior de cada hueso.',
+      'Sus cavidades son prolongaciones de la mediocarpiana: hacia arriba entre los huesos de la primera fila, hacia abajo entre los de la segunda y hasta las carpometacarpianas. Las superficies, oblicuas, dan al macizo del carpo su forma cóncava hacia delante, el canal del carpo.',
     ],
     sources: [LR('529–530')],
+  },
+  'Midcarpal joint': {
+    text: [
+      'La articulación entre las **dos filas del carpo**: arriba el escafoides, el semilunar y el piramidal (no el pisiforme) forman una cavidad; abajo el trapezoide, el grande y el ganchoso, un cóndilo, con la cabeza del grande metida en el hueco del escafoides y el semilunar. Es una sinovial **bicondílea**, que puede tomarse por elipsoidea; la unión del escafoides con el trapecio pertenece a la columna del pulgar.',
+      'Las dos filas se unen por ligamentos palmares, que convergen en el hueso grande (ligamento radiado), por ligamentos dorsales cortos, que unen hueso a hueso, y por un ligamento colateral medial, del piramidal al gancho del ganchoso. Su cavidad es la única gran sinovial del carpo. Se mueve junto con la radiocarpiana en la flexión y la extensión de la mano.',
+    ],
+    sources: [LR('530')],
+  },
+  'Pisiform joint': {
+    text: [
+      'La articulación del **pisiforme** con la cara palmar del **piramidal**: una pequeña sinovial plana, sin ligamento interóseo y con su propia cavidad, que a veces comunica con la radiocarpiana. El pisiforme es un sesamoideo en el tendón del flexor ulnar del carpo, cuyas expansiones refuerzan la cápsula.',
+      'Lo fijan un ligamento superior a la estiloides ulnar, uno dorsal al piramidal y dos inferiores, fuertes, que prolongan el tendón: el **pisoganchoso**, al gancho del ganchoso, y el **pisometacarpiano**, a la base del quinto metacarpiano.',
+    ],
+    sources: [LR('529')],
   },
   'Pisotriquetral ligament': {
     text: ['Refuerzo de la pequeña articulación pisipiramidal, la única del carpo con sinovial propia, entre el pisiforme y el piramidal.'],
@@ -278,8 +292,15 @@ const joints: Record<string, Description> = {
   // ---------- Hand ----------
   'Carpometacarpal joints': {
     text: [
-      'Unen la segunda fila del carpo con la base de los metacarpianos. La del **pulgar**, entre el trapecio y el primer metacarpiano, es una articulación **en silla de montar** con una cápsula ancha y laxa: de ella depende la oposición.',
-      'Las de los otros cuatro son planas y apenas se mueven: el segundo metacarpiano se encaja como una cuña entre el trapecio, el trapezoide y el grande. Sólo el quinto, en silla de montar con el ganchoso, tiene algo más de juego. Sus sinoviales comunican con la mediocarpiana.',
+      'Unen la segunda fila del carpo con la base de los metacarpianos 2.º a 5.º (la del pulgar, la trapeciometacarpiana, es aparte). Son **planas** y apenas se mueven: el segundo metacarpiano se encaja como una cuña entre el trapecio, el trapezoide y el grande; el tercero se apoya en el grande, y el cuarto en el ganchoso y un poco en el grande.',
+      'Sólo el quinto, en silla de montar con el ganchoso, tiene algo más de juego, frenado por su unión con el cuarto. Las cápsulas, poco elásticas, se refuerzan con ligamentos palmares y dorsales, más fuertes éstos; sus sinoviales comunican con la mediocarpiana.',
+    ],
+    sources: [LR('531'), MOORE('290')],
+  },
+  'Carpometacarpal joint of thumb': {
+    text: [
+      'La articulación del **trapecio** con la base del **primer metacarpiano**, la más importante de la mano para la **oposición** del pulgar. Es **en silla de montar**: la superficie del trapecio es convexa de dorsal a palmar y cóncava de lado a lado, y la del metacarpiano, configurada a la inversa, se moldea sobre ella como un jinete que puede moverse en todos los sentidos.',
+      'Su cápsula, inserta en el contorno de las dos superficies, es notablemente ancha y laxa, más gruesa detrás que delante, y su sinovial es independiente de la gran sinovial del carpo. Es superficial detrás y lateralmente, en el fondo de la tabaquera anatómica, donde la cruza la arteria radial; delante la cubre la eminencia tenar.',
     ],
     sources: [LR('531'), MOORE('290')],
   },

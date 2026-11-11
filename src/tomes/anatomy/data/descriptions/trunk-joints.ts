@@ -60,11 +60,74 @@ const joints: Record<string, Description> = {
     'La unión del vértice del sacro, convexo, con la base del cóccix, algo cóncava: una sínfisis cuyo disco es aquí sólo fibroso, rodeada de ligamentos sacrococcígeos anterior, posteriores y laterales; no hay articulaciones posteriores. Apenas se mueve, salvo en el parto, cuando la cabeza fetal empuja el cóccix hacia atrás y agranda el estrecho inferior de la pelvis.',
   ),
 
+  'Sacrococcygeal joint': d(
+    '52–53',
+    'La unión del **sacro** con el **cóccix**: una sínfisis entre el vértice del sacro, convexo, y la base del cóccix, algo cóncava, con un disco sólo fibroso (el ligamento sacrococcígeo posterior profundo) y ligamentos sacrococcígeos anterior, posterior superficial y laterales; las astas de los dos huesos se unen por los ligamentos intercornuales.',
+    'Las piezas del cóccix se unen entre sí del mismo modo, por **sínfisis intercoccígeas** que suelen soldarse con la edad. El conjunto apenas se mueve, salvo en el parto, cuando el cóccix retrocede y agranda el estrecho inferior de la pelvis.',
+  ),
+  'Zygapophysial joints': d(
+    '48, 51',
+    'Las articulaciones de los **procesos articulares** de cada vértebra con los de la siguiente, a uno y otro lado del arco: la carilla inferior de la vértebra de arriba sobre la superior de la de abajo. Son **sinoviales planas** en el cuello y el tórax y **trocoides** en la región lumbar, donde la vértebra superior encaja su carilla convexa en la cóncava de la inferior.',
+    'Su orientación regula lo que permite cada región: casi planas y oblicuas en el cuello, las más verticales en el tórax, en segmentos de cilindro en la región lumbar. La cápsula es delgada y laxa en el cuello, más firme en el tórax y más resistente aún en la región lumbar; la refuerzan por dentro los ligamentos amarillos y, en las dos últimas regiones, un ligamento posterior. Su pequeña sinovial cuenta mucho en la patología de la columna.',
+  ),
+  'Atlanto-occipital joint': d(
+    '117–119',
+    'La articulación de la cabeza con la columna: los dos **cóndilos del occipital**, alargados, oblicuos hacia delante y medialmente y convexos en todos los sentidos, sobre las **carillas articulares superiores del atlas**, cóncavas, que miran arriba y medialmente. Es una sinovial **condílea** doble, derecha e izquierda.',
+    'Cada cápsula es gruesa delante, detrás y a los lados y delgada por dentro; las completan las membranas atlantooccipitales anterior y posterior, esta última entre el foramen magno y el arco posterior del atlas, atravesada por la arteria vertebral y el primer nervio cervical. En ella se hace la flexión y la extensión de la cabeza (el gesto de decir sí) y una ligera inclinación lateral. Sus sinoviales son lo bastante amplias para enfermar (mal de Pott suboccipital).',
+  ),
+  'Median atlanto-axial joint': d(
+    '117–119',
+    'El pivote de la cabeza: el **diente del axis** gira dentro de un anillo osteofibroso formado delante por el arco anterior del atlas, con su fosita del diente, y detrás por el **ligamento transverso del atlas**, tendido de una masa lateral a la otra. Con sus fascículos longitudinales, que suben al foramen magno y bajan al cuerpo del axis, el transverso forma el ligamento cruciforme. Es una **trocoide** con dos cavidades, delante y detrás del diente.',
+    'Con las dos laterales hace la rotación de la cabeza (el gesto de decir no). El diente rodea el paso del bulbo a la médula: su fractura o la rotura del ligamento transverso son graves por la cercanía de esos centros vitales.',
+  ),
+  'Lateral atlanto-axial joint': d(
+    '117–118',
+    'Las dos articulaciones de las **masas laterales del atlas**, por sus carillas inferiores, que miran abajo y medialmente, con las **carillas superiores del axis**, a los lados del diente. Reproducen las cigapofisarias de más abajo y son **sinoviales planas**, pero su cartílago las vuelve convexas, sobre todo de delante atrás, lo que favorece que el atlas gire sobre el axis.',
+    'Las unen los ligamentos atlantoaxoideos anterior, del arco anterior del atlas al cuerpo del axis, y posterior, del arco posterior a las láminas del axis, equivalente a los ligamentos amarillos.',
+  ),
+  'Tectorial membrane and alar ligaments': d(
+    '117, 119',
+    'Los ligamentos que unen el **occipital** al **axis** sin contacto articular entre ellos, dentro del conducto vertebral: la **membrana tectoria**, que baja del borde anterior del foramen magno a la cara posterior del cuerpo del axis pasando por detrás del diente y del ligamento transverso, con dos fascículos laterales accesorios; y los ligamentos que sujetan el diente al foramen magno.',
+    'Éstos son el **ligamento del vértice del diente**, corto y medio, y los dos **ligamentos alares**, cortos y poderosos, de la cara medial de los cóndilos a los lados del vértice del diente, que frenan la rotación. Detrás de la membrana tectoria se continúa el ligamento longitudinal posterior.',
+  ),
+
   // ---------- Thorax ----------
-  'Costovertebral joints': d2(
-    '833–835',
-    'Cada costilla se articula atrás dos veces: su **cabeza** con los cuerpos de dos vértebras y el disco entre ellas, y su **tubérculo** con el proceso transverso de la vértebra de abajo (costotransversa). Las dos son sinoviales planas, de cápsula delgada; las costillas 1.ª, 11.ª y 12.ª tocan una sola vértebra, y las dos últimas carecen de costotransversa.',
-    'Aunque sus movimientos son pequeños, de ellas depende toda la mecánica del tórax: su artritis o su artrosis pueden perturbar mucho la respiración.',
+  'Joints of head of rib': d2(
+    '833–834',
+    'Cada **cabeza costal** se articula con los cuerpos de dos vértebras vecinas y con el disco entre ellos: dos carillas de la cabeza, separadas por una cresta, sobre las fositas costales de las dos vértebras. Es una sinovial plana; un ligamento intraarticular, de la cresta al disco, la divide a menudo en dos cavidades, y la refuerzan el ligamento radiado delante y un ligamento posterior.',
+    'Las costillas 1.ª, 11.ª y 12.ª tocan una sola vértebra y tienen una sola cavidad, con un ligamento interóseo rudimentario o ausente. Por pequeños que sean sus movimientos, de ellas y de las costotransversas depende toda la mecánica del tórax.',
+  ),
+  'Costotransverse joints': d2(
+    '834–835',
+    'La articulación del **tubérculo costal**, por su carilla oval y algo convexa, con la fosita costal del **proceso transverso** de la vértebra de su mismo número: una sinovial plana, de cápsula pequeña y sinovial rudimentaria, que falta en las costillas 11.ª y 12.ª. Las costillas medias e inferiores quedan algo por encima de su proceso, tanto más cuanto más bajas.',
+    'La unen el ligamento costotransverso, corto y potente, del cuello costal a la cara anterior del proceso, el superior, que sube al proceso de arriba, el lateral, del tubérculo al vértice del proceso, y el costolaminar. Sus arterias vienen de las ramas dorsales de las intercostales; sus nervios, de los ramos posteriores torácicos.',
+  ),
+  'Costochondral joints': d2(
+    '836',
+    'La unión de cada una de las diez primeras **costillas** con su **cartílago costal**: el extremo anterior de la costilla tiene una fosita elipsoidea donde encaja el extremo del cartílago, configurado a la inversa, y el periostio se continúa con el pericondrio. La unión es absoluta, sin cavidad ni movimiento propio; los cartílagos de las costillas 11.ª y 12.ª terminan libres.',
+  ),
+  'Synchondrosis of first rib': d2(
+    '836',
+    'La unión del **primer cartílago costal** con el **manubrio**: superficies planas y, sólo rara vez, una cavidad; casi siempre el cartílago se continúa con el esternón en una **sincondrosis**. En su borde superior, dos pequeños ligamentos, anterior y posterior, dejan entre ellos una depresión para la clavícula: así participa en la articulación esternoclavicular.',
+  ),
+  'Sternocostal joints': d2(
+    '835–836',
+    'La articulación de los cartílagos 2.º a 7.º con las **incisuras costales** del borde del esternón: cada cartílago termina en una cuña con dos carillas, superior e inferior, que entra en una escotadura de dos carillas, abierta en la línea de soldadura de dos piezas del esternón; las incisuras están más cerca entre sí cuanto más abajo. Son **sinoviales planas**, como las costovertebrales; el 2.º cartílago llega a la unión del manubrio con el cuerpo.',
+    'Las une una pequeña cápsula, continuación del pericondrio con el periostio, reforzada por los **ligamentos radiados** anterior y posterior, en abanico, y por un ligamento intraarticular, de la arista del cartílago al fondo de la escotadura, que las divide en una o dos sinoviales. Los radiados anteriores se entrecruzan formando la membrana esternal; la 7.ª añade el ligamento costoxifoideo. Los cartílagos 8.º a 10.º no llegan al esternón: se unen al 7.º.',
+  ),
+  'Interchondral joints': d2(
+    '836',
+    'Las uniones de los cartílagos costales entre sí, de la 5.ª a la 10.ª costilla: en los bordes que se tocan, cada cartílago tiene un pequeño ensanchamiento con una carilla oval. El 7.º se articula con el 6.º y el 8.º; el 9.º y el 10.º, incurvados hacia arriba, se unen al de encima y cierran el **arco costal**. Las mantiene el pericondrio, reforzado delante y detrás por fascículos fibrosos.',
+  ),
+  'Manubriosternal joint': {
+    text: [
+      'La unión del **manubrio** con el **cuerpo del esternón** por un fibrocartílago muy denso: una sínfisis, que con la edad suele osificarse. Forma un ángulo saliente hacia delante, el **ángulo esternal** (de Louis), que se palpa bajo la piel a la altura de los segundos cartílagos costales: es el punto de partida para contar las costillas.',
+    ],
+    sources: [LR2('827–828, 836')],
+  },
+  'Xiphisternal joint': d2(
+    '836, 846',
+    'La unión del cuerpo del **esternón** con el **proceso xifoides** por una lámina cartilaginosa, que desaparece con la edad al osificarse. Delante de ella se fija el ligamento costoxifoideo del 7.º cartílago; detrás se insertan los fascículos esternales del diafragma.',
   ),
   'Radiate ligament of head of rib': d2('834', 'Ligamento en abanico de la cara anterior de la cabeza costal: su vértice en la cabeza y su base en las dos vértebras vecinas y en el disco intervertebral.'),
   'Intra-articular ligament of head of rib': d2(

@@ -178,10 +178,36 @@ const joints: Record<string, Description> = {
   'Posterior tibiotalar ligament': d('732–733', 'Porción posterior del ligamento deltoideo: del maléolo medial al tubérculo medial del astrágalo; es la más profunda y gruesa.'),
 
   // ---------- Tarsus ----------
-  'Intertarsal joints': d(
-    '736–740',
-    'Las articulaciones del tarso: la **subastragalina** (astrágalo y calcáneo, unidos en el seno del tarso por el ligamento interóseo), la **transversa del tarso** de Chopart (calcaneocuboidea y talocalcaneonavicular, cuya llave es el ligamento bifurcado) y las del tarso anterior (cuneiformes, navicular y cuboides).',
-    'Permiten la inversión y la eversión del pie y, sobre todo, mantienen la bóveda plantar con sus ligamentos plantares.',
+  'Subtalar joint': d(
+    '736–737',
+    'La articulación del **astrágalo** con el **calcáneo**, por debajo del tobillo. El conjunto de sus superficies obra como una **trocoide** de eje longitudinal: delante, las carillas anterior y media, cóncavas en el calcáneo; detrás, la carilla posterior, convexa en el calcáneo y cóncava en el astrágalo. Entre ellas, los surcos de los dos huesos forman el **seno del tarso**.',
+    'El seno separa dos articulaciones: la posterior, con cápsula y sinovial propias, y la anterior, que se comunica con la talocalcaneonavicular. Las une sobre todo el **ligamento talocalcáneo interóseo**, firme, que llena el seno en dos planos, con los talocalcáneos lateral, medial y posterior. En ella se hacen la inversión y la eversión del pie; lateralmente la cubren los tendones fibulares y medialmente el canal retromaleolar medial.',
+  ),
+  'Talocalcaneonavicular joint': d(
+    '737–738',
+    'La parte medial de la **articulación transversa del tarso** (de Chopart): la **cabeza del astrágalo**, convexa, en una cavidad formada por el **navicular** delante y por el sustentáculo del **calcáneo** debajo. La cavidad del navicular es corta para la cabeza, y la amplía por abajo el **ligamento calcaneonavicular plantar** (ligamento en muelle), un fibrocartílago triangular entre el sustentáculo y el navicular. Es una sinovial **esferoidea**.',
+    'La unen el ligamento talonavicular dorsal, del cuello del astrágalo al navicular, y el fascículo medial del **ligamento bifurcado**, común con la calcaneocuboidea y llave de la desarticulación mediotarsiana. Su sinovial se comunica con la subastragalina anterior.',
+  ),
+  'Calcaneocuboid joint': d(
+    '737–738',
+    'La parte lateral de la **articulación transversa del tarso**: la cara anterior del **calcáneo**, más alta que ancha y cóncava de arriba abajo, contra la cara posterior del **cuboides**, configurada a la inversa. Es una sinovial **en silla de montar**, con su propia sinovial.',
+    'La une un ligamento dorsal débil y, abajo, el **calcaneocuboideo plantar**, muy potente, en dos láminas: la profunda, corta y ancha, al cuboides; la superficial, el **ligamento plantar largo**, que salta sobre el canal del fibular largo hasta las bases de los últimos metatarsianos. El fascículo lateral del ligamento bifurcado llega a la cara dorsal del cuboides.',
+  ),
+  'Cuneonavicular joint': d(
+    '739',
+    'La articulación de la cara anterior del **navicular**, dividida por dos crestas en tres carillas, con los tres **cuneiformes**, uno por carilla. La unen tres ligamentos dorsales, del borde superior del navicular a cada cuneiforme, y ligamentos plantares: uno ancho y fuerte, de la tuberosidad del navicular al cuneiforme medial, y dos débiles a los otros. Su sinovial única se prolonga entre los cuneiformes.',
+  ),
+  'Cuboideonavicular joint': d(
+    '738–739',
+    'La unión del **navicular** con el **cuboides**, por una superficie plana a cada lado que se continúa con la que cada uno ofrece al cuneiforme lateral. La unen un ligamento dorsal, uno plantar y uno interóseo, corto y resistente; una prolongación de la sinovial cuneonavicular separa los dos huesos.',
+  ),
+  'Intercuneiform joints': d(
+    '739',
+    'Las uniones de los tres **cuneiformes** entre sí, por superficies planas que les permiten excavar la **bóveda plantar** transversal. Son sinoviales planas, prolongación de la cuneonavicular, unidas por dos ligamentos dorsales transversales, dos interóseos y un plantar fuerte entre el cuneiforme medial y el intermedio (no lo hay entre el intermedio y el lateral).',
+  ),
+  'Cuneocuboid joint': d(
+    '739–740',
+    'La unión del **cuneiforme lateral** con el **cuboides**, por dos superficies triangulares alargadas de delante atrás. La unen un ligamento dorsal transversal, uno plantar y uno interóseo corto que ocupa toda la superficie no articular; su sinovial es propia o una prolongación de la cuneonavicular.',
   ),
   'Talocalcaneal interosseous ligament': d('736', 'Ligamento firme y fuerte que ocupa el seno del tarso entre el astrágalo y el calcáneo, en dos planos: la principal unión de la subastragalina.'),
   'Lateral talocalcaneal ligament': d('736', 'Fascículo débil de la cara lateral del astrágalo a la del calcáneo, bajo el calcaneofibular.'),

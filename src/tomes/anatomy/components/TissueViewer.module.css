@@ -131,3 +131,8 @@
 .parts li::marker {
   content: none !important;
 }
+
+.none {
+  font-style: italic;
+  opacity: 0.75;
+}

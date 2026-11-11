@@ -157,8 +157,10 @@ export function TissueViewer({
   const chooseJoint = (def: JointDef, side: JointSide = "right") => {
     const parts = jointParts(def, side);
     const pieces = new Set(parts.pieces.map((p) => p.id));
-    setOn((prev) => ({ ...prev, bones: true, joints: true }));
-    mount("joints");
+    // A suture or a synchondrosis has no piece in the model: only its bones are shown.
+    const bare = pieces.size === 0;
+    setOn((prev) => ({ ...prev, bones: true, joints: prev.joints || !bare }));
+    if (!bare) mount("joints");
     setRemoved((prev) =>
       prev.filter(
         (group) =>
@@ -167,7 +169,11 @@ export function TissueViewer({
     );
     setJoint({ def, side, pieces, bones: new Set(parts.bones) });
     selectIds([]);
-    setFocus({ kind: "nodes", ids: [...pieces], view: def.view });
+    setFocus({
+      kind: "nodes",
+      ids: bare ? parts.bones : [...pieces],
+      view: def.view,
+    });
   };
 
   const select = (id: string | null) => {
@@ -390,7 +396,7 @@ export function TissueViewer({
             onFocus={() =>
               setFocus({
                 kind: "nodes",
-                ids: [...joint.pieces],
+                ids: joint.pieces.size ? [...joint.pieces] : [...joint.bones],
                 view: joint.def.view,
               })
             }
@@ -590,9 +596,11 @@ function JointCard({
   const bones = [
     ...new Set([...joint.bones].map((id) => pieceById.get(id)?.base ?? id)),
   ];
+  // Paired when the other side shows something else (a suture between the two parietals is not).
+  const other = jointParts(def, side === "right" ? "left" : "right");
   const paired =
     pieces.some((p) => p.side) ||
-    [...joint.bones].some((id) => pieceById.get(id)?.side);
+    other.bones.some((id) => !joint.bones.has(id));
 
   return (
     <div className={styles.card}>
@@ -639,19 +647,25 @@ function JointCard({
         </dd>
         <dt>Piezas</dt>
         <dd>
-          <ul className={styles.parts}>
-            {pieces.map((p) => (
-              <li key={p.id}>
-                <button
-                  className={styles.part}
-                  onClick={() => onPiece(p.id)}
-                  title={p.la ?? p.en}
-                >
-                  {capitalize(softName(p))}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {pieces.length > 0 ? (
+            <ul className={styles.parts}>
+              {pieces.map((p) => (
+                <li key={p.id}>
+                  <button
+                    className={styles.part}
+                    onClick={() => onPiece(p.id)}
+                    title={p.la ?? p.en}
+                  >
+                    {capitalize(softName(p))}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <span className={styles.none}>
+              Sin piezas propias en el modelo: se ven los huesos que une.
+            </span>
+          )}
         </dd>
       </dl>
       {described && <Description en={def.en} />}

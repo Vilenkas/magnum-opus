@@ -105,7 +105,7 @@ describe('descriptions', () => {
     )
     expect(joints.length).toBeGreaterThan(10)
     for (const e of joints) expect(descriptionOf(e.en), e.en).toBeDefined()
-    for (const j of JOINTS.filter((j) => j.region === 'head')) expect(descriptionOf(j.en), j.en).toBeDefined()
+    for (const j of JOINTS.filter((j) => j.region === 'head' || j.region === 'skull')) expect(descriptionOf(j.en), j.en).toBeDefined()
     const muscles = (soft as { set: string; en: string; groups?: { en: string }[] }[]).filter(
       (e) => e.set === 'muscles' && e.groups?.some((g) => /^(Cranial part of muscular system|Cervical part of muscular system|Fasciae of head|Cervical fasciae)$/.test(g.en)),
     )

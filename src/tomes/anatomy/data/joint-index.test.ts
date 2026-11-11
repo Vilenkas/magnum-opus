@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { JOINTS, jointIndex, jointOfPiece, jointParts, jointPieceList, jointPieces } from './joint-index'
+import type { CountNode } from './bone-count'
+import { jointCount } from './joint-count'
 import { pieceById } from './skeleton'
 import { softEntries } from './soft-tissues'
 
@@ -11,12 +13,39 @@ describe('joint index', () => {
 
   it('has no empty joint, and every bone it names is in the skeleton on the right side', () => {
     for (const joint of JOINTS) {
-      expect(jointPieces.get(joint.key)!.length, joint.key).toBeGreaterThan(0)
       const { pieces, bones } = jointParts(joint, 'right')
-      expect(pieces.length, joint.key).toBeGreaterThan(0)
       for (const b of bones) expect(pieceById.has(b), `${joint.key}: ${b}`).toBe(true)
-      expect(pieces.every((p) => p.side !== 'left'), joint.key).toBe(true)
+      expect(new Set(joint.bones).size, joint.key).toBe(joint.bones.length)
+      if (joint.groups || joint.pieces) {
+        expect(pieces.length, joint.key).toBeGreaterThan(0)
+        expect(pieces.every((p) => p.side !== 'left'), joint.key).toBe(true)
+      } else {
+        // Without pieces of its own, a joint is the meeting of at least two bones.
+        expect(jointPieces.get(joint.key), joint.key).toEqual([])
+        expect(bones.length, joint.key).toBeGreaterThanOrEqual(2)
+      }
     }
+  })
+
+  it('has unique keys and names', () => {
+    for (const field of ['key', 'es', 'en'] as const) {
+      const values = JOINTS.map((j) => j[field])
+      expect(values.filter((v, i) => values.indexOf(v) !== i), field).toEqual([])
+    }
+  })
+
+  it('opens every joint of Lámina II, by its Latin name', () => {
+    const latin = new Set(JOINTS.flatMap((j) => [j.la, ...(j.covers ?? [])]))
+    const leaves = (nodes: CountNode[]): CountNode[] => nodes.flatMap((n) => (n.children ? leaves(n.children) : [n]))
+    const missing = jointCount.flatMap((d) => leaves(d.regions)).filter((n) => !latin.has(n.latin!)).map((n) => `${n.name} (${n.latin})`)
+    expect(missing).toEqual([])
+  })
+
+  it('shows a suture with both bones when it joins a pair, and one side when it joins two paired bones', () => {
+    const sagittal = JOINTS.find((j) => j.key === 'sagittal-suture')!
+    expect(jointParts(sagittal, 'right').bones).toEqual(['parietal-bone-l', 'parietal-bone-r'])
+    const squamous = JOINTS.find((j) => j.key === 'squamous-suture')!
+    expect(jointParts(squamous, 'left').bones).toEqual(['parietal-bone-l', 'temporal-bone-l'])
   })
 
   it('keeps the left side apart from the right', () => {
@@ -38,5 +67,8 @@ describe('joint index', () => {
     expect(find('menisco')).toContain('knee')
     expect(find('coxofemoral')).toEqual(['hip'])
     expect(find('lisfranc')).toEqual(['tarsometatarsal'])
+    expect(find('chopart').sort()).toEqual(['calcaneocuboid', 'talocalcaneonavicular'])
+    expect(find('pterion').sort()).toEqual(['sphenofrontal-suture', 'sphenoparietal-suture', 'sphenosquamous-suture'])
+    expect(find('odontoides')).toEqual(['median-atlanto-axial'])
   })
 })

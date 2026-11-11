@@ -9,6 +9,7 @@ import { headNeckBones } from './head-neck-bones'
 import { headNeckJoints } from './head-neck-joints'
 import { headNeckMuscles } from './head-neck-muscles'
 import { headNeckNerves } from './head-neck-nerves'
+import { headNeckSutures } from './head-neck-sutures'
 import { headNeckVessels } from './head-neck-vessels'
 import { heart } from './heart'
 import { lowerLimbBones } from './lower-limb-bones'
@@ -41,7 +42,7 @@ export interface Description {
 export const descriptionKey = (en: string) => en.trim().toLowerCase()
 
 /** Every file of descriptions, by region; the tests check the keys against the models. */
-export const DESCRIPTION_FILES: Record<string, Record<string, Description>> = { heart, upperLimbBones, upperLimbJoints, upperLimbMuscles, upperLimbVessels, upperLimbNerves, lowerLimbBones, lowerLimbJoints, lowerLimbMuscles, lowerLimbVessels, lowerLimbNerves, trunkBones, trunkJoints, trunkMuscles, trunkVessels, trunkNerves, headNeckBones, headNeckJoints, headNeckMuscles, headNeckVessels, headNeckNerves }
+export const DESCRIPTION_FILES: Record<string, Record<string, Description>> = { heart, upperLimbBones, upperLimbJoints, upperLimbMuscles, upperLimbVessels, upperLimbNerves, lowerLimbBones, lowerLimbJoints, lowerLimbMuscles, lowerLimbVessels, lowerLimbNerves, trunkBones, trunkJoints, trunkMuscles, trunkVessels, trunkNerves, headNeckBones, headNeckJoints, headNeckSutures, headNeckMuscles, headNeckVessels, headNeckNerves }
 
 const all = new Map<string, Description>()
 for (const file of Object.values(DESCRIPTION_FILES)) for (const [en, d] of Object.entries(file)) all.set(descriptionKey(en), d)

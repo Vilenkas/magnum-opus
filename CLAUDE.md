@@ -101,7 +101,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
 - `data/joint-index.ts`: every piece of `joints.glb` belongs to one joint (by its nearest TA group, plus single
   pieces); each joint names its bones. `<LigamentViewer>` indexes whole joints first: choosing one shows its
   bones and pieces on one side (the rest ghosted, the stage's `{ kind: 'nodes' }` focus frames them), and its
-  card lists the pieces. Tests check no piece is left without a joint.
+  card lists the pieces. Tests check no piece is left without a joint. Joints with no piece in the model (sutures and
+  synchondroses, region `skull`; ossicles, gomphosis, craniovertebral, zygapophysial, most of the thorax, thumb CMC) list
+  only their bones and the stage frames those. Every row of Lámina II (`joint-count.ts`) opens a viewer joint by its Latin
+  name (`la` or `covers`), tested; the tarsus is split joint by joint (subtalar, Chopart's two, the anterior tarsus).
   Source blend and TA2.csv live in `library/anatomy/z-anatomy/` (see `tools/anatomy/README.md`).
 - `data/bones.ts` — Spanish names per GLB node id (hand-editable; the user is the domain
   expert).
