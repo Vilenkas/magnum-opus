@@ -1,0 +1,111 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 19rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+.body > [data-stage] {
+  min-width: 0;
+}
+@media (max-width: 48rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  min-width: 0;
+  max-height: min(78vh, 46rem);
+  overflow-y: auto;
+  padding: 0.75rem 1rem 1rem;
+  border-left: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+  font-size: 0.88rem;
+}
+@media (max-width: 48rem) {
+  .panel {
+    max-height: none;
+    border-left: 0;
+    border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+  }
+}
+.note {
+  margin: 0 !important;
+}
+.heading {
+  margin: 0.8rem 0 0.25rem !important;
+  font-family: var(--anatomy-display);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--anatomy-accent);
+}
+
+.walls {
+  margin: 0 !important;
+}
+.walls > div {
+  padding: 0.2rem 0;
+  border-bottom: 1px dotted color-mix(in oklab, var(--anatomy-ink) 18%, transparent);
+}
+.walls dt {
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.walls dd {
+  margin: 0 !important;
+  cursor: default;
+}
+
+.contents {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.contents li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.1rem 0 !important;
+  padding: 0 !important;
+  cursor: default;
+}
+.contents li::before {
+  content: '' !important;
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--dot, #888);
+}
+.contents li[data-kind='artery'] {
+  --dot: #b8322a;
+}
+.contents li[data-kind='vein'] {
+  --dot: #3b5a92;
+}
+.contents li[data-kind='nerve'] {
+  --dot: #d8b23a;
+}
+.contents li[data-kind='tendon'] {
+  --dot: #d9cdb4;
+}
+[data-lit='true'] {
+  color: var(--anatomy-accent);
+  font-weight: 700;
+}
+
+.compression {
+  margin-top: 0.9rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid color-mix(in oklab, var(--anatomy-ink) 20%, transparent);
+}
+.compression p {
+  margin: 0.3rem 0 0 !important;
+}
+.cause {
+  font-style: italic;
+  color: var(--anatomy-ink-soft);
+}
+.signs {
+  color: #9e2a24;
+}

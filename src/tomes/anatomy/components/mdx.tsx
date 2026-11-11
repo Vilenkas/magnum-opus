@@ -39,6 +39,7 @@ export const mdxComponents: MDXComponents = {
   Anastomoses: lazyPlate(() => import('./Anastomoses').then((m) => m.Anastomoses)),
   VenousValves: lazyPlate(() => import('./VenousValves').then((m) => m.VenousValves)),
   VenousReturn: lazyPlate(() => import('./VenousReturn').then((m) => m.VenousReturn)),
+  RegionViewer: lazyPlate(() => import('./RegionViewer').then((m) => m.RegionViewer)),
   LymphDrainage: lazyPlate(() => import('./LymphDrainage').then((m) => m.LymphDrainage)),
   CordSections: lazyPlate(() => import('./CordSections').then((m) => m.CordSections)),
   BulbColumns: lazyPlate(() => import('./BulbColumns').then((m) => m.BulbColumns)),

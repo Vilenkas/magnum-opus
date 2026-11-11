@@ -133,6 +133,10 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   are Spanish labels over muscles.glb pieces; ranges only where Moore 9 (`moore`) or Latarjet–Ruiz state them (unstated sides are
   drawn dashed). Tests check the pieces exist and derive the two-joint muscles (hamstrings yes, short head of biceps femoris no).
   Artrología and Miología plates are numbered in order of appearance too.
+- `data/regions.ts` + `components/RegionViewer.tsx` (Miología, Lámina IV): axilla, quadrangular space, cubital fossa, carpal
+  tunnel, Guyon's canal, snuffbox, inguinal canal, femoral triangle, adductor canal, popliteal fossa, each as walls (pieces of
+  muscles/joints/skeleton) and contents (vessels.glb, nervous.glb, tendons) on a 3D stage, right side. «Comprimir» runs the
+  region's `plexuses.ts` lesion (carpal tunnel spares the palm: the palmar branch leaves at 3.8, the tunnel is at 4.2).
 - `data/joints.ts` + `components/JointTypes.tsx` — Libro II's classification plate (Testut's classes
   and genera, each shown on real joints). The stage's `{ kind: 'joint' }` focus frames a landmark
   with an anatomical view (`front`/`side`/`top`…); size from the smallest bone or `frame`.
