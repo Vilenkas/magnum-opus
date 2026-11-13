@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- The alchemical philosopher's stone: circle, triangle, square, circle — the Magnum Opus. -->
+  <defs>
+    <radialGradient id="ink" cx="50%" cy="45%" r="65%">
+      <stop offset="0" stop-color="#1d1a14" />
+      <stop offset="1" stop-color="#0d0c0a" />
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="220" fill="url(#ink)" />
+  <g fill="none" stroke="#c9a45c" stroke-width="30" stroke-linejoin="round">
+    <circle cx="512" cy="552" r="330" />
+    <!-- Triangle inscribed in the outer circle; the square stands on its base with its top
+         corners on the sides; the inner circle is inscribed in the square. -->
+    <polygon points="512,222 226.2,717 797.8,717" />
+    <rect x="379.4" y="451.7" width="265.3" height="265.3" />
+    <circle cx="512" cy="584.4" r="132.6" />
+  </g>
+</svg>
