@@ -26,6 +26,10 @@ body {
   color: var(--color-parchment);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* The page only scrolls vertically: anything wider than the viewport (a long word, a shelf
+     row) is clipped instead of letting a sideways swipe nudge the page. clip, not hidden, keeps
+     position: sticky working. */
+  overflow-x: clip;
 }
 
 /* Thin, arrowless scrollbars in the colours of the space they sit in (standard properties:

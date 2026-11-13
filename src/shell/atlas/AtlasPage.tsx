@@ -25,10 +25,10 @@ export function AtlasPage() {
     // The index view is an app layout on wide screens: fixed header, sidebar and content
     // scrolling on their own. Elsewhere (and on narrow screens) the page scrolls as a whole.
     <div className={`flex min-h-dvh flex-col ${view === 'index' ? 'lg:h-dvh lg:min-h-0' : ''}`}>
-      <header className="flex flex-none flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-3 sm:px-6">
+      <header className="flex flex-none flex-wrap items-center justify-center sm:justify-between gap-4 border-b border-line px-4 py-3 sm:px-6">
         {/* The shelves view carries the big title itself. */}
         {view === 'shelves' ? (
-          <span />
+          <span className="max-sm:hidden" />
         ) : (
           <Link to="/" search={{ view: 'shelves' }} className="font-display text-xl font-bold tracking-wide text-gold">
             Magnum Opus
