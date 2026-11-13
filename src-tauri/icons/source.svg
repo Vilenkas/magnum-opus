@@ -9,8 +9,10 @@
   <rect width="1024" height="1024" rx="220" fill="url(#ink)" />
   <g fill="none" stroke="#c9a45c" stroke-width="30" stroke-linejoin="round">
     <circle cx="512" cy="552" r="330" />
-    <polygon points="512,222 226,717 798,717" />
-    <rect x="395" y="435" width="234" height="234" />
-    <circle cx="512" cy="552" r="117" />
+    <!-- Triangle inscribed in the outer circle; the square stands on its base with its top
+         corners on the sides; the inner circle is inscribed in the square. -->
+    <polygon points="512,222 226.2,717 797.8,717" />
+    <rect x="379.4" y="451.7" width="265.3" height="265.3" />
+    <circle cx="512" cy="584.4" r="132.6" />
   </g>
 </svg>
