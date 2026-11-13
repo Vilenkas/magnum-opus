@@ -8,6 +8,16 @@ const manifest: TomeManifest = {
   tier: 'codex',
   status: 'draft',
   home: 'health/basic-sciences/anatomy',
+  // Each area under anatomy is one of the treatise's books (books.ts).
+  sections: {
+    osteology: 'osteology',
+    arthrology: 'arthrology',
+    myology: 'myology',
+    angiology: 'angiology',
+    neurology: 'neurology',
+    splanchnology: 'splanchnology',
+    esthesiology: 'aesthesiology',
+  },
   facets: { system: ['skeletal', 'cardiovascular', 'lymphatic', 'nervous', 'digestive'] },
   tags: ['esqueleto', 'huesos', 'accidentes óseos', 'corazón', 'arterias', 'venas', 'linfáticos', 'neurona', 'sistema nervioso', 'boca', 'dientes', 'velo del paladar', 'vísceras'],
   palette: {

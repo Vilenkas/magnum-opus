@@ -4,6 +4,7 @@ import { facets } from '@/tomes/taxonomy'
 import {
   facetCounts,
   isFacetValue,
+  readingOf,
   relatedTo,
   tomesWithFacet,
   trailOf,
@@ -163,7 +164,7 @@ function AreaPanel({ atlas, node }: { atlas: Atlas; node?: AtlasNode }) {
       {node?.coveredBy && !node.tomes.length && (
         <div className="flex flex-col gap-3">
           <p className="text-sm text-muted">Esta área forma parte de un tomo más amplio:</p>
-          <TomeBanner tome={node.coveredBy} node={atlas.homeOf.get(node.coveredBy.id)} />
+          <TomeBanner tome={node.coveredBy} node={atlas.homeOf.get(node.coveredBy.id)} path={readingOf(node)?.path} />
         </div>
       )}
 

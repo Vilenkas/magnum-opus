@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { TaxonomyNode } from '@/tomes/taxonomy'
 import type { TomeManifest } from '@/tomes/types'
 import { descendantCount, focusLayout } from './layout'
-import { buildAtlas, facetCounts, pendingLeaves, relatedTo, tomesWithFacet, tomesWithin, trailOf } from './model'
+import { buildAtlas, facetCounts, pendingLeaves, readingOf, relatedTo, tomesWithFacet, tomesWithin, trailOf } from './model'
 import { matchScore, search } from './search'
 
 const tree: TaxonomyNode[] = [
@@ -50,6 +50,7 @@ const anatomy = tome('anatomy', 'health/basic/anatomy', {
   subtitle: 'De humani corporis fabrica',
   tags: ['huesos'],
   facets: { system: ['skeletal'] },
+  sections: { osteology: 'bones' },
 })
 const latin = tome('latin', 'languages/latin', { title: 'Latín', related: ['anatomy'] })
 const atlas = buildAtlas([latin, anatomy], tree)
@@ -65,6 +66,15 @@ describe('buildAtlas', () => {
     expect(at('health/basic/physiology').status).toBe('pending')
     expect(at('health/clinical').status).toBe('group')
     expect(at('mathematics').status).toBe('group')
+  })
+
+  it('opens an area where it is read', () => {
+    expect(readingOf(at('health/basic/anatomy'))).toEqual({ tome: anatomy, path: '' })
+    expect(readingOf(at('health/basic/anatomy/osteology'))).toEqual({ tome: anatomy, path: 'bones' })
+    // Covered but not named in `sections`: the tome's front page.
+    expect(readingOf(at('health/basic/anatomy/neurology'))).toEqual({ tome: anatomy, path: '' })
+    expect(readingOf(at('health/basic/physiology'))).toBeUndefined()
+    expect(readingOf(at('health/basic'))).toBeUndefined()
   })
 
   it('counts tomes and leaves per subtree', () => {

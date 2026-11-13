@@ -77,6 +77,17 @@ export function buildAtlas(manifests: TomeManifest[], tree: TaxonomyNode[] = tax
   return { roots: tree.map((root) => build(root, undefined)), byPath, homeOf, tomes }
 }
 
+/**
+ * Where a node is read: its own tome at the front page, or the tome covering it at the section
+ * its manifest names for it (the front page if it names none). Undefined if nothing covers it.
+ */
+export function readingOf(node: AtlasNode): { tome: TomeManifest; path: string } | undefined {
+  if (node.tomes.length) return { tome: node.tomes[0], path: '' }
+  const tome = node.coveredBy
+  if (!tome) return undefined
+  return { tome, path: tome.sections?.[node.path.slice(tome.home.length + 1)] ?? '' }
+}
+
 /** The node and its ancestors, from the root down. */
 export function trailOf(node: AtlasNode): AtlasNode[] {
   const trail: AtlasNode[] = []

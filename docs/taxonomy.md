@@ -42,7 +42,9 @@ question is about. The tree is made of disciplines; objects become facets.
 A tome covers its node's whole subtree until a more specific tome claims a child. The
 anatomy tome lives at `health/basic-sciences/anatomy` and its books (Osteología,
 Artrología…) match the child nodes. If myology ever needs its own tome, it moves to
-`…/anatomy/myology` and anatomy keeps the rest. The same goes for mathematics: one
+`…/anatomy/myology` and anatomy keeps the rest. The manifest's `sections` says where each
+covered area is read inside the tome (`osteology` → its book's path), so the atlas, the map and
+the search open Osteología at its book rather than at the front page. The same goes for mathematics: one
 "Cálculo" tome with derivatives and integrals as chapters, split only when it grows.
 
 ## Rules for the tree itself
@@ -59,6 +61,6 @@ Artrología…) match the child nodes. If myology ever needs its own tome, it mo
 
 ## Validation
 
-`placementProblems()` checks `home`, facets, `related` and `prereqs`. The registry throws on
+`placementProblems()` checks `home`, facets, `sections`, `related` and `prereqs`. The registry throws on
 startup if a tome is misplaced, `src/tomes/taxonomy.test.ts` checks every manifest, and
 `pnpm new-tome <id> "<Título>" <home>` refuses an unknown path.

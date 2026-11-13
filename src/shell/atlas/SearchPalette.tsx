@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { facets } from '@/tomes/taxonomy'
-import { trailOf, type Atlas } from './model'
-import { plural, SearchIcon, statusText, tierLabel } from './parts'
+import { readingOf, trailOf, type Atlas } from './model'
+import { plural, SearchIcon, statusText, tierLabel, tomeTarget } from './parts'
 import { search, type SearchResult } from './search'
 
 const PER_GROUP = 6
@@ -45,15 +45,20 @@ export function SearchPalette({ atlas, onClose }: { atlas: Atlas; onClose: () =>
             highlight: true,
             go: close(() => navigate({ to: '/tomes/$tomeId', params: { tomeId: r.tome.id } })),
           }
-        case 'area':
+        case 'area': {
+          // An area inside a tome opens the tome where it is read; others, their page in the index.
+          const reading = readingOf(r.node)
           return {
             key: `a:${r.node.path}`,
             title: r.node.title,
             detail: trailOf(r.node).slice(0, -1).map((n) => n.title).join(' › ') || 'Dominio',
             meta: statusText(r.node),
             highlight: r.node.status !== 'pending' && r.node.status !== 'group',
-            go: close(() => navigate({ to: '/', search: { view: 'index', area: r.node.path } })),
+            go: close(() =>
+              navigate(reading ? tomeTarget(reading.tome.id, reading.path) : { to: '/', search: { view: 'index', area: r.node.path } }),
+            ),
           }
+        }
         case 'facet':
           return {
             key: `f:${r.value}`,

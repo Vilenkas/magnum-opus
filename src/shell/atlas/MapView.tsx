@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { focusLayout, type MapPoint } from './layout'
-import { trailOf, type Atlas, type AtlasNode } from './model'
-import { statusText, TomeBanner, Trail } from './parts'
+import { readingOf, trailOf, type Atlas, type AtlasNode } from './model'
+import { statusText, TomeBanner, tomeTarget, Trail } from './parts'
 
 // Wide enough that the centre's title never reaches the first ring.
 const RING = 150
@@ -368,8 +368,7 @@ function Selection({ atlas, node }: { atlas: Atlas; node: AtlasNode }) {
       <div className="flex flex-wrap gap-3">
         {node.coveredBy && (
           <Link
-            to="/tomes/$tomeId"
-            params={{ tomeId: node.coveredBy.id }}
+            {...tomeTarget(node.coveredBy.id, readingOf(node)?.path)}
             className="inline-flex h-11 items-center rounded bg-gold px-5 text-sm font-semibold text-ink"
           >
             Abrir {atlas.homeOf.get(node.coveredBy.id)?.title ?? node.coveredBy.title}

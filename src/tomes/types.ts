@@ -31,6 +31,12 @@ export interface TomeManifest {
    * specific tome claims a child. See docs/taxonomy.md.
    */
   home: string
+  /**
+   * Where each area the tome covers is read inside it: a taxonomy path relative to `home`
+   * ('osteology') → the tome's internal path (what it receives as `path`). The atlas and the
+   * search open a covered area there instead of at the tome's front page.
+   */
+  sections?: Record<string, string>
   /** What the tome is about across branches (e.g. body system). */
   facets?: TomeFacets
   /** Free search keywords (Spanish). Not structure: don't repeat home or facets. */

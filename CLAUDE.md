@@ -53,7 +53,8 @@ Full rule in `docs/taxonomy.md`. In short:
 - Classify by **discipline** (method), not object: anatomy, physiology, pharmacology and
   imaging are nodes; "cardiovascular" is a facet (`facets.system`). Clinical specialties are
   nodes under `health/clinical`.
-- A tome covers its node's subtree until a more specific tome claims a child. Split a topic
+- A tome covers its node's subtree until a more specific tome claims a child. Its manifest's
+  `sections` maps covered areas to internal paths; the shell opens them there (`readingOf`). Split a topic
   into its own tome only when it needs its own design or outgrows its parent tome.
 - Order is not in the tree: `prereqs` form suggested routes; `related` is see-also; `tags`
   are search keywords only.

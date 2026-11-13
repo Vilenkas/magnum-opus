@@ -538,7 +538,14 @@ export const isWithin = (path: string, ancestor: string): boolean =>
  * human-readable problems; empty means valid.
  */
 export const placementProblems = (
-  tome: { id: string; home: string; facets?: Record<string, readonly string[] | undefined>; related?: string[]; prereqs?: string[] },
+  tome: {
+    id: string
+    home: string
+    facets?: Record<string, readonly string[] | undefined>
+    related?: string[]
+    prereqs?: string[]
+    sections?: Record<string, string>
+  },
   knownTomeIds: ReadonlySet<string>,
 ): string[] => {
   const problems: string[] = []
@@ -552,6 +559,9 @@ export const placementProblems = (
     for (const value of values ?? []) {
       if (!(value in def.values)) problems.push(`unknown value "${value}" for facet "${facet}"`)
     }
+  }
+  for (const area of Object.keys(tome.sections ?? {})) {
+    if (!byPath.has(`${tome.home}/${area}`)) problems.push(`section "${area}" is not an area under its home`)
   }
   for (const field of ['related', 'prereqs'] as const) {
     for (const id of tome[field] ?? []) {

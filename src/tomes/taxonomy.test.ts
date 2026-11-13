@@ -52,6 +52,7 @@ describe('taxonomy', () => {
           facets: { system: ['skeletal', 'bony'], era: ['rome'] },
           related: ['x', 'ghost'],
           prereqs: ['latin'],
+          sections: { osteology: 'bones' },
         },
         ids,
       ),
@@ -59,6 +60,7 @@ describe('taxonomy', () => {
       'home "health/anatomy" is not a taxonomy path',
       'unknown value "bony" for facet "system"',
       'unknown facet "era"',
+      'section "osteology" is not an area under its home',
       'related lists the tome itself',
       'related points to unknown tome "ghost"',
     ])

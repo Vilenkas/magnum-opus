@@ -9,6 +9,12 @@ export const tierLabel: Record<TomeTier, string> = {
   grimoire: 'Grimorio',
 }
 
+/** Link/navigate options that open a tome, at an internal path when given. */
+export const tomeTarget = (tomeId: string, path = '') =>
+  path
+    ? ({ to: '/tomes/$tomeId/$', params: { tomeId, _splat: path } } as const)
+    : ({ to: '/tomes/$tomeId', params: { tomeId } } as const)
+
 export const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`
 
 /** One line saying how far a node is written. */
@@ -81,12 +87,11 @@ export function TomeCard({ tome }: { tome: TomeManifest }) {
 }
 
 /** Landscape card with an explicit "open" action (index and map). */
-export function TomeBanner({ tome, node }: { tome: TomeManifest; node?: AtlasNode }) {
+export function TomeBanner({ tome, node, path }: { tome: TomeManifest; node?: AtlasNode; path?: string }) {
   const { background, foreground, accent } = tome.palette
   return (
     <Link
-      to="/tomes/$tomeId"
-      params={{ tomeId: tome.id }}
+      {...tomeTarget(tome.id, path)}
       className="group flex flex-wrap items-center gap-6 rounded-sm border px-6 py-5 transition hover:brightness-[1.03]"
       style={{ background, color: foreground, borderColor: `${accent}55` }}
     >
