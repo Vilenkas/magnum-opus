@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 import type { ReactNode } from 'react'
+import { AntipsychoticProfiles } from './AntipsychoticProfiles'
 import { Cite } from './Citations'
 import { ClassShelf } from './ClassShelf'
 import { DoseResponse } from './DoseResponse'
@@ -22,4 +23,5 @@ export const mdxComponents: MDXComponents = {
   DurationChart,
   SynapseTargets,
   SaturableKinetics,
+  AntipsychoticProfiles,
 }

@@ -65,6 +65,9 @@ function Entry({ source, pages }: { source: Source; pages: string[] }) {
   )
 }
 
+/** Pages in reading order: by their first number, then the shorter (single) one first. */
+const byPage = (pages: string[]) => pages.sort((a, b) => parseInt(a) - parseInt(b) || a.length - b.length)
+
 /** The chapter's sources, at its end. */
 export function Sources() {
   const registry = useContext(CitationContext)
@@ -76,7 +79,7 @@ export function Sources() {
         {registry.order.map((id, i) => (
           <li key={id} id={`fuente-${i + 1}`} className={styles.item}>
             <span className={styles.index}>{i + 1}</span>
-            <Entry source={sources[id]} pages={[...(registry.pages.get(id) ?? [])]} />
+            <Entry source={sources[id]} pages={byPage([...(registry.pages.get(id) ?? [])])} />
           </li>
         ))}
       </ol>
@@ -91,7 +94,7 @@ export function RefList({ refs }: { refs: Ref[] }) {
     if (!pages.has(r.source)) pages.set(r.source, new Set())
     if (r.p) pages.get(r.source)!.add(r.p)
   }
-  const sorted = (set: Set<string>) => [...set].sort((a, b) => parseInt(a) - parseInt(b))
+  const sorted = (set: Set<string>) => byPage([...set])
   return (
     <ol className={styles.list}>
       {[...pages].map(([id, set]) => (

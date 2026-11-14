@@ -28,7 +28,8 @@ export function ClassShelf({ clase, depth = 0 }: { clase: string; depth?: number
   const cls = classById.get(clase)
   if (!cls) return import.meta.env.DEV ? <p className={styles.missing}>[clase desconocida: {clase}]</p> : null
   const subs = childrenOf(clase).filter((c) => drugsIn(c.id).length)
-  const mine = own(clase)
+  // A class with no drugs of its own (the anticonvulsant mood stabilisers) shows those serving it.
+  const mine = own(clase).length || subs.length ? own(clase) : drugsIn(clase, true)
   return (
     <div className={depth ? styles.sub : styles.shelf}>
       {depth > 0 && (

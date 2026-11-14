@@ -11,7 +11,7 @@ export const antiepileptics: Drug[] = [
     name: 'Carbamazepina',
     inn: 'carbamazepine',
     brand: 'Tegretol',
-    classes: ['ae-sodium', 'antipsychotics'],
+    classes: ['ae-sodium', 'ms-anticonvulsants'],
     summary:
       'El prototipo de los bloqueadores del sodio: crisis focales, neuralgia del trigémino y trastorno bipolar.',
     uses: [
@@ -175,7 +175,7 @@ export const antiepileptics: Drug[] = [
     name: 'Lamotrigina',
     inn: 'lamotrigine',
     brand: 'Lamictal',
-    classes: ['ae-sodium', 'antipsychotics'],
+    classes: ['ae-sodium', 'ms-anticonvulsants'],
     summary:
       'Bloqueador del sodio de espectro más amplio, muy bien tolerado y de los más seguros en el embarazo.',
     uses: [
@@ -473,7 +473,7 @@ export const antiepileptics: Drug[] = [
     name: 'Ácido valproico',
     inn: 'valproic acid',
     brand: 'Depakine',
-    classes: ['ae-multiple', 'antipsychotics'],
+    classes: ['ae-multiple', 'ms-anticonvulsants'],
     summary:
       'El antiepiléptico de amplio espectro de primera elección, pero teratógeno: se evita en mujeres en edad fértil.',
     mechanism: 'Su mecanismo no se conoce bien; protege en muchos modelos de crisis distintos.',

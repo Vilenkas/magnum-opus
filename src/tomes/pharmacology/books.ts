@@ -46,6 +46,7 @@ export const books: Book[] = [
     numeral: 'IV',
     title: 'Antipsicóticos y estabilizadores del ánimo',
     summary: 'Típicos, atípicos y agonistas parciales; el litio y los estabilizadores.',
+    load: () => import('./chapters/antipsychotics.mdx'),
   },
   {
     id: 'antidepressants',

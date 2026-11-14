@@ -1,0 +1,85 @@
+.scroll {
+  overflow-x: auto;
+  margin: 0 -0.2rem;
+}
+
+.table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: separate;
+  border-spacing: 3px;
+  font-size: 0.8rem;
+}
+
+.table th {
+  font-weight: 600;
+  text-align: center;
+}
+.drugHead {
+  text-align: left !important;
+  padding-left: 0.3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.sort {
+  width: 100%;
+  padding: 0.35rem 0.2rem;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sort:hover {
+  border-color: var(--line-strong);
+}
+.sort.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.drug {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.45rem;
+  padding: 0.3rem;
+  text-align: left !important;
+  white-space: nowrap;
+}
+.drug a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.drug a:hover {
+  color: var(--accent);
+}
+.tagTypical,
+.tagAtypical {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tagTypical {
+  color: var(--warn);
+}
+.tagAtypical {
+  color: var(--accent);
+}
+
+/* --v runs 0 (muy baja) to 1 (muy alta). */
+.cell {
+  padding: 0.4rem 0.3rem;
+  border-radius: 0.25rem;
+  background: color-mix(in oklab, var(--warn) calc(var(--v) * 55%), var(--card));
+  color: var(--ink);
+  font-size: 0.72rem;
+  text-align: center;
+  white-space: nowrap;
+}

@@ -271,11 +271,116 @@ export const classes: DrugClass[] = [
       'Durante una crisis, el bicarbonato que sale por los receptores GABA-A despolariza la neurona. Inhibir la anhidrasa carbónica impide reponerlo y quita esa influencia excitadora.',
     refs: [K('432')],
   },
+  // — Antipsicóticos y estabilizadores del ánimo (Katzung cap. 29)
   {
     id: 'antipsychotics',
     title: 'Antipsicóticos y estabilizadores del ánimo',
     book: 'antipsychotics',
-    summary: 'Fármacos para la psicosis y para el trastorno bipolar.',
+    summary:
+      'Fármacos que reducen los síntomas psicóticos (esquizofrenia, manía, depresión psicótica) y fármacos que estabilizan el ánimo en el trastorno bipolar.',
+    mechanism:
+      'Todos los antipsicóticos eficaces bloquean, en algún grado, los receptores D2 de la dopamina, sobre todo en la vía mesolímbica. Sus efectos adversos dependen de qué otros receptores bloquean (α1, muscarínicos, H1, 5-HT2).',
+    refs: [K('511'), K('516-517')],
+  },
+  {
+    id: 'ap-typical',
+    parent: 'antipsychotics',
+    title: 'Antipsicóticos típicos (primera generación)',
+    summary:
+      'Los neurolépticos clásicos, desde la clorpromazina. Alivian los síntomas positivos tanto como los atípicos, pero producen más efectos extrapiramidales.',
+    mechanism:
+      'Antagonistas de los receptores D2: su afinidad por D2 se correlaciona con su potencia antipsicótica y extrapiramidal. Para tratar hace falta ocupar al menos el 60 % de los D2 del estriado; por encima del 80 % aparecen los efectos extrapiramidales.',
+    adverse: [
+      'Efectos extrapiramidales tempranos: parkinsonismo, acatisia y distonías agudas',
+      'Discinesia tardía con el uso crónico, el efecto adverso más importante',
+      'Hiperprolactinemia: amenorrea-galactorrea, infertilidad, impotencia',
+      'Síndrome neuroléptico maligno, raro pero grave: rigidez, fiebre, inestabilidad autonómica',
+    ],
+    refs: [K('514'), K('517'), K('522-523')],
+  },
+  {
+    id: 'ap-phenothiazines',
+    parent: 'ap-typical',
+    title: 'Fenotiazinas',
+    summary:
+      'Tres subfamilias según la cadena lateral: las alifáticas y las piperidinas, poco potentes, sedantes y con muchos efectos autonómicos; las piperazinas, potentes y más selectivas.',
+    refs: [K('514')],
+  },
+  {
+    id: 'ap-thioxanthenes',
+    parent: 'ap-typical',
+    title: 'Tioxantenos',
+    summary: 'Parientes estructurales de las fenotiazinas, con menos sedación y menos efecto antimuscarínico.',
+    refs: [K('514'), K('529')],
+  },
+  {
+    id: 'ap-butyrophenones',
+    parent: 'ap-typical',
+    title: 'Butirofenonas y afines',
+    summary:
+      'Estructura muy distinta de las fenotiazinas: más potentes, con menos efectos autonómicos y más efectos extrapiramidales.',
+    refs: [K('515')],
+  },
+  {
+    id: 'ap-other-typical',
+    parent: 'ap-typical',
+    title: 'Otros típicos',
+    summary: 'Antipsicóticos de primera generación de otras estructuras, de eficacia comparable.',
+    refs: [K('515'), K('520')],
+  },
+  {
+    id: 'ap-atypical',
+    parent: 'antipsychotics',
+    title: 'Antipsicóticos atípicos (segunda generación)',
+    summary:
+      'Desde la clozapina (1959): antipsicóticos con pocos efectos extrapiramidales a dosis eficaces. Hoy son los más usados.',
+    mechanism:
+      'Bloquean más el receptor 5-HT2A de la serotonina (como agonistas inversos) que el D2. Eso permite tratar con menos ocupación de D2 (30-50 % en la clozapina y la olanzapina) y protege del bloqueo extrapiramidal. Muchos son además agonistas parciales 5-HT1A.',
+    adverse: [
+      'Síndrome metabólico: aumento de peso y de lípidos, diabetes; máximo con la clozapina y la olanzapina, mínimo con la ziprasidona',
+      'Menos efectos extrapiramidales y menos discinesia tardía que los típicos',
+      'Más mortalidad en pacientes ancianos con demencia',
+    ],
+    refs: [K('511-513'), K('515'), K('517-520')],
+  },
+  {
+    id: 'ap-partial-agonists',
+    parent: 'antipsychotics',
+    title: 'Agonistas parciales D2',
+    summary:
+      'Atípicos que no bloquean del todo el receptor D2, sino que lo estimulan a medias: ocupan casi todos los D2 sin producir efectos extrapiramidales.',
+    mechanism:
+      'Agonistas parciales del receptor D2: donde sobra dopamina actúan como antagonistas, y donde falta, como agonistas débiles. Antagonizan además el 5-HT2A.',
+    adverse: ['Aumento de peso y de lípidos pequeño', 'Apenas elevan la prolactina'],
+    refs: [K('512'), K('517-518')],
+  },
+  {
+    id: 'ap-5ht2a',
+    parent: 'antipsychotics',
+    title: 'Agonistas inversos 5-HT2A selectivos',
+    summary: 'Antipsicóticos sin acción sobre la dopamina, pensados para la psicosis del Parkinson.',
+    mechanism: 'Agonistas inversos selectivos del receptor 5-HT2A; no antagonizan la dopamina ni causan efectos extrapiramidales.',
+    refs: [K('519')],
+  },
+  {
+    id: 'ms-lithium',
+    parent: 'antipsychotics',
+    title: 'Litio',
+    summary:
+      'El primer estabilizador del ánimo que no era un antipsicótico (Cade, 1949). Previene tanto la manía como la depresión.',
+    mechanism:
+      'No se conoce del todo. Agota el inositol al inhibir la inositol monofosfatasa, con lo que se reduce la señal de IP3 y DAG, e inhibe la glucógeno sintasa cinasa-3 (GSK-3). No bloquea receptores autonómicos ni seda.',
+    refs: [K('524-526')],
+  },
+  {
+    id: 'ms-anticonvulsants',
+    parent: 'antipsychotics',
+    title: 'Estabilizadores anticonvulsivos',
+    summary:
+      'Antiepilépticos que también estabilizan el ánimo, hoy más usados que el litio: el valproato y la carbamazepina en la manía, la lamotrigina en la prevención de la depresión bipolar.',
+    mechanism:
+      'Su acción en el trastorno bipolar no está clara. El valproato, como el litio, agota el inositol y reduce indirectamente la GSK-3; la carbamazepina no actúa sobre la GSK-3.',
+    refs: [K('524-525'), K('528')],
   },
   {
     id: 'antidepressants',
