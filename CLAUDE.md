@@ -353,9 +353,12 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   IUPAC, SMILES, 2D depiction; Wikidata ATC). Rerun after adding drugs. `data/molecule.ts` draws skeletal
   formulas (labels with their H on the free side, ring double bonds inward, wedges); tests check every drawing
   against PubChem's formula. `data/search.ts`: accents and small typos forgiven, names, brands and class path.
-- Plates (numbered per chapter): `DoseResponse` (Katzung fig. 22-1, `data/dose-response.ts`, tested) and
-  `DurationChart` (benzodiazepine half-lives on a log axis, from the data). MDX: `<Cita>`, `<Farmaco id>`,
-  `<Familia clase>` (a class's shelf of cards).
+- Plates (numbered per chapter): `DoseResponse` (Katzung fig. 22-1, `data/dose-response.ts`, tested),
+  `DurationChart` (benzodiazepine half-lives on a log axis, from the data), `SynapseTargets` (Katzung
+  fig. 24-1: where each antiepileptic class acts on the two synapses, `data/synapse-targets.ts`, tested)
+  and `SaturableKinetics` (phenytoin's Michaelis-Menten Css vs dose against a first-order drug,
+  `data/saturable-kinetics.ts`, tested). MDX: `<Cita>`, `<Farmaco id>`, `<Familia clase>` (a class's
+  shelf of cards). Written so far: family 1 (sedative-hypnotics) and family 2 (antiepileptics, by target).
 
 ## Commands
 

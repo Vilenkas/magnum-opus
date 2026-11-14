@@ -166,12 +166,110 @@ export const classes: DrugClass[] = [
     refs: [K('382-383'), G('350')],
   },
 
-  // — Families still to be written: roots only, so a drug can already name them.
+  // — Antiepilépticos (Katzung cap. 24), by molecular target as in its cuadro 24-2
   {
     id: 'antiepileptics',
     title: 'Antiepilépticos',
     book: 'antiepileptics',
-    summary: 'Fármacos que previenen o detienen las crisis epilépticas.',
+    summary:
+      'Fármacos que previenen las crisis epilépticas, tomados a diario y durante años, o que detienen una crisis en curso. Se eligen por el tipo de crisis.',
+    mechanism:
+      'Inclinan hacia la inhibición el equilibrio entre la excitación del glutamato y la inhibición del GABA: reducen la capacidad de las neuronas de disparar a alta frecuencia y en sincronía, refuerzan la inhibición GABAérgica o frenan la excitación glutamatérgica.',
+    adverse: [
+      'Ninguno es del todo seguro en el embarazo; el valproato, el fenobarbital y el topiramato son los de más riesgo',
+      'Suspenderlos de golpe puede traer de vuelta las crisis e incluso un estado epiléptico',
+      'Alerta de la FDA (2008) por ideas y conductas suicidas, sin prueba firme de un efecto de clase',
+    ],
+    refs: [K('409-411'), K('434')],
+  },
+  {
+    id: 'ae-sodium',
+    parent: 'antiepileptics',
+    title: 'Bloqueadores de los canales de sodio',
+    summary:
+      'El grupo más usado para las crisis focales. La mayoría salieron de la prueba del electrochoque máximo en roedores.',
+    mechanism:
+      'Se unen al canal de sodio dependiente de voltaje cuando está inactivado y lo retienen en ese estado. Como en una ráfaga los canales pasan una y otra vez por la inactivación, el bloqueo se acumula: frenan las descargas rápidas de una crisis y apenas tocan el disparo normal (bloqueo dependiente del uso y del voltaje).',
+    adverse: [
+      'Mareo, visión doble y ataxia, dependientes de la dosis',
+      'Pueden empeorar las ausencias y las mioclonías de las epilepsias generalizadas idiopáticas',
+      'Contraindicados en el síndrome de Dravet por mutación de SCN1A',
+    ],
+    refs: [K('409-410'), K('413-415'), K('430')],
+  },
+  {
+    id: 'ae-calcium-t',
+    parent: 'antiepileptics',
+    title: 'Bloqueadores de los canales de calcio T',
+    summary: 'Los fármacos de las crisis de ausencia.',
+    mechanism:
+      'Inhiben los canales de calcio de tipo T, activados por bajo voltaje, de las neuronas talamocorticales, que sostienen las descargas de punta-onda a 3 Hz de las ausencias.',
+    refs: [K('428-429')],
+  },
+  {
+    id: 'ae-alpha2delta',
+    parent: 'antiepileptics',
+    title: 'Ligandos de α2δ (gabapentinoides)',
+    summary:
+      'Nacieron como análogos del GABA, pero no actúan sobre él. Más usados para el dolor neuropático y la ansiedad que para la epilepsia.',
+    mechanism:
+      'Se unen con avidez a α2δ, una subunidad auxiliar de los canales de calcio dependientes de voltaje; probablemente reducen así la liberación de glutamato. No actúan sobre los receptores ni el metabolismo del GABA.',
+    adverse: ['Somnolencia, mareo y ataxia, sobre todo al empezar', 'Aumento de peso y edema periférico'],
+    refs: [K('420')],
+  },
+  {
+    id: 'ae-gaba',
+    parent: 'antiepileptics',
+    title: 'Potenciadores del GABA',
+    summary: 'Refuerzan la inhibición: unos modulan el receptor GABA-A, otros dejan más GABA en la sinapsis.',
+    mechanism:
+      'Las benzodiacepinas, los barbitúricos y la primidona son moduladores alostéricos positivos del receptor GABA-A. La vigabatrina impide que se degrade el GABA (inhibe la GABA-transaminasa) y la tiagabina, que se recapte (bloquea el transportador GAT-1).',
+    refs: [K('411-413'), K('431')],
+  },
+  {
+    id: 'ae-potassium',
+    parent: 'antiepileptics',
+    title: 'Abridores de los canales de potasio Kv7',
+    summary: 'Refuerzan un freno natural de la excitabilidad neuronal.',
+    mechanism:
+      'Abren los canales de potasio KCNQ (Kv7.2-Kv7.5) de axones y terminales; en las presinápticas, eso reduce la liberación de glutamato.',
+    refs: [K('411'), K('421')],
+  },
+  {
+    id: 'ae-sv2a',
+    parent: 'antiepileptics',
+    title: 'Ligandos de SV2A',
+    summary: 'Actúan sobre la maquinaria que libera el neurotransmisor.',
+    mechanism:
+      'Se unen a SV2A, una proteína de las vesículas sinápticas, y reducen la liberación de glutamato durante las ráfagas de alta frecuencia.',
+    refs: [K('423')],
+  },
+  {
+    id: 'ae-ampa',
+    parent: 'antiepileptics',
+    title: 'Antagonistas del receptor AMPA',
+    summary: 'Bloquean el principal receptor de la excitación sináptica.',
+    mechanism:
+      'Antagonistas no competitivos del receptor AMPA del glutamato, que media la excitación local en el foco y su propagación a distancia.',
+    refs: [K('423')],
+  },
+  {
+    id: 'ae-multiple',
+    parent: 'antiepileptics',
+    title: 'De mecanismo múltiple o desconocido',
+    summary: 'Varios blancos a la vez, o ninguno identificado con certeza. Suelen ser de amplio espectro.',
+    mechanism:
+      'No hay consenso sobre su blanco: actúan sobre varios (canales de sodio, receptores GABA-A, receptores del glutamato) o sobre alguno aún no identificado.',
+    refs: [K('413')],
+  },
+  {
+    id: 'ae-carbonic-anhydrase',
+    parent: 'antiepileptics',
+    title: 'Inhibidores de la anhidrasa carbónica',
+    summary: 'Anticonvulsivos de amplio espectro a los que la tolerancia llega en semanas.',
+    mechanism:
+      'Durante una crisis, el bicarbonato que sale por los receptores GABA-A despolariza la neurona. Inhibir la anhidrasa carbónica impide reponerlo y quita esa influencia excitadora.',
+    refs: [K('432')],
   },
   {
     id: 'antipsychotics',

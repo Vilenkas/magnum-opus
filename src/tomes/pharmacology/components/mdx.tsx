@@ -4,6 +4,8 @@ import { Cite } from './Citations'
 import { ClassShelf } from './ClassShelf'
 import { DoseResponse } from './DoseResponse'
 import { DurationChart } from './DurationChart'
+import { SaturableKinetics } from './SaturableKinetics'
+import { SynapseTargets } from './SynapseTargets'
 import { DrugLink } from './links'
 
 /** `<Farmaco id="diazepam">el diazepam</Farmaco>`: a link to the drug's card. */
@@ -18,4 +20,6 @@ export const mdxComponents: MDXComponents = {
   Familia: ClassShelf,
   DoseResponse,
   DurationChart,
+  SynapseTargets,
+  SaturableKinetics,
 }

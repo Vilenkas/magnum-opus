@@ -58,7 +58,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Clobazam',
     inn: 'clobazam',
     brand: 'Frisium',
-    classes: ['bzd-long', 'antiepileptics'],
+    classes: ['bzd-long', 'ae-gaba'],
     summary:
       '1,5-benzodiacepina (y no 1,4 como las demás) que se usa sobre todo como antiepiléptico coadyuvante.',
     uses: [
@@ -83,7 +83,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Clonazepam',
     inn: 'clonazepam',
     brand: 'Rivotril',
-    classes: ['bzd-intermediate', 'antiepileptics'],
+    classes: ['bzd-intermediate', 'ae-gaba'],
     summary:
       'Benzodiacepina de acción anticonvulsiva muy selectiva: antiepiléptico y tratamiento del trastorno de pánico.',
     uses: [
@@ -105,7 +105,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Clorazepato',
     inn: 'clorazepate',
     brand: 'Tranxene',
-    classes: ['bzd-long', 'antiepileptics'],
+    classes: ['bzd-long', 'ae-gaba'],
     summary:
       'Profármaco: el ácido del estómago lo convierte en desmetildiazepam, que es lo que actúa y dura días.',
     uses: ['Trastornos de ansiedad', 'Trastornos convulsivos', 'Abstinencia alcohólica'],
@@ -121,7 +121,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Diazepam',
     inn: 'diazepam',
     brand: 'Valium',
-    classes: ['bzd-long', 'antiepileptics'],
+    classes: ['bzd-long', 'ae-gaba'],
     summary:
       'La benzodiacepina prototipo, de acción prolongada; ansiolítico, anticonvulsivo y relajante muscular.',
     uses: [
@@ -182,7 +182,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Lorazepam',
     inn: 'lorazepam',
     brand: 'Ativan',
-    classes: ['bzd-intermediate', 'antiepileptics'],
+    classes: ['bzd-intermediate', 'ae-gaba'],
     summary:
       'Benzodiacepina de acción intermedia sin metabolitos activos; por vía parenteral, se usa en el delirium tremens.',
     uses: [
@@ -361,7 +361,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Fenobarbital',
     inn: 'phenobarbital',
     brand: 'Luminal',
-    classes: ['barbiturates-long', 'antiepileptics'],
+    classes: ['barbiturates-long', 'ae-gaba'],
     summary:
       'Barbitúrico de acción prolongada (1912) que sigue en uso como antiepiléptico; potente inductor enzimático.',
     uses: [
@@ -388,7 +388,7 @@ export const sedativeHypnotics: Drug[] = [
     name: 'Mefobarbital',
     inn: 'mephobarbital',
     brand: 'Mebaral',
-    classes: ['barbiturates-long', 'antiepileptics'],
+    classes: ['barbiturates-long', 'ae-gaba'],
     status: { kind: 'withdrawn', note: 'Retirado del mercado estadounidense.' },
     summary: 'N-metilbarbitúrico que el hígado convierte en fenobarbital.',
     uses: ['Trastornos convulsivos, como anticonvulsivo de segunda línea', 'Sedación diurna'],

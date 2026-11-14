@@ -1,0 +1,63 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.window {
+  fill: color-mix(in oklab, var(--accent) 10%, transparent);
+}
+.windowLabel {
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.axis {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.axisLabel {
+  font-size: 11px;
+  fill: var(--muted);
+}
+
+.linear {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+.saturable {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.cursor {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.5;
+}
+.dot {
+  fill: var(--accent);
+  stroke: var(--card);
+  stroke-width: 2;
+}
+
+.slider {
+  width: 100%;
+  margin-top: 0.6rem;
+  accent-color: var(--accent);
+}
+.readout {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+}
+.toxic {
+  color: var(--warn);
+}
+.ok {
+  color: var(--accent);
+}

@@ -1,0 +1,101 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+.chip {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease;
+}
+.chip:hover {
+  border-color: var(--accent);
+}
+.chip.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--card);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bouton {
+  fill: color-mix(in oklab, var(--warn) 12%, var(--card));
+  stroke: var(--warn);
+  stroke-width: 1.2;
+}
+.boutonInh {
+  fill: color-mix(in oklab, var(--accent) 12%, var(--card));
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.postMem {
+  fill: color-mix(in oklab, var(--warn) 25%, var(--card));
+}
+.postMemInh {
+  fill: color-mix(in oklab, var(--accent) 25%, var(--card));
+}
+.synLabel {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--muted);
+}
+
+.target {
+  transition: opacity 200ms ease;
+}
+.markExc {
+  fill: var(--warn);
+  stroke: var(--card);
+  stroke-width: 1.5;
+}
+.markInh {
+  fill: var(--accent);
+  stroke: var(--card);
+  stroke-width: 1.5;
+}
+.markLabel {
+  font-size: 9.5px;
+  fill: var(--ink);
+}
+
+.detail {
+  margin-top: 0.9rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.4rem;
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+}
+.detailTitle {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.detailTitle a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.actions {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-family: 'Source Serif 4 Variable', Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.actions li + li {
+  margin-top: 0.3rem;
+}

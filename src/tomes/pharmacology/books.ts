@@ -38,6 +38,7 @@ export const books: Book[] = [
     numeral: 'III',
     title: 'Antiepilépticos',
     summary: 'Por su mecanismo: canales de sodio y de calcio, GABA, SV2A y glutamato.',
+    load: () => import('./chapters/antiepileptics.mdx'),
   },
   {
     id: 'antipsychotics',

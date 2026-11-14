@@ -86,7 +86,12 @@ describe('drugs', () => {
   })
 
   it('count drugs serving another family through their extra classes', () => {
-    expect(drugsIn('antiepileptics')).toEqual([])
+    const main = drugsIn('antiepileptics').map((d) => d.id)
+    // Own antiepileptics are there; benzodiazepines and barbiturates are not (their main class is elsewhere).
+    expect(main).toEqual(expect.arrayContaining(['carbamazepine', 'valproic-acid', 'lamotrigine']))
+    expect(main).not.toContain('clonazepam')
+    expect(main).not.toContain('phenobarbital')
+    // With `any`, the drugs that only serve the family through an extra class appear too.
     expect(drugsIn('antiepileptics', true).map((d) => d.id)).toEqual(
       expect.arrayContaining(['clonazepam', 'diazepam', 'phenobarbital', 'clobazam']),
     )
