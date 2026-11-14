@@ -6,6 +6,7 @@ import type { Molecule as MoleculeData } from '../data/molecule'
 import type { Drug } from '../data/types'
 import { RefList } from './Citations'
 import { HalfLifeBar } from './HalfLifeBar'
+import { BrandName } from './BrandName'
 import { ClassLink, DrugLink, Formula, inTome, Rich } from './links'
 import { Molecule } from './Molecule'
 import styles from './DrugCard.module.css'
@@ -46,7 +47,7 @@ export function DrugCard({ drug }: { drug: Drug }) {
           <p className={styles.inn}>
             <span lang="en">{drug.inn}</span>
             <span className={styles.innTag}>DCI en inglés</span>
-            {drug.brand && <span className={styles.brand}>{drug.brand}</span>}
+            <BrandName key={drug.id} drug={drug} className={styles.brand} />
           </p>
         </div>
         {drug.status && (

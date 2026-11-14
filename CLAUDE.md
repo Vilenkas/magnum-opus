@@ -353,6 +353,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   IUPAC, SMILES, 2D depiction; Wikidata ATC). Rerun after adding drugs. `data/molecule.ts` draws skeletal
   formulas (labels with their H on the free side, ring double bonds inward, wedges); tests check every drawing
   against PubChem's formula. `data/search.ts`: accents and small typos forgiven, names, brands and class path.
+- Brand product photos (personal use): `node tools/pharmacology/fetch-brand-photos.mjs` fills the git-ignored
+  `figures/private/` (CIMA first: pack + dosage form; else DailyMed's «package label, principal display panel»,
+  maker's oral label preferred over repackagers) and writes its `index.ts` (`brand-<id>-box|pill`). `BrandName`
+  turns the card's brand into a hover/tap card (bottom-anchored on phones); without the folder it is plain text.
+  Figures follow `docs/assets.md` (`figures/registry.ts`, `brandPhotos(id)`).
 - Plates (numbered per chapter): `DoseResponse` (Katzung fig. 22-1, `data/dose-response.ts`, tested),
   `DurationChart` (benzodiazepine half-lives on a log axis, from the data), `SynapseTargets` (Katzung
   fig. 24-1: where each antiepileptic class acts on the two synapses, `data/synapse-targets.ts`, tested)
