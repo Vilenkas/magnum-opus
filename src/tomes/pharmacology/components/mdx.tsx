@@ -8,6 +8,7 @@ import { DurationChart } from './DurationChart'
 import { SaturableKinetics } from './SaturableKinetics'
 import { SynapseTargets } from './SynapseTargets'
 import { DrugLink } from './links'
+import { MonoamineSynapse } from './MonoamineSynapse'
 
 /** `<Farmaco id="diazepam">el diazepam</Farmaco>`: a link to the drug's card. */
 function Farmaco({ id, children }: { id: string; children?: ReactNode }) {
@@ -24,4 +25,5 @@ export const mdxComponents: MDXComponents = {
   SynapseTargets,
   SaturableKinetics,
   AntipsychoticProfiles,
+  MonoamineSynapse,
 }

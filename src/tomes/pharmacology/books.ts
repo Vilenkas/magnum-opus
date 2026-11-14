@@ -54,5 +54,6 @@ export const books: Book[] = [
     numeral: 'V',
     title: 'Antidepresivos',
     summary: 'ISRS, IRSN, tricíclicos, IMAO y los antidepresivos atípicos.',
+    load: () => import('./chapters/antidepressants.mdx'),
   },
 ]

@@ -382,10 +382,115 @@ export const classes: DrugClass[] = [
       'Su acción en el trastorno bipolar no está clara. El valproato, como el litio, agota el inositol y reduce indirectamente la GSK-3; la carbamazepina no actúa sobre la GSK-3.',
     refs: [K('524-525'), K('528')],
   },
+  // — Antidepresivos (Katzung cap. 30)
   {
     id: 'antidepressants',
     title: 'Antidepresivos',
     book: 'antidepressants',
-    summary: 'Fármacos para la depresión y, muchos de ellos, para los trastornos de ansiedad.',
+    summary:
+      'Fármacos para la depresión mayor y, muchos de ellos, para los trastornos de ansiedad, el dolor crónico y otras afecciones.',
+    mechanism:
+      'Todos aumentan la disponibilidad de monoaminas (serotonina, noradrenalina o dopamina) en la sinapsis: inhiben su recaptación, su degradación por la MAO o actúan sobre sus receptores. El efecto pleno tarda semanas, quizá lo que tarda en sintetizarse el factor neurotrófico BDNF.',
+    adverse: [
+      'Más ideas e intentos de suicidio en menores de 25 años (advertencia de la FDA), sin aumento en los mayores',
+      'Pueden precipitar la manía o acelerar los ciclos en el trastorno bipolar',
+    ],
+    refs: [K('534-536'), K('541'), K('544'), K('546')],
+  },
+  {
+    id: 'ad-ssri',
+    parent: 'antidepressants',
+    title: 'Inhibidores selectivos de la recaptación de serotonina (ISRS)',
+    summary:
+      'Los antidepresivos más usados: fáciles de manejar, bien tolerados y seguros en sobredosis. Nacieron de buscar la acción de los tricíclicos sin su bloqueo de receptores.',
+    mechanism:
+      'Inhiben de forma alostérica y selectiva el transportador de serotonina (SERT): a dosis terapéuticas bloquean el 80 % de su actividad. Apenas tocan el transportador de noradrenalina y los receptores histamínicos, muscarínicos o α.',
+    adverse: [
+      'Náuseas y molestias digestivas, sobre todo la primera semana',
+      'Disfunción sexual en el 30-40 %: menos libido, orgasmo retardado',
+      'Cefalea, insomnio o hipersomnia',
+      'Síndrome de discontinuación (mareo, parestesias) al suspender los de semivida corta',
+      'Síndrome serotoninérgico si se combinan con un IMAO',
+    ],
+    refs: [K('536'), K('541-542'), K('546'), K('549')],
+  },
+  {
+    id: 'ad-snri',
+    parent: 'antidepressants',
+    title: 'Inhibidores de la recaptación de serotonina y noradrenalina (IRSN)',
+    summary: 'Útiles también en el dolor crónico, la fibromialgia y los síntomas vasomotores de la menopausia.',
+    mechanism:
+      'Inhiben los transportadores de serotonina y de noradrenalina, casi siempre con más afinidad por el primero, pero sin el bloqueo antihistamínico, α y anticolinérgico de los tricíclicos.',
+    adverse: [
+      'Los de los ISRS',
+      'Efectos noradrenérgicos: subida de la presión arterial y de la frecuencia cardiaca, insomnio, ansiedad, agitación',
+      'Síndrome de discontinuación',
+    ],
+    refs: [K('537'), K('542'), K('547')],
+  },
+  {
+    id: 'ad-tca',
+    parent: 'antidepressants',
+    title: 'Antidepresivos tricíclicos',
+    summary:
+      'La clase dominante hasta los ISRS. Eficaces, pero peor tolerados y letales en sobredosis: hoy quedan para la depresión que no responde y para el dolor.',
+    mechanism:
+      'Inhiben la recaptación de serotonina y noradrenalina, en proporción variable según el fármaco. Bloquean además los receptores muscarínicos, H1 y α1, de donde vienen casi todos sus efectos adversos.',
+    adverse: [
+      'Antimuscarínicos: boca seca, estreñimiento, retención urinaria, visión borrosa, confusión',
+      'Hipotensión ortostática, por el bloqueo α',
+      'Sedación y aumento de peso, por el bloqueo H1',
+      'Arritmias: son antiarrítmicos de clase IA; la sobredosis puede ser mortal',
+    ],
+    refs: [K('537-538'), K('542'), K('547-548')],
+  },
+  {
+    id: 'ad-tca-tertiary',
+    parent: 'ad-tca',
+    title: 'Aminas terciarias',
+    summary: 'Más serotoninérgicas y más anticolinérgicas.',
+    refs: [K('542'), K('547')],
+  },
+  {
+    id: 'ad-tca-secondary',
+    parent: 'ad-tca',
+    title: 'Aminas secundarias',
+    summary: 'Más selectivas por la noradrenalina, menos anticolinérgicas, sin metabolitos activos y de cinética casi lineal.',
+    refs: [K('540'), K('542'), K('547')],
+  },
+  {
+    id: 'ad-5ht',
+    parent: 'antidepressants',
+    title: 'Moduladores de la serotonina',
+    summary: 'Actúan sobre todo en los receptores de la serotonina más que en su transportador.',
+    mechanism:
+      'La trazodona y la nefazodona bloquean el receptor 5-HT2A, y solo débilmente el transportador; la vortioxetina actúa sobre varios receptores 5-HT además de inhibir el SERT.',
+    adverse: ['Sedación (sobre todo la trazodona) y molestias digestivas', 'Pocos efectos sexuales'],
+    refs: [K('538'), K('543'), K('547')],
+  },
+  {
+    id: 'ad-atypical',
+    parent: 'antidepressants',
+    title: 'Tetracíclicos y unicíclicos',
+    summary: 'Antidepresivos que no encajan en las otras clases, cada uno con su mecanismo.',
+    mechanism:
+      'Mecanismos diversos: liberación de catecolaminas (bupropión), bloqueo de los autorreceptores α2 (mirtazapina), inhibición de la recaptación de noradrenalina (amoxapina, maprotilina) o de serotonina con agonismo 5-HT1A (vilazodona).',
+    refs: [K('538-539'), K('543')],
+  },
+  {
+    id: 'ad-maoi',
+    parent: 'antidepressants',
+    title: 'Inhibidores de la monoaminooxidasa (IMAO)',
+    summary:
+      'La primera clase moderna de antidepresivos (años cincuenta). Hoy se usan poco por su toxicidad y sus interacciones, a veces mortales, con alimentos y fármacos.',
+    mechanism:
+      'Inhiben la monoaminooxidasa, que degrada las monoaminas: la MAO-A, sobre todo noradrenalina, adrenalina y serotonina; la MAO-B, sobre todo dopamina y tiramina. Unos lo hacen de forma irreversible y no selectiva; otros, selectiva o reversible.',
+    adverse: [
+      'Hipotensión ortostática y aumento de peso',
+      'Los efectos sexuales más altos de todos los antidepresivos',
+      'Crisis hipertensiva con alimentos ricos en tiramina (quesos curados, embutidos secos) o simpaticomiméticos',
+      'Síndrome serotoninérgico con ISRS, IRSN, tricíclicos o meperidina',
+    ],
+    refs: [K('539'), K('543'), K('547'), K('549')],
   },
 ]

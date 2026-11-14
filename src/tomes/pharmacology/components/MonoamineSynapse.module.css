@@ -1,0 +1,122 @@
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.select {
+  width: 100%;
+  max-width: 22rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.4rem;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+.select:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 0.8rem;
+}
+
+.pre {
+  fill: color-mix(in oklab, var(--accent) 10%, var(--card));
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.post {
+  fill: color-mix(in oklab, var(--muted) 18%, var(--card));
+}
+.part {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--muted);
+}
+
+.sert {
+  fill: #7b5ea7;
+}
+.net {
+  fill: #d08a2e;
+}
+.plug {
+  fill: var(--warn);
+  stroke: var(--card);
+  stroke-width: 1.5;
+  transition:
+    r 250ms ease,
+    opacity 250ms ease;
+}
+.tLabel {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+.serotonin {
+  fill: #7b5ea7;
+  opacity: 0.85;
+}
+.noradrenaline {
+  fill: #d08a2e;
+  opacity: 0.85;
+}
+
+/* --b runs 0 (no block) to 1 (+++). */
+.receptor {
+  fill: color-mix(in oklab, var(--warn) calc(var(--b) * 70%), var(--card));
+  stroke: var(--line-strong);
+}
+.rText {
+  font-size: 10.5px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.grade {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.key text {
+  font-size: 10.5px;
+  fill: var(--muted);
+}
+
+.readout {
+  margin-top: 0.4rem;
+}
+.drugLine {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.drugLine a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.effects {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-family: 'Source Serif 4 Variable', Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.none {
+  margin: 0;
+  font-family: 'Source Serif 4 Variable', Georgia, serif;
+  font-size: 1rem;
+  color: var(--muted);
+}

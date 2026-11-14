@@ -358,10 +358,11 @@ Always call `useGLTF(url, false, true)` — Draco off, meshopt on.
   fig. 24-1: where each antiepileptic class acts on the two synapses, `data/synapse-targets.ts`, tested)
   and `SaturableKinetics` (phenytoin's Michaelis-Menten Css vs dose against a first-order drug,
   `data/saturable-kinetics.ts`, tested) and `AntipsychoticProfiles` (Katzung cuadro 29-1 as a sortable heat map,
-  `data/antipsychotic-profiles.ts`; tests check EPS tracks the D2/5-HT2A preference). MDX: `<Cita>`, `<Farmaco id>`, `<Familia clase>` (a class's
+  `data/antipsychotic-profiles.ts`; tests check EPS tracks the D2/5-HT2A preference) and `MonoamineSynapse`
+  (pick an antidepressant, see what it blocks; Katzung cuadro 30-2 in `data/antidepressant-binding.ts`, tested). MDX: `<Cita>`, `<Farmaco id>`, `<Familia clase>` (a class's
   shelf of cards). A class with no drugs of its own (`ms-anticonvulsants`) shelves those serving it through extra classes.
-  Written so far: families 1-3 (sedative-hypnotics; antiepileptics, by target; antipsychotics and mood
-  stabilisers). No dosing regimens in cards or chapters.
+  Psychopharmacology written: sedative-hypnotics; antiepileptics, by target; antipsychotics and mood
+  stabilisers; antidepressants (123 cards). Book I (CNS neurotransmission) is still pending. No dosing regimens in cards or chapters.
 
 ## Commands
 
