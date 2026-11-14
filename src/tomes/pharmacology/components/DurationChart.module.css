@@ -1,0 +1,119 @@
+.chart {
+  --name: 7.5rem;
+  position: relative;
+  font-size: 0.85rem;
+}
+@media (min-width: 36rem) {
+  .chart {
+    --name: 9rem;
+  }
+}
+
+/* The three bands, behind the rows, aligned with the tracks. */
+.bands {
+  position: absolute;
+  inset: 0 0 1.4rem var(--name);
+}
+.bands span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding-top: 0.1rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bands .short {
+  background: color-mix(in oklab, var(--band-short) 10%, transparent);
+}
+.bands .intermediate {
+  background: color-mix(in oklab, var(--band-mid) 10%, transparent);
+}
+.bands .long {
+  background: color-mix(in oklab, var(--band-long) 10%, transparent);
+}
+
+.rows {
+  position: relative;
+  margin: 0;
+  padding: 1.4rem 0 0.3rem;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--name) 1fr;
+  align-items: center;
+  height: 1.7rem;
+}
+
+.name {
+  overflow: hidden;
+  padding-right: 0.6rem;
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.name:hover {
+  color: var(--accent);
+}
+
+.track {
+  position: relative;
+  height: 100%;
+}
+.bar {
+  position: absolute;
+  top: 50%;
+  height: 0.65rem;
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+.bar.short {
+  background: var(--band-short);
+}
+.bar.intermediate {
+  background: var(--band-mid);
+}
+.bar.long {
+  background: var(--band-long);
+}
+.striped {
+  background-image: repeating-linear-gradient(-45deg, transparent 0 5px, rgb(255 255 255 / 0.45) 5px 8px);
+}
+.value {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.axis {
+  display: grid;
+  grid-template-columns: var(--name) 1fr;
+  height: 1.4rem;
+  border-top: 1px solid var(--line-strong);
+}
+.ticks {
+  position: relative;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+.ticks span {
+  position: absolute;
+  top: 0.25rem;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.ticks span:last-child {
+  transform: translateX(-100%);
+}

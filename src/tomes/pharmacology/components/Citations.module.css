@@ -1,0 +1,80 @@
+.mark {
+  font-size: 0.7em;
+  line-height: 0;
+  vertical-align: super;
+  padding: 0 0.12em;
+  font-family: 'IBM Plex Sans Variable', system-ui, sans-serif;
+}
+.mark a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.mark a:hover {
+  text-decoration: underline;
+}
+
+.unknown {
+  color: var(--warn);
+  font-size: 0.8em;
+}
+
+.sources {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-family: 'IBM Plex Sans Variable', system-ui, sans-serif;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  align-items: baseline;
+  line-height: 1.5;
+}
+
+.index {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.entry {
+  color: var(--muted);
+}
+.author {
+  color: var(--ink);
+}
+.bookTitle {
+  font-style: italic;
+  color: var(--ink);
+}
+.pages {
+  margin-left: 0.4rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.85em;
+}
+.note {
+  display: block;
+  font-size: 0.92em;
+}

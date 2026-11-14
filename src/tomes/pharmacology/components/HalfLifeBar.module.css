@@ -1,0 +1,51 @@
+.scale {
+  margin: 0.6rem 0 0.3rem;
+}
+
+.track {
+  position: relative;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.boundary {
+  position: absolute;
+  top: -0.2rem;
+  bottom: -0.2rem;
+  width: 1px;
+  background: var(--muted);
+  opacity: 0.6;
+}
+
+.range {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: var(--accent);
+}
+/* Counting active metabolites: striped. */
+.metabolites {
+  background: repeating-linear-gradient(-45deg, var(--accent) 0 5px, color-mix(in oklab, var(--accent) 60%, white) 5px 8px);
+}
+
+.ticks {
+  position: relative;
+  height: 1.1rem;
+  margin-top: 0.25rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.ticks span {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.ticks span:first-child {
+  transform: none;
+}
+.ticks span:last-child {
+  transform: translateX(-100%);
+}

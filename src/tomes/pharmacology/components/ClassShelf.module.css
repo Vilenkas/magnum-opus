@@ -1,0 +1,185 @@
+.shelf {
+  margin: 1.5rem 0;
+  font-family: 'IBM Plex Sans Variable', system-ui, sans-serif;
+}
+
+.sub {
+  padding: 0.9rem 0 0.2rem;
+  border-top: 1px solid var(--line);
+}
+.sub .sub {
+  margin-left: 0.9rem;
+  padding-top: 0.6rem;
+  border-top-style: dashed;
+}
+.shelf > .sub:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+/* `h4` so a chapter's own h2/h3 index isn't disturbed. */
+.subTitle {
+  margin: 0 0 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.subTitle a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.subTitle a:hover {
+  text-decoration: underline;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 0.6rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.4rem;
+  background: var(--card);
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+.chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.chipName {
+  font-weight: 550;
+  font-size: 0.92rem;
+}
+.chipMeta {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.chipStatus {
+  font-size: 0.68rem;
+  color: var(--warn);
+}
+
+.missing {
+  color: var(--warn);
+}
+
+/* ---------- Class page ---------- */
+
+.page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 5rem 1rem 4rem;
+  font-family: 'IBM Plex Sans Variable', system-ui, sans-serif;
+}
+@media (min-width: 48rem) {
+  .page {
+    padding: 5.5rem 2rem 5rem;
+  }
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.crumbs a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.crumbs a:hover {
+  color: var(--accent);
+}
+.crumb {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.header {
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--ink);
+}
+.kicker {
+  margin: 0 0 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.summary,
+.mechanism {
+  max-width: 44rem;
+  margin: 1rem 0 0;
+  font-family: 'Source Serif 4 Variable', Georgia, serif;
+  font-size: 1.12rem;
+  line-height: 1.55;
+}
+.mechanism {
+  font-size: 1.02rem;
+}
+.label {
+  font-family: 'IBM Plex Sans Variable', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.book {
+  margin: 1.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.book a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.book a:hover {
+  text-decoration: underline;
+}
+
+.section {
+  margin-top: 2rem;
+}
+.sectionTitle {
+  margin: 0 0 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-family: 'Source Serif 4 Variable', Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+.empty {
+  color: var(--muted);
+}

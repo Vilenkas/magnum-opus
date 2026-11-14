@@ -1,0 +1,92 @@
+.bank {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 5rem 1rem 4rem;
+}
+@media (min-width: 48rem) {
+  .bank {
+    padding: 5.5rem 2rem 5rem;
+  }
+}
+
+.crumbs {
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+}
+.crumbs a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.crumbs a:hover {
+  color: var(--accent);
+}
+
+.header {
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--ink);
+}
+.kicker {
+  margin: 0 0 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.title {
+  margin: 0;
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.lead {
+  margin: 0.8rem 0 1.5rem;
+  font-family: 'Source Serif 4 Variable', Georgia, serif;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.family {
+  margin-top: 2.5rem;
+}
+.familyHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+.familyTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.familyTitle a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.familyTitle a:hover {
+  color: var(--accent);
+}
+.count {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.chapter {
+  margin-left: auto;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.chapter:hover {
+  text-decoration: underline;
+}
+.pending {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}

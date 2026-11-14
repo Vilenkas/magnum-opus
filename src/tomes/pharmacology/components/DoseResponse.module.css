@@ -1,0 +1,114 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.band0 {
+  fill: color-mix(in oklab, var(--accent) 6%, transparent);
+}
+.band1 {
+  fill: color-mix(in oklab, var(--accent) 13%, transparent);
+}
+.band2 {
+  fill: color-mix(in oklab, var(--warn) 12%, transparent);
+}
+.band3 {
+  fill: color-mix(in oklab, var(--warn) 24%, transparent);
+}
+
+.stage {
+  font-size: 12px;
+  fill: var(--muted);
+}
+
+.axis {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.axisLabel {
+  font-size: 12px;
+  fill: var(--muted);
+}
+
+.curveA,
+.curveB {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.curveA {
+  stroke: var(--warn);
+}
+.curveB {
+  stroke: var(--accent);
+}
+.tagA,
+.tagB {
+  font-size: 14px;
+  font-weight: 700;
+}
+.tagA {
+  fill: var(--warn);
+}
+.tagB {
+  fill: var(--accent);
+}
+
+.cursor {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.6;
+}
+.dotA {
+  fill: var(--warn);
+  stroke: var(--card);
+  stroke-width: 2;
+}
+.dotB {
+  fill: var(--accent);
+  stroke: var(--card);
+  stroke-width: 2;
+}
+
+.sliderLabel {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.readout {
+  display: grid;
+  gap: 0.3rem 1.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+@media (min-width: 36rem) {
+  .readout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.readout p {
+  margin: 0;
+}
+.keyA,
+.keyB {
+  margin-right: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.keyA {
+  color: var(--warn);
+}
+.keyB {
+  color: var(--accent);
+}

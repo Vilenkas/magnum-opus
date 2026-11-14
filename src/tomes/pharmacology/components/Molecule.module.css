@@ -1,0 +1,43 @@
+.svg {
+  display: block;
+  width: 100%;
+  max-height: 20rem;
+  overflow: visible;
+}
+
+.bonds line {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.bonds line.hash {
+  stroke-width: 1.2;
+}
+.wedge {
+  fill: var(--ink);
+}
+
+.label {
+  font-family: 'IBM Plex Sans Variable', system-ui, sans-serif;
+  font-weight: 500;
+  fill: var(--ink);
+}
+.charge {
+  font-size: 0.7em;
+}
+
+.n {
+  fill: var(--el-n);
+}
+.o {
+  fill: var(--el-o);
+}
+.s {
+  fill: var(--el-s);
+}
+.hal {
+  fill: var(--el-hal);
+}
+.p {
+  fill: var(--el-p);
+}
